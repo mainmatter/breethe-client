@@ -32,5 +32,12 @@
   "engines": {
     "node": ">= 4.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@orbit/coordinator": "^0.15.10",
+    "@orbit/core": "^0.15.10",
+    "@orbit/data": "^0.15.10",
+    "@orbit/jsonapi": "^0.15.10",
+    "@orbit/store": "^0.15.10"
+  }
 }
