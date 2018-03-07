@@ -24,7 +24,7 @@ export const measurement: ModelDefinition = {
   }
 };
 
-export const schemaDefinition:SchemaSettings = {
+export const schemaDefinition: SchemaSettings = {
   models: {
     location,
     measurement
