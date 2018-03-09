@@ -14,17 +14,17 @@ module.exports = function(app) {
         attributes: {
           city: 'København',
           country: 'Denmark',
-          lastUpdated: '2017-03-06',
+          'last-updated': '2017-03-06',
           coordinates: '55.676098, 12.568337'
         }
       },
       {
         type: 'positions',
-        id: 1,
+        id: 2,
         attributes: {
           city: 'Salzburg',
           country: 'Austria',
-          lastUpdated: '2017-03-07',
+          'last-updated': '2017-03-07',
           coordinates: '47.811195, 13.033229'
         }
       }]

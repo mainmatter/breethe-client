@@ -3,21 +3,20 @@ import { ModelDefinition } from '@orbit/data';
 
 export const location: ModelDefinition = {
   attributes: {
-    identifier: { type: 'string' },
     city: { type: 'string' },
+    coordinates: { type: 'string' },
     country: { type: 'string' },
-    lastUpdated: { type: 'string' },
-    coordinates: { type: 'string' }
+    identifier: { type: 'string' },
+    lastUpdated: { type: 'string' }
   }
 };
 
 export const measurement: ModelDefinition = {
   attributes: {
-    identifier: { type: 'string' },
-    city: { type: 'string' },
-    country: { type: 'string' },
-    lastUpdated: { type: 'string' },
-    coordinates: { type: 'string' }
+    coordinates: { type: 'string' },
+    measuredId: { type: 'string' },
+    unit: { type: 'string' },
+    value: { type: 'number' }
   },
   relationships: {
     location: { type: 'hasOne', model: 'location' }

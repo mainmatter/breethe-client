@@ -1,10 +1,9 @@
 import Component, { tracked } from '@glimmer/component';
-import { schemaDefinition } from '../../../utils/data/schema';
+import Coordinator, { RequestStrategy } from '@orbit/coordinator';
 import Orbit, { Schema } from '@orbit/data';
-import Store from '@orbit/store';
 import JSONAPIStore from '@orbit/jsonapi';
-import Coordinator from '@orbit/coordinator';
-import { RequestStrategy } from '@orbit/coordinator';
+import Store from '@orbit/store';
+import { schemaDefinition } from '../../../utils/data/schema';
 
 // Temporal fix until Orbit binds the window fetch by default if it's available
 // https://github.com/orbitjs/orbit/issues/452
@@ -16,7 +15,7 @@ export default class PpmClient extends Component {
   store = this.setupStore();
 
   @tracked
-  positions = null
+  positions = null;
 
   constructor(options) {
     super(options);
@@ -28,15 +27,15 @@ export default class PpmClient extends Component {
 
     let store = new Store({ schema });
     let jsonapi = new JSONAPIStore( {
-      schema,
-      namespace: 'api'
+      namespace: 'api',
+      schema
     });
     let requestStrategy = new RequestStrategy({
-      source: 'store',
-      on: 'beforeQuery',
-      target: 'jsonapi',
       action: 'pull',
-      blocking: false
+      blocking: false,
+      on: 'beforeQuery',
+      source: 'store',
+      target: 'jsonapi',
     });
 
     const coordinator = new Coordinator({
@@ -51,9 +50,9 @@ export default class PpmClient extends Component {
 
   loadPositions() {
     let { store } = this;
-    store.query( q => q.findRecords('position') )
+    store.query( (q) => q.findRecords('position') )
     .then((positions) => {
       this.positions = positions;
-    })
+    });
   }
 }
