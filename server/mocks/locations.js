@@ -6,10 +6,11 @@ module.exports = function(app) {
   let positionsRouter = express.Router();
 
   positionsRouter.get('/', function(req, res) {
-    res.send({
+    res.type('application/vnd.api+json');
+    res.json({
       data: [
       {
-        type: 'positions',
+        type: 'location',
         id: 1,
         attributes: {
           city: 'København',
@@ -19,7 +20,7 @@ module.exports = function(app) {
         }
       },
       {
-        type: 'positions',
+        type: 'location',
         id: 2,
         attributes: {
           city: 'Salzburg',
@@ -37,7 +38,7 @@ module.exports = function(app) {
 
   positionsRouter.get('/:id', function(req, res) {
     res.send({
-      'positions': {
+      'locations': {
         id: req.params.id
       }
     });
@@ -45,7 +46,7 @@ module.exports = function(app) {
 
   positionsRouter.put('/:id', function(req, res) {
     res.send({
-      'positions': {
+      'locations': {
         id: req.params.id
       }
     });
@@ -64,6 +65,6 @@ module.exports = function(app) {
   // After installing, you need to `use` the body-parser for
   // this mock uncommenting the following line:
   //
-  //app.use('/api/positions', require('body-parser').json());
-  app.use('/api/positions', positionsRouter);
+  //app.use('/api/locations', require('body-parser').json());
+  app.use('/api/locations', positionsRouter);
 };
