@@ -1,10 +1,9 @@
 import Component, { tracked } from '@glimmer/component';
 import Coordinator, { EventLoggingStrategy, RequestStrategy, SyncStrategy } from '@orbit/coordinator';
-
 import Orbit, { Schema } from '@orbit/data';
 import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
-import { schemaDefinition } from '../../../utils/data/schema';
+import { schemaDefinition, measurement } from '../../../utils/data/schema';
 
 // Temporal fix until Orbit binds the window fetch by default if it's available
 // https://github.com/orbitjs/orbit/issues/452
@@ -18,28 +17,19 @@ export default class PpmClient extends Component {
   @tracked
   locations = null;
 
+  @tracked
+  measurements = null;
+
   constructor(options) {
     super(options);
     this.loadLocations();
+    this.loadMeasurements();
   }
 
   setupStore() {
     let schema = new Schema(schemaDefinition);
 
     let store = new Store({ schema });
-    // store.update(t => [
-    //   t.addRecord({
-    //     type: 'location',
-    //     id: 1,
-    //     attributes: {
-    //       city: 'København',
-    //       country: 'Denmark',
-    //       'last-updated': '2017-03-06',
-    //       coordinates: '55.676098, 12.568337'
-    //     }
-    //   })
-    // ]);
-
     let jsonapi = new JSONAPIStore({
       namespace: 'api',
       schema
@@ -73,16 +63,14 @@ export default class PpmClient extends Component {
   }
 
   async loadLocations() {
-    let { store } = this;
-
-    let locations = await store.query( (q) => {
+    this.locations = await this.store.query( (q) => {
       return q.findRecords('location');
     });
-    console.log(store);
-    console.log(locations);
-    this.locations = locations;
-    // .then((locations) => {
-    //   this.locations = locations;
-    // });
+  }
+
+  async loadMeasurements() {
+    this.measurements = await this.store.query( (q) => {
+      return q.findRecords('measurement');
+    });
   }
 }

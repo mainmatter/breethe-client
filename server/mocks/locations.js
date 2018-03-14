@@ -3,9 +3,9 @@
 
 module.exports = function(app) {
   const express = require('express');
-  let positionsRouter = express.Router();
+  let locationsRouter = express.Router();
 
-  positionsRouter.get('/', function(req, res) {
+  locationsRouter.get('/', function(req, res) {
     res.type('application/vnd.api+json');
     res.json({
       data: [
@@ -32,11 +32,11 @@ module.exports = function(app) {
     });
   });
 
-  positionsRouter.post('/', function(req, res) {
+  locationsRouter.post('/', function(req, res) {
     res.status(201).end();
   });
 
-  positionsRouter.get('/:id', function(req, res) {
+  locationsRouter.get('/:id', function(req, res) {
     res.send({
       'locations': {
         id: req.params.id
@@ -44,7 +44,7 @@ module.exports = function(app) {
     });
   });
 
-  positionsRouter.put('/:id', function(req, res) {
+  locationsRouter.put('/:id', function(req, res) {
     res.send({
       'locations': {
         id: req.params.id
@@ -52,7 +52,7 @@ module.exports = function(app) {
     });
   });
 
-  positionsRouter.delete('/:id', function(req, res) {
+  locationsRouter.delete('/:id', function(req, res) {
     res.status(204).end();
   });
 
@@ -66,5 +66,5 @@ module.exports = function(app) {
   // this mock uncommenting the following line:
   //
   //app.use('/api/locations', require('body-parser').json());
-  app.use('/api/locations', positionsRouter);
+  app.use('/api/locations', locationsRouter);
 };
