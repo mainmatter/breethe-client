@@ -14,7 +14,7 @@ module.exports = function(app) {
           id: 1,
           attributes: {
             coordinates: "55.676098, 12.568337",
-            measuredId: 1,
+            measuredAt: 1,
             unit: 'ppm',
             value: 34
           },
@@ -32,7 +32,7 @@ module.exports = function(app) {
           id: 2,
           attributes: {
             coordinates: "55.676099, 12.568335",
-            measuredId: 1,
+            measuredAt: 1,
             unit: 'ppm',
             value: 32
           },
