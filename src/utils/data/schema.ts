@@ -17,7 +17,7 @@ export const location: ModelDefinition = {
 export const measurement: ModelDefinition = {
   attributes: {
     coordinates: { type: 'string' },
-    measuredId: { type: 'string' },
+    measuredAt: { type: 'string' },
     unit: { type: 'string' },
     value: { type: 'number' }
   },

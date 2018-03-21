@@ -1,6 +1,6 @@
 import hbs from '@glimmer/inline-precompile';
 import { setupRenderingTest } from '@glimmer/test-helpers';
-// import * as pretender from 'pretender';
+import * as Pretender from 'pretender';
 
 const { module, test } = QUnit;
 
@@ -31,7 +31,7 @@ module('Component: PpmClient', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    let server = new Pretender();
+    let server = new pretender.Pretender();
     server.get('/api/locations', function() {
       let data = JSON.stringify({
         data: locations
@@ -51,6 +51,5 @@ module('Component: PpmClient', function(hooks) {
     assert.ok(!!location2, 'Location loaded');
 
     server.shutdown();
-    // assert.equal(this.containerElement.textContent, 'Welcome to Glimmer!\n');
   });
 });
