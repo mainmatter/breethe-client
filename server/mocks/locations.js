@@ -17,6 +17,18 @@ module.exports = function(app) {
           country: 'Denmark',
           'last-updated': '2017-03-06',
           coordinates: '55.676098, 12.568337'
+        },
+        relationships: {
+          data: [
+            {
+              id: 1,
+              type: 'measurement'
+            },
+            {
+              id: 2,
+              type: 'measurement'
+            }
+          ]
         }
       },
       {

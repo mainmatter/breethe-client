@@ -1,6 +1,6 @@
 import hbs from '@glimmer/inline-precompile';
 import { setupRenderingTest } from '@glimmer/test-helpers';
-import * as pretender from 'pretender';
+// import * as pretender from 'pretender';
 
 const { module, test } = QUnit;
 

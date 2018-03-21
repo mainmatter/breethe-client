@@ -26,6 +26,24 @@ module.exports = function(app) {
               }
             }
           }
+        },
+        {
+          type: "measurement",
+          id: 2,
+          attributes: {
+            coordinates: "55.676099, 12.568335",
+            measuredId: 1,
+            unit: 'ppm',
+            value: 32
+          },
+          relationships: {
+            location: {
+              data: {
+                id: 1,
+                type: 'location'
+              }
+            }
+          }
         }
       ]
     });

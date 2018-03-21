@@ -8,6 +8,9 @@ export const location: ModelDefinition = {
     country: { type: 'string' },
     identifier: { type: 'string' },
     lastUpdated: { type: 'string' }
+  },
+  relationships: {
+    measurements: { type: 'hasMany', model: 'measurement', inverse: 'location' }
   }
 };
 
@@ -19,7 +22,7 @@ export const measurement: ModelDefinition = {
     value: { type: 'number' }
   },
   relationships: {
-    location: { type: 'hasOne', model: 'location' }
+    location: { type: 'hasOne', model: 'location', inverse: 'measurements' }
   }
 };
 
