@@ -29,6 +29,7 @@
     "express": "^4.16.2",
     "glob": "^4.5.3",
     "morgan": "^1.9.0",
+    "pretender": "^2.0.0",
     "qunitjs": "^2.3.3",
     "typescript": "~2.6.0"
   },

@@ -3,7 +3,7 @@ import Coordinator, { EventLoggingStrategy, RequestStrategy, SyncStrategy } from
 import Orbit, { Schema } from '@orbit/data';
 import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
-import { schemaDefinition, measurement } from '../../../utils/data/schema';
+import { measurement, schemaDefinition } from '../../../utils/data/schema';
 
 // Temporal fix until Orbit binds the window fetch by default if it's available
 // https://github.com/orbitjs/orbit/issues/452
