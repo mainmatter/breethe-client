@@ -10,7 +10,7 @@ if (window.fetch) {
   Orbit.fetch = window.fetch.bind(window);
 }
 
-export default function setupStore () {
+export default function setupStore(): Store  {
   let schema = new Schema(schemaDefinition);
 
   let store = new Store({ schema });

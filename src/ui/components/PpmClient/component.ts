@@ -17,14 +17,10 @@ export default class PpmClient extends Component {
   }
 
   async loadLocations() {
-    this.locations = await this.store.query( (q) => {
-      return q.findRecords('location');
-    });
+    this.locations = await this.store.query((q) => q.findRecords('location'));
   }
 
   async loadMeasurements() {
-    this.measurements = await this.store.query( (q) => {
-      return q.findRecords('measurement');
-    });
+    this.measurements = await this.store.query((q) => q.findRecords('measurement'));
   }
 }
