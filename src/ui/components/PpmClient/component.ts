@@ -1,26 +1,22 @@
 import Component, { tracked } from '@glimmer/component';
-import setupStore from '../../../utils/data/setup-store';
+import { getRouteFromPath, IRoute } from '../../../utils/routing';
 
 export default class PpmClient extends Component {
-  store = setupStore();
 
   @tracked
-  locations = null;
-
-  @tracked
-  measurements = null;
+  theCurrentView: IRoute = {
+    name: '',
+    title: '',
+    componentName: '',
+    notFound: false
+  };
 
   constructor(options) {
     super(options);
-    this.loadLocations();
-    this.loadMeasurements();
+    this.setupRouting();
   }
 
-  async loadLocations() {
-    this.locations = await this.store.query((q) => q.findRecords('location'));
-  }
-
-  async loadMeasurements() {
-    this.measurements = await this.store.query((q) => q.findRecords('measurement'));
+  setupRouting() {
+    this.theCurrentView = {...getRouteFromPath(window.location.pathname)};
   }
 }

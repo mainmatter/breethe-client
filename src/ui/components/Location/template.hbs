@@ -1,0 +1,11 @@
+<h4>
+  Measurements
+</h4>
+<ul>
+  {{#each measurements key="id" as |measurement|}}
+  <li class="test__measurement-{{location.id}}">
+    {{measurement.attributes.value}} {{measurement.attributes.unit}}
+    in {{measurement.relationships.location.data.id}}
+  </li>
+  {{/each}}
+</ul>
