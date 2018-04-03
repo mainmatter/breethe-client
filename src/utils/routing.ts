@@ -8,7 +8,7 @@ export interface IRoute {
   notFound: boolean;
 }
 
-export function getRouteDefinition(routeName: string): IRoute {
+export function getRouteDefinition(routeName: string, id: string): IRoute {
   if (routeName === '') {
     return {
       name: 'home',
@@ -22,11 +22,12 @@ export function getRouteDefinition(routeName: string): IRoute {
       name: 'location',
       title: 'PPM Location',
       componentName: 'Location',
-      notFound: false
+      notFound: false,
+      id
     };
   }
   return {
-    name: 'notFound',
+    name: routeName,
     title: 'Not found',
     componentName: 'NotFound',
     notFound: true
@@ -40,9 +41,9 @@ export function getRouteFromPath(path: string): IRoute {
   if (path[path.length - 1] === '/') {
     path = path.substring(0, path.length - 1);
   }
+
   let segments = path.split('/');
+  let [routeName, id] = segments;
 
-  let routeName = segments[0];
-
-  return getRouteDefinition(routeName);
+  return getRouteDefinition(routeName, id);
 }

@@ -7,20 +7,8 @@
 </h4>
 <ul>
   {{#each locations key="id" as |location|}}
-  <li class="test__location-{{location.id}}">
-    {{location.attributes.city}}, {{location.attributes.country}}
-  </li>
-  {{/each}}
-</ul>
-
-<h4>
-  Measurements
-</h4>
-<ul>
-  {{#each measurements key="id" as |measurement|}}
-  <li class="test__measurement-{{location.id}}">
-    {{measurement.attributes.value}} {{measurement.attributes.unit}}
-    in {{measurement.relationships.location.data.id}}
-  </li>
+    <li class="test__location-{{location.id}}">
+        {{location.attributes.city}}, {{location.attributes.country}}
+    </li>
   {{/each}}
 </ul>
