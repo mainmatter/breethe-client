@@ -1,7 +1,10 @@
 import Component, { tracked } from '@glimmer/component';
+import setupStore from '../../../utils/data/setup-store';
 import { getRouteFromPath, IRoute } from '../../../utils/routing';
 
 export default class PpmClient extends Component {
+  store = setupStore();
+
   @tracked
   theCurrentView: IRoute = {
     name: '',

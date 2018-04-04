@@ -1,8 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
-import setupStore from '../../../utils/data/setup-store';
 
 export default class PpmClient extends Component {
-  store = setupStore();
 
   @tracked
   locations = null;
@@ -13,6 +11,6 @@ export default class PpmClient extends Component {
   }
 
   async loadLocations() {
-    this.locations = await this.store.query((q) => q.findRecords('location'));
+    this.locations = await this.args.store.query((q) => q.findRecords('location'));
   }
 }
