@@ -1,4 +1,5 @@
 import Component, { tracked } from '@glimmer/component';
+import { assert } from '@orbit/utils';
 
 export default class PpmClient extends Component {
 
@@ -7,6 +8,8 @@ export default class PpmClient extends Component {
 
   constructor(options) {
     super(options);
+    assert('Argument \'store\' must be supplied to this component.', this.args.store);
+
     this.loadLocations();
   }
 
