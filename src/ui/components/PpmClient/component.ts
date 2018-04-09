@@ -1,76 +1,50 @@
 import Component, { tracked } from '@glimmer/component';
-import Coordinator, { EventLoggingStrategy, RequestStrategy, SyncStrategy } from '@orbit/coordinator';
-import Orbit, { Schema } from '@orbit/data';
-import JSONAPIStore from '@orbit/jsonapi';
-import Store from '@orbit/store';
-import { measurement, schemaDefinition } from '../../../utils/data/schema';
-
-// Temporal fix until Orbit binds the window fetch by default if it's available
-// https://github.com/orbitjs/orbit/issues/452
-if (window.fetch) {
-  Orbit.fetch = window.fetch.bind(window);
-}
+import setupStore from '../../../utils/data/setup-store';
+import { getRouteFromPath, IRoute } from '../../../utils/routing';
 
 export default class PpmClient extends Component {
-  store = this.setupStore();
+  store = setupStore();
 
   @tracked
-  locations = null;
-
-  @tracked
-  measurements = null;
+  theCurrentView: IRoute = {
+    name: '',
+    title: '',
+    componentName: '',
+    notFound: false
+  };
 
   constructor(options) {
     super(options);
-    this.loadLocations();
-    this.loadMeasurements();
+    this.setupRouting();
   }
 
-  setupStore() {
-    let schema = new Schema(schemaDefinition);
-
-    let store = new Store({ schema });
-    let jsonapi = new JSONAPIStore({
-      namespace: 'api',
-      schema
-    });
-    let requestStrategy = new RequestStrategy({
-      action: 'pull',
-      blocking: true,
-      on: 'beforeQuery',
-      source: 'store',
-      target: 'jsonapi',
-    });
-
-    let logger = new EventLoggingStrategy({
-      interfaces: ['queryable', 'syncable']
-    });
-
-    let syncStrategy = new SyncStrategy({
-      blocking: true,
-      source: 'jsonapi',
-      target: 'store'
-    });
-
-    const coordinator = new Coordinator({
-      sources: [store, jsonapi],
-      strategies: [requestStrategy, syncStrategy, logger]
-    });
-
-    coordinator.activate();
-
-    return store;
+  loadFromUrl(path) {
+    let routeState = getRouteFromPath(path);
+    window.history.pushState(routeState, routeState.title, `${path}`);
+    this.theCurrentView = routeState;
   }
 
-  async loadLocations() {
-    this.locations = await this.store.query( (q) => {
-      return q.findRecords('location');
+  bindInternalLinks() {
+    document.addEventListener('click', (event: Event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target.tagName === 'A' &&
+        target.classList.contains('internal-link')
+      ) {
+        event.preventDefault();
+        this.loadFromUrl(target.getAttribute('href'));
+      }
     });
   }
 
-  async loadMeasurements() {
-    this.measurements = await this.store.query( (q) => {
-      return q.findRecords('measurement');
-    });
+  setupRouting() {
+    window.onpopstate = (event) => {
+      if (event.state) {
+        const view = event.state;
+        this.theCurrentView = view;
+      }
+    };
+    this.loadFromUrl(window.location.pathname);
+    this.bindInternalLinks();
   }
 }

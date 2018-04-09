@@ -1,0 +1,15 @@
+{{#if notFound}}
+<em>We couldn't load the requested location.</em>
+{{else}}
+<h4>
+  Measurements ({{measurements.length}}) for {{@id}}
+</h4>
+<ul>
+  {{#each measurements key="id" as |measurement|}}
+  <li class="test__measurement-{{measurement.id}}">
+    {{measurement.id}} {{measurement.attributes.value}}
+    {{measurement.attributes.unit}} in {{measurement.relationships.location.data.id}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
