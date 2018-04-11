@@ -2,8 +2,9 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'ppm-client',
-    environment
+    environment,
+    rootURL: '/',
+    modulePrefix: 'ppm-client'
   };
 
   return ENV;

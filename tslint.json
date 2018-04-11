@@ -8,7 +8,9 @@
     "quotemark": [true, "single"],
     "trailing-comma": false,
     "only-arrow-functions": false,
-    "prefer-const": false
+    "prefer-const": false,
+    "member-access": false,
+    "object-literal-sort-keys": false
   },
   "rulesDirectory": []
 }
