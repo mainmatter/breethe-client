@@ -1,0 +1,12 @@
+<h4>
+  Locations
+</h4>
+<ul>
+  {{#each locations key="id" as |location|}}
+    <li class="test__location-{{location.id}}">
+        <a href="/location/{{location.id}}" class="internal-link">
+            {{location.attributes.city}}, {{location.attributes.country}}
+        </a>
+    </li>
+  {{/each}}
+</ul>

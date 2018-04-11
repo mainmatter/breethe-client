@@ -1,16 +1,5 @@
-<div>
-  <h1>Welcome to PPM!</h1>
-</div>
+<h1>
+    Welcome to PPT-CLIENT
+</h1>
 
-<h4>
-  Locations
-</h4>
-<ul>
-  {{#each locations key="id" as |location|}}
-    <li class="test__location-{{location.id}}">
-        <a href="/location/{{location.id}}" class="internal-link">
-            {{location.attributes.city}}, {{location.attributes.country}}
-        </a>
-    </li>
-  {{/each}}
-</ul>
+<SearchForm @onSearch={{action goToRoute}} />
