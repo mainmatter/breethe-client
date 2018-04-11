@@ -6,14 +6,31 @@ export default class Home extends Component {
   @tracked
   locations = null;
 
+  @tracked
+  searchTerm = '';
+
   constructor(options) {
     super(options);
     assert('Argument \'store\' must be supplied to this component.', this.args.store);
-
-    this.loadLocations();
+    this.searchTerm = this.args.param;
+    this.loadLocations(this.args.param);
   }
 
-  async loadLocations() {
-    this.locations = await this.args.store.query((q) => q.findRecords('location'));
+  async loadLocations(searchTerm) {
+    this.locations = await this.args.store.query((q) =>
+      q.findRecords('location')
+       .filter({ attribute: 'city', value: searchTerm })
+    );
+  }
+
+  goToRoute(search) {
+    this.loadLocations(search);
+    this.searchTerm = search;
+    /**
+     * This 'transition' doesn't trigger any update
+     * in the component. We use it here to update
+     * the URL parameter.
+     */
+    this.args.transitionTo(`/search/${search}`);
   }
 }

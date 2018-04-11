@@ -1,6 +1,14 @@
 <h4>
-  Locations
+  {{#if searchTerm}}
+    Locations for "{{searchTerm}}"
+  {{else}}
+    Search for your location
+  {{/if}}
 </h4>
+
+<SearchForm @term={{searchTerm}} @onSearch={{action goToRoute}} />
+
+{{#if locations.length}}
 <ul>
   {{#each locations key="id" as |location|}}
     <li class="test__location-{{location.id}}">
@@ -10,3 +18,10 @@
     </li>
   {{/each}}
 </ul>
+{{else}}
+  {{#if searchTerm}}
+    <em>
+      We could not find locations with your search term.
+    </em>
+  {{/if}}
+{{/if}}
