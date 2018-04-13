@@ -1,8 +1,9 @@
 <h1>{{theCurrentView.componentName}}</h1>
 {{#if theCurrentView.componentName}}
   {{component theCurrentView.componentName
-      id=theCurrentView.id
+      param=theCurrentView.param
       name=theCurrentView.name
       store=store
+      transitionTo=(action loadFromUrl)
   }}
 {{/if}}

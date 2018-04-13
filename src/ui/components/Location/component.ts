@@ -1,6 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
 
-export default class PpmClient extends Component {
+export default class Location extends Component {
   @tracked
   measurements = null;
 
@@ -9,7 +9,7 @@ export default class PpmClient extends Component {
 
   constructor(options) {
     super(options);
-    this.loadMeasurements(this.args.id);
+    this.loadMeasurements(this.args.param);
   }
 
   async loadMeasurements(locationId) {

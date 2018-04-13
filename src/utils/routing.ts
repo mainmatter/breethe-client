@@ -2,13 +2,13 @@ import { DictSet } from '@glimmer/util';
 
 export interface IRoute {
   name: string;
-  id?: string;
+  param?: string;
   title: string;
   componentName: string;
   notFound: boolean;
 }
 
-export function getRouteDefinition(routeName: string, id: string): IRoute {
+export function getRouteDefinition(routeName: string, param: string): IRoute {
   if (routeName === '') {
     return {
       name: 'home',
@@ -23,7 +23,16 @@ export function getRouteDefinition(routeName: string, id: string): IRoute {
       title: 'PPM Location',
       componentName: 'Location',
       notFound: false,
-      id
+      param
+    };
+  }
+  if (routeName === 'search') {
+    return {
+      name: 'search',
+      title: 'PPM Location',
+      componentName: 'Search',
+      notFound: false,
+      param
     };
   }
   return {
