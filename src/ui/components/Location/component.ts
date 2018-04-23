@@ -2,7 +2,7 @@ import Component, { tracked } from '@glimmer/component';
 
 export default class Location extends Component {
   @tracked
-  measurements = null;
+  location = null;
 
   @tracked
   notFound = false;
@@ -13,13 +13,13 @@ export default class Location extends Component {
   }
 
   async loadMeasurements(locationId) {
-    try {
-      this.measurements = await this.args.store.query((q) =>
-        q.findRelatedRecords({ type: 'location', id: locationId }, 'measurements')
+    // try {
+      this.location = await this.args.store.query((q) =>
+        q.findRecord({ type: 'location', id: locationId })
       );
       this.notFound = false;
-    } catch (e) {
-      this.notFound = true;
-    }
+    // } catch (e) {
+    //   this.notFound = true;
+    // }
   }
 }

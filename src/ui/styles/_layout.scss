@@ -7,10 +7,15 @@ html, body, #app {
   @extend %screen-view;
 }
 
-%component-screen {
+@mixin component-screen {
   @extend %screen-view;
   box-sizing: border-box;
   padding: 1rem;
   display: flex;
   flex-flow: column nowrap;
+
+  @include for-tablet-portrait-up() {
+    max-width: 600px;
+    margin: 0 auto;
+  }
 }

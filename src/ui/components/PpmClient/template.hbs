@@ -1,8 +1,10 @@
-{{#if theCurrentView.componentName}}
-  {{component theCurrentView.componentName
-      param=theCurrentView.param
-      name=theCurrentView.name
-      store=store
-      transitionTo=(action loadFromUrl)
-  }}
-{{/if}}
+<div class="ppm-client">
+  {{#if theCurrentView.componentName}}
+    {{component theCurrentView.componentName
+        param=theCurrentView.param
+        name=theCurrentView.name
+        store=store
+        transitionTo=(action loadFromUrl)
+    }}
+  {{/if}}
+</div>

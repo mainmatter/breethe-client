@@ -1,6 +1,5 @@
 .search-route {
-  @extend %component-screen;
-  @include qualityBackground($clear-sky);
+  @include component-screen();
   padding: 1rem; 
 }
   

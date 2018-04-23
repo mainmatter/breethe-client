@@ -1,15 +1,94 @@
 {{#if notFound}}
   <em>We couldn't load the requested location.</em>
 {{else}}
-  <h4>
-    Measurements ({{measurements.length}}) for {{@id}}
-  </h4>
-  <ul>
-    {{#each measurements key="id" as |measurement|}}
-    <li class="test__measurement-{{measurement.id}}">
-      {{measurement.id}} {{measurement.attributes.value}}
-      {{measurement.attributes.unit}} in {{measurement.relationships.location.data.id}}
-    </li>
-    {{/each}}
-  </ul>
+  <div class="location-route">
+    <header>
+      <h1 class="location-route__title">
+        Ulrike-Günther-Platz 145, 18410 Guben
+      </h1>
+      <p class="location-route__updated">
+        Last update: 10:30 AM | 14-04-2018
+      </p>
+    </header>
+    <div class="location-route__indicator">
+      <div class="location-route__indicator__content">
+        <strong>
+          Good
+        </strong>
+        Air Quality
+      </div>
+    </div>
+    <div class="location-route__measurements-wrapper">
+      <ul class="location-route__measurements">
+        <li class="location-route__measurement">
+          <strong class="location-route__measurement__label">
+            PM10
+          </strong>
+          <span class="location-route__measurement__value">
+            20mg
+          </span>
+          <span class="location-route__measurement__value">
+            2.5%
+          </span>
+        </li>
+        <li class="location-route__measurement">
+          <strong class="location-route__measurement__label">
+            PM10
+          </strong>
+          <span class="location-route__measurement__value">
+            20mg
+          </span>
+          <span class="location-route__measurement__value">
+            2.5%
+          </span>
+        </li>
+        <li class="location-route__measurement">
+          <strong class="location-route__measurement__label">
+            PM10
+          </strong>
+          <span class="location-route__measurement__value">
+            20mg
+          </span>
+          <span class="location-route__measurement__value">
+            2.5%
+          </span>
+        </li>
+      </ul>
+      <ul class="location-route__measurements">
+        <li class="location-route__measurement">
+          <strong class="location-route__measurement__label">
+            PM10
+          </strong>
+          <span class="location-route__measurement__value">
+            20mg
+          </span>
+          <span class="location-route__measurement__value">
+            2.5%
+          </span>
+        </li>
+        <li class="location-route__measurement">
+          <strong class="location-route__measurement__label">
+            PM10
+          </strong>
+          <span class="location-route__measurement__value">
+            20mg
+          </span>
+          <span class="location-route__measurement__value">
+            2.5%
+          </span>
+        </li>
+        <li class="location-route__measurement">
+          <strong class="location-route__measurement__label">
+            PM10
+          </strong>
+          <span class="location-route__measurement__value">
+            20mg
+          </span>
+          <span class="location-route__measurement__value">
+            2.5%
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
 {{/if}}
