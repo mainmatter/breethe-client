@@ -1,6 +1,5 @@
 .home-route {
   @include component-screen();
-  padding: 1rem;
 
   &__header {
     height: 38.19vh;
@@ -27,15 +26,7 @@
 
     &__item {
       a {
-        &:before {
-          content: '';
-          display: block;
-          background: no-repeat center url(images/map-marker.svg);
-          width: 1rem;
-          height: 1rem;
-          float: left;
-          margin-right: 0.5rem;
-        }
+        @include marker-pin();
         display: block;
         padding: 1rem 0;
         border-radius: $radius-size;

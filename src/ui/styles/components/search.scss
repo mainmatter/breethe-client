@@ -1,5 +1,39 @@
 .search-route {
   @include component-screen();
-  padding: 1rem; 
+
+  &__title {
+    font-size: 1rem;
+    font-weight: $medium-weight;
+    color: $font-color;
+    margin: 1rem 0;
+  }
+
+  .search-form {
+    display: flex;
+    flex-flow: row nowrap;
+    &__button {
+      width: 15rem;
+      margin: 0 0 0 1rem;
+    }
+  }
+
+  &__result {
+    margin-bottom: 1rem;
+    a {
+      @include marker-pin();
+      display: block;
+      background: rgba($font-color, 0.10);
+      border-radius: $radius-size;
+      padding: 1rem;
+      color: $font-color;
+      text-decoration: none;
+    }
+  }
+
+  &__no-results {
+    display: inline-block;
+    color: $font-color;
+    margin-top: 1rem;
+  }
 }
   

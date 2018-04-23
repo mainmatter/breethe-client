@@ -21,3 +21,15 @@
 @mixin for-big-desktop-up {
   @media (min-width: 1800px) { @content; }
 }
+
+@mixin marker-pin($width: 1rem, $height: 1rem) {
+  &:before {
+    content: '';
+    display: block;
+    background: no-repeat center url(images/map-marker.svg);
+    width: $width;
+    height: $height;
+    float: left;
+    margin-right: 0.5rem;
+  }
+}

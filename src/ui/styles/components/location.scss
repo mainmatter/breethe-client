@@ -3,6 +3,7 @@
   justify-content: space-between;
 
   &__title {
+    @include marker-pin(1.5rem, 1.5rem);
     font-size: 1.5em;
     text-align: center;
     color: $font-color;
@@ -11,16 +12,6 @@
     @include for-tablet-portrait-up() {
       margin-left: 4rem;
       margin-right: 4rem;
-    }
-
-    &:before {
-      content: '';
-      display: block;
-      background: no-repeat center url(images/map-marker.svg);
-      width: 1.5rem;
-      height: 1.5rem;
-      float: left;
-      margin-right: 0.5rem;
     }
   }
 
@@ -60,6 +51,8 @@
 
   &__measurements-wrapper {
     padding: 2rem 0;
+    flex-shrink: 0;
+
     @include for-tablet-portrait-up() {
       display: flex;
       flex-flow: row nowrap;
