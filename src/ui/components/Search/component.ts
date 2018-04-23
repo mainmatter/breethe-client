@@ -4,10 +4,15 @@ import { assert } from '@orbit/utils';
 export default class Home extends Component {
 
   @tracked
-  locations = null;
+  locations = [];
 
   @tracked
   searchTerm = '';
+
+  @tracked('locations', 'searchTerm')
+  get showSearchResults() {
+    return this.locations.length > 0 && this.searchTerm.length > 0;
+  }
 
   constructor(options) {
     super(options);

@@ -13,7 +13,7 @@ export function getRouteDefinition(routeName: string, param: string): IRoute {
     return {
       name: 'home',
       title: 'PPM',
-      componentName: 'Home',
+      componentName: 'Search',
       notFound: false
     };
   }

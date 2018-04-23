@@ -31,4 +31,13 @@
     outline: none;
     cursor: pointer;
   }
+
+  @include for-tablet-portrait-up() {
+    display: flex;
+    flex-flow: row nowrap;
+    .search-form__button {
+      width: 15rem;
+      margin: 0 0 0 1rem;
+    }
+  }
 }

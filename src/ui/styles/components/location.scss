@@ -15,6 +15,25 @@
     }
   }
 
+  &__logo {
+    color: $font-color;
+    margin-top: 1rem;
+    a {
+      display: block;
+      text-align: center; 
+      background: no-repeat center/contain url(images/logo.svg);
+      height: 2rem;
+      text-indent: -1000000px;
+      overflow: hidden;
+    }
+    @include for-tablet-portrait-up() {
+      margin-top: 2rem;
+      a {
+        height: 2.5rem;
+      }
+    } 
+  }
+
   &__updated {
     text-align: center;
     color: $font-color;
@@ -23,7 +42,7 @@
 
   &__indicator {
     margin: 2rem auto;
-    background: rgba(#fff, 0.2);
+    background: rgba(#fff, 0.1);
     width: 10rem;
     height: 10rem;
     padding: 2rem;
@@ -33,7 +52,7 @@
       width: 10rem;
       height: 10rem;
       border-radius: 8rem;
-      background: rgba($font-color, 0.2);
+      background: rgba($font-color, 0.15);
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
@@ -62,7 +81,7 @@
 
   &__measurements {
     @include for-tablet-portrait-up() {
-      width: calc(50% - 1rem);
+      width: calc(50% - 2rem);
       box-sizing: border-box;
       &:nth-child(n+1) {
         .location-route__measurement:first-child {
