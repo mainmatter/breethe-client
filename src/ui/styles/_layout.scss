@@ -1,0 +1,16 @@
+%screen-view {
+  width: 100%;
+  height: 100vh;
+}
+
+html, body, #app {
+  @extend %screen-view;
+}
+
+%component-screen {
+  @extend %screen-view;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  flex-flow: column nowrap;
+}

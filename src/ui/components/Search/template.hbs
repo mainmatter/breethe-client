@@ -1,27 +1,29 @@
-<h4>
-  {{#if searchTerm}}
-    Locations for "{{searchTerm}}"
+<div class="search-route">
+  <h4>
+    {{#if searchTerm}}
+      Locations for "{{searchTerm}}"
+    {{else}}
+      Search for your location
+    {{/if}}
+  </h4>
+
+  <SearchForm @term={{searchTerm}} @onSearch={{action goToRoute}} />
+
+  {{#if locations.length}}
+    <ul>
+      {{#each locations key="id" as |location|}}
+        <li class="test__location-{{location.id}}">
+            <a href="/location/{{location.id}}" class="internal-link">
+                {{location.attributes.city}}, {{location.attributes.country}}
+            </a>
+        </li>
+      {{/each}}
+    </ul>
   {{else}}
-    Search for your location
+    {{#if searchTerm}}
+      <em>
+        We could not find locations with your search term.
+      </em>
+    {{/if}}
   {{/if}}
-</h4>
-
-<SearchForm @term={{searchTerm}} @onSearch={{action goToRoute}} />
-
-{{#if locations.length}}
-<ul>
-  {{#each locations key="id" as |location|}}
-    <li class="test__location-{{location.id}}">
-        <a href="/location/{{location.id}}" class="internal-link">
-            {{location.attributes.city}}, {{location.attributes.country}}
-        </a>
-    </li>
-  {{/each}}
-</ul>
-{{else}}
-  {{#if searchTerm}}
-    <em>
-      We could not find locations with your search term.
-    </em>
-  {{/if}}
-{{/if}}
+</div>

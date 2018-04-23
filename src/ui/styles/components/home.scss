@@ -1,0 +1,49 @@
+.home-route {
+  @extend %component-screen;
+  @include qualityBackground($clear-sky);
+  padding: 1rem;
+
+  &__header {
+    height: 38.19vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__logo {
+    font-size: 2rem;
+    font-weight: $medium-weight;
+    color: $font-color;
+    text-align: center; 
+  }
+
+  &__recent {
+    margin-top: 4rem;
+
+    &__title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: $font-color;
+    }
+
+    &__item {
+      a {
+        &:before {
+          content: '';
+          display: block;
+          background: no-repeat center url(images/map-marker.svg);
+          width: 1rem;
+          height: 1rem;
+          float: left;
+          margin-right: 0.5rem;
+        }
+        display: block;
+        padding: 1rem 0;
+        border-radius: $radius-size;
+        color: $font-color;
+        opacity: 0.8;
+        text-decoration: none;
+      }
+    }
+  }
+}
