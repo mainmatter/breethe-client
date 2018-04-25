@@ -1,6 +1,6 @@
-<form onsubmit={{action submitSearch}}>
-  <input value={{search}} oninput={{action updateSearch}}>
-  <button>
-    Search
+<form onsubmit={{action submitSearch}} class="search-form">
+  <input value={{search}} oninput={{action updateSearch}} class="search-form__input">
+  <button class="search-form__button">
+    Find location
   </button>
 </form>

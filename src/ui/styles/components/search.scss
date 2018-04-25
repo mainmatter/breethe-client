@@ -1,0 +1,55 @@
+.search-route {
+  @include component-screen();
+
+  &__header {
+    height: 38.19vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__logo {
+    font-size: 2rem;
+    font-weight: $medium-weight;
+    color: $font-color;
+    text-align: center; 
+    background: no-repeat center url(images/logo.svg);
+    height: 5rem;
+    text-indent: -1000000px;
+    overflow: hidden;
+  }
+
+  &__results {
+    margin-top: 4rem;
+
+    &__title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: $font-color;
+      strong {
+        font-weight: $bold-weight;
+      }
+    }
+  }
+
+  &__result {
+    margin-bottom: 1rem;
+    a {
+      @include marker-pin();
+      display: flex;
+      flex-flow: row nowrap;
+      background: rgba($font-color, 0.10);
+      border-radius: $radius-size;
+      padding: 1rem;
+      line-height: 1.2rem;
+      color: $font-color;
+      text-decoration: none;
+    }
+  }
+
+  &__no-results {
+    display: inline-block;
+    color: $font-color;
+    margin-top: 1rem;
+  }
+}

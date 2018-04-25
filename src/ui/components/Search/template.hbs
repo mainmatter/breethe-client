@@ -1,27 +1,50 @@
-<h4>
-  {{#if searchTerm}}
-    Locations for "{{searchTerm}}"
-  {{else}}
-    Search for your location
-  {{/if}}
-</h4>
+<div class="search-route">
+  <header class="search-route__header">
+    <h1 class="search-route__logo">
+      Breethe
+    </h1>
+  </header>
 
-<SearchForm @term={{searchTerm}} @onSearch={{action goToRoute}} />
+  <SearchForm @term={{searchTerm}} @onSearch={{action goToRoute}} />
 
-{{#if locations.length}}
-<ul>
-  {{#each locations key="id" as |location|}}
-    <li class="test__location-{{location.id}}">
-        <a href="/location/{{location.id}}" class="internal-link">
-            {{location.attributes.city}}, {{location.attributes.country}}
-        </a>
-    </li>
-  {{/each}}
-</ul>
-{{else}}
-  {{#if searchTerm}}
-    <em>
-      We could not find locations with your search term.
-    </em>
-  {{/if}}
-{{/if}}
+  <div class="search-route__results">
+    <h2 class="search-route__results__title">
+      {{#if searchTerm}}
+        Locations for "<strong>{{searchTerm}}</strong>"
+      {{else}}
+        Recent Locations
+      {{/if}}
+    </h2>
+
+    {{#if showSearchResults}}
+      <ul>
+        {{#each locations key="id" as |location|}}
+          <li class="search-route__result">
+            <a href="/location/{{location.id}}" class="internal-link">
+              {{location.attributes.city}}, {{location.attributes.country}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      {{#if searchTerm}}
+        <em class="search-route__no-results">
+          We could not find locations with your search term.
+        </em>
+      {{else}}
+        <ul>
+          <li class="search-route__result">
+            <a href="#">
+              Teglhomsgade 58 2450 København
+            </a> 
+          </li>
+          <li class="search-route__result">
+            <a href="#">
+              Ulrich-Schreier St 5020 Salzburg
+            </a>
+          </li>
+        </ul>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

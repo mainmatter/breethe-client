@@ -1,0 +1,35 @@
+@mixin qualityBackground($gradient, $clouds: 0, $particles: 0) {
+  background: linear-gradient(map-get($gradient, start), map-get($gradient, end));
+}
+
+@mixin for-phone-only {
+  @media (max-width: 599px) { @content; }
+}
+
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) { @content; }
+}
+
+@mixin for-tablet-landscape-up {
+  @media (min-width: 900px) { @content; }
+}
+
+@mixin for-desktop-up {
+  @media (min-width: 1200px) { @content; }
+}
+
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) { @content; }
+}
+
+@mixin marker-pin($width: 1rem, $height: 1rem) {
+  &:before {
+    content: '';
+    display: block;
+    background: no-repeat center url(images/map-marker.svg);
+    width: $width;
+    height: $height;
+    float: left;
+    margin-right: 0.5rem;
+  }
+}
