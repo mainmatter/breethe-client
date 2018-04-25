@@ -13,13 +13,14 @@ export default class Location extends Component {
   }
 
   async loadMeasurements(locationId) {
-    try {
+    // try {
       this.measurements = await this.args.store.query((q) =>
         q.findRelatedRecords({ type: 'location', id: locationId }, 'measurements')
       );
       this.notFound = false;
-    } catch (e) {
-      this.notFound = true;
-    }
+      this.args.updateParticles(80);
+    // } catch (e) {
+      // this.notFound = true;
+    // }
   }
 }

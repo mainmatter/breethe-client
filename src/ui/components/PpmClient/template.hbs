@@ -5,6 +5,12 @@
         name=theCurrentView.name
         store=store
         transitionTo=(action loadFromUrl)
+        updateParticles=(action updateParticles)
     }}
   {{/if}}
+
+  <div class="ppm-background">
+    <div class="ppm-background__overgradient"></div>
+    <canvas class="ppm-background__particles"></canvas>
+  </div>
 </div>
