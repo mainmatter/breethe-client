@@ -31,7 +31,6 @@ export default class PpmClient extends Component {
   loadParticles() {
     this.particlesIndex = DEFAULT_PARTICLES_INDEX;
     let initialParticles = 200 + MAX_PARTICLES * (this.particlesIndex / 100);
-    console.info(initialParticles);
     this.particles = Particles.default.init({
       selector: '.ppm-background__particles',
       color: '#109bff',
@@ -44,7 +43,6 @@ export default class PpmClient extends Component {
   updateParticles(particlesIndex: number) {
     if (this.particlesIndex && this.particlesIndex !== particlesIndex) {
       let maxParticles = 200 + MAX_PARTICLES * (particlesIndex / 100);
-      console.log(maxParticles);
       this.particles.options.maxParticles = maxParticles;
       this.particles._refresh();
       this.particlesIndex = particlesIndex;
