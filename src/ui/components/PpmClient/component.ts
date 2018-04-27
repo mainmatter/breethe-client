@@ -5,7 +5,9 @@ import { getRouteFromPath, IRoute } from '../../../utils/routing';
 export default class PpmClient extends Component {
   store = setupStore();
   particles: any = null;
-  particlesIndex: number = 0;
+
+  @tracked
+  particlesIndex: number = 20;
 
   @tracked
   theCurrentView: IRoute = {
@@ -21,6 +23,7 @@ export default class PpmClient extends Component {
   }
 
   updateParticles(particlesIndex: number) {
+    this.particlesIndex = particlesIndex;
     // TODO: variations according to particles
   }
 
