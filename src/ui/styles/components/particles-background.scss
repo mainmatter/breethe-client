@@ -12,19 +12,14 @@
 
 @for $i from 1 through 50 {
   @keyframes particle-animation-#{$i} {
-    5% {
-      opacity: 1;
-    }
-    95% {
-      transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
-    }
     100% {
-      opacity: 0;
+      transform: translate3d((random(90) * 100%), (random(90) * 100%), (random(100) * 1px));
     }
   }
 
   .particle:nth-child(#{$i}){
     animation: particle-animation-#{$i} 60s infinite;
+    animation-direction: alternate;
     $size: random(10) + 5 + px;
     $opacity: random(100)/100 + 0.20;
     height: $size;
@@ -32,6 +27,5 @@
     animation-delay: -$i * .2s;
     transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
     background: rgba(map-get($clear-sky, start), $opacity);
-    opacity: 0;
   }
 }
