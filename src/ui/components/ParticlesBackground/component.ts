@@ -10,7 +10,6 @@ export default class ParticlesBackground extends Component {
     let { index } = this.args;
     let numParticles = index;
     let particles = Array.from(Array(numParticles).keys());
-    console.log(particles.length);
     return particles;
   }
 }
