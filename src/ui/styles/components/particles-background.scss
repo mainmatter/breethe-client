@@ -5,21 +5,19 @@
   height: 50vh;
 }
 
-.particle {
+.particle, .particle-extra {
   position: absolute;
   border-radius: 50%;
 }
 
-@for $i from 1 through 100 {
+@for $i from 1 through 50 {
   @keyframes particle-animation-#{$i} {
-    0% {
-      opacity: 0;
-    }
-    20% {
+    50% {
       opacity: 1;
       transform: translate3d((random(90) * 100%), (random(90) * 100%), (random(100) * 1px));
     }
     100% {
+      opacity: 1;
       transform: translate3d((random(90) * 100%), (random(90) * 100%), (random(100) * 1px));
     }
   }
@@ -32,6 +30,32 @@
     height: $size;
     width: $size;
     animation-delay: -$i * .2s;
+    transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
+    background: rgba(map-get($clear-sky, start), $opacity);
+  }
+}
+
+@for $i from 1 through 75 {
+  @keyframes particle-animation-#{$i} {
+    0%, 100% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+      transform: translate3d((random(90) * 100%), (random(90) * 100%), (random(100) * 1px));
+    }
+    90% {
+      opacity: 1;
+      transform: translate3d((random(90) * 100%), (random(90) * 100%), (random(100) * 1px));
+    }
+  }
+
+  .particle-extra:nth-child(#{$i}){
+    animation: particle-animation-#{$i} 60s infinite;
+    $size: random(10) + 5 + px;
+    $opacity: random(100)/100 + 0.20;
+    height: $size;
+    width: $size;
     transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
     background: rgba(map-get($clear-sky, start), $opacity);
   }

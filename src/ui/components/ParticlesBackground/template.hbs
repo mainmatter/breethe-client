@@ -1,5 +1,13 @@
 <div class="particles-background">
-  {{#each particles key='@index' as |particle index|}}
+  {{#each particles.particles key='@index' as |particle index|}}
     <div class="particle"></div>
   {{/each}}
 </div>
+
+{{#if particles.extraParticles.length}}
+  <div class="particles-background particles-background--extra">
+    {{#each particles.extraParticles key='@index' as |particle index|}}
+      <div class="particle-extra"></div>
+    {{/each}}
+  </div>
+{{/if}}
