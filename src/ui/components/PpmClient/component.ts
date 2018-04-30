@@ -24,7 +24,6 @@ export default class PpmClient extends Component {
 
   updateParticles(particlesIndex: number) {
     this.particlesIndex = particlesIndex;
-    // TODO: variations according to particles
   }
 
   loadFromUrl(path) {
