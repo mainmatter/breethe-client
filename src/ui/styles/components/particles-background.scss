@@ -23,7 +23,7 @@
   }
 
   .particle:nth-child(#{$i}){
-    animation: particle-animation-#{$i} 60s infinite;
+    animation: particle-animation-#{$i} 80s infinite;
     animation-direction: alternate;
     $size: random(10) + 5 + px;
     $opacity: random(100)/100 + 0.20;
@@ -42,7 +42,7 @@
     }
     10% {
       opacity: 0.8;
-      transform: translate3d((random(90) * 100%), (random(90) * 100%), (random(100) * 1px));
+      // transform: translate3d((random(90) * 100%), (random(90) * 100%), (random(100) * 1px));
     }
     90% {
       opacity: 1;
@@ -51,7 +51,7 @@
   }
 
   .particle-extra:nth-child(#{$i}){
-    animation: particle-animation-#{$i} 60s infinite;
+    animation: particle-animation-#{$i} 80s infinite;
     $size: random(10) + 5 + px;
     $opacity: random(100)/100 + 0.20;
     height: $size;
