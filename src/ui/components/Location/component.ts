@@ -14,7 +14,8 @@ export default class Location extends Component {
 
   async loadMeasurements(locationId) {
     // try {
-      this.measurements = await this.args.store.query((q) =>
+      let store = await this.args.store;
+      this.measurements = await store.query((q) =>
         q.findRelatedRecords({ type: 'location', id: locationId }, 'measurements')
       );
       this.notFound = false;

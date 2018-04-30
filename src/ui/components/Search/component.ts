@@ -9,9 +9,9 @@ export default class Home extends Component {
   @tracked
   searchTerm = '';
 
-  @tracked('locations', 'searchTerm')
-  get showSearchResults() {
-    return this.locations.length > 0 && this.searchTerm.length > 0;
+  @tracked('locations')
+  get showResults() {
+    return this.locations.length > 0;
   }
 
   constructor(options) {
@@ -20,6 +20,8 @@ export default class Home extends Component {
     this.searchTerm = this.args.searchTerm;
     if (this.searchTerm && this.searchTerm.length > 0) {
       this.loadLocations(this.searchTerm);
+    } else {
+      this.loadRecent();
     }
   }
 
@@ -35,9 +37,19 @@ export default class Home extends Component {
     }
   }
 
+  async loadRecent() {
+    let store = await this.args.store;
+    this.locations = store.cache.query((q) => q.findRecords('location'));
+  }
+
   goToRoute(search) {
-    this.loadLocations(search);
+    if (search) {
+      this.loadLocations(search);
+    } else {
+      this.loadRecent();
+    }
     this.searchTerm = search;
+
     /**
      * This 'transition' doesn't trigger any update
      * in the component. We use it here to update

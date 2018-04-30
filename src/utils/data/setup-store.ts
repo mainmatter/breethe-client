@@ -1,5 +1,6 @@
 import Coordinator, { EventLoggingStrategy, RequestStrategy, SyncStrategy } from '@orbit/coordinator';
 import Orbit, { Schema } from '@orbit/data';
+import IndexedDBStore from '@orbit/indexeddb';
 import JSONAPIStore from '@orbit/jsonapi';
 import Store, { Cache } from '@orbit/store';
 import { schema as schemaDefinition } from './schema';

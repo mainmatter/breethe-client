@@ -12,11 +12,13 @@
       {{#if searchTerm}}
         Locations for "<strong>{{searchTerm}}</strong>"
       {{else}}
-        Recent Locations
+        {{#if showResults}}
+          Recent Locations
+        {{/if}}
       {{/if}}
     </h2>
 
-    {{#if showSearchResults}}
+    {{#if showResults}}
       <ul>
         {{#each locations key="id" as |location|}}
           <li class="search-route__result" data-test-search-result={{location.attributes.city}}>
@@ -31,19 +33,6 @@
         <em class="search-route__no-results">
           We could not find locations with your search term.
         </em>
-      {{else}}
-        <ul>
-          <li class="search-route__result">
-            <a href="#" data-navigo>
-              Teglhomsgade 58 2450 København
-            </a> 
-          </li>
-          <li class="search-route__result">
-            <a href="#" data-navigo>
-              Ulrich-Schreier St 5020 Salzburg
-            </a>
-          </li>
-        </ul>
       {{/if}}
     {{/if}}
   </div>

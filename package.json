@@ -26,6 +26,7 @@
     "@orbit/coordinator": "^0.15.13",
     "@orbit/core": "^0.15.14",
     "@orbit/data": "^0.15.14",
+    "@orbit/indexeddb": "^0.15.14",
     "@orbit/jsonapi": "^0.15.14",
     "@orbit/store": "^0.15.14",
     "@types/qunit": "^2.0.31",
