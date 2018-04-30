@@ -4,7 +4,6 @@ const DEFAULT_PARTICLES_INDEX = 25;
 const MAX_PARTICLES = 100;
 
 export default class ParticlesBackground extends Component {
-
   @tracked('args')
   get particles() {
     let { index } = this.args;
