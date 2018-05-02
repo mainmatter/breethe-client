@@ -22,8 +22,7 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 
 install:
-  - yarn install --non-interactive
+  - yarn install --non-interactive --pure-lockfile
 
 script:
   - yarn test
-  
