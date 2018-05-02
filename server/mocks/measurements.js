@@ -1,59 +1,83 @@
 /* eslint-env node */
-"use strict";
+'use strict';
 
 module.exports = function(app) {
-  const express = require("express");
+  const express = require('express');
   let measurementsRouter = express.Router();
 
-  measurementsRouter.get("/", function(req, res) {
-    res.type("application/vnd.api+json");
+  measurementsRouter.get('/', function(req, res) {
+    res.type('application/vnd.api+json');
     res.json({
       data: [
         {
-          type: "measurement",
+          type: 'measurement',
           id: 1,
           attributes: {
-            coordinates: "55.676098, 12.568337",
-            measuredAt: 1,
+            value: 12,
             unit: 'ppm',
-            value: 34
-          },
-          relationships: {
-            location: {
-              data: {
-                id: 1,
-                type: 'location'
-              }
-            }
+            parameter: 'pm10',
+            'measured-at': '2016-10-28T16:00:00.000Z'
           }
         },
         {
-          type: "measurement",
+          type: 'measurement',
           id: 2,
           attributes: {
-            coordinates: "55.676099, 12.568335",
-            measuredAt: 1,
+            value: 19,
             unit: 'ppm',
-            value: 32
-          },
-          relationships: {
-            location: {
-              data: {
-                id: 1,
-                type: 'location'
-              }
-            }
+            parameter: 'pm25',
+            'measured-at': '2016-10-28T16:00:00.000Z'
+          }
+        },
+        {
+          type: 'measurement',
+          id: 3,
+          attributes: {
+            value: 39,
+            unit: 'micro_grams_m3',
+            parameter: 'so2',
+            'measured-at': '2016-10-28T16:00:00.000Z'
+          }
+        },
+        {
+          type: 'measurement',
+          id: 4,
+          attributes: {
+            value: 39,
+            unit: 'micro_grams_m3',
+            parameter: 'o3',
+            'measured-at': '2016-10-28T16:00:00.000Z'
+          }
+        },
+        {
+          type: 'measurement',
+          id: 5,
+          attributes: {
+            value: 49,
+            unit: 'micro_grams_m3',
+            parameter: 'no2',
+            'measured-at': '2016-10-28T16:00:00.000Z'
+          }
+        },
+        {
+          type: 'measurement',
+          id: 6,
+          attributes: {
+            value: 35,
+            unit: 'micro_grams_m3',
+            parameter: 'co',
+            'measured-at': '2016-10-28T16:00:00.000Z'
           }
         }
       ]
     });
   });
 
-  measurementsRouter.post("/", function(req, res) {
+  measurementsRouter.post('/', function(req, res) {
     res.status(201).end();
   });
 
-  measurementsRouter.get("/:id", function(req, res) {
+  measurementsRouter.get('/:id', function(req, res) {
     res.send({
       measurements: {
         id: req.params.id
@@ -61,7 +85,7 @@ module.exports = function(app) {
     });
   });
 
-  measurementsRouter.put("/:id", function(req, res) {
+  measurementsRouter.put('/:id', function(req, res) {
     res.send({
       measurements: {
         id: req.params.id
@@ -69,7 +93,7 @@ module.exports = function(app) {
     });
   });
 
-  measurementsRouter.delete("/:id", function(req, res) {
+  measurementsRouter.delete('/:id', function(req, res) {
     res.status(204).end();
   });
 
@@ -83,5 +107,5 @@ module.exports = function(app) {
   // this mock uncommenting the following line:
   //
   //app.use('/api/measurements', require('body-parser').json());
-  app.use("/api/measurements", measurementsRouter);
+  app.use('/api/measurements', measurementsRouter);
 };

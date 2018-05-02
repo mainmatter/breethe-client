@@ -1,0 +1,17 @@
+<li class="location-route__measurement">
+  <strong class="location-route__measurement__label">
+    {{paramName.base}}
+    <sup>
+      {{paramName.sup}}
+    </sup>
+  </strong>
+  <span class="location-route__measurement__value">
+    {{@measurement.attributes.value}}
+    &nbsp;
+    {{#if isPPM}}
+      ppm
+    {{else}}
+      &#181;g/m<sup>3</sup>
+    {{/if}}
+  </span>
+</li>

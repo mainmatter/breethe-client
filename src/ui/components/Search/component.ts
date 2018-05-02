@@ -39,7 +39,10 @@ export default class Home extends Component {
 
   async loadRecent() {
     let store = await this.args.store;
-    this.locations = store.cache.query((q) => q.findRecords('location'));
+    this.locations = store.cache.query(
+      (q) => q.findRecords('location')
+              .page({ offset: 0, limit: 3 })
+    );
   }
 
   goToRoute(search) {

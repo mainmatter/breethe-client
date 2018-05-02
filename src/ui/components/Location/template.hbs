@@ -25,74 +25,14 @@
     </div>
     <div class="location-route__measurements-wrapper">
       <ul class="location-route__measurements">
-        <li class="location-route__measurement">
-          <strong class="location-route__measurement__label">
-            PM10
-          </strong>
-          <span class="location-route__measurement__value">
-            20mg
-          </span>
-          <span class="location-route__measurement__value">
-            2.5%
-          </span>
-        </li>
-        <li class="location-route__measurement">
-          <strong class="location-route__measurement__label">
-            PM10
-          </strong>
-          <span class="location-route__measurement__value">
-            20mg
-          </span>
-          <span class="location-route__measurement__value">
-            2.5%
-          </span>
-        </li>
-        <li class="location-route__measurement">
-          <strong class="location-route__measurement__label">
-            PM10
-          </strong>
-          <span class="location-route__measurement__value">
-            20mg
-          </span>
-          <span class="location-route__measurement__value">
-            2.5%
-          </span>
-        </li>
+        {{#each measurementLists.first key="@index" as |measurement|}}
+          <MeasurementRow @measurement={{measurement}} />
+        {{/each}}
       </ul>
       <ul class="location-route__measurements">
-        <li class="location-route__measurement">
-          <strong class="location-route__measurement__label">
-            PM10
-          </strong>
-          <span class="location-route__measurement__value">
-            20mg
-          </span>
-          <span class="location-route__measurement__value">
-            2.5%
-          </span>
-        </li>
-        <li class="location-route__measurement">
-          <strong class="location-route__measurement__label">
-            PM10
-          </strong>
-          <span class="location-route__measurement__value">
-            20mg
-          </span>
-          <span class="location-route__measurement__value">
-            2.5%
-          </span>
-        </li>
-        <li class="location-route__measurement">
-          <strong class="location-route__measurement__label">
-            PM10
-          </strong>
-          <span class="location-route__measurement__value">
-            20mg
-          </span>
-          <span class="location-route__measurement__value">
-            2.5%
-          </span>
-        </li>
+        {{#each measurementLists.second key="@id" as |measurement|}}
+          <MeasurementRow @measurement={{measurement}} />
+        {{/each}}
       </ul>
     </div>
   </div>

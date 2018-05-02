@@ -68,12 +68,14 @@ module.exports = function(app) {
       res.json({
         data: [
           {
+            type: 'measurement',
             id: 1,
-            type: 'measurement'
-          },
-          {
-            id: 2,
-            type: 'measurement'
+            attributes: {
+              value: 12,
+              unit: 'ppm',
+              parameter: 'pm10',
+              'measured-at': '2016-10-28T16:00:00.000Z'
+            }
           }
         ]
       });
