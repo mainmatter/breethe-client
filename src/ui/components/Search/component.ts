@@ -18,7 +18,10 @@ export default class Home extends Component {
     super(options);
     assert('Argument \'store\' must be supplied to this component.', this.args.store);
     this.searchTerm = this.args.param;
-    this.loadLocations(this.args.param);
+    if (this.searchTerm && this.searchTerm.length > 0) {
+      this.loadLocations(this.searchTerm);
+    }
+    this.args.updateParticles(25);
   }
 
   async loadLocations(searchTerm) {
