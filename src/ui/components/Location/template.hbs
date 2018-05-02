@@ -26,12 +26,20 @@
     <div class="location-route__measurements-wrapper">
       <ul class="location-route__measurements">
         {{#each measurementLists.first key="@index" as |measurement|}}
-          <MeasurementRow @measurement={{measurement}} />
+          <MeasurementRow
+            @value={{measurement.attributes.value}}
+            @parameter={{measurement.attributes.parameter}}
+            @unit={{measurement.attributes.unit}}
+          />
         {{/each}}
       </ul>
       <ul class="location-route__measurements">
         {{#each measurementLists.second key="@id" as |measurement|}}
-          <MeasurementRow @measurement={{measurement}} />
+          <MeasurementRow
+            @value={{measurement.attributes.value}}
+            @parameter={{measurement.attributes.parameter}}
+            @unit={{measurement.attributes.unit}}
+          />
         {{/each}}
       </ul>
     </div>

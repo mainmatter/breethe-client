@@ -11,7 +11,6 @@ export default class Location extends Component {
   get measurementLists() {
     let { measurements } = this;
     let halfWay = Math.ceil(measurements.length / 2);
-    console.info(halfWay);
     return {
       first: measurements.slice(0, halfWay),
       second: measurements.slice(halfWay)
