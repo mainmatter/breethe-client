@@ -26,3 +26,11 @@ install:
 
 script:
   - yarn test
+
+notifications:
+  email: false
+  on_success: never
+  slack:
+    rooms:
+      secure: OzppQXwO1V82dDpxy3/IzD5hJjISJ8xWwtjvXPOEz0QP6vzuOJKiyIWOjikxpu2ayMgLAQDTucJg+O1Ac0Xf3648PtJlHF8cZS9TA1Kq5z193j4YjMA0HgWnV5AgRT38Enp2H7wJ713xPOM8C2I8m8ybVj/l+ah6673h0WHlFAkiOBDIZQ+2fnwexkohtGI5mn5+kg4BseS+XWh54d3PwlRmrkVu2XHuXO9AyplpF/DbZLtkj26/9Ntw2SZVWEEPxZqBIupUY45RYewXS2YlOpwNPrUf+lkZQlnqLPDD3a4TJXFl7ywBwI4URmhAvw9IiSqG9exY/0zvJMwFjuApuy/iCHVzeb3A8Qw4smxCXZ+Uwj9A5QVK8MiS0ttkeroVx0PhkjBh164kc3c2EKQRQFHNNEVGLLSwpvBHUqvZLsG5ZRDylBKel9u2F2Tio5S2R4sW3okN9S/4k8wgf3jQf3Ka4xt704QRSXgcbPiOTeoduCR8RQAscVDm5l7YO4pYJAI+qWSK/0sUOuHCta8Smu92a9/t1hm+QbumNF+EW2sdgSe3kbHlxpa3qqq8OnR/ehFpcAC6niWd3ZHqDX39Ae+i4MMBmjWeeeNCcnLf5KmHsRUTS/cckSWBltfjdC7lRPe2Z0MfXW16tZ8RZUxRvz1pY9m35QqCPFI/MSNoQVE=
+
