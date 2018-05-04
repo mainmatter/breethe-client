@@ -1,16 +1,18 @@
 <li class="location-route__measurement">
-  <strong class="location-route__measurement__label">
-    <span class="location-route__measurement__label__base">
+  <strong class="location-route__measurement__label" data-test-measurement-label="">
+    <span class="location-route__measurement__label__base" data-test-measurement-label-base="">
       {{paramName.base}}
     </span>
-    <sup class="location-route__measurement__label__sup">
+    <sup class="location-route__measurement__label__sup" data-test-measurement-label-sup="">
       {{paramName.sup}}
     </sup>
   </strong>
   <span class="location-route__measurement__value">
-    <span class="location-route__measurement__value__value">{{@value}}</span>
+    <span data-test-measurement-value="">
+      {{@value}}
+    </span>
     &nbsp;
-    <span class="location-route__measurement__value__unit">
+    <span data-test-measurement-unit="">
       {{#if isPPM}}
         ppm
       {{else}}

@@ -14,9 +14,9 @@ module('Component: MeasurementRow', function(hooks) {
         @unit=ppm
       />
     `);
-    let label = this.containerElement.querySelector('.location-route__measurement__label').textContent.trim();
-    let value = this.containerElement.querySelector('.location-route__measurement__value__value').textContent.trim();
-    let unit = this.containerElement.querySelector('.location-route__measurement__value__unit').textContent.trim();
+    let label = this.containerElement.querySelector('[data-test-measurement-label]').textContent.trim();
+    let value = this.containerElement.querySelector('[data-test-measurement-value]').textContent.trim();
+    let unit = this.containerElement.querySelector('[data-test-measurement-unit]').textContent.trim();
 
     assert.equal(label, 'PM25', 'Parameter is rendered');
     assert.equal(value, `12`, 'Value is rendered');
@@ -31,10 +31,10 @@ module('Component: MeasurementRow', function(hooks) {
         @unit=micro_grams_m3
       />
     `);
-    let labelBase = this.containerElement.querySelector('.location-route__measurement__label__base').textContent.trim();
-    let labelSup = this.containerElement.querySelector('.location-route__measurement__label__sup').textContent.trim();
-    let value = this.containerElement.querySelector('.location-route__measurement__value__value').textContent.trim();
-    let unit = this.containerElement.querySelector('.location-route__measurement__value__unit').textContent.trim();
+    let labelBase = this.containerElement.querySelector('[data-test-measurement-label-base]').textContent.trim();
+    let labelSup = this.containerElement.querySelector('[data-test-measurement-label-sup]').textContent.trim();
+    let value = this.containerElement.querySelector('[data-test-measurement-value]').textContent.trim();
+    let unit = this.containerElement.querySelector('[data-test-measurement-unit]').textContent.trim();
 
     assert.equal(labelBase, 'O', 'Label base is rendered');
     assert.equal(labelSup, '3', 'Label sup is rendered');
@@ -50,10 +50,10 @@ module('Component: MeasurementRow', function(hooks) {
         @unit=ppm
       />
     `);
-    let labelBase = this.containerElement.querySelector('.location-route__measurement__label__base').textContent.trim();
-    let labelSup = this.containerElement.querySelector('.location-route__measurement__label__sup').textContent.trim();
-    let value = this.containerElement.querySelector('.location-route__measurement__value__value').textContent.trim();
-    let unit = this.containerElement.querySelector('.location-route__measurement__value__unit').textContent.trim();
+    let labelBase = this.containerElement.querySelector('[data-test-measurement-label-base]').textContent.trim();
+    let labelSup = this.containerElement.querySelector('[data-test-measurement-label-sup]').textContent.trim();
+    let value = this.containerElement.querySelector('[data-test-measurement-value]').textContent.trim();
+    let unit = this.containerElement.querySelector('[data-test-measurement-unit]').textContent.trim();
 
     assert.equal(labelBase, 'SO', 'Label base is rendered');
     assert.equal(labelSup, '2', 'Label sup is rendered');
