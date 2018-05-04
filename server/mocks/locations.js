@@ -26,6 +26,74 @@ const ALL_LOCATIONS = [
   }
 ];
 
+const ALL_MEASUREMENTS = [
+  {
+    type: 'measurement',
+    id: '1',
+    attributes: {
+      value: 15,
+      unit: 'ppm',
+      parameter: 'pm10',
+      'measured-at': '2018-10-28T16:00:00.000Z'
+    },
+    relationships: {
+      location: {
+        data: { type: 'location', id: '2' }
+      }
+    }
+  },
+  {
+    type: 'measurement',
+    id: '2',
+    attributes: {
+      value: 19,
+      unit: 'ppm',
+      parameter: 'pm25',
+      'measured-at': '2017-11-28T16:00:00.000Z'
+    }
+  },
+  {
+    type: 'measurement',
+    id: '3',
+    attributes: {
+      value: 39,
+      unit: 'micro_grams_m3',
+      parameter: 'so2',
+      'measured-at': '2016-12-28T16:00:00.000Z'
+    }
+  },
+  {
+    type: 'measurement',
+    id: '4',
+    attributes: {
+      value: 39,
+      unit: 'micro_grams_m3',
+      parameter: 'o3',
+      'measured-at': '2016-10-28T16:00:00.000Z'
+    }
+  },
+  {
+    type: 'measurement',
+    id: '5',
+    attributes: {
+      value: 49,
+      unit: 'micro_grams_m3',
+      parameter: 'no2',
+      'measured-at': '2016-10-28T16:00:00.000Z'
+    }
+  },
+  {
+    type: 'measurement',
+    id: '6',
+    attributes: {
+      value: 35,
+      unit: 'micro_grams_m3',
+      parameter: 'co',
+      'measured-at': '2016-10-28T16:00:00.000Z'
+    }
+  }
+];
+
 module.exports = function(app) {
   const express = require('express');
   let locationsRouter = express.Router();
@@ -56,25 +124,19 @@ module.exports = function(app) {
   locationsRouter.get('/:id/measurements', function(req, res) {
     let locationId = req.params.id;
     if (locationId <= ALL_LOCATIONS.length) {
-      res.type('application/vnd.api+json');
-      res.json({
-        data: [
-          {
-            type: 'measurement',
-            id: '1',
-            attributes: {
-              value: 12,
-              unit: 'ppm',
-              parameter: 'pm10',
-              'measured-at': '2016-10-28T16:00:00.000Z'
-            },
-            relationships: {
-              location: {
-                data: { type: 'location', id: locationId }
-              }
+      let data = ALL_MEASUREMENTS.map((measurement) => {
+        return {
+          ...measurement,
+          relationships: {
+            location: {
+              data: { type: 'location', id: locationId }
             }
           }
-        ]
+        };
+      });
+      res.type('application/vnd.api+json');
+      res.json({
+        data
       });
     } else {
       res.status(404).send('Not found');
