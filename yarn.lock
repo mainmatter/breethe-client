@@ -335,6 +335,32 @@
   version "0.15.11"
   resolved "https://registry.yarnpkg.com/@orbit/utils/-/utils-0.15.11.tgz#2398551c215f30582c66e51a172fed9c99e3316f"
 
+"@simple-dom/document@^1.4.0-alpha.82914663":
+  version "1.4.0-alpha.82914663"
+  resolved "https://registry.yarnpkg.com/@simple-dom/document/-/document-1.4.0-alpha.82914663.tgz#a88f70743ffe2dee664bc3e7be8657268229d3d1"
+  dependencies:
+    "@simple-dom/interface" "^1.4.0-alpha.82914663"
+
+"@simple-dom/interface@^1.4.0-alpha.82914663":
+  version "1.4.0-alpha.dc2f50c1"
+  resolved "https://registry.yarnpkg.com/@simple-dom/interface/-/interface-1.4.0-alpha.dc2f50c1.tgz#44d15bcf933b77d0740b91e9403042c8f32857c3"
+
+"@simple-dom/parser@^1.4.0-alpha.82914663":
+  version "1.4.0-alpha.82914663"
+  resolved "https://registry.yarnpkg.com/@simple-dom/parser/-/parser-1.4.0-alpha.82914663.tgz#3b2291a164823c37806800784cd52093459be336"
+  dependencies:
+    "@simple-dom/interface" "^1.4.0-alpha.82914663"
+
+"@simple-dom/serializer@^1.4.0-alpha.82914663":
+  version "1.4.0-alpha.82914663"
+  resolved "https://registry.yarnpkg.com/@simple-dom/serializer/-/serializer-1.4.0-alpha.82914663.tgz#8444de7207b175f48e8594bb948791075ffb1fb1"
+  dependencies:
+    "@simple-dom/interface" "^1.4.0-alpha.82914663"
+
+"@simple-dom/void-map@^1.4.0-alpha.82914663":
+  version "1.4.0-alpha.82914663"
+  resolved "https://registry.yarnpkg.com/@simple-dom/void-map/-/void-map-1.4.0-alpha.82914663.tgz#0669dd8d3a1cb3a391e548a139a3cdc327e07e09"
+
 "@types/node@^8.0.46":
   version "8.10.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.3.tgz#ee34a5c732703cf45d2fadc163a299a6b2f456c2"
@@ -5583,6 +5609,16 @@ silent-error@^1.0.0, silent-error@^1.0.1, silent-error@^1.1.0:
   resolved "https://registry.yarnpkg.com/silent-error/-/silent-error-1.1.0.tgz#2209706f1c850a9f1d10d0d840918b46f26e1bc9"
   dependencies:
     debug "^2.2.0"
+
+simple-dom@^1.4.0-alpha.82914663:
+  version "1.4.0-alpha.82914663"
+  resolved "https://registry.yarnpkg.com/simple-dom/-/simple-dom-1.4.0-alpha.82914663.tgz#fda73c0522a81a9526677508b04ebfbe81fb571d"
+  dependencies:
+    "@simple-dom/document" "^1.4.0-alpha.82914663"
+    "@simple-dom/interface" "^1.4.0-alpha.82914663"
+    "@simple-dom/parser" "^1.4.0-alpha.82914663"
+    "@simple-dom/serializer" "^1.4.0-alpha.82914663"
+    "@simple-dom/void-map" "^1.4.0-alpha.82914663"
 
 simple-html-tokenizer@^0.4.1:
   version "0.4.3"
