@@ -1,5 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
 import { assert } from '@orbit/utils';
+import { compareDesc, isValid as isValidDate, parse as parseDate } from 'date-fns';
 
 export default class Home extends Component {
 
@@ -39,10 +40,18 @@ export default class Home extends Component {
 
   async loadRecent() {
     let store = await this.args.store;
-    this.locations = store.cache.query(
+    let locations = store.cache.query(
       (q) => q.findRecords('location')
-              .page({ offset: 0, limit: 3 })
     );
+    locations = locations.filter((location) => {
+      return isValidDate(parseDate(location.attributes.visitedAt));
+    });
+    locations.sort((locationL, locationR) => {
+      let dateLeft = parseDate(locationL.attributes.visitedAt);
+      let dateRight = parseDate(locationR.attributes.visitedAt);
+      return compareDesc(dateLeft, dateRight);
+    });
+    this.locations = locations.slice(0, 3);
   }
 
   goToRoute(search) {
