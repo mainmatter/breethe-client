@@ -67,6 +67,11 @@ module.exports = function(app) {
               unit: 'ppm',
               parameter: 'pm10',
               'measured-at': '2016-10-28T16:00:00.000Z'
+            },
+            relationships: {
+              location: {
+                data: { type: 'location', id: locationId }
+              }
             }
           }
         ]

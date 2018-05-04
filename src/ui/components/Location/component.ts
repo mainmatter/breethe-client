@@ -49,7 +49,7 @@ export default class LocationComponent extends Component {
         t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
       );
 
-      this.measurements = await store.query((q) => q.findRecords('measurement'));
+      this.measurements = await store.query((q) => q.findRelatedRecords(locationSignature, 'measurements'));
 
       this.notFound = false;
       this.args.updateParticles(80);

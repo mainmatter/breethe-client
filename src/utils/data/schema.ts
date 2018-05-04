@@ -11,7 +11,7 @@ export const location: ModelDefinition = {
     lastVisited: { type: 'string' }
   },
   relationships: {
-    measurements: { type: 'hasMany', model: 'measurement' }
+    measurements: { type: 'hasMany', model: 'measurement', inverse: 'location' }
   }
 };
 
@@ -21,6 +21,9 @@ export const measurement: ModelDefinition = {
     measuredAt: { type: 'string' },
     unit: { type: 'string' },
     value: { type: 'number' }
+  },
+  relationships: {
+    location: { type: 'hasOne', model: 'location', inverse: 'measurements' }
   }
 };
 

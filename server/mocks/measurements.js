@@ -13,10 +13,15 @@ module.exports = function(app) {
           type: 'measurement',
           id: '1',
           attributes: {
-            value: 12,
+            value: 15,
             unit: 'ppm',
             parameter: 'pm10',
             'measured-at': '2018-10-28T16:00:00.000Z'
+          },
+          relationships: {
+            location: {
+              data: { type: 'location', id: '2' }
+            }
           }
         },
         {
