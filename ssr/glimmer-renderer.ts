@@ -9,10 +9,7 @@ import Resolver, { BasicModuleRegistry } from '@glimmer/resolver';
 import resolverConfiguration from 'glimmer/config/resolver-configuration';
 import moduleMap from 'glimmer/config/module-map';
 
-import {generateTrackingId} from '@linkedin/core-web-tracking';
-
 import {transform} from 'api/infra/transform';
-import {AppState} from 'global/app-state';
 import SSRApplication from './ssr-application';
 
 import SSRRenderer from '../ssr-renderer';
@@ -41,14 +38,6 @@ export default class GlimmerRenderer implements SSRRenderer {
 
     const transformedData = dataKey && transform(JSON.parse(data[dataKey]), null);
 
-    const appState = new AppState({
-      pageTrackingId: generateTrackingId(),
-      locale: 'en_US',
-      applicationInstance: '', // TODO
-      ssrData: transformedData,
-      ssrActiveComponent: routeName,
-    });
-
     const document = new Document();
     let loader = new SailfishBytecodeLoader({
       bytecode: this.bytecode,
@@ -62,9 +51,8 @@ export default class GlimmerRenderer implements SSRRenderer {
     let builder = new SerializingBuilder({ element: mountEl, nextSibling: null });
 
     const app = new SSRApplication({
-      rootName: 'sailfish',
+      rootName: 'ppm-client',
       self,
-      appState,
       document,
       renderer,
       builder,
