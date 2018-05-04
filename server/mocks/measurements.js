@@ -11,37 +11,37 @@ module.exports = function(app) {
       data: [
         {
           type: 'measurement',
-          id: 1,
+          id: '1',
           attributes: {
             value: 12,
             unit: 'ppm',
             parameter: 'pm10',
-            'measured-at': '2016-10-28T16:00:00.000Z'
+            'measured-at': '2018-10-28T16:00:00.000Z'
           }
         },
         {
           type: 'measurement',
-          id: 2,
+          id: '2',
           attributes: {
             value: 19,
             unit: 'ppm',
             parameter: 'pm25',
-            'measured-at': '2016-10-28T16:00:00.000Z'
+            'measured-at': '2017-11-28T16:00:00.000Z'
           }
         },
         {
           type: 'measurement',
-          id: 3,
+          id: '3',
           attributes: {
             value: 39,
             unit: 'micro_grams_m3',
             parameter: 'so2',
-            'measured-at': '2016-10-28T16:00:00.000Z'
+            'measured-at': '2016-12-28T16:00:00.000Z'
           }
         },
         {
           type: 'measurement',
-          id: 4,
+          id: '4',
           attributes: {
             value: 39,
             unit: 'micro_grams_m3',
@@ -51,7 +51,7 @@ module.exports = function(app) {
         },
         {
           type: 'measurement',
-          id: 5,
+          id: '5',
           attributes: {
             value: 49,
             unit: 'micro_grams_m3',
@@ -61,7 +61,7 @@ module.exports = function(app) {
         },
         {
           type: 'measurement',
-          id: 6,
+          id: '6',
           attributes: {
             value: 35,
             unit: 'micro_grams_m3',

@@ -1,11 +1,13 @@
 import Component, { tracked } from '@glimmer/component';
+import { debug } from '@glimmer/opcode-compiler';
+import { compareAsc, format as formatDate, parse as parseDate } from 'date-fns';
 
 export default class Location extends Component {
-  @tracked
-  measurements = [];
+  @tracked location = {};
 
-  @tracked
-  notFound = false;
+  @tracked measurements = [];
+
+  @tracked notFound = false;
 
   @tracked('measurements')
   get measurementLists() {
@@ -17,6 +19,20 @@ export default class Location extends Component {
     };
   }
 
+  @tracked('measurements')
+  get updatedDate() {
+    let { measurements } = this;
+    if (measurements.length === 0) {
+      return '––';
+    }
+    let dates = measurements.map((measurement) => {
+      return parseDate(measurement.attributes.measuredAt);
+    });
+    dates.sort(compareAsc);
+
+    return formatDate(dates[0], 'HH:MM | DD-MM-YYYY');
+  }
+
   constructor(options) {
     super(options);
     this.loadMeasurements(this.args.location);
@@ -24,18 +40,22 @@ export default class Location extends Component {
 
   async loadMeasurements(locationId) {
     // try {
-      let store = await this.args.store;
-      // this.measurements = await store.query((q) =>
-      //   q.findRelatedRecords({ type: 'location', id: locationId }, 'measurements')
-      // );
-      this.measurements = await store.query((q) =>
-        q.findRecords('measurement')
-      );
-      // console.log(this.measurements);
-      this.notFound = false;
-      this.args.updateParticles(80);
+    let store = await this.args.store;
+    this.location = await store.query((q) =>
+      q.findRecord({ type: 'location', id: locationId })
+    );
+    // this.measurements = await store.query((q) =>
+    //   q.findRelatedRecords({ type: 'location', id: locationId }, 'measurements')
+    // );
+    this.measurements = await store.query((q) => q.findRecords('measurement'));
+    // this.measurements = await store.query((q) =>
+    //   q.findRecords('measurement')
+    //   .filter({ attribute: 'location', value: locationId })
+    // );
+    this.notFound = false;
+    this.args.updateParticles(80);
     // } catch (e) {
-      // this.notFound = true;
+    // this.notFound = true;
     // }
   }
 }

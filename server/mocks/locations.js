@@ -1,38 +1,30 @@
 /* eslint-env node */
 'use strict';
 
-const ALL_LOCATIONS = [{
-  type: 'location',
-  id: 1,
-  attributes: {
-    city: 'København',
-    country: 'Denmark',
-    'last-updated': '2017-03-06',
-    coordinates: '55.676098, 12.568337'
+const ALL_LOCATIONS = [
+  {
+    type: 'location',
+    id: '1',
+    attributes: {
+      name: 'Teglholmsgade',
+      city: 'København',
+      country: 'Denmark',
+      'last-updated': '2017-03-06',
+      coordinates: '55.676098, 12.568337'
+    }
   },
-  relationships: {
-    data: [
-      {
-        id: 1,
-        type: 'measurement'
-      },
-      {
-        id: 2,
-        type: 'measurement'
-      }
-    ]
+  {
+    type: 'location',
+    id: '2',
+    attributes: {
+      name: 'Ulrich Scheier Straße',
+      city: 'Salzburg',
+      country: 'Austria',
+      'last-updated': '2017-03-07',
+      coordinates: '47.811195, 13.033229'
+    }
   }
-},
-{
-  type: 'location',
-  id: 2,
-  attributes: {
-    city: 'Salzburg',
-    country: 'Austria',
-    'last-updated': '2017-03-07',
-    coordinates: '47.811195, 13.033229'
-  }
-}];
+];
 
 module.exports = function(app) {
   const express = require('express');
@@ -69,7 +61,7 @@ module.exports = function(app) {
         data: [
           {
             type: 'measurement',
-            id: 1,
+            id: '1',
             attributes: {
               value: 12,
               unit: 'ppm',
@@ -86,7 +78,7 @@ module.exports = function(app) {
 
   locationsRouter.put('/:id', function(req, res) {
     res.send({
-      'locations': {
+      locations: {
         id: req.params.id
       }
     });

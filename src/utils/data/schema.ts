@@ -3,11 +3,15 @@ import { ModelDefinition } from '@orbit/data';
 
 export const location: ModelDefinition = {
   attributes: {
+    name: { type: 'string' },
     city: { type: 'string' },
     coordinates: { type: 'string' },
     country: { type: 'string' },
     identifier: { type: 'string' },
     lastUpdated: { type: 'string' }
+  },
+  relationships: {
+    measurements: { type: 'hasMany', model: 'measurement' }
   }
 };
 
