@@ -2,6 +2,8 @@ import Component, { tracked } from '@glimmer/component';
 import { debug } from '@glimmer/opcode-compiler';
 import { compareAsc, format as formatDate, parse as parseDate } from 'date-fns';
 
+const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
+
 export default class LocationComponent extends Component {
   @tracked location: any = {};
 
@@ -12,10 +14,20 @@ export default class LocationComponent extends Component {
   @tracked('measurements')
   get measurementLists() {
     let { measurements } = this;
-    let halfWay = Math.ceil(measurements.length / 2);
+    if (measurements.length === 0) {
+      return measurements;
+    }
+    let orderedMeasurements = ORDERED_PARAMS.map((param) => {
+      return measurements.find((measurement) => {
+        return measurement.attributes.parameter === param;
+      });
+    });
+    orderedMeasurements = orderedMeasurements.filter((measurement) => !!measurement);
+
+    let halfWay = Math.ceil(orderedMeasurements.length / 2);
     return {
-      first: measurements.slice(0, halfWay),
-      second: measurements.slice(halfWay)
+      first: orderedMeasurements.slice(0, halfWay),
+      second: orderedMeasurements.slice(halfWay)
     };
   }
 
