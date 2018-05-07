@@ -37,7 +37,13 @@ export default class Home extends Component {
 
     store.update((t) => {
       return locations.map((location) => {
-        return t.addRecord(location);
+        let signature = { type: 'location', id: location.id };
+        try {
+          store.cache.query((q) => q.findRecord(signature));
+          return t.replaceRecord(location);
+        } catch (e) {
+          return t.addRecord(location);
+        }
       });
     });
   }
