@@ -27,6 +27,7 @@
     "@orbit/store": "^0.15.10",
     "@types/qunit": "^2.0.31",
     "broccoli-asset-rev": "^2.5.0",
+    "cors": "^2.8.4",
     "ember-cli": "^3.0.0",
     "ember-cli-dependency-checker": "^2.0.1",
     "ember-cli-inject-live-reload": "^1.6.1",
