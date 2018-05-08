@@ -6,29 +6,41 @@ const resolve = require('rollup-plugin-node-resolve');
 const MergeTrees = require('broccoli-merge-trees');
 const typescript = require('broccoli-typescript-compiler').typescript;
 const Funnel = require('broccoli-funnel');
+const Rollup = require('broccoli-rollup');
+var log = require('broccoli-stew').log;
 
 class PpmGlimmerApp extends GlimmerApp {
   ssrTree() {
-    let jsTree = this.javascriptTree();
     let ssrTree = typescript('ssr', {
       workingPath: this.project.root
     });
-    ssrTree = new Funnel(ssrTree, {
-      destDir: 'src'
-    });
-    ssrTree = this.processESLatest(ssrTree);
-    ssrTree = new MergeTrees([jsTree, ssrTree], { overwrite: true });
 
-    return ssrTree;
+    return new Funnel(ssrTree, {
+      destDir: 'ssr'
+    });
+  }
+
+  packageSSR() {
+    let jsTree = log(new Funnel(this.javascriptTree(), {
+      exclude: ['src/index.js']
+    }));
+    let ssrTree = this.ssrTree();
+
+    let appTree = log(new MergeTrees([jsTree, ssrTree]));
+    appTree = new Rollup(appTree, {
+      rollup: {
+        entry: 'ssr/index.js',
+        dest: 'ssr-app.js',
+        format: 'cjs'
+      }
+    });
+
+    return appTree;
   }
 
   package() {
     let appTree = super.package(...arguments);
-    let ssrTree = this.ssrTree();
-    ssrTree = this.rollupTree(ssrTree);
-    ssrTree = new Funnel(ssrTree, {
-      destDir: 'ssr'
-    });
+    let ssrTree = this.packageSSR();
 
     return new MergeTrees([appTree, ssrTree]);
   }

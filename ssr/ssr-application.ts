@@ -1,12 +1,14 @@
-import Application from '../src/main';
 import SSRDOMTreeConstruction from './ssr-dom-tree-construction';
 import SSRComponentManager from './ssr-component-manager';
 import DynamicScope from './dynamic-scope';
 import { TemplateIterator } from '@glimmer/runtime';
+import { UpdatableReference } from '@glimmer/component';
 // tslint:disable-next-line:no-var-requires
 const SimpleDOM = require('simple-dom');
 
-export interface SSROptions {
+import Application, { ApplicationOptions } from '@glimmer/application';
+
+export interface SSROptions extends ApplicationOptions {
   element: any;
 }
 
@@ -16,7 +18,7 @@ export default class SSRApplication extends Application {
   element: any;
 
   constructor(options: SSROptions) {
-    super();
+    super(options);
     let rootName = 'ppm-client';
     this.element = options.element;
     this.registerInitializer({
@@ -40,15 +42,18 @@ export default class SSRApplication extends Application {
     let builder = this.builder.getBuilder(env);
     let dynamicScope = new DynamicScope();
     let templateIterator: TemplateIterator;
+    let self = new UpdatableReference({ roots: [{id: 1, component: 'PpmClient', parent: this.element, nextSibling: null}] });
 
     try {
-      templateIterator = await this.loader.getTemplateIterator(this, env, builder, dynamicScope as any, null);
+      templateIterator = await this.loader.getTemplateIterator(this, env, builder, dynamicScope as any, self);
     } catch (err) {
       this._didError(err);
       throw err;
     }
 
     try {
+      debugger;
+      this.boot();
       // Begin a new transaction. The transaction stores things like component
       // lifecycle events so they can be flushed once rendering has completed.
       env.begin();

@@ -1,21 +1,43 @@
-import { ComponentManager, setPropertyDidChange } from '@glimmer/component';
-import App from './ssr-application';
+// tslint:disable-next-line:no-var-requires
 const SimpleDOM = require('simple-dom');
 const Document = SimpleDOM.Document;
+import { SyncRenderer, RuntimeCompilerLoader, DOMBuilder } from '@glimmer/application';
+import Resolver, { BasicModuleRegistry } from '@glimmer/resolver';
+import { SerializingBuilder } from '@glimmer/ssr';
+import resolverConfiguration from '../config/resolver-configuration';
+import moduleMap from '../config/module-map';
 
-const app = new App();
-const containerElement = document.getElementById('app');
+import SSRApplication from './ssr-application';
 
-setPropertyDidChange(() => {
-  app.scheduleRerender();
-});
+const ROUTE_DATA_KEYS: {[key: string]: string} = {
+  FeedUpdate: 'update',
+  FeedHome: 'updates',
+};
 
-app.registerInitializer({
-  initialize(registry) {
-    registry.register(`component-manager:/${app.rootName}/component-managers/main`, ComponentManager);
+let moduleRegistry = new BasicModuleRegistry(moduleMap);
+let resolver = new Resolver(resolverConfiguration, moduleRegistry);
+let loader = new RuntimeCompilerLoader(resolver);
+
+export default class GlimmerRenderer {
+  constructor() {}
+  render(): Promise<string> {
+    const document = new Document();
+
+    const mountEl = document.createElement('div');
+    mountEl.setAttribute('id', 'app');
+    let renderer = new SyncRenderer();
+    let builder = new SerializingBuilder({ element: document.body as any as Element, nextSibling: null });
+
+    const app = new SSRApplication({
+      rootName: 'ppm-client',
+      loader,
+      builder,
+      document,
+      renderer,
+      resolver,
+      element: mountEl,
+    });
+
+    return app.renderToString();
   }
-});
-
-app.renderComponent('PpmClient', containerElement, null);
-
-app.boot();
+}

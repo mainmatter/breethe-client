@@ -142,7 +142,7 @@
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@glimmer/env/-/env-0.1.7.tgz#fd2d2b55a9029c6b37a6c935e8c8871ae70dfa07"
 
-"@glimmer/inline-precompile@^1.0.0":
+"@glimmer/inline-precompile@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@glimmer/inline-precompile/-/inline-precompile-1.0.1.tgz#4201119a358002d4bb2b5d8fa633327239fb9336"
   dependencies:
@@ -163,6 +163,14 @@
 "@glimmer/low-level@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/low-level/-/low-level-0.31.0.tgz#c5ed9c825fa67498f5285e8fe8003ec54d58d826"
+
+"@glimmer/node@^0.31.0":
+  version "0.31.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/node/-/node-0.31.0.tgz#2e3cc933695038d5eff965be825d90a8130511a3"
+  dependencies:
+    "@glimmer/interfaces" "^0.31.0"
+    "@glimmer/runtime" "^0.31.0"
+    simple-dom "^0.3.0"
 
 "@glimmer/object-reference@^0.31.0":
   version "0.31.0"
@@ -218,15 +226,15 @@
   dependencies:
     broccoli-plugin "^1.3.0"
 
-"@glimmer/resolver@^0.3.0":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@glimmer/resolver/-/resolver-0.3.1.tgz#41069345b6f41beb0948cc35d8e4aa60adcadfc5"
+"@glimmer/resolver@0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@glimmer/resolver/-/resolver-0.4.3.tgz#b1baae5c3291b4621002ccf8d7870466097e841d"
   dependencies:
     "@glimmer/di" "^0.2.0"
 
-"@glimmer/resolver@^0.4.1":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@glimmer/resolver/-/resolver-0.4.3.tgz#b1baae5c3291b4621002ccf8d7870466097e841d"
+"@glimmer/resolver@^0.3.0":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@glimmer/resolver/-/resolver-0.3.1.tgz#41069345b6f41beb0948cc35d8e4aa60adcadfc5"
   dependencies:
     "@glimmer/di" "^0.2.0"
 
@@ -242,6 +250,14 @@
     "@glimmer/util" "^0.31.0"
     "@glimmer/vm" "^0.31.0"
     "@glimmer/wire-format" "^0.31.0"
+
+"@glimmer/ssr@0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@glimmer/ssr/-/ssr-0.9.1.tgz#6733c85d9a365ab5a416ee731cd211a4ccad5b84"
+  dependencies:
+    "@glimmer/application" "^0.9.1"
+    "@glimmer/node" "^0.31.0"
+    "@glimmer/runtime" "^0.31.0"
 
 "@glimmer/syntax@^0.29.1":
   version "0.29.10"
@@ -4616,6 +4632,10 @@ nice-try@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.4.tgz#d93962f6c52f2c1558c0fbda6d512819f1efe1c4"
 
+node-fetch@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
+
 node-gyp@^3.3.1:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-3.6.2.tgz#9bfbe54562286284838e750eac05295853fa1c60"
@@ -5609,6 +5629,10 @@ silent-error@^1.0.0, silent-error@^1.0.1, silent-error@^1.1.0:
   resolved "https://registry.yarnpkg.com/silent-error/-/silent-error-1.1.0.tgz#2209706f1c850a9f1d10d0d840918b46f26e1bc9"
   dependencies:
     debug "^2.2.0"
+
+simple-dom@^0.3.0:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/simple-dom/-/simple-dom-0.3.2.tgz#0663d10f1556f1500551d518f56e3aba0871371d"
 
 simple-dom@^1.4.0-alpha.82914663:
   version "1.4.0-alpha.82914663"
