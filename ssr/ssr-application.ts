@@ -52,7 +52,6 @@ export default class SSRApplication extends Application {
     }
 
     try {
-      debugger;
       this.boot();
       // Begin a new transaction. The transaction stores things like component
       // lifecycle events so they can be flushed once rendering has completed.

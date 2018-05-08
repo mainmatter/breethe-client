@@ -3,14 +3,15 @@ import Orbit, { Schema } from '@orbit/data';
 import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
 import { schema as schemaDefinition } from './schema';
-
-// Temporal fix until Orbit binds the window fetch by default if it's available
-// https://github.com/orbitjs/orbit/issues/452
-if (window.fetch) {
-  Orbit.fetch = window.fetch.bind(window);
-}
+import IS_SSR from '../ssr/detect';
 
 export default function setupStore(): Store  {
+  if (IS_SSR) {
+    Orbit.fetch = require('node-fetch');
+  } else {
+    Orbit.fetch = window.fetch.bind(window);
+  }
+
   let schema = new Schema(schemaDefinition);
 
   let store = new Store({ schema });

@@ -1,8 +1,9 @@
 import Component, { tracked } from '@glimmer/component';
 import Navigo from 'navigo';
 import setupStore from '../../../utils/data/setup-store';
+import IS_SSR from '../../../utils/ssr/detect';
 
-const router = new Navigo('http://localhost:4200');
+const router = new Navigo('http://localhost:3000');
 
 const MODE_SEARCH = 'search';
 const MODE_RESULTS = 'results';
@@ -68,13 +69,15 @@ export default class PpmClient extends Component {
   }
 
   _bindInternalLinks() {
-    document.addEventListener('click', (event: Event) => {
-      const target = event.target as HTMLElement;
+    if (!IS_SSR) {
+      document.addEventListener('click', (event: Event) => {
+        const target = event.target as HTMLElement;
 
-      if (target.tagName === 'A' && target.dataset.navigo !== undefined) {
-        event.preventDefault();
-        this.router.navigate(target.getAttribute('href'));
-      }
-    });
+        if (target.tagName === 'A' && target.dataset.navigo !== undefined) {
+          event.preventDefault();
+          this.router.navigate(target.getAttribute('href'));
+        }
+      });
+    }
   }
 }
