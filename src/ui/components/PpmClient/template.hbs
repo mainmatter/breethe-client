@@ -1,12 +1,8 @@
 <div class="ppm-client">
-  {{#if theCurrentView.componentName}}
-    {{component theCurrentView.componentName
-        param=theCurrentView.param
-        name=theCurrentView.name
-        store=store
-        transitionTo=(action loadFromUrl)
-        updateParticles=(action updateParticles)
-    }}
+  {{#if isSearchMode}}
+    <Search @searchTerm={{searchTerm}} @store={{store}} @router={{router}} />
+  {{else if isResultsMode}}
+    <Location @location={{location}} @store={{store}} @router={{router}} @updateParticles={{action updateParticles}} />
   {{/if}}
 
   <div class="ppm-background">

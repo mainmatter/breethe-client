@@ -20,7 +20,7 @@
       <ul>
         {{#each locations key="id" as |location|}}
           <li class="search-route__result">
-            <a href="/location/{{location.id}}" class="internal-link">
+            <a href="/location/{{location.id}}" data-navigo>
               {{location.attributes.city}}, {{location.attributes.country}}
             </a>
           </li>
@@ -34,12 +34,12 @@
       {{else}}
         <ul>
           <li class="search-route__result">
-            <a href="#">
+            <a href="#" data-navigo>
               Teglhomsgade 58 2450 København
             </a> 
           </li>
           <li class="search-route__result">
-            <a href="#">
+            <a href="#" data-navigo>
               Ulrich-Schreier St 5020 Salzburg
             </a>
           </li>

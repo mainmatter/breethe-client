@@ -17,11 +17,10 @@ export default class Home extends Component {
   constructor(options) {
     super(options);
     assert('Argument \'store\' must be supplied to this component.', this.args.store);
-    this.searchTerm = this.args.param;
+    this.searchTerm = this.args.searchTerm;
     if (this.searchTerm && this.searchTerm.length > 0) {
       this.loadLocations(this.searchTerm);
     }
-    this.args.updateParticles(25);
   }
 
   async loadLocations(searchTerm) {
@@ -39,6 +38,6 @@ export default class Home extends Component {
      * in the component. We use it here to update
      * the URL parameter.
      */
-    this.args.transitionTo(`/search/${search}`);
+    this.args.router.navigate(`/search/${search}`);
   }
 }

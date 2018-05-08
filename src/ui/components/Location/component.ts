@@ -9,7 +9,7 @@ export default class Location extends Component {
 
   constructor(options) {
     super(options);
-    this.loadMeasurements(this.args.param);
+    this.loadMeasurements(this.args.location);
   }
 
   async loadMeasurements(locationId) {

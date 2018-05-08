@@ -1,58 +1,80 @@
 import Component, { tracked } from '@glimmer/component';
+import Navigo from 'navigo';
 import setupStore from '../../../utils/data/setup-store';
-import { getRouteFromPath, IRoute } from '../../../utils/routing';
+
+const router = new Navigo('http://localhost:4200');
+
+const MODE_SEARCH = 'search';
+const MODE_RESULTS = 'results';
 
 export default class PpmClient extends Component {
   store = setupStore();
   particles: any = null;
 
+  router = router;
+
   @tracked
   particlesIndex: number = 20;
 
   @tracked
-  theCurrentView: IRoute = {
-    name: '',
-    title: '',
-    componentName: '',
-    notFound: false
-  };
+  mode: string;
+  @tracked
+  location: {};
+  @tracked
+  searchTerm: string;
+
+  @tracked('mode')
+  get isSearchMode() {
+    return this.mode === MODE_SEARCH;
+  }
+
+  @tracked('mode')
+  get isResultsMode() {
+    return this.mode === MODE_RESULTS;
+  }
 
   constructor(options) {
     super(options);
-    this.setupRouting();
+
+    this._setupRouting();
+    this._bindInternalLinks();
   }
 
   updateParticles(particlesIndex: number) {
     this.particlesIndex = particlesIndex;
   }
 
-  loadFromUrl(path) {
-    let routeState = getRouteFromPath(path);
-    window.history.pushState(routeState, routeState.title, `${path}`);
-    this.theCurrentView = routeState;
+  _setupRouting() {
+    this.router
+      .on('/', () => this._setMode(MODE_SEARCH))
+      .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
+      .on('/location/:location/', (params) => this._setMode(MODE_RESULTS, params))
+      .resolve();
   }
 
-  bindInternalLinks() {
+  _setMode(mode, params = {}) {
+    this.mode = mode;
+
+    switch (mode) {
+      case MODE_SEARCH:
+        this.location = null;
+        this.searchTerm = params.searchTerm;
+        break;
+      case MODE_RESULTS:
+        this.location = params.location;
+        this.searchTerm = null;
+        break;
+    }
+  }
+
+  _bindInternalLinks() {
     document.addEventListener('click', (event: Event) => {
       const target = event.target as HTMLElement;
-      if (
-        target.tagName === 'A' &&
-        target.classList.contains('internal-link')
-      ) {
+
+      if (target.tagName === 'A' && target.dataset.navigo !== undefined) {
         event.preventDefault();
-        this.loadFromUrl(target.getAttribute('href'));
+        this.router.navigate(target.getAttribute('href'));
       }
     });
-  }
-
-  setupRouting() {
-    window.onpopstate = (event) => {
-      if (event.state) {
-        const view = event.state;
-        this.theCurrentView = view;
-      }
-    };
-    this.loadFromUrl(window.location.pathname);
-    this.bindInternalLinks();
   }
 }
