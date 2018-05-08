@@ -4574,6 +4574,10 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+navigo@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/navigo/-/navigo-7.1.2.tgz#f543098ae5cbc5763b926742b5047ffb68a187e2"
+
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
