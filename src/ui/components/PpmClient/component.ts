@@ -1,18 +1,16 @@
 import Component, { tracked } from '@glimmer/component';
 import Navigo from 'navigo';
 import setupStore from '../../../utils/data/setup-store';
-import IS_SSR from '../../../utils/ssr/detect';
-
-const router = new Navigo('http://localhost:3000');
 
 const MODE_SEARCH = 'search';
 const MODE_RESULTS = 'results';
 
 export default class PpmClient extends Component {
-  store = setupStore();
+  store;
   particles: any = null;
+  appState: { origin: string, route: string, isSSR: boolean };
 
-  router = router;
+  router;
 
   @tracked
   particlesIndex: number = 20;
@@ -37,6 +35,8 @@ export default class PpmClient extends Component {
   constructor(options) {
     super(options);
 
+    this.appState = this.appState || { origin: window.location.origin, route: window.location.pathname, isSSR: false };
+    this.store = setupStore(this.appState.isSSR);
     this._setupRouting();
     this._bindInternalLinks();
   }
@@ -46,11 +46,13 @@ export default class PpmClient extends Component {
   }
 
   _setupRouting() {
+    this.router = new Navigo(this.appState.origin);
+
     this.router
       .on('/', () => this._setMode(MODE_SEARCH))
       .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
       .on('/location/:location/', (params) => this._setMode(MODE_RESULTS, params))
-      .resolve();
+      .resolve(this.appState.route);
   }
 
   _setMode(mode, params = {}) {
@@ -69,7 +71,7 @@ export default class PpmClient extends Component {
   }
 
   _bindInternalLinks() {
-    if (!IS_SSR) {
+    if (!this.appState.isSSR) {
       document.addEventListener('click', (event: Event) => {
         const target = event.target as HTMLElement;
 

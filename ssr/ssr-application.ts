@@ -10,6 +10,8 @@ import Application, { ApplicationOptions } from '@glimmer/application';
 
 export interface SSROptions extends ApplicationOptions {
   element: any;
+  route: string;
+  origin: string;
 }
 
 export default class SSRApplication extends Application {
@@ -19,6 +21,23 @@ export default class SSRApplication extends Application {
 
   constructor(options: SSROptions) {
     super(options);
+
+    class AppState {
+      isSSR: boolean;
+      route: string;
+      origin: string;
+
+      static create() {
+        return new AppState();
+      }
+
+      constructor() {
+        this.route = options.route;
+        this.origin = options.origin;
+        this.isSSR = true;
+      }
+    }
+
     let rootName = 'ppm-client';
     this.element = options.element;
     this.registerInitializer({
@@ -27,6 +46,8 @@ export default class SSRApplication extends Application {
         registry.register(`domTreeConstruction:/${rootName}/main/main`, SSRDOMTreeConstruction);
         registry.registerInjection('domTreeConstruction', 'document', `document:/${rootName}/main/main`);
         registry.registerInjection('environment', 'appendOperations', `domTreeConstruction:/${rootName}/main/main`);
+        registry.register(`app-state:/${rootName}/main/main`, AppState);
+        registry.registerInjection(`component:/${rootName}/components/PpmClient`, 'appState', `app-state:/${rootName}/main/main`);
         registry.register(`component-manager:/${rootName}/component-managers/main`, SSRComponentManager);
       },
     });

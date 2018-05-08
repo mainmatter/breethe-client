@@ -9,18 +9,13 @@ import moduleMap from '../config/module-map';
 
 import SSRApplication from './ssr-application';
 
-const ROUTE_DATA_KEYS: {[key: string]: string} = {
-  FeedUpdate: 'update',
-  FeedHome: 'updates',
-};
-
 let moduleRegistry = new BasicModuleRegistry(moduleMap);
 let resolver = new Resolver(resolverConfiguration, moduleRegistry);
 let loader = new RuntimeCompilerLoader(resolver);
 
 export default class GlimmerRenderer {
   constructor() {}
-  render(): Promise<string> {
+  render(origin: string, route: string): Promise<string> {
     const document = new Document();
 
     const mountEl = document.createElement('div');
@@ -35,6 +30,8 @@ export default class GlimmerRenderer {
       document,
       renderer,
       resolver,
+      route,
+      origin,
       element: mountEl,
     });
 
