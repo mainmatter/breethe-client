@@ -9,7 +9,6 @@ export default class SearchForm extends Component {
   }
 
   submitSearch(event) {
-    debugger
     event.preventDefault();
     let { search } = this;
     this.args.onSearch(this.search);

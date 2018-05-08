@@ -31,7 +31,6 @@ export default class Home extends Component {
   }
 
   goToRoute(search) {
-    debugger;
     this.loadLocations(search);
     this.searchTerm = search;
     /**
