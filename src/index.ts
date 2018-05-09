@@ -14,6 +14,17 @@ app.registerInitializer({
   }
 });
 
+let current = containerElement.firstChild;
+if (current) {
+  let parent = current.parentElement;
+  let nextNode;
+  do {
+    nextNode = current.nextSibling;
+    parent.removeChild(current);
+    current = nextNode;
+  } while (current);
+}
+
 app.renderComponent('PpmClient', containerElement, null);
 
 app.boot();
