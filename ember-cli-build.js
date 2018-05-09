@@ -30,7 +30,11 @@ class PpmGlimmerApp extends GlimmerApp {
       rollup: {
         entry: 'ssr/index.js',
         dest: 'ssr-app.js',
-        format: 'cjs'
+        format: 'cjs',
+        plugins: [
+          resolve({ jsnext: true, module: true, main: true }),
+          commonjs()
+        ]
       }
     });
 
