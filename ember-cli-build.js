@@ -43,13 +43,9 @@ class PpmGlimmerApp extends GlimmerApp {
 
   package() {
     let appTree = super.package(...arguments);
+    let ssrTree = this.packageSSR();
 
-    if (this.env !== 'development') {
-      let ssrTree = this.packageSSR();
-      return new MergeTrees([appTree, ssrTree]);
-    } else {
-      return appTree;
-    }
+    return new MergeTrees([appTree, ssrTree]);
   }
 }
 
