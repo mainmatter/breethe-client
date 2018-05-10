@@ -24,10 +24,16 @@ export default class Home extends Component {
   }
 
   async loadLocations(searchTerm) {
-    this.locations = await this.args.store.query((q) =>
+    let filter = ((q) =>
       q.findRecords('location')
        .filter({ attribute: 'city', value: searchTerm })
     );
+
+    if (this.args.appState.isSSR) {
+      this.locations = this.args.store.cache.query(filter);
+    } else {
+      this.locations = await this.args.store.query(filter);
+    }
   }
 
   goToRoute(search) {

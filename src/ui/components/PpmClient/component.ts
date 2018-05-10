@@ -8,7 +8,7 @@ const MODE_RESULTS = 'results';
 export default class PpmClient extends Component {
   store;
   particles: any = null;
-  appState: { origin: string, route: string, isSSR: boolean, apiHost: string };
+  appState: { origin: string, route: string, isSSR: boolean, apiHost: string, appData: any };
 
   router;
 
