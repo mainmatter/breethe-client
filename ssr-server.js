@@ -1,10 +1,22 @@
 const express = require('express');
+const Raven = require('raven');
 const fs = require('fs');
 const vm = require('vm');
 const morgan = require('morgan');
 const GlimmerRenderer = require('./dist/ssr-app.js');
 
+const { SENTRY_DSN } = process.env;
+const USE_SENTRY = !!SENTRY_DSN;
+
+if (USE_SENTRY) {
+  Raven.config(SENTRY_DSN).install();
+}
+
 const app = express();
+
+if (USE_SENTRY) {
+  app.use(Raven.requestHandler());
+}
 
 const html = fs.readFileSync('dist/index.html').toString();
 
@@ -29,5 +41,9 @@ async function preprender(req, res, next) {
 app.get('/', preprender);
 app.get('/search/:searchTerm', preprender);
 app.get('/location/:location', preprender);
+
+if (USE_SENTRY) {
+  app.use(Raven.errorHandler());
+}
 
 app.listen(3000, () => console.log('Server listening on port 3000!'))
