@@ -19,18 +19,17 @@ if (USE_SENTRY) {
 }
 
 const html = fs.readFileSync('dist/index.html').toString();
+const renderer = new GlimmerRenderer();
+const sandbox = { require, renderer };
+const context = vm.createContext(sandbox);
 
 app.use(morgan('common'));
 app.use(express.static('dist', { index: false }));
 
 async function preprender(req, res, next) {
   try {
-    //const sandbox = { require };
-    //const context = vm.createContext(sandbox);
-    //let script = new vm.Script(`const GlimmerRenderer = require('./dist/ssr-app.js'); new GlimmerRenderer().render(, ${req.url}');`);
-    //let app = await script.runInContext(context);
-    let renderer = new GlimmerRenderer();
-    let app = await renderer.render('http://localhost:3000', req.url);
+    let script = new vm.Script(`renderer.render('${req.url}');`);
+    let app = await script.runInContext(context);
     let body = html.replace('<div id="app"></div>', `<div id="app">${app}</div>`);
     res.send(body);
   } catch(e) {
