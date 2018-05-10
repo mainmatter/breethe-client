@@ -8,7 +8,7 @@ const MODE_RESULTS = 'results';
 export default class PpmClient extends Component {
   store;
   particles: any = null;
-  appState: { origin: string, route: string, isSSR: boolean };
+  appState: { origin: string, route: string, isSSR: boolean, apiHost: string };
 
   router;
 
@@ -36,7 +36,7 @@ export default class PpmClient extends Component {
     super(options);
 
     this.appState = this.appState || { origin: window.location.origin, route: window.location.pathname, isSSR: false };
-    this.store = setupStore(this.appState.isSSR);
+    this.store = setupStore(this.appState);
     this._setupRouting();
     this._bindInternalLinks();
   }

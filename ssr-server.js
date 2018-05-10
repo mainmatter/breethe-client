@@ -19,8 +19,10 @@ if (USE_SENTRY) {
 }
 
 const html = fs.readFileSync('dist/index.html').toString();
+
+const { API_HOST } = process.env;
 const renderer = new GlimmerRenderer();
-const sandbox = { require, renderer };
+const sandbox = { require, renderer, apiHost: API_HOST };
 const context = vm.createContext(sandbox);
 
 app.use(morgan('common'));
@@ -28,7 +30,7 @@ app.use(express.static('dist', { index: false }));
 
 async function preprender(req, res, next) {
   try {
-    let script = new vm.Script(`renderer.render('${req.url}');`);
+    let script = new vm.Script(`renderer.render('http://localhost:3000', '${req.url}', apiHost);`);
     let app = await script.runInContext(context);
     let body = html.replace('<div id="app"></div>', `<div id="app">${app}</div>`);
     res.send(body);

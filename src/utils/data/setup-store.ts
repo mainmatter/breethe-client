@@ -4,8 +4,11 @@ import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
 import { schema as schemaDefinition } from './schema';
 
-export default function setupStore(isSSR): Store  {
-  if (isSSR) {
+export default function setupStore(appState): Store  {
+  let host = '';
+
+  if (appState.isSSR) {
+    host = appState.apiHost || host;
     Orbit.fetch = require('node-fetch');
   } else {
     Orbit.fetch = window.fetch.bind(window);
@@ -15,9 +18,9 @@ export default function setupStore(isSSR): Store  {
 
   let store = new Store({ schema });
   let jsonapi = new JSONAPIStore({
-    host: 'http://localhost:4200',
-    namespace: 'api',
-    schema
+    host,
+    schema,
+    namespace: 'api'
   });
   let requestStrategy = new RequestStrategy({
     action: 'pull',

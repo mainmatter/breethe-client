@@ -15,7 +15,7 @@ let loader = new RuntimeCompilerLoader(resolver);
 
 export default class GlimmerRenderer {
   constructor() {}
-  render(origin: string, route: string): Promise<string> {
+  render(origin: string, route: string, apiHost: string): Promise<string> {
     const document = new Document();
 
     const mountEl = document.createElement('div');
@@ -32,6 +32,7 @@ export default class GlimmerRenderer {
       resolver,
       route,
       origin,
+      apiHost,
       element: mountEl,
     });
 
