@@ -1,4 +1,4 @@
-<div class="search-route">
+<div class="search-route" data-test-search>
   <header class="search-route__header">
     <h1 class="search-route__logo">
       Breethe
@@ -19,7 +19,7 @@
     {{#if showSearchResults}}
       <ul>
         {{#each locations key="id" as |location|}}
-          <li class="search-route__result">
+          <li class="search-route__result" data-test-search-result={{location.attributes.city}}>
             <a href="/location/{{location.id}}" data-navigo>
               {{location.attributes.city}}, {{location.attributes.country}}
             </a>
