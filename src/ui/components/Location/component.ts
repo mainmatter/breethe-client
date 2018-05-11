@@ -1,6 +1,5 @@
 import Component, { tracked } from '@glimmer/component';
 import { debug } from '@glimmer/opcode-compiler';
-import { compareAsc, format as formatDate, parse as parseDate } from 'date-fns';
 
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
 
@@ -38,11 +37,18 @@ export default class LocationComponent extends Component {
       return '––';
     }
     let dates = measurements.map((measurement) => {
-      return parseDate(measurement.attributes.measuredAt);
+      return new Date(measurement.attributes.measuredAt);
     });
-    dates.sort(compareAsc);
+    dates.sort((dateLeft, dateRight) => {
+      if (dateLeft > dateRight) {
+        return 1;
+      } else if (dateLeft < dateRight) {
+        return -1;
+      }
+      return 0;
+    });
 
-    return formatDate(dates[0], 'HH:MM | DD-MM-YYYY');
+    return dates[0].toLocaleString();
   }
 
   constructor(options) {

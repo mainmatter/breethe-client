@@ -1,6 +1,5 @@
 import Component, { tracked } from '@glimmer/component';
 import { assert } from '@orbit/utils';
-import { compareDesc, isValid as isValidDate, parse as parseDate } from 'date-fns';
 
 export default class Home extends Component {
 
@@ -53,12 +52,17 @@ export default class Home extends Component {
       (q) => q.findRecords('location')
     );
     locations = locations.filter((location) => {
-      return isValidDate(parseDate(location.attributes.visitedAt));
+      return !!location.attributes.visitedAt;
     });
     locations.sort((locationL, locationR) => {
-      let dateLeft = parseDate(locationL.attributes.visitedAt);
-      let dateRight = parseDate(locationR.attributes.visitedAt);
-      return compareDesc(dateLeft, dateRight);
+      let dateLeft = new Date(locationL.attributes.visitedAt);
+      let dateRight = new Date(locationR.attributes.visitedAt);
+      if (dateLeft > dateRight) {
+        return -1;
+      } else if (dateLeft < dateRight) {
+        return 1;
+      }
+      return 0;
     });
     this.locations = locations.slice(0, 3);
   }
