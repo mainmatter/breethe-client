@@ -33,6 +33,11 @@ async function searchLocation(searchTerm) {
   return data;
 }
 
+function serializeCacheData(data) {
+  let serialized = JSON.stringify(data);
+  return `<script type="orbit/cache" id="orbit-main-cache">${serialized}</script>`;
+}
+
 async function preprender(req, res, next, data = []) {
   try {
     let origin = `${req.protocol}://${req.headers.host}`;
@@ -40,7 +45,9 @@ async function preprender(req, res, next, data = []) {
     const context = vm.createContext(sandbox);
     let script = new vm.Script(`renderer.render(origin, '${req.url}', apiHost, data);`);
     let app = await script.runInContext(context);
-    let body = HTML.replace('<div id="app"></div>', `<div id="app">${app}</div>`);
+    let body = `<div id="app">${app}</div>`;
+    body += serializeCacheData(res.locals.cacheData);
+    body = HTML.replace('<div id="app"></div>', body);
     res.send(body);
   } catch(e) {
     next(e);
@@ -50,6 +57,7 @@ async function preprender(req, res, next, data = []) {
 app.get('/', preprender);
 app.get('/search/:searchTerm', async function(req, res, next) {
   let data = await searchLocation(req.params.searchTerm);
+  res.locals.cacheData = data || [];
   await preprender(req, res, next, data);
 });
 app.get('/location/:location', preprender);
