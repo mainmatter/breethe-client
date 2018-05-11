@@ -1,5 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
 import Navigo from 'navigo';
+import restoreCache from '../../../utils/data/restore-cache';
 import setupStore from '../../../utils/data/setup-store';
 
 const MODE_SEARCH = 'search';
@@ -37,6 +38,9 @@ export default class PpmClient extends Component {
 
     this.appState = this.appState || { origin: window.location.origin, route: window.location.pathname, isSSR: false };
     this.store = setupStore(this.appState);
+    if (!this.appState.isSSR) {
+      restoreCache(this.store);
+    }
     this._setupRouting();
     this._bindInternalLinks();
   }

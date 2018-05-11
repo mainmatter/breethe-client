@@ -33,7 +33,7 @@ async function searchLocation(searchTerm) {
   return data;
 }
 
-function serializeCacheData(data) {
+function serializeCacheData(data = []) {
   let serialized = JSON.stringify(data);
   return `<script type="orbit/cache" id="orbit-main-cache">${serialized}</script>`;
 }
@@ -67,6 +67,7 @@ if (USE_SENTRY) {
 }
 
 app.use(function(err, req, res, next) {
+  console.error('Error: ', err);
   res.send(HTML);
 });
 
