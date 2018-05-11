@@ -35,10 +35,10 @@ async function searchLocation(searchTerm) {
 
 async function preprender(req, res, next, data = []) {
   try {
-    console.log(data);
-    let script = new vm.Script(`renderer.render('http://localhost:3000', '${req.url}', apiHost, data);`);
-    const sandbox = { require, renderer, apiHost: API_HOST, data };
+    let origin = `${req.protocol}://${req.headers.host}`;
+    const sandbox = { origin, renderer, apiHost: API_HOST, data };
     const context = vm.createContext(sandbox);
+    let script = new vm.Script(`renderer.render(origin, '${req.url}', apiHost, data);`);
     let app = await script.runInContext(context);
     let body = HTML.replace('<div id="app"></div>', `<div id="app">${app}</div>`);
     res.send(body);
