@@ -9,7 +9,7 @@ export default function setupStore(appState): Store  {
   let store = new Store({ schema });
 
   if (appState.isSSR) {
-    let data = appState.appData as {}[];
+    let data = appState.appData as Array<{}>;
     data.forEach((record) => {
       store.cache.patch((t) => t.addRecord(record));
     });
