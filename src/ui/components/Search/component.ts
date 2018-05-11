@@ -27,7 +27,7 @@ export default class Home extends Component {
   }
 
   async loadLocations(searchTerm) {
-    let store = await this.args.store;
+    let { store } = this.args;
     let locationsResponse = await fetch(`/api/locations?filter[name]=${searchTerm}`);
     let locationsPayload: { data: any[] } = await locationsResponse.json();
     let locations = locationsPayload.data;

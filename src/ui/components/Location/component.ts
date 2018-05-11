@@ -52,7 +52,7 @@ export default class LocationComponent extends Component {
 
   async loadMeasurements(locationId) {
     try {
-      let store = await this.args.store;
+      let { store } = this.args;
       let currentDate = new Date().toISOString();
       let locationSignature = { type: 'location', id: locationId };
       this.location = await store.query((q) => q.findRecord(locationSignature));
