@@ -1,0 +1,42 @@
+/**
+ * From https://github.com/tobiasahlin/SpinKit/blob/master/scss/spinners/7-three-bounce.scss
+ **/
+$spinkit-spinner-margin: 40px auto;
+$spinkit-size: 40px;
+$spinkit-spinner-color: #fff;
+
+.sk-three-bounce {
+  $animationDuration: 1.4s;
+  $delayRange: 0.32s;
+  margin: $spinkit-spinner-margin;
+  width: $spinkit-size * 2;
+  text-align: center;
+
+  .sk-child {
+    width: $spinkit-size / 2;
+    height: $spinkit-size / 2;
+    background-color: $spinkit-spinner-color;
+
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-three-bounce $animationDuration ease-in-out 0s infinite both;
+  }
+
+  .sk-bounce1 {
+    animation-delay: -$delayRange;
+  }
+  .sk-bounce2 {
+    animation-delay: -$delayRange / 2;
+  }
+}
+
+@keyframes sk-three-bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

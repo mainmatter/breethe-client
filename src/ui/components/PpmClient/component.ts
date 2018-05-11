@@ -15,8 +15,7 @@ interface ILocationParams {
 }
 
 export default class PpmClient extends Component {
-  store;
-  particles: any = null;
+
   appState: {
     origin: string,
     route: string,
@@ -25,6 +24,12 @@ export default class PpmClient extends Component {
   };
 
   router;
+
+  @tracked
+  loading = false;
+
+  @tracked
+  store = null;
 
   @tracked
   particlesIndex: number = 20;
@@ -55,16 +60,22 @@ export default class PpmClient extends Component {
       isSSR: false,
       appData: {}
     };
-    this.store = setupStore(this.appState);
     if (!this.appState.isSSR) {
       restoreCache(this.store);
     }
+    this._setupStore();
     this._setupRouting();
     this._bindInternalLinks();
   }
 
   updateParticles(particlesIndex: number) {
     this.particlesIndex = particlesIndex;
+  }
+
+  async _setupStore() {
+    this.loading = true;
+    this.store = await setupStore();
+    this.loading = false;
   }
 
   _setupRouting() {

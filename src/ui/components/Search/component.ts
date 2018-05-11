@@ -1,7 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
 import { assert } from '@orbit/utils';
 import { compareDesc, isValid as isValidDate, parse as parseDate } from 'date-fns';
-import 'whatwg-fetch';
 
 export default class Home extends Component {
 
@@ -29,7 +28,7 @@ export default class Home extends Component {
 
   async loadLocations(searchTerm) {
     let store = await this.args.store;
-    let locationsResponse = await fetch('/api/locations');
+    let locationsResponse = await fetch(`/api/locations?filter[name]=${searchTerm}`);
     let locationsPayload: { data: any[] } = await locationsResponse.json();
     let locations = locationsPayload.data;
 
