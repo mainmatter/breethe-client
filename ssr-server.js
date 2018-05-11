@@ -19,7 +19,7 @@ if (USE_SENTRY) {
   app.use(Raven.requestHandler());
 }
 
-const html = fs.readFileSync('dist/index.html').toString();
+const HTML = fs.readFileSync('dist/index.html').toString();
 
 const { API_HOST } = process.env;
 const renderer = new GlimmerRenderer();
@@ -40,7 +40,7 @@ async function preprender(req, res, next, data = []) {
     const sandbox = { require, renderer, apiHost: API_HOST, data };
     const context = vm.createContext(sandbox);
     let app = await script.runInContext(context);
-    let body = html.replace('<div id="app"></div>', `<div id="app">${app}</div>`);
+    let body = HTML.replace('<div id="app"></div>', `<div id="app">${app}</div>`);
     res.send(body);
   } catch(e) {
     next(e);
@@ -57,5 +57,9 @@ app.get('/location/:location', preprender);
 if (USE_SENTRY) {
   app.use(Raven.errorHandler());
 }
+
+app.use(function(err, req, res, next) {
+  res.send(HTML);
+});
 
 app.listen(3000, () => console.log('Server listening on port 3000!'))
