@@ -37,6 +37,12 @@ class PpmGlimmerApp extends GlimmerApp {
         entry: 'ssr/index.js',
         dest: 'ssr-app.js',
         format: 'cjs',
+        onwarn: function(warning) {
+          if (warning.code === 'THIS_IS_UNDEFINED') {
+            return;
+          }
+          console.log('Rollup warning: ', warning.message);
+        },
         plugins: [
           resolve({ jsnext: true, module: true, main: true }),
           commonjs()
