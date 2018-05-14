@@ -11,7 +11,8 @@
     "start": "ember server",
     "test": "ember test",
     "test-ssr": "mocha --recursive --exit -t 10s ssr-tests/helpers/prepare.js ssr-tests",
-    "heroku-postbuild": "ember build -prod"
+    "heroku-postbuild": "ember build -prod",
+    "start-ssr": "node ssr-server.js"
   },
   "devDependencies": {
     "@glimmer/application": "^0.9.1",
