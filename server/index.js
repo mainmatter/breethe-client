@@ -19,6 +19,10 @@ module.exports = function(app) {
   const morgan = require('morgan');
   app.use(morgan('dev'));
 
+  // Enable CORS from anywhere
+  const cors = require('cors')
+  app.use(cors());
+
   mocks.forEach(route => route(app));
   proxies.forEach(route => route(app));
 };

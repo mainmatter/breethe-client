@@ -24,8 +24,14 @@ before_install:
 install:
   - yarn install --non-interactive
 
-script:
-  - yarn test
+jobs:
+  include:
+    - stage: test
+      script: yarn test
+    - stage: test
+      script:
+        - ember b
+        - yarn test-ssr
 
 notifications:
   email: false

@@ -1,47 +1,52 @@
 import Coordinator, { EventLoggingStrategy, RequestStrategy, SyncStrategy } from '@orbit/coordinator';
 import Orbit, { Schema } from '@orbit/data';
 import JSONAPIStore from '@orbit/jsonapi';
-import Store from '@orbit/store';
+import Store, { Cache } from '@orbit/store';
 import { schema as schemaDefinition } from './schema';
 
-// Temporal fix until Orbit binds the window fetch by default if it's available
-// https://github.com/orbitjs/orbit/issues/452
-if (window.fetch) {
-  Orbit.fetch = window.fetch.bind(window);
-}
-
-export default function setupStore(): Store  {
+export default function setupStore(appState): Store  {
   let schema = new Schema(schemaDefinition);
-
   let store = new Store({ schema });
-  let jsonapi = new JSONAPIStore({
-    namespace: 'api',
-    schema
-  });
-  let requestStrategy = new RequestStrategy({
-    action: 'pull',
-    blocking: true,
-    on: 'beforeQuery',
-    source: 'store',
-    target: 'jsonapi',
-  });
 
-  let logger = new EventLoggingStrategy({
-    interfaces: ['queryable', 'syncable']
-  });
+  if (appState.isSSR) {
+    let data = appState.appData as Array<{}>;
+    data.forEach((record) => {
+      store.cache.patch((t) => t.addRecord(record));
+    });
+  } else {
+    Orbit.fetch = window.fetch.bind(window);
+    let host = appState.apiHost || 'http://localhost:4200';
 
-  let syncStrategy = new SyncStrategy({
-    blocking: true,
-    source: 'jsonapi',
-    target: 'store'
-  });
+    let jsonapi = new JSONAPIStore({
+      host,
+      schema,
+      namespace: 'api'
+    });
+    let requestStrategy = new RequestStrategy({
+      action: 'pull',
+      blocking: true,
+      on: 'beforeQuery',
+      source: 'store',
+      target: 'jsonapi',
+    });
 
-  const coordinator = new Coordinator({
-    sources: [store, jsonapi],
-    strategies: [requestStrategy, syncStrategy, logger]
-  });
+    let logger = new EventLoggingStrategy({
+      interfaces: ['queryable', 'syncable']
+    });
 
-  coordinator.activate();
+    let syncStrategy = new SyncStrategy({
+      blocking: true,
+      source: 'jsonapi',
+      target: 'store'
+    });
+
+    const coordinator = new Coordinator({
+      sources: [store, jsonapi],
+      strategies: [requestStrategy, syncStrategy, logger]
+    });
+
+    coordinator.activate();
+  }
 
   return store;
 }

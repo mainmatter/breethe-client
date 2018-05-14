@@ -1,9 +1,8 @@
 import Component, { tracked } from '@glimmer/component';
 import Navigo from 'navigo';
+import restoreCache from '../../../utils/data/restore-cache';
 import setupStore from '../../../utils/data/setup-store';
 import Location from '../Location/component';
-
-const router = new Navigo('http://localhost:4200');
 
 const MODE_SEARCH = 'search';
 const MODE_RESULTS = 'results';
@@ -16,10 +15,11 @@ interface ILocationParams {
 }
 
 export default class PpmClient extends Component {
-  store = setupStore();
+  store;
   particles: any = null;
+  appState: { origin: string, route: string, isSSR: boolean, apiHost: string, appData: any };
 
-  router = router;
+  router;
 
   @tracked
   particlesIndex: number = 20;
@@ -44,6 +44,11 @@ export default class PpmClient extends Component {
   constructor(options) {
     super(options);
 
+    this.appState = this.appState || { origin: window.location.origin, route: window.location.pathname, isSSR: false };
+    this.store = setupStore(this.appState);
+    if (!this.appState.isSSR) {
+      restoreCache(this.store);
+    }
     this._setupRouting();
     this._bindInternalLinks();
   }
@@ -53,11 +58,13 @@ export default class PpmClient extends Component {
   }
 
   _setupRouting() {
+    this.router = new Navigo(this.appState.origin);
+
     this.router
       .on('/', () => this._setMode(MODE_SEARCH))
       .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
       .on('/location/:location/', (params) => this._setMode(MODE_RESULTS, params))
-      .resolve();
+      .resolve(this.appState.route);
   }
 
   _setMode(mode, params: ISearchParams | ILocationParams = {}) {
@@ -78,13 +85,15 @@ export default class PpmClient extends Component {
   }
 
   _bindInternalLinks() {
-    document.addEventListener('click', (event: Event) => {
-      const target = event.target as HTMLElement;
+    if (!this.appState.isSSR) {
+      document.addEventListener('click', (event: Event) => {
+        const target = event.target as HTMLElement;
 
-      if (target.tagName === 'A' && target.dataset.navigo !== undefined) {
-        event.preventDefault();
-        this.router.navigate(target.getAttribute('href'));
-      }
-    });
+        if (target.tagName === 'A' && target.dataset.navigo !== undefined) {
+          event.preventDefault();
+          this.router.navigate(target.getAttribute('href'));
+        }
+      });
+    }
   }
 }

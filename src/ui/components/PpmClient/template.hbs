@@ -1,6 +1,6 @@
-<div class="ppm-client">
+<div class="ppm-client" data-test-ppm-client>
   {{#if isSearchMode}}
-    <Search @searchTerm={{searchTerm}} @store={{store}} @router={{router}} />
+    <Search @searchTerm={{searchTerm}} @store={{store}} @router={{router}} @appState={{appState}} />
   {{else if isResultsMode}}
     <Location @location={{location}} @store={{store}} @router={{router}} @updateParticles={{action updateParticles}} />
   {{/if}}
