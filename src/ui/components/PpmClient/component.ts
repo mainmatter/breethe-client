@@ -72,12 +72,12 @@ export default class PpmClient extends Component {
 
     switch (mode) {
       case MODE_SEARCH:
-        params = params as SearchParams;
+        params = params as ISearchParams;
         this.location = null;
         this.searchTerm = params.searchTerm;
         break;
       case MODE_RESULTS:
-        params = params as LocationParams;
+        params = params as ILocationParams;
         this.location = params.location;
         this.searchTerm = null;
         break;
