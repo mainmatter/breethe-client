@@ -60,6 +60,7 @@
   },
   "ember-addon": {
     "paths": [
+      "lib/sentry",
       "lib/strip-test-selectors"
     ]
   }

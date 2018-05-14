@@ -2,9 +2,17 @@ import Component, { tracked } from '@glimmer/component';
 import Navigo from 'navigo';
 import restoreCache from '../../../utils/data/restore-cache';
 import setupStore from '../../../utils/data/setup-store';
+import Location from '../Location/component';
 
 const MODE_SEARCH = 'search';
 const MODE_RESULTS = 'results';
+
+interface ISearchParams {
+  searchTerm?: string;
+}
+interface ILocationParams {
+  location?: string;
+}
 
 export default class PpmClient extends Component {
   store;
@@ -59,15 +67,17 @@ export default class PpmClient extends Component {
       .resolve(this.appState.route);
   }
 
-  _setMode(mode, params = {}) {
+  _setMode(mode, params: ISearchParams | ILocationParams = {}) {
     this.mode = mode;
 
     switch (mode) {
       case MODE_SEARCH:
+        params = params as SearchParams;
         this.location = null;
         this.searchTerm = params.searchTerm;
         break;
       case MODE_RESULTS:
+        params = params as LocationParams;
         this.location = params.location;
         this.searchTerm = null;
         break;
