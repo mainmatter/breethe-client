@@ -17,7 +17,13 @@ interface ILocationParams {
 export default class PpmClient extends Component {
   store;
   particles: any = null;
-  appState: { origin: string, route: string, isSSR: boolean, apiHost: string, appData: any };
+  appState: {
+    origin: string,
+    route: string,
+    isSSR: boolean,
+    apiHost: string,
+    appData: any
+  };
 
   router;
 
@@ -44,7 +50,13 @@ export default class PpmClient extends Component {
   constructor(options) {
     super(options);
 
-    this.appState = this.appState || { origin: window.location.origin, route: window.location.pathname, apiHost: '', isSSR: false, appData: {} };
+    this.appState = this.appState || {
+      origin: window.location.origin,
+      route: window.location.pathname,
+      apiHost: '',
+      isSSR: false,
+      appData: {}
+    };
     this.store = setupStore(this.appState);
     if (!this.appState.isSSR) {
       restoreCache(this.store);
