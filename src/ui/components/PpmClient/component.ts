@@ -60,10 +60,12 @@ export default class PpmClient extends Component {
       isSSR: false,
       appData: {}
     };
+
     if (!this.appState.isSSR) {
       restoreCache(this.store);
     }
-    this._setupStore();
+
+    this._setupStore(this.appState);
     this._setupRouting();
     this._bindInternalLinks();
   }
@@ -72,9 +74,9 @@ export default class PpmClient extends Component {
     this.particlesIndex = particlesIndex;
   }
 
-  async _setupStore() {
+  async _setupStore(appState) {
     this.loading = true;
-    this.store = await setupStore();
+    this.store = await setupStore(appState);
     this.loading = false;
   }
 
