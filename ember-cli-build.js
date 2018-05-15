@@ -10,12 +10,18 @@ const Rollup = require('broccoli-rollup');
 
 class PpmGlimmerApp extends GlimmerApp {
   ssrTree() {
-    let ssrTree = typescript('ssr', {
-      workingPath: this.project.root
+    let tsTree = new Funnel('.', {
+      include: ['ssr/**/*', 'config/**/*']
     });
 
-    return new Funnel(ssrTree, {
-      destDir: 'ssr'
+    return typescript(tsTree, {
+      workingPath: this.project.root,
+      tsconfig: {
+        compilerOptions: {
+          target: 'es6',
+          moduleResolution: 'node'
+        }
+      }
     });
   }
 
@@ -31,6 +37,12 @@ class PpmGlimmerApp extends GlimmerApp {
         entry: 'ssr/index.js',
         dest: 'ssr-app.js',
         format: 'cjs',
+        onwarn: function(warning) {
+          if (warning.code === 'THIS_IS_UNDEFINED') {
+            return;
+          }
+          console.log('Rollup warning: ', warning.message);
+        },
         plugins: [
           resolve({ jsnext: true, module: true, main: true }),
           commonjs()
