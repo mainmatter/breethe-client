@@ -35,6 +35,13 @@ async function searchLocation(searchTerm) {
   return data;
 }
 
+async function locationMeasurements(locationId) {
+  let location = await request(`${API_HOST}/api/locations/${locationId}`);
+  let measurements = await request(`${API_HOST}/api/locations/${locationId}/measurements`);
+  let data = [JSON.parse(location).data, ...JSON.parse(measurements).data];
+  return data;
+}
+
 function serializeCacheData(data) {
   let serialized = JSON.stringify(data);
   return `<script type="orbit/cache" id="orbit-main-cache">${serialized}</script>`;
@@ -61,7 +68,10 @@ app.get('/search/:searchTerm', async function(req, res, next) {
   let data = await searchLocation(req.params.searchTerm);
   await preprender(req, res, next, data);
 });
-app.get('/location/:location', preprender);
+app.get('/location/:location', async function(req, res, next) {
+  let data = await locationMeasurements(req.params.location);
+  await preprender(req, res, next, data);
+});
 
 if (USE_SENTRY) {
   app.use(Raven.errorHandler());

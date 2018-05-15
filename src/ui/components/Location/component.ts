@@ -57,22 +57,33 @@ export default class LocationComponent extends Component {
   }
 
   async loadMeasurements(locationId) {
-    try {
       let { store } = this.args;
       let currentDate = new Date().toISOString();
       let locationSignature = { type: 'location', id: locationId };
-      this.location = await store.query((q) => q.findRecord(locationSignature));
+
+      let locationQuery = (q) => q.findRecord(locationSignature);
+      try {
+        this.location = store.cache.query(locationQuery);
+      } catch (e) {
+        try {
+          this.location = await store.query(locationQuery);
+        } catch (e) {
+          this.notFound = true;
+        }
+      }
 
       store.update((t) =>
         t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
       );
 
-      this.measurements = await store.query((q) => q.findRelatedRecords(locationSignature, 'measurements'));
+      let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
+      let measurements = store.cache.query(measurementQuery);
+      if (measurements.length === 0) {
+        measurements = await store.query(measurementQuery);
+      }
+      this.measurements = measurements;
 
       this.notFound = false;
       this.args.updateParticles(80);
-    } catch (e) {
-      this.notFound = true;
-    }
   }
 }
