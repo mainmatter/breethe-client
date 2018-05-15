@@ -47,7 +47,8 @@ export default class Home extends Component {
   }
 
   async loadRecent() {
-    let store = await this.args.store;
+    let { pullIndexedDB, store } = this.args;
+    await pullIndexedDB();
     let locations = store.cache.query(
       (q) => q.findRecords('location')
     );

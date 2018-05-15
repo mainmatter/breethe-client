@@ -1,21 +1,18 @@
 <div class="ppm-client" data-test-ppm-client>
-  {{#if loading}}
-    <div class="search-route">
-      <header class="search-route__header">
-        <h1 class="search-route__logo">
-          Breethe
-        </h1>
-      </header>
-      <div class="loading">
-        <Loading />
-      </div>
-    </div>
-  {{else}}
-    {{#if isSearchMode}}
-      <Search @searchTerm={{searchTerm}} @store={{store}} @router={{router}} />
-    {{else if isResultsMode}}
-      <Location @location={{location}} @store={{store}} @router={{router}} @updateParticles={{action updateParticles}} />
-    {{/if}}
+  {{#if isSearchMode}}
+    <Search
+      @searchTerm={{searchTerm}}
+      @store={{store}}
+      @router={{router}}
+      @pullIndexedDB={{pullIndexedDB}}
+    />
+  {{else if isResultsMode}}
+    <Location
+      @location={{location}}
+      @store={{store}}
+      @router={{router}}
+      @updateParticles={{action updateParticles}}
+    />
   {{/if}}
   <div class="ppm-background">
     <ParticlesBackground @index={{particlesIndex}} />

@@ -7,7 +7,7 @@ import { schema as schemaDefinition } from './schema';
 
 declare const __ENV_API_HOST__: string;
 
-export default function setupStore(appState): Store  {
+export function initializeStore(appState) {
   let schema = new Schema(schemaDefinition);
   let store = new Store({ schema });
 
@@ -16,40 +16,64 @@ export default function setupStore(appState): Store  {
     data.forEach((record) => {
       store.cache.patch((t) => t.addRecord(record));
     });
-  } else {
-    Orbit.fetch = window.fetch.bind(window);
-    let host = __ENV_API_HOST__;
-
-    let jsonapi = new JSONAPIStore({
-      host,
-      schema,
-      namespace: 'api'
-    });
-    let requestStrategy = new RequestStrategy({
-      action: 'pull',
-      blocking: true,
-      on: 'beforeQuery',
-      source: 'store',
-      target: 'jsonapi',
-    });
-
-    let logger = new EventLoggingStrategy({
-      interfaces: ['queryable', 'syncable']
-    });
-
-    let syncStrategy = new SyncStrategy({
-      blocking: true,
-      source: 'jsonapi',
-      target: 'store'
-    });
-
-    const coordinator = new Coordinator({
-      sources: [store, jsonapi],
-      strategies: [requestStrategy, syncStrategy, logger]
-    });
-
-    coordinator.activate();
   }
 
-  return store;
+  return {
+    store,
+    schema
+  };
+}
+
+export function setupCoordinator(store, schema, appState)  {
+  Orbit.fetch = window.fetch.bind(window);
+  let host = __ENV_API_HOST__;
+
+  let remote = new JSONAPIStore({
+    name: 'remote',
+    namespace: 'api',
+    host,
+    schema
+  });
+
+  let local = new IndexedDBStore({
+    name: 'local',
+    schema
+  });
+
+  let requestStrategy = new RequestStrategy({
+    action: 'pull',
+    blocking: true,
+    on: 'beforeQuery',
+    source: 'store',
+    target: 'remote',
+  });
+
+  let logger = new EventLoggingStrategy({
+    interfaces: ['queryable', 'syncable']
+  });
+
+  let syncStrategy = new SyncStrategy({
+    blocking: true,
+    source: 'remote',
+    target: 'store'
+  });
+
+  const localStoreSync = new SyncStrategy({
+    source: 'store',
+    target: 'local',
+    blocking: true
+  });
+
+  const coordinator = new Coordinator({
+    sources: [store, local, remote],
+    strategies: [requestStrategy, syncStrategy, localStoreSync, logger]
+  });
+
+  coordinator.activate();
+
+  return {
+    store,
+    local,
+    remote
+  };
 }

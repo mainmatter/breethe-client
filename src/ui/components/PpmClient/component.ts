@@ -1,7 +1,7 @@
 import Component, { tracked } from '@glimmer/component';
 import Navigo from 'navigo';
 import restoreCache from '../../../utils/data/restore-cache';
-import setupStore from '../../../utils/data/setup-store';
+import { initializeStore, setupCoordinator } from '../../../utils/data/setup-store';
 import Location from '../Location/component';
 
 const MODE_SEARCH = 'search';
@@ -25,11 +25,9 @@ export default class PpmClient extends Component {
 
   router;
 
-  @tracked
-  loading = false;
-
-  @tracked
-  store = null;
+  store;
+  local;
+  loadedLocal = false;
 
   @tracked
   particlesIndex: number = 20;
@@ -61,23 +59,29 @@ export default class PpmClient extends Component {
       appData: {}
     };
 
+    let { store, schema } = initializeStore(this.appState);
+    this.store = store;
+
     if (!this.appState.isSSR) {
       restoreCache(this.store);
+      let { local } = setupCoordinator(this.store, schema, this.appState);
+      this.local = local;
     }
 
-    this._setupStore(this.appState);
     this._setupRouting();
     this._bindInternalLinks();
   }
 
-  updateParticles(particlesIndex: number) {
-    this.particlesIndex = particlesIndex;
+  pullIndexedDB = async () => {
+    if (!this.loadedLocal) {
+      let transform = await this.local.pull((q) => q.findRecords());
+      await this.store.sync(transform);
+      this.loadedLocal = true;
+    }
   }
 
-  async _setupStore(appState) {
-    this.loading = true;
-    this.store = await setupStore(appState);
-    this.loading = false;
+  updateParticles(particlesIndex: number) {
+    this.particlesIndex = particlesIndex;
   }
 
   _setupRouting() {
