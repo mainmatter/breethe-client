@@ -1,9 +1,8 @@
 import { ComponentManager, setPropertyDidChange } from '@glimmer/component';
 import App from './main';
 
-declare var Raven: any;
-
 let wrapper = (callback) => callback();
+let Raven = (window as any).Raven;
 if (typeof Raven !== 'undefined') {
   wrapper = Raven.context.bind(Raven);
 }
