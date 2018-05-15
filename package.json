@@ -42,7 +42,6 @@
     "execa": "^0.10.0",
     "glob": "^4.5.3",
     "mocha": "^5.1.1",
-    "morgan": "^1.9.0",
     "qunitjs": "^2.3.3",
     "simple-dom": "^1.4.0-alpha.82914663",
     "typescript": "~2.6.0"
@@ -53,6 +52,7 @@
   "private": true,
   "dependencies": {
     "express": "^4.16.3",
+    "morgan": "^1.9.0",
     "navigo": "^7.1.2",
     "raven": "^2.6.1",
     "request": "^2.85.0",
