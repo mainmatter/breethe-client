@@ -8,6 +8,8 @@ const GlimmerRenderer = require('./dist/ssr-app.js');
 
 const HTML = fs.readFileSync('dist/index.html').toString();
 
+const { PORT = 3000 } = process.env;
+
 const { API_HOST } = process.env;
 const renderer = new GlimmerRenderer();
 
@@ -70,4 +72,4 @@ app.use(function(err, req, res, next) {
   res.send(HTML);
 });
 
-app.listen(3000, () => console.log('Server listening on port 3000!'))
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}!`))
