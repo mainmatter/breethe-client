@@ -27,6 +27,7 @@ export default class PpmClient extends Component {
 
   store;
   local;
+  searchResults;
   loadedLocal = false;
 
   @tracked
@@ -63,9 +64,15 @@ export default class PpmClient extends Component {
     this.store = store;
 
     if (!this.appState.isSSR) {
-      restoreCache(this.store);
+      let cacheData = restoreCache(this.store);
+      if (cacheData) {
+        this.searchResults = cacheData.searchResults;
+      }
       let { local } = setupCoordinator(this.store, schema, this.appState);
       this.local = local;
+    } else if (this.appState.appData) {
+      let { searchResults } = this.appState.appData;
+      this.searchResults = searchResults;
     }
 
     this._setupRouting();

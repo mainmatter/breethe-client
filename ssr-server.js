@@ -32,14 +32,20 @@ app.use(express.static('dist', { index: false }));
 async function searchLocation(searchTerm) {
   let response = await request(`${API_HOST}/api/locations?filter%5Bcity%5D=${searchTerm}`);
   let data = JSON.parse(response).data;
-  return data;
+  let ids = data.map((result) => result.id);
+  return {
+    orbit: data,
+    searchResults: ids
+  };
 }
 
 async function locationMeasurements(locationId) {
   let location = await request(`${API_HOST}/api/locations/${locationId}`);
   let measurements = await request(`${API_HOST}/api/locations/${locationId}/measurements`);
   let data = [JSON.parse(location).data, ...JSON.parse(measurements).data];
-  return data;
+  return {
+    orbit: data
+  };
 }
 
 function serializeCacheData(data) {
@@ -47,7 +53,7 @@ function serializeCacheData(data) {
   return `<script type="orbit/cache" id="orbit-main-cache">${serialized}</script>`;
 }
 
-async function preprender(req, res, next, data = []) {
+async function preprender(req, res, next, data = {orbit: []}) {
   try {
     let origin = `${req.protocol}://${req.headers.host}`;
     const sandbox = { origin, renderer, data };

@@ -19,31 +19,42 @@ export default class Home extends Component {
     assert('Argument \'store\' must be supplied to this component.', this.args.store);
     this.searchTerm = this.args.searchTerm;
     if (this.searchTerm && this.searchTerm.length > 0) {
-      this.loadLocations(this.searchTerm);
+      this.loadLocations(this.searchTerm, this.args.searchResults);
     } else {
       this.loadRecent();
     }
   }
 
-  async loadLocations(searchTerm) {
+  async loadLocations(searchTerm, searchResults = []) {
     let { store } = this.args;
-    let locationsResponse = await fetch(`/api/locations?filter[name]=${searchTerm}`);
-    let locationsPayload: { data: any[] } = await locationsResponse.json();
-    let locations = locationsPayload.data;
-
-    this.locations = locations;
-
-    store.update((t) => {
-      return locations.map((location) => {
-        let signature = { type: 'location', id: location.id };
+    if (searchResults.length > 0) {
+      let locations = searchResults.map((id) => {
         try {
-          store.cache.query((q) => q.findRecord(signature));
-          return t.replaceRecord(location);
+          return store.cache.query((q) => q.findRecord({ type: 'location', id }));
         } catch (e) {
-          return t.addRecord(location);
+          return;
         }
       });
-    });
+      this.locations = locations;
+    } else {
+      let locationsResponse = await fetch(`/api/locations?filter[name]=${searchTerm}`);
+      let locationsPayload: { data: any[] } = await locationsResponse.json();
+      let locations = locationsPayload.data;
+
+      this.locations = locations;
+
+      store.update((t) => {
+        return locations.map((location) => {
+          let signature = { type: 'location', id: location.id };
+          try {
+            store.cache.query((q) => q.findRecord(signature));
+            return t.replaceRecord(location);
+          } catch (e) {
+            return t.addRecord(location);
+          }
+        });
+      });
+    }
   }
 
   async loadRecent() {

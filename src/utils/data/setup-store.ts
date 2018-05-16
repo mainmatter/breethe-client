@@ -12,8 +12,8 @@ export function initializeStore(appState) {
   let store = new Store({ schema });
 
   if (appState.isSSR) {
-    let data = appState.appData as Array<{}>;
-    data.forEach((record) => {
+    let data = appState.appData;
+    data.orbit.forEach((record) => {
       store.cache.patch((t) => t.addRecord(record));
     });
   }
