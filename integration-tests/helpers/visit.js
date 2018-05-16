@@ -2,10 +2,16 @@ const puppeteer = require('puppeteer');
 
 const BASE_URL = 'http://localhost:3000';
 
-async function visit(route, callback) {
+async function visit(route, options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+  let gotoOpts = Object.assign({}, { waitUntil: 'load' }, options);
+
   let browser = await puppeteer.launch();
   let page = await browser.newPage();
-  await page.goto(`${BASE_URL}${route}`);
+  await page.goto(`${BASE_URL}${route}`, gotoOpts);
 
   try {
     await callback(page);
