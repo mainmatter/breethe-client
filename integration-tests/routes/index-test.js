@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const visit = require('./helpers/visit');
+const visit = require('../helpers/visit');
 
 describe('the index route', function() {
   describe('the SSR response', function() {
