@@ -3,9 +3,10 @@ const visit = require('./helpers/visit');
 
 describe('the location route', function() {
   it('is served', async function() {
-    let response = await visit('/location/2');
+    await visit('/location/2', async (page) => {
+      let element = await page.$('[data-test-location]');
 
-    expect(response.statusCode).to.equal(200);
-    expect(response.$('[data-test-location]').length).to.be.ok;
+      expect(element).to.be.ok;
+    });
   });
 });

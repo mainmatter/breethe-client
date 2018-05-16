@@ -1,20 +1,17 @@
-const cheerio = require('cheerio');
-const request = require('request-promise-native');
+const puppeteer = require('puppeteer');
 
 const BASE_URL = 'http://localhost:3000';
 
-async function visit(route, options = {}) {
-  options.uri = BASE_URL + route;
-  options.headers = options.headers || {};
-  options.headers['Accept'] = 'text/html';
-  options.resolveWithFullResponse = true;
+async function visit(route, callback) {
+  let browser = await puppeteer.launch();
+  let page = await browser.newPage();
+  await page.goto(`${BASE_URL}${route}`);
 
-  let response = await request(options);
-  if (response.body.length) {
-    response.$ = cheerio.load(response.body);
+  try {
+    await callback(page);
+  } finally {
+    await browser.close();
   }
-
-  return response;
 }
 
 module.exports = visit;

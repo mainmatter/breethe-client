@@ -42,6 +42,7 @@
     "execa": "^0.10.0",
     "glob": "^4.5.3",
     "mocha": "^5.1.1",
+    "puppeteer": "^1.4.0",
     "qunitjs": "^2.3.3",
     "typescript": "~2.6.0"
   },
