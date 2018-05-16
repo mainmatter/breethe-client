@@ -31,7 +31,7 @@ jobs:
     - stage: test
       script:
         - ember b
-        - yarn test-ssr
+        - yarn test-integration
 
 notifications:
   email: false
