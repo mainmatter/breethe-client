@@ -9,7 +9,7 @@ async function visit(route, options, callback) {
   }
   let gotoOpts = Object.assign({}, { waitUntil: 'load' }, options);
 
-  let browser = await puppeteer.launch();
+  let browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   let page = await browser.newPage();
   await page.goto(`${BASE_URL}${route}`, gotoOpts);
 
