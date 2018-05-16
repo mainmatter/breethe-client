@@ -30,7 +30,7 @@ jobs:
       script: yarn test
     - stage: test
       script:
-        - ember b
+        - API_HOST=http://localhost:3001 ember b
         - yarn test-integration
 
 notifications:
