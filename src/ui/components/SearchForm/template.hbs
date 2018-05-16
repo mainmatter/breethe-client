@@ -1,6 +1,6 @@
 <form onsubmit={{action submitSearch}} class="search-form">
-  <input value={{search}} oninput={{action updateSearch}} class="search-form__input">
-  <button class="search-form__button">
+  <input value={{search}} oninput={{action updateSearch}} class="search-form__input" data-test-search-input>
+  <button class="search-form__button" data-test-search-submit>
     Find location
   </button>
 </form>

@@ -15,7 +15,7 @@ export default function setupStore(appState): Store  {
     });
   } else {
     Orbit.fetch = window.fetch.bind(window);
-    let host = appState.apiHost || 'http://localhost:4200';
+    let host = appState.apiHost || 'http://localhost:3001';
 
     let jsonapi = new JSONAPIStore({
       host,
