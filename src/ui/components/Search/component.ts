@@ -1,6 +1,8 @@
 import Component, { tracked } from '@glimmer/component';
 import { assert } from '@orbit/utils';
 
+declare const __ENV_API_HOST__: string;
+
 export default class Home extends Component {
 
   @tracked
@@ -37,7 +39,7 @@ export default class Home extends Component {
       });
       this.locations = locations;
     } else {
-      let locationsResponse = await fetch(`/api/locations?filter[name]=${searchTerm}`);
+      let locationsResponse = await fetch(`${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`);
       let locationsPayload: { data: any[] } = await locationsResponse.json();
       let locations = locationsPayload.data;
 

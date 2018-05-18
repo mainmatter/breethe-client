@@ -27,6 +27,7 @@ export function initializeStore(appState) {
 export function setupCoordinator(store, schema, appState)  {
   Orbit.fetch = window.fetch.bind(window);
   let host = __ENV_API_HOST__;
+  console.info(host);
 
   let remote = new JSONAPIStore({
     name: 'remote',
