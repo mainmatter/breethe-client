@@ -12,7 +12,6 @@ export interface SSROptions extends ApplicationOptions {
   element: any;
   route: string;
   origin: string;
-  apiHost: string;
   appData: any;
 }
 
@@ -28,7 +27,6 @@ export default class SSRApplication extends Application {
       isSSR: boolean;
       route: string;
       origin: string;
-      apiHost: string;
       appData: any;
 
       static create() {
@@ -39,7 +37,6 @@ export default class SSRApplication extends Application {
         this.route = options.route;
         this.origin = options.origin;
         this.isSSR = true;
-        this.apiHost = options.apiHost;
         this.appData = options.appData;
       }
     }

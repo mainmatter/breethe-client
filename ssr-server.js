@@ -43,9 +43,9 @@ function serializeCacheData(data) {
 async function preprender(req, res, next, data = []) {
   try {
     let origin = `${req.protocol}://${req.headers.host}`;
-    const sandbox = { origin, renderer, apiHost: API_HOST, data };
+    const sandbox = { origin, renderer, data };
     const context = vm.createContext(sandbox);
-    let script = new vm.Script(`renderer.render(origin, '${req.url}', apiHost, data);`);
+    let script = new vm.Script(`renderer.render(origin, '${req.url}', data);`);
     let app = await script.runInContext(context);
     let body = `<div id="app">${app}</div>`;
     body += serializeCacheData(data);

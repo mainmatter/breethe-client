@@ -3,10 +3,13 @@
 const GlimmerApp = require('@glimmer/application-pipeline').GlimmerApp;
 const commonjs = require('rollup-plugin-commonjs');
 const resolve = require('rollup-plugin-node-resolve');
+const replace = require('rollup-plugin-replace');
 const MergeTrees = require('broccoli-merge-trees');
 const typescript = require('broccoli-typescript-compiler').typescript;
 const Funnel = require('broccoli-funnel');
 const Rollup = require('broccoli-rollup');
+
+const ApiHost = process.env.API_HOST || 'http://localhost:4200';
 
 class PpmGlimmerApp extends GlimmerApp {
   ssrTree() {
@@ -45,7 +48,10 @@ class PpmGlimmerApp extends GlimmerApp {
         },
         plugins: [
           resolve({ jsnext: true, module: true, main: true }),
-          commonjs()
+          commonjs(),
+          replace({
+            __ENV_API_HOST__: JSON.stringify(ApiHost)
+          })
         ]
       }
     });
@@ -66,7 +72,10 @@ module.exports = function(defaults) {
     rollup: {
       plugins: [
         resolve({ jsnext: true, module: true, main: true }),
-        commonjs()
+        commonjs(),
+        replace({
+          __ENV_API_HOST__: JSON.stringify(ApiHost)
+        })
       ]
     }
   });

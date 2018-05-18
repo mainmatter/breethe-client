@@ -21,7 +21,6 @@ export default class PpmClient extends Component {
     origin: string,
     route: string,
     isSSR: boolean,
-    apiHost: string,
     appData: any
   };
 
@@ -53,7 +52,6 @@ export default class PpmClient extends Component {
     this.appState = this.appState || {
       origin: window.location.origin,
       route: window.location.pathname,
-      apiHost: '',
       isSSR: false,
       appData: {}
     };

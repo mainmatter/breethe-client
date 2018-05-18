@@ -4,6 +4,8 @@ import JSONAPIStore from '@orbit/jsonapi';
 import Store, { Cache } from '@orbit/store';
 import { schema as schemaDefinition } from './schema';
 
+declare const __ENV_API_HOST__: string;
+
 export default function setupStore(appState): Store  {
   let schema = new Schema(schemaDefinition);
   let store = new Store({ schema });
@@ -15,7 +17,7 @@ export default function setupStore(appState): Store  {
     });
   } else {
     Orbit.fetch = window.fetch.bind(window);
-    let host = appState.apiHost || 'http://localhost:4200';
+    let host = __ENV_API_HOST__;
 
     let jsonapi = new JSONAPIStore({
       host,
