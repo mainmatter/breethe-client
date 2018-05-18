@@ -23,6 +23,17 @@ const ALL_LOCATIONS = [
       'last-updated': '2017-03-07',
       coordinates: '47.811195, 13.033229'
     }
+  },
+  {
+    type: 'location',
+    id: '3',
+    attributes: {
+      name: 'Calle San Bernabé',
+      city: 'Madrid',
+      country: 'Spain',
+      'last-updated': '2017-03-07',
+      coordinates: '45.811195, 13.033229'
+    }
   }
 ];
 
@@ -100,13 +111,19 @@ module.exports = function(app) {
 
   locationsRouter.get('/', function(req, res) {
     res.type('application/vnd.api+json');
-    res.json({
-      data: ALL_LOCATIONS
-    });
-  });
-
-  locationsRouter.post('/', function(req, res) {
-    res.status(201).end();
+    let queryName = req.query.filter.name;
+    if (queryName) {
+      let filteredData = ALL_LOCATIONS.filter((record) => {
+        return record.attributes.city.toUpperCase() === queryName.toUpperCase();
+      });
+      res.json({
+        data: filteredData
+      });
+    } else {
+      res.json({
+        data: ALL_LOCATIONS
+      });
+    }
   });
 
   locationsRouter.get('/:id', function(req, res) {
@@ -143,27 +160,5 @@ module.exports = function(app) {
     }
   });
 
-  locationsRouter.put('/:id', function(req, res) {
-    res.send({
-      locations: {
-        id: req.params.id
-      }
-    });
-  });
-
-  locationsRouter.delete('/:id', function(req, res) {
-    res.status(204).end();
-  });
-
-  // The POST and PUT call will not contain a request body
-  // because the body-parser is not included by default.
-  // To use req.body, run:
-
-  //    npm install --save-dev body-parser
-
-  // After installing, you need to `use` the body-parser for
-  // this mock uncommenting the following line:
-  //
-  //app.use('/api/locations', require('body-parser').json());
   app.use('/api/locations', locationsRouter);
 };
