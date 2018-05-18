@@ -330,6 +330,14 @@
   version "0.15.14"
   resolved "https://registry.yarnpkg.com/@orbit/immutable/-/immutable-0.15.14.tgz#8c6958841d45f7f947282d8f39d88094d20bd152"
 
+"@orbit/indexeddb@^0.15.14":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/indexeddb/-/indexeddb-0.15.14.tgz#bd41d0aec7919ce9fac788a1f99a1b5f83880444"
+  dependencies:
+    "@orbit/core" "^0.15.14"
+    "@orbit/data" "^0.15.14"
+    "@orbit/utils" "^0.15.14"
+
 "@orbit/jsonapi@^0.15.14":
   version "0.15.14"
   resolved "https://registry.yarnpkg.com/@orbit/jsonapi/-/jsonapi-0.15.14.tgz#8815c5eb6a7f275d57566ebc8551e4f7a914846b"

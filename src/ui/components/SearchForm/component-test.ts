@@ -8,7 +8,7 @@ module('Component: SearchForm', function(hooks) {
 
   test('It renders', async function(assert) {
     await this.render(hbs`<SearchForm @term="alpha" />`);
-    let inputValue = this.containerElement.querySelector('input').value;
+    let inputValue = this.containerElement.querySelector('[data-test-search-input]').value;
     assert.equal(inputValue, 'alpha', 'Term parameter is rendered');
   });
 });

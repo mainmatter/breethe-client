@@ -1,12 +1,21 @@
 <div class="ppm-client" data-test-ppm-client>
   {{#if isSearchMode}}
-    <Search @searchTerm={{searchTerm}} @store={{store}} @router={{router}} @appState={{appState}} />
+    <Search
+      @searchTerm={{searchTerm}}
+      @store={{store}}
+      @router={{router}}
+      @pullIndexedDB={{pullIndexedDB}}
+      @searchResults={{searchResults}}
+    />
   {{else if isResultsMode}}
-    <Location @location={{location}} @store={{store}} @router={{router}} @updateParticles={{action updateParticles}} />
+    <Location
+      @location={{location}}
+      @store={{store}}
+      @router={{router}}
+      @updateParticles={{action updateParticles}}
+    />
   {{/if}}
-
   <div class="ppm-background">
-    <div class="ppm-background__overgradient"></div>
     <ParticlesBackground @index={{particlesIndex}} />
   </div>
 </div>

@@ -10,6 +10,8 @@
   border-radius: 50%;
 }
 
+$paricleColor: lighten(map-get($clear-sky, end), 20);
+
 @for $i from 1 through 50 {
   @keyframes particle-animation-#{$i} {
     50% {
@@ -31,7 +33,7 @@
     width: $size;
     animation-delay: -$i * .2s;
     transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
-    background: rgba(map-get($clear-sky, start), $opacity);
+    background: rgba($paricleColor, $opacity);
   }
 }
 
@@ -56,6 +58,6 @@
     height: $size;
     width: $size;
     transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
-    background: rgba(map-get($clear-sky, start), $opacity);
+    background: rgba($paricleColor, $opacity);
   }
 }

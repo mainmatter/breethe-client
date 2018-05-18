@@ -109,5 +109,10 @@
     &__label {
       font-weight: $medium-weight;
     }
+    sup {
+      font-size: 0.7em;
+      display: block;
+      float: right;
+    }
   }
 }
