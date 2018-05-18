@@ -25,7 +25,7 @@ describe('the search route', function() {
           return JSON.parse(cacheContainer.innerHTML);
         });
 
-        expect(cache.indexOf(r => r.type === 'location' && r.id === 2 && r.attributes.city === 'Salzburg')).to.be.ok;
+        expect(cache.orbit.indexOf(r => r.type === 'location' && r.id === 2 && r.attributes.city === 'Salzburg')).to.be.ok;
       });
     });
   });
