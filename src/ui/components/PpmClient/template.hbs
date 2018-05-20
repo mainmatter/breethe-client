@@ -16,6 +16,8 @@
     />
   {{/if}}
   <div class="ppm-background">
-    <ParticlesBackground @index={{particlesIndex}} />
+    {{#unless appState.isSSR}}
+      <ParticlesBackground @index={{particlesIndex}} />
+    {{/unless}}
   </div>
 </div>
