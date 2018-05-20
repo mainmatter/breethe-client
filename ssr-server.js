@@ -30,7 +30,7 @@ app.use(morgan('common'));
 app.use(express.static('dist', { index: false }));
 
 async function searchLocation(searchTerm) {
-  let response = await request(`${API_HOST}/api/locations?filter%5Bcity%5D=${searchTerm}`);
+  let response = await request(`${API_HOST}/api/locations?filter%5Bname%5D=${searchTerm}`);
   let data = JSON.parse(response).data;
   let ids = data.map((result) => result.id);
   return {
