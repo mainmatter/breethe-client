@@ -10,6 +10,12 @@ describe('the location route', function() {
         expect(element).to.be.ok;
       });
     });
+
+    it('falls back to rendering the empty HTML in case of errors', async function() {
+      await visit('/location/error', { waitUntil: 'domcontentloaded' }, async (page, $response) => {
+        expect($response('#app').html()).to.be.empty;
+      });
+    });
   });
 
   describe('the rehydrated app', function() {

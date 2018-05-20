@@ -71,12 +71,20 @@ async function preprender(req, res, next, data = {orbit: []}) {
 
 app.get('/', preprender);
 app.get('/search/:searchTerm', async function(req, res, next) {
-  let data = await searchLocation(req.params.searchTerm);
-  await preprender(req, res, next, data);
+  try {
+    let data = await searchLocation(req.params.searchTerm);
+    await preprender(req, res, next, data);
+  } catch(e) {
+    next(e);
+  }
 });
 app.get('/location/:location', async function(req, res, next) {
-  let data = await locationMeasurements(req.params.location);
-  await preprender(req, res, next, data);
+  try{
+    let data = await locationMeasurements(req.params.location);
+    await preprender(req, res, next, data);
+  } catch(e) {
+    next(e);
+  }
 });
 
 if (USE_SENTRY) {
@@ -84,7 +92,6 @@ if (USE_SENTRY) {
 }
 
 app.use(function(err, req, res, next) {
-  console.error('Error: ', err);
   res.send(HTML);
 });
 

@@ -112,7 +112,9 @@ module.exports = function(app) {
   locationsRouter.get('/', function(req, res) {
     res.type('application/vnd.api+json');
     let queryName = req.query.filter.name;
-    if (queryName) {
+    if (queryName === 'error') { // this special query can be used for tests to force an error response
+      res.sendStatus(500);
+    } else if (queryName) {
       let filteredData = ALL_LOCATIONS.filter((record) => {
         return record.attributes.city.toUpperCase() === queryName.toUpperCase();
       });
@@ -128,7 +130,9 @@ module.exports = function(app) {
 
   locationsRouter.get('/:id', function(req, res) {
     let locationId = req.params.id;
-    if (locationId <= ALL_LOCATIONS.length) {
+    if (locationId === 'error') { // this special query can be used for tests to force an error response
+      res.sendStatus(500);
+    } else if (locationId <= ALL_LOCATIONS.length) {
       res.type('application/vnd.api+json');
       res.json({
         data: ALL_LOCATIONS[locationId - 1]

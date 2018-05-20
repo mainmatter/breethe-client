@@ -28,6 +28,12 @@ describe('the search route', function() {
         expect(cache.orbit.indexOf(r => r.type === 'location' && r.id === 2 && r.attributes.city === 'Salzburg')).to.be.ok;
       });
     });
+
+    it('falls back to rendering the empty HTML in case of errors', async function() {
+      await visit('/search/error', { waitUntil: 'domcontentloaded' }, async (page, $response) => {
+        expect($response('#app').html()).to.be.empty;
+      });
+    });
   });
 
   describe('the rehydrated app', function() {
