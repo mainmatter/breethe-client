@@ -5,7 +5,7 @@
     </h1>
   </header>
 
-  <SearchForm @term={{searchTerm}} @onSearch={{action goToRoute}} />
+  <SearchForm @term={{searchTerm}} @isSSR={{@isSSR}} @onSearch={{action goToRoute}} />
 
   <div class="search-route__results">
     <h2 class="search-route__results__title">
