@@ -4,10 +4,10 @@ const visit = require('../helpers/visit');
 describe('the index route', function() {
   describe('the SSR response', function() {
     it('is rendered', async function() {
-      await visit('/', { waitUntil: 'domcontentloaded' }, async (page) => {
-        let element = await page.$('[data-test-ppm-client]');
+      await visit('/', async (page, $response) => {
+        let element = $response('[data-test-ppm-client]');
     
-        expect(element).to.be.ok;
+        expect(element.length).to.be.ok;
       });
     });
   });
