@@ -15,6 +15,7 @@
     "start-ssr": "node ssr-server.js"
   },
   "devDependencies": {
+    "@css-blocks/ember-cli": "^0.19.0",
     "@glimmer/application": "^0.9.1",
     "@glimmer/application-pipeline": "^0.11.1",
     "@glimmer/blueprint": "~0.9.1",
