@@ -1,6 +1,6 @@
-<form onsubmit={{action submitSearch}} class="search-form">
-  <input value={{search}} oninput={{action updateSearch}} placeholder="Enter location" class="search-form__input" disabled={{@isSSR}} data-test-search-input>
-  <button class="search-form__button {{if @isSSR 'loading'}}" disabled={{@isSSR}} data-test-search-submit>
+<form onsubmit={{action submitSearch}}>
+  <input value={{search}} oninput={{action updateSearch}} placeholder="Enter location" disabled={{@isSSR}} data-test-search-input>
+  <button disabled={{@isSSR}} data-test-search-submit>
     {{#if @isSSR}}
       <Loading />
     {{/if}}

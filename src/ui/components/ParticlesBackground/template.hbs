@@ -1,13 +1,15 @@
-<div class="particles-background" data-test-effects-background>
-  {{#each particles.particles key='@index' as |particle index|}}
-    <div class="particle"></div>
-  {{/each}}
-</div>
-
-{{#if particles.extraParticles.length}}
-  <div class="particles-background particles-background--extra">
-    {{#each particles.extraParticles key='@index' as |particle index|}}
-      <div class="particle-extra"></div>
+<div>
+  <div data-test-effects-background>
+    {{#each particles.particles key='@index' as |particle index|}}
+      <div></div>
     {{/each}}
   </div>
-{{/if}}
+  
+  {{#if particles.extraParticles.length}}
+    <div>
+      {{#each particles.extraParticles key='@index' as |particle index|}}
+        <div></div>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>

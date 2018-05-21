@@ -77,6 +77,10 @@ module.exports = function(defaults) {
           __ENV_API_HOST__: JSON.stringify(ApiHost)
         })
       ]
+    },
+    'css-blocks': {
+      entry: 'PpmClient',
+      output: 'src/ui/styles/app.css'
     }
   });
 
