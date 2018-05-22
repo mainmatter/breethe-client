@@ -1,3 +1,27 @@
+@import '../../styles/_variables';
+
 :scope {
   block-name: MeasurementRow;
+  color: $font-color;
+  font-size: 0.9em;
+  border-top: 1px solid rgba($font-color, 0.4);
+  padding: .5rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  opacity: 0.9;
+
+  &:nth-child(1) {
+    border-top: none;
+  }
+}
+
+.label {
+  font-weight: $medium-weight;
+}
+
+.label-sup {
+  font-size: 0.7em;
+  display: block;
+  float: right;
 }
