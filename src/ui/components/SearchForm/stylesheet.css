@@ -1,3 +1,71 @@
+@import '../../styles/_mixins';
+@import '../../styles/_variables';
+
 :scope {
   block-name: SearchForm;
+}
+
+:scope[state|loading] {
+  opacity: .5
+}
+
+@include for-tablet-portrait-up() {
+  :scope {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+}
+
+.search-term {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: $radius-size;
+  font-size: 1.2rem;
+  border: 2px solid map-get($clear-sky, end);
+  outline: none;
+  padding: 1rem 0.5rem;
+  color: $font-contrast-color;
+  transition: border 100ms ease-in-out;
+  
+  &:focus {
+    border: 2px solid map-get($clear-sky, start);
+    outline: none;
+  }
+  
+  &:disabled {
+    background: rgba($action-color, 0.9);
+  }
+}
+
+.submit {
+  margin-top: 1rem;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  text-align: center;
+  background: rgba($action-color, 0.9);
+  border-radius: $radius-size;
+  color: $font-color;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+@include for-tablet-portrait-up() {
+  .submit {
+    width: 15rem;
+    margin: 0 0 0 1rem;
+  }
+}
+
+.Loading[state|loading] {
+  height: 48px;
+  width: 80px;
+  position: absolute;
+  left: calc(50% - 40px);
+  margin: auto 0;
 }

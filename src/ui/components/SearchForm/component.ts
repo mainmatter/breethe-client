@@ -4,6 +4,11 @@ export default class SearchForm extends Component {
   @tracked
   search: string = this.args.term || '';
 
+  @tracked
+  get isLoading() {
+    return this.args.isSSR;
+  }
+
   updateSearch(event) {
     this.search = event.target.value;
   }
