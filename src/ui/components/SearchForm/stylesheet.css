@@ -5,10 +5,6 @@
   block-name: SearchForm;
 }
 
-:scope[state|loading] {
-  opacity: .5
-}
-
 @include for-tablet-portrait-up() {
   :scope {
     display: flex;
@@ -32,9 +28,9 @@
     border: 2px solid map-get($clear-sky, start);
     outline: none;
   }
-  
+
   &:disabled {
-    background: rgba($action-color, 0.9);
+    opacity: .5;
   }
 }
 
@@ -53,6 +49,10 @@
   outline: none;
   cursor: pointer;
   position: relative;
+
+  &:disabled {
+    opacity: .5;
+  }
 }
 
 @include for-tablet-portrait-up() {

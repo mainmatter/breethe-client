@@ -7,7 +7,12 @@
     </h1>
   </header>
 
-  <SearchForm @term={{searchTerm}} @isSSR={{@isSSR}} @onSearch={{action goToRoute}} />
+  <div class="search-form-wrapper">
+    <SearchForm @term={{searchTerm}} @isDisabled={{@isSSR}} @onSearch={{action goToRoute}} />
+    {{#if @isSSR}}
+      <div class="loader.loader form-loader" data-test-form-laoder></div>
+    {{/if}}
+  </div>
 
   <div class="results">
     <h2 class="results-title">

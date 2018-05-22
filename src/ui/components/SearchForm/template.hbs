@@ -1,6 +1,6 @@
 <form onsubmit={{action submitSearch}}>
-  <input value={{search}} oninput={{action updateSearch}} placeholder="Enter location" disabled={{@isSSR}} class="search-term" data-test-search-input>
-  <button disabled={{@isSSR}} class="submit" data-test-search-submit>
+  <input value={{search}} oninput={{action updateSearch}} placeholder="Enter location" disabled={{@isDisabled}} class="search-term" data-test-search-input>
+  <button disabled={{@isDisabled}} class="submit" data-test-search-submit>
     Find location
   </button>
 </form>

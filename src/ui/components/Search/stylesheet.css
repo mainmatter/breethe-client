@@ -2,6 +2,7 @@
 @import '../../styles/_variables';
 
 @block-reference logo from "../../styles/logo.block.css";
+@block-reference loader from "../../styles/loader.block.css";
 
 :scope {
   block-name: Search;
@@ -24,6 +25,19 @@
     height: 2.5rem;
   }
 } 
+
+.search-form-wrapper {
+  position: relative;
+}
+
+.form-loader {
+  height: 4rem;
+  width: 4rem;
+  position: absolute;
+  left: calc(50% - 2.25rem);
+  top: calc(50% - 2.25rem);
+  border-width: .25rem;
+}
 
 .results {
   margin-top: 4rem;
