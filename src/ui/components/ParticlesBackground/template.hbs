@@ -1,14 +1,14 @@
 <div data-test-effects-background>
-  <div>
+  <div class="background">
     {{#each particles.particles key='@index' as |particle index|}}
-      <div></div>
+      <div class="particle"></div>
     {{/each}}
   </div>
   
   {{#if particles.extraParticles.length}}
-    <div>
+    <div class="background">
       {{#each particles.extraParticles key='@index' as |particle index|}}
-        <div></div>
+        <div class="extra-particle"></div>
       {{/each}}
     </div>
   {{/if}}

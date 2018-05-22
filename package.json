@@ -44,6 +44,7 @@
     "execa": "^0.10.0",
     "glob": "^4.5.3",
     "mocha": "^5.1.1",
+    "node-sass": "^4.9.0",
     "puppeteer": "^1.4.0",
     "qunitjs": "^2.3.3",
     "rollup-plugin-replace": "^2.0.0",
