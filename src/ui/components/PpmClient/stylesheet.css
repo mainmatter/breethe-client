@@ -1,6 +1,13 @@
+@import '../../styles/_mixins';
+@import '../../styles/_variables';
+
 :scope {
   block-name: PpmClient;
   position: relative;
-  width: 100%;
-  min-height: 100vh;
+  @include screen-view();
+
+  font-size: map-get($root-font, font-size);
+  line-height: map-get($root-font, line-height);
+  font-family: map-get($root-font, font-family);
+  letter-spacing: map-get($root-font, letter-spacing);
 }

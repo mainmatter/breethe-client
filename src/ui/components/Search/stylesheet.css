@@ -1,3 +1,76 @@
+@import '../../styles/_mixins';
+@import '../../styles/_variables';
+
 :scope {
   block-name: Search;
+  @include component-screen();
+}
+
+.header {
+  height: 38.19vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  color: $font-color;
+  margin-top: 1rem;
+}
+
+@include for-tablet-portrait-up() {
+  .logo {
+    margin-top: 2rem;
+  }
+} 
+
+.logo-link {
+  display: block;
+  text-align: center; 
+  background: no-repeat center/contain url(images/logo.svg);
+  height: 2rem;
+  text-indent: -1000000px;
+  overflow: hidden;
+}
+
+@include for-tablet-portrait-up() {
+  .logo-link {
+    height: 2.5rem;
+  }
+} 
+
+.results {
+  margin-top: 4rem;
+}
+
+.results-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: $font-color;
+}
+
+.result {
+  margin-bottom: 1rem;
+}
+
+.result-link {
+  @include marker-pin();
+  display: flex;
+  flex-flow: row nowrap;
+  background: rgba($font-color, 0.10);
+  border-radius: $radius-size;
+  padding: 1rem;
+  line-height: 1.2rem;
+  color: $font-color;
+  text-decoration: none;
+}
+
+.search-term {
+  font-weight: $bold-weight;
+}
+
+.no-results {
+  display: inline-block;
+  color: $font-color;
+  margin-top: 1rem;
 }

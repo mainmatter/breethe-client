@@ -1,16 +1,18 @@
 <div data-test-search>
-  <header>
-    <h1>
-      Breethe
+  <header class="header">
+    <h1 class="logo">
+      <a href="/" class="logo-link" data-navigo>
+        Breethe
+      </a>
     </h1>
   </header>
 
   <SearchForm @term={{searchTerm}} @isSSR={{@isSSR}} @onSearch={{action goToRoute}} />
 
-  <div>
-    <h2>
+  <div class="results">
+    <h2 class="results-title">
       {{#if searchTerm}}
-        Locations for "<strong>{{searchTerm}}</strong>"
+        Locations for "<strong class="search-term">{{searchTerm}}</strong>"
       {{else}}
         {{#if showResults}}
           Recent Locations
@@ -22,7 +24,7 @@
       <ul>
         {{#each locations key="id" as |location|}}
           <li data-test-search-result={{location.attributes.city}}>
-            <a href="/location/{{location.id}}" data-navigo>
+            <a href="/location/{{location.id}}" class="result-link" data-navigo>
               {{location.attributes.name}}, {{location.attributes.city}}
             </a>
           </li>
@@ -30,7 +32,7 @@
       </ul>
     {{else}}
       {{#if searchTerm}}
-        <em>
+        <em class="no-results">
           We could not find locations with your search term.
         </em>
       {{/if}}

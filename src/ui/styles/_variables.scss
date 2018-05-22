@@ -2,3 +2,16 @@ $clear-sky: (
   start: hsl(225, 100%, 36%),
   end: #109bff
 );
+
+$body-font: 'Poppins', sans-serif;
+$font-color: #fff;
+$root-font: (
+  font-size: 14px,
+  line-height: 28px,
+  font-family: $body-font,
+  letter-spacing: 0.24px
+);
+
+$bold-weight: 700;
+
+$radius-size: 4px;

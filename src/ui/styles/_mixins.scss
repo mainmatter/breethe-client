@@ -1,3 +1,37 @@
 @mixin qualityBackground($gradient, $clouds: 0, $particles: 0) {
   background: linear-gradient(map-get($gradient, start), map-get($gradient, end));
 }
+
+@mixin screen-view {
+  width: 100%;
+  min-height: 100vh;
+}
+
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) { @content; }
+}
+
+@mixin component-screen {
+  @include screen-view();
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  flex-flow: column nowrap;
+
+  @include for-tablet-portrait-up() {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@mixin marker-pin($width: 1rem, $height: 1rem) {
+  &:before {
+    content: '';
+    display: block;
+    background: no-repeat center url(images/map-marker.svg);
+    width: $width;
+    height: $height;
+    float: left;
+    margin-right: 0.5rem;
+  }
+} 
