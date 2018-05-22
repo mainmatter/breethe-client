@@ -1,9 +1,15 @@
 @import '../../styles/_mixins';
 @import '../../styles/_variables';
 
+@block-reference logo from "../../styles/logo.block.css";
+
 :scope {
   block-name: Location;
   @include component-screen();
+}
+
+.logo-link {
+  height: 2rem;
 }
 
 .location-data {
@@ -32,28 +38,6 @@
   text-align: center;
   color: $font-color;
   opacity: 0.6;
-}
-
-.logo {
-  color: $font-color;
-  margin-top: 1rem;
-
-  @include for-tablet-portrait-up() {
-    margin-top: 2rem;
-  }
-}
-
-.logo-link {
-  display: block;
-  text-align: center; 
-  background: no-repeat center/contain url(images/logo.svg);
-  height: 2rem;
-  text-indent: -1000000px;
-  overflow: hidden;
-
-  @include for-tablet-portrait-up() {
-    height: 2.5rem;
-  }
 }
 
 .indicator {

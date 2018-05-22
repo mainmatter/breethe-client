@@ -1,6 +1,8 @@
 @import '../../styles/_mixins';
 @import '../../styles/_variables';
 
+@block-reference logo from "../../styles/logo.block.css";
+
 :scope {
   block-name: Search;
   @include component-screen();
@@ -13,24 +15,8 @@
   justify-content: center;
 }
 
-.logo {
-  color: $font-color;
-  margin-top: 1rem;
-}
-
-@include for-tablet-portrait-up() {
-  .logo {
-    margin-top: 2rem;
-  }
-} 
-
 .logo-link {
-  display: block;
-  text-align: center; 
-  background: no-repeat center/contain url(images/logo.svg);
-  height: 2rem;
-  text-indent: -1000000px;
-  overflow: hidden;
+  height: 4rem;
 }
 
 @include for-tablet-portrait-up() {
