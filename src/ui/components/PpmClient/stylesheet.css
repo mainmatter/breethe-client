@@ -5,6 +5,7 @@
   block-name: PpmClient;
   position: relative;
   @include screen-view();
+  @include gradientBackground($clear-sky);
 
   font-size: map-get($root-font, font-size);
   line-height: map-get($root-font, line-height);

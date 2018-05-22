@@ -84,7 +84,6 @@ class PpmGlimmerApp extends GlimmerApp {
   }
 
   package() {
-    return super.package(...arguments);
     let appTree = super.package(...arguments);
     let ssrTree = this.packageSSR();
 

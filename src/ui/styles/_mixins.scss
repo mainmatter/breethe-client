@@ -1,4 +1,4 @@
-@mixin qualityBackground($gradient, $clouds: 0, $particles: 0) {
+@mixin gradientBackground($gradient, $clouds: 0, $particles: 0) {
   background: linear-gradient(map-get($gradient, start), map-get($gradient, end));
 }
 
