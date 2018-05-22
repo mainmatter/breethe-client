@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const GlimmerApp = require('@glimmer/application-pipeline').GlimmerApp;
 const commonjs = require('rollup-plugin-commonjs');
 const resolve = require('rollup-plugin-node-resolve');
@@ -8,6 +10,8 @@ const MergeTrees = require('broccoli-merge-trees');
 const typescript = require('broccoli-typescript-compiler').typescript;
 const Funnel = require('broccoli-funnel');
 const Rollup = require('broccoli-rollup');
+const Log = require('broccoli-stew').log;
+const Map = require('broccoli-stew').map;
 
 const ApiHost = process.env.API_HOST || 'http://localhost:4200';
 
@@ -26,6 +30,15 @@ class PpmGlimmerApp extends GlimmerApp {
         }
       }
     });
+  }
+
+  cssTree() {
+    let resetCss = fs.readFileSync(path.join(this.project.root, 'vendor', 'reset.css'));
+    let cssTree = Funnel(super.cssTree(...arguments), {
+      include: ['app.css']
+    });
+    
+    return Map(cssTree, (content) => `${resetCss}${content}`);
   }
 
   packageSSR() {
