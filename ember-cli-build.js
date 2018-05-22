@@ -10,7 +10,7 @@ const MergeTrees = require('broccoli-merge-trees');
 const typescript = require('broccoli-typescript-compiler').typescript;
 const Funnel = require('broccoli-funnel');
 const Rollup = require('broccoli-rollup');
-const Log = require('broccoli-stew').log;
+const BroccoliCleanCss = require('broccoli-clean-css');
 const Map = require('broccoli-stew').map;
 
 const ApiHost = process.env.API_HOST || 'http://localhost:4200';
@@ -37,8 +37,14 @@ class PpmGlimmerApp extends GlimmerApp {
     let cssTree = Funnel(super.cssTree(...arguments), {
       include: ['app.css']
     });
-    
-    return Map(cssTree, (content) => `${resetCss}${content}`);
+
+    cssTree = Map(cssTree, (content) => `${resetCss}${content}`);
+
+    if (this.options.minifyCSS.enabled) {
+      cssTree = new BroccoliCleanCss(cssTree);
+    }
+
+    return cssTree;
   }
 
   packageSSR() {
@@ -94,6 +100,9 @@ module.exports = function(defaults) {
     'css-blocks': {
       entry: 'PpmClient',
       output: 'src/ui/styles/app.css'
+    },
+    minifyCSS: {
+      enabled: process.env.EMBER_ENV === 'production'
     }
   });
 

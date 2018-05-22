@@ -32,6 +32,7 @@
     "@orbit/store": "^0.15.14",
     "@types/qunit": "^2.0.31",
     "broccoli-asset-rev": "^2.5.0",
+    "broccoli-clean-css": "^2.0.1",
     "chai": "^4.1.2",
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.4",
