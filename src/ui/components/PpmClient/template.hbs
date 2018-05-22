@@ -16,7 +16,9 @@
       @updateParticles={{action updateParticles}}
     />
   {{/if}}
-  {{#unless appState.isSSR}}
+  {{#if appState.isSSR}}
+    <div class="background"></div>
+  {{else}}
     <ParticlesBackground @index={{particlesIndex}} />
-  {{/unless}}
+  {{/if}}
 </div>

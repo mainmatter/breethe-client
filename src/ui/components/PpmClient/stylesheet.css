@@ -5,10 +5,13 @@
   block-name: PpmClient;
   position: relative;
   @include screen-view();
-  @include gradientBackground($clear-sky);
 
   font-size: map-get($root-font, font-size);
   line-height: map-get($root-font, line-height);
   font-family: map-get($root-font, font-family);
   letter-spacing: map-get($root-font, letter-spacing);
+}
+
+.background {
+  @include background();
 }

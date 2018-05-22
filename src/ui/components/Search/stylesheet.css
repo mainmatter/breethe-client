@@ -16,6 +16,10 @@
   justify-content: center;
 }
 
+.background {
+  @include background();
+}
+
 .logo-link {
   height: 4rem;
 }
