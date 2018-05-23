@@ -69,7 +69,8 @@ export default class LocationComponent extends Component {
   }
 
   async loadMeasurements(locationId) {
-      let { store } = this.args;
+      let { pullIndexedDB, store } = this.args;
+      await pullIndexedDB();
       let currentDate = new Date().toISOString();
       let locationSignature = { type: 'location', id: locationId };
 
