@@ -123,5 +123,14 @@ module.exports = function(defaults) {
     }
   });
 
-  return app.toTree();
+  let worker = typescript('workers', {
+    tsconfig: {
+      compilerOptions: {
+        module: 'es6',
+        target: 'es6'
+      }
+    }
+  });
+
+  return new MergeTrees([app.toTree(), worker]);
 };
