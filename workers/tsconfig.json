@@ -8,6 +8,9 @@
     "experimentalDecorators": true,
     "types": [
       "qunit"
+    ],
+    "lib": [
+      "webworker", "es2015.promise", "es2015.core"
     ]
   },
   "exclude": [
