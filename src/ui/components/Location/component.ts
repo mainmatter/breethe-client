@@ -39,7 +39,7 @@ export default class LocationComponent extends Component {
   get updatedDate() {
     let { measurements } = this;
     if (measurements.length === 0) {
-      return '––';
+      return '–';
     }
     let dates = measurements
       .filter((measurement) => {
@@ -49,7 +49,7 @@ export default class LocationComponent extends Component {
         return new Date(measurement.attributes.measuredAt);
       });
     if (dates.length === 0) {
-      return '––';
+      return '–';
     }
     dates.sort((dateLeft, dateRight) => {
       if (dateLeft > dateRight) {
@@ -90,11 +90,9 @@ export default class LocationComponent extends Component {
       );
 
       let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
-      let measurements = store.cache.query(measurementQuery);
-      if (measurements.length === 0) {
-        measurements = await store.query(measurementQuery);
-      }
-      this.measurements = measurements;
+      this.measurements = store.cache.query(measurementQuery);
+
+      this.measurements = await store.query(measurementQuery);
 
       this.notFound = false;
       this.args.updateParticles(80);
