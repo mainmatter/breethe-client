@@ -1,0 +1,80 @@
+@import '../../styles/_mixins';
+@import '../../styles/_variables';
+
+@block-reference logo from "../../styles/logo.block.css";
+@block-reference loader from "../../styles/loader.block.css";
+
+:scope {
+  block-name: Search;
+  @include component-screen();
+}
+
+.header {
+  height: 38.19vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.background {
+  @include background();
+}
+
+.logo-link {
+  height: 4rem;
+}
+
+@include for-tablet-portrait-up() {
+  .logo-link {
+    height: 2.5rem;
+  }
+} 
+
+.search-form-wrapper {
+  position: relative;
+}
+
+.form-loader {
+  height: 4rem;
+  width: 4rem;
+  position: absolute;
+  left: calc(50% - 2.25rem);
+  top: calc(50% - 2.25rem);
+  border-width: .25rem;
+}
+
+.results {
+  margin-top: 4rem;
+}
+
+.results-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: $font-color;
+}
+
+.result {
+  margin-bottom: 1rem;
+}
+
+.result-link {
+  @include marker-pin();
+  display: flex;
+  flex-flow: row nowrap;
+  background: rgba($font-color, 0.10);
+  border-radius: $radius-size;
+  padding: 1rem;
+  line-height: 1.2rem;
+  color: $font-color;
+  text-decoration: none;
+}
+
+.search-term {
+  font-weight: $bold-weight;
+}
+
+.no-results {
+  display: inline-block;
+  color: $font-color;
+  margin-top: 1rem;
+}

@@ -1,4 +1,4 @@
-<div class="ppm-client" data-test-ppm-client>
+<div data-test-ppm-client>
   {{#if isSearchMode}}
     <Search
       @searchTerm={{searchTerm}}
@@ -16,9 +16,9 @@
       @updateParticles={{action updateParticles}}
     />
   {{/if}}
-  <div class="ppm-background">
-    {{#unless appState.isSSR}}
-      <ParticlesBackground @index={{particlesIndex}} />
-    {{/unless}}
-  </div>
+  {{#if appState.isSSR}}
+    <div class="background"></div>
+  {{else}}
+    <ParticlesBackground @index={{particlesIndex}} />
+  {{/if}}
 </div>

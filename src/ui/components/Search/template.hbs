@@ -1,16 +1,23 @@
-<div class="search-route" data-test-search>
-  <header class="search-route__header">
-    <h1 class="search-route__logo">
-      Breethe
+<div data-test-search>
+  <header class="header">
+    <h1 class="logo.logo">
+      <a href="/" class="logo.logo-link logo-link" data-navigo>
+        Breethe
+      </a>
     </h1>
   </header>
 
-  <SearchForm @term={{searchTerm}} @isSSR={{@isSSR}} @onSearch={{action goToRoute}} />
+  <div class="search-form-wrapper">
+    <SearchForm @term={{searchTerm}} @isDisabled={{@isSSR}} @onSearch={{action goToRoute}} />
+    {{#if @isSSR}}
+      <div class="loader.loader form-loader" data-test-form-laoder></div>
+    {{/if}}
+  </div>
 
-  <div class="search-route__results">
-    <h2 class="search-route__results__title">
+  <div class="results">
+    <h2 class="results-title">
       {{#if searchTerm}}
-        Locations for "<strong>{{searchTerm}}</strong>"
+        Locations for "<strong class="search-term">{{searchTerm}}</strong>"
       {{else}}
         {{#if showResults}}
           Recent Locations
@@ -21,8 +28,8 @@
     {{#if showResults}}
       <ul>
         {{#each locations key="id" as |location|}}
-          <li class="search-route__result" data-test-search-result={{location.attributes.city}}>
-            <a href="/location/{{location.id}}" data-navigo>
+          <li data-test-search-result={{location.attributes.city}}>
+            <a href="/location/{{location.id}}" class="result-link" data-navigo>
               {{location.attributes.name}}, {{location.attributes.city}}
             </a>
           </li>
@@ -30,7 +37,7 @@
       </ul>
     {{else}}
       {{#if searchTerm}}
-        <em class="search-route__no-results">
+        <em class="no-results">
           We could not find locations with your search term.
         </em>
       {{/if}}

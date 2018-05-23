@@ -1,11 +1,20 @@
-.particles-background { 
+@import '../../styles/_variables';
+@import '../../styles/_mixins';
+
+:scope {
+  block-name: ParticlesBackground;
+  overflow: hidden;
+  @include background();
+}
+
+.background {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 50vh;
 }
 
-.particle, .particle-extra {
+.particle, .extra-particle {
   position: absolute;
   border-radius: 50%;
 }
@@ -51,7 +60,7 @@ $paricleColor: lighten(map-get($clear-sky, end), 20);
     }
   }
 
-  .particle-extra:nth-child(#{$i}){
+  .extra-particle:nth-child(#{$i}){
     animation: particle-animation-x-#{$i} 80s infinite;
     $size: random(10) + 5 + px;
     $opacity: random(100)/100 + 0.20;

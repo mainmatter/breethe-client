@@ -22,7 +22,7 @@ export default class Home extends Component {
     this.searchTerm = this.args.searchTerm;
     if (this.searchTerm && this.searchTerm.length > 0) {
       this.loadLocations(this.searchTerm, this.args.searchResults);
-    } else {
+    } else if (!this.args.isSSR) {
       this.loadRecent();
     }
   }

@@ -1,25 +1,27 @@
-@mixin qualityBackground($gradient, $clouds: 0, $particles: 0) {
+@mixin gradientBackground($gradient, $clouds: 0, $particles: 0) {
   background: linear-gradient(map-get($gradient, start), map-get($gradient, end));
 }
 
-@mixin for-phone-only {
-  @media (max-width: 599px) { @content; }
+@mixin screen-view {
+  width: 100%;
+  min-height: 100vh;
 }
 
 @mixin for-tablet-portrait-up {
   @media (min-width: 600px) { @content; }
 }
 
-@mixin for-tablet-landscape-up {
-  @media (min-width: 900px) { @content; }
-}
+@mixin component-screen {
+  @include screen-view();
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  flex-flow: column nowrap;
 
-@mixin for-desktop-up {
-  @media (min-width: 1200px) { @content; }
-}
-
-@mixin for-big-desktop-up {
-  @media (min-width: 1800px) { @content; }
+  @include for-tablet-portrait-up() {
+    max-width: 600px;
+    margin: 0 auto;
+  }
 }
 
 @mixin marker-pin($width: 1rem, $height: 1rem) {
@@ -32,4 +34,15 @@
     float: left;
     margin-right: 0.5rem;
   }
+} 
+
+@mixin background() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  @include gradientBackground($clear-sky);
 }
+

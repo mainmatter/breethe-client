@@ -19,6 +19,14 @@ describe('the search route', function() {
       });
     });
 
+    it('renders a loader over the search form', async function() {
+      await visit('/search/Salzburg', async (page, $response) => {
+        let element = $response('[data-test-form-laoder]');
+
+        expect(element.length).to.be.ok;
+      });
+    });
+
     it('includes the orbit cache', async function() {
       await visit('/search/Salzburg', async (page, $response) => {
         let cache = JSON.parse($response('#orbit-main-cache').html());
