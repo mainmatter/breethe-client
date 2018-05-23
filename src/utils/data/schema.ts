@@ -20,7 +20,7 @@ export const measurement: ModelDefinition = {
     parameter: { type: 'string' },
     measuredAt: { type: 'string' },
     unit: { type: 'string' },
-    value: { type: 'number' }
+    value: { type: 'string' }
   },
   relationships: {
     location: { type: 'hasOne', model: 'location', inverse: 'measurements' }

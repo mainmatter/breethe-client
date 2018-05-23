@@ -7,17 +7,21 @@
       {{paramName.sup}}
     </sup>
   </strong>
-  <span>
-    <span data-test-measurement-value={{@value}}>
-      {{@value}}
-    </span>
-    &nbsp;
-    <span data-test-measurement-unit>
-      {{#if isPPM}}
-        ppm
-      {{else}}
-        &#181;g/m<sup>3</sup>
-      {{/if}}
-    </span>
+  <span data-test-measurement-value-wrapper>
+    {{#if valuePresent}}
+      <span data-test-measurement-value={{@value}}>
+        {{value}}
+      </span>
+      &nbsp;
+      <span data-test-measurement-unit>
+        {{#if isPPM}}
+          ppm
+        {{else}}
+          &#181;g/m<sup>3</sup>
+        {{/if}}
+      </span>
+    {{else}}
+      &mdash;
+    {{/if}}
   </span>
 </li>

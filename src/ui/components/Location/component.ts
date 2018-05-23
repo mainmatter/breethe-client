@@ -13,15 +13,20 @@ export default class LocationComponent extends Component {
   @tracked('measurements')
   get measurementLists() {
     let { measurements } = this;
-    if (measurements.length === 0) {
-      return measurements;
-    }
+
     let orderedMeasurements = ORDERED_PARAMS.map((param) => {
-      return measurements.find((measurement) => {
+      let sMeasurement = measurements.find((measurement) => {
         return measurement.attributes.parameter === param;
       });
+      if (sMeasurement) {
+        return sMeasurement;
+      }
+      return {
+        attributes: {
+          parameter: param
+        }
+      };
     });
-    orderedMeasurements = orderedMeasurements.filter((measurement) => !!measurement);
 
     let halfWay = Math.ceil(orderedMeasurements.length / 2);
     return {
@@ -36,9 +41,16 @@ export default class LocationComponent extends Component {
     if (measurements.length === 0) {
       return '––';
     }
-    let dates = measurements.map((measurement) => {
-      return new Date(measurement.attributes.measuredAt);
-    });
+    let dates = measurements
+      .filter((measurement) => {
+        return !!measurement.attributes.measuredAt;
+      })
+      .map((measurement) => {
+        return new Date(measurement.attributes.measuredAt);
+      });
+    if (dates.length === 0) {
+      return '––';
+    }
     dates.sort((dateLeft, dateRight) => {
       if (dateLeft > dateRight) {
         return 1;
