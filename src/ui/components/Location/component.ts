@@ -53,6 +53,19 @@ export default class LocationComponent extends Component {
     if (dates.length === 0) {
       return '–';
     }
+<<<<<<< HEAD
+=======
+    let dates = measurements
+      .filter((measurement) => {
+        return !!measurement.attributes.measuredAt;
+      })
+      .map((measurement) => {
+        return new Date(measurement.attributes.measuredAt);
+      });
+    if (dates.length === 0) {
+      return '––';
+    }
+>>>>>>> ca81c7c... Handle invalid/missing data in the  component
     dates.sort((dateLeft, dateRight) => {
       if (dateLeft > dateRight) {
         return 1;
