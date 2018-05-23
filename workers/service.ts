@@ -1,5 +1,5 @@
 const CACHE_NAME: string = 'breethe-cache-v1';
-const CACHED_FILES = ['']
+const JSON_API_CONTENT_TYPE: string = 'application/vnd.api+json';
 
 self.addEventListener('activate', function(event: ExtendableEvent) {
   event.waitUntil(
@@ -25,7 +25,8 @@ self.addEventListener('fetch', function(event: FetchEvent) {
             return response;
           } else {
             return fetch(event.request.clone()).then(function(response) {
-              if (response.status < 400) {
+              let contentType = response.headers.get('content-type');
+              if (response.status < 400 && !(contentType || '').startsWith(JSON_API_CONTENT_TYPE)) {
                 cache.put(event.request, response.clone());
               }
               return response;
