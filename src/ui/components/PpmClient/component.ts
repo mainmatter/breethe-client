@@ -97,7 +97,7 @@ export default class PpmClient extends Component {
   }
 
   updateParticles(particlesIndex: number) {
-    this.particlesIndex = particlesIndex;
+    this.particlesIndex = 20 + particlesIndex * 20;
   }
 
   _setupRouting() {

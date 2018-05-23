@@ -81,7 +81,7 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('measurements')
-  get qualityLabel() {
+  get qualityIndex() {
     let { measurements } = this;
     let indexes = measurements
       .filter((measurement) => {
@@ -99,8 +99,13 @@ export default class LocationComponent extends Component {
           return 0;
         }
       });
-    console.log(indexes);
-    return QUALITY_LABEL[indexes[0]];
+    return indexes[0];
+  }
+
+  @tracked('qualityIndex')
+  get qualityLabel() {
+    let { qualityIndex } = this;
+    return QUALITY_LABEL[qualityIndex];
   }
 
   constructor(options) {
@@ -140,6 +145,6 @@ export default class LocationComponent extends Component {
       this.loading = false;
 
       this.notFound = false;
-      this.args.updateParticles(80);
+      this.args.updateParticles(this.qualityIndex);
   }
 }
