@@ -15,11 +15,11 @@ export default class LocationComponent extends Component {
     let { measurements } = this;
 
     let orderedMeasurements = ORDERED_PARAMS.map((param) => {
-      let sMeasurement = measurements.find((measurement) => {
-        return measurement.attributes.parameter === param;
+      let measurement = measurements.find((record) => {
+        return record.attributes.parameter === param;
       });
-      if (sMeasurement) {
-        return sMeasurement;
+      if (measurement) {
+        return measurement;
       }
       return {
         attributes: {
