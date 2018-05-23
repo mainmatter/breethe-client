@@ -7,6 +7,9 @@
   width: 100%;
   height: 50vh;
   filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0.35;
 }
 
 %fog {
@@ -68,7 +71,12 @@
   background: url('images/fog2.png') top center/cover no-repeat transparent;
 }
 
-.fog-02, .fog-03 {
+.fog-02 {
   @extend %fog;
   animation: foglayer_02_opacity 21s linear infinite, foglayer_moveme 28s linear infinite;
+}
+
+.fog-03 {
+  @extend %fog;
+  animation: foglayer_02_opacity 21s linear -10s infinite, foglayer_moveme 35s linear -8s infinite;
 }

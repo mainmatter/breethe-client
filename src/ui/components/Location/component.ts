@@ -2,6 +2,8 @@ import Component, { tracked } from '@glimmer/component';
 import { debug } from '@glimmer/opcode-compiler';
 
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
+const QUALITY_SCALE = ['very_low', 'low', 'medium', 'high', 'very_high'];
+const QUALITY_LABEL = ['Excellent', 'Good', 'Ok', 'Poor', 'Very poor'];
 
 export default class LocationComponent extends Component {
   @tracked loading = false;
@@ -76,6 +78,29 @@ export default class LocationComponent extends Component {
     });
 
     return dates[0].toLocaleString();
+  }
+
+  @tracked('measurements')
+  get qualityLabel() {
+    let { measurements } = this;
+    let indexes = measurements
+      .filter((measurement) => {
+        return !!measurement.attributes.qualityIndex;
+      })
+      .map((measurement) => {
+        return QUALITY_SCALE.indexOf(measurement.attributes.qualityIndex);
+      })
+      .sort((a, b) => {
+        if (a > b) {
+          return -1;
+        } else if (a < b) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    console.log(indexes);
+    return QUALITY_LABEL[indexes[0]];
   }
 
   constructor(options) {
