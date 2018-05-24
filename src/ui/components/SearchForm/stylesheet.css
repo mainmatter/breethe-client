@@ -23,6 +23,7 @@
   padding: 1rem 0.5rem;
   color: $font-contrast-color;
   transition: border 100ms ease-in-out;
+  font-family: $body-font;
   
   &:focus {
     border: 2px solid map-get($clear-sky, start);
@@ -49,6 +50,7 @@
   outline: none;
   cursor: pointer;
   position: relative;
+  font-family: $body-font;
 
   &:disabled {
     opacity: .5;
