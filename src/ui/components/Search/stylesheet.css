@@ -16,6 +16,13 @@
   justify-content: center;
 }
 
+.statement {
+  font-size: 1.25rem;
+  color: $font-color;
+  text-align: center;
+  margin-top: 2rem;
+}
+
 .background {
   @include background();
 }
