@@ -90,6 +90,31 @@ describe('when offline', function() {
     });
   });
 
+  it('the main user flow works', async function() {
+    await visit('/', async (page) => {
+      // go through the flow online first so we populate IndexedDB
+      await page.type('[data-test-search-input]', 'Salzburg');
+      await page.click('[data-test-search-submit]');
+      await page.waitForSelector('[data-test-search-result="Salzburg"]');
+      await page.click('[data-test-search-result="Salzburg"] a');
+      await page.waitForSelector('[data-test-location]');
+      await page.click('[data-test-home-link]');
+
+      await page.setOfflineMode(true);
+      await page.reload({ waitUntil: 'networkidle0' });
+
+      // click the recent location
+      await page.click('[data-test-search-result="Salzburg"] a');
+      await page.waitForSelector('[data-test-location]');
+
+      // check the correct data is still present
+      expect(page.url()).to.match(/\/location\/2$/);
+      let element = await page.$('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
+
+      expect(element).to.be.ok;
+    });
+  });
+
   describe('when coming back online', function() {
     it('enables the location search field', async function() {
       await visit('/', async (page) => {
