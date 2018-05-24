@@ -2,5 +2,8 @@
   "name": "service-worker",
   "keywords": [
     "ember-addon"
-  ]
+  ],
+  "ember-addon": {
+    "before": "broccoli-asset-rev"
+  }
 }
