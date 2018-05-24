@@ -8,7 +8,7 @@
   </header>
 
   <div class="search-form-wrapper">
-    <SearchForm @term={{searchTerm}} @isDisabled={{@isSSR}} @onSearch={{action goToRoute}} />
+    <SearchForm @term={{searchTerm}} @isDisabled={{isSearchDisabled}} @onSearch={{action goToRoute}} />
     {{#if @isSSR}}
       <div class="loader.loader form-loader" data-test-form-laoder></div>
     {{/if}}

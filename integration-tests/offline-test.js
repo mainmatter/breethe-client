@@ -23,4 +23,48 @@ describe('when offline', function() {
       expect(element).to.be.ok;
     });
   });
+
+  it('disables the location search field', async function() {
+    await visit('/', async (page) => {
+      await page.setOfflineMode(true);
+
+      let element = await page.$('[data-test-search-input]:disabled');
+
+      expect(element).to.be.ok;
+    });
+  });
+
+  it('disables the location search button', async function() {
+    await visit('/', async (page) => {
+      await page.setOfflineMode(true);
+
+      let element = await page.$('[data-test-search-submit]:disabled');
+
+      expect(element).to.be.ok;
+    });
+  });
+
+  describe('when coming back online', function() {
+    it('enabled the location search field', async function() {
+      await visit('/', async (page) => {
+        await page.setOfflineMode(true); // go offline
+        await page.setOfflineMode(false); // …and back online 
+
+        let element = await page.$('[data-test-search-input]:enabled');
+
+        expect(element).to.be.ok;
+      });
+    });
+
+    it('disables the location search button', async function() {
+      await visit('/', async (page) => {
+        await page.setOfflineMode(true); // go offline
+        await page.setOfflineMode(false); // …and back online 
+
+        let element = await page.$('[data-test-search-submit]:enabled');
+
+        expect(element).to.be.ok;
+      });
+    });
+  });
 });
