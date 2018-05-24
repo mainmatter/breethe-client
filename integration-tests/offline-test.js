@@ -38,7 +38,7 @@ describe('when offline', function() {
   it('disables the location search field', async function() {
     await visit('/', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(1);
+      await page.waitFor(10);
 
       let element = await page.$('[data-test-search-input]:disabled');
 
@@ -49,7 +49,7 @@ describe('when offline', function() {
   it('disables the location search button', async function() {
     await visit('/', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(1);
+      await page.waitFor(10);
 
       let element = await page.$('[data-test-search-submit]:disabled');
 
@@ -60,7 +60,7 @@ describe('when offline', function() {
   it('shows an offline warning on the index rotue', async function() {
     await visit('/', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(1);
+      await page.waitFor(10);
 
       let element = await page.$('[data-test-offline-warning]');
 
@@ -71,7 +71,7 @@ describe('when offline', function() {
   it('shows an offline warning on the search rotue', async function() {
     await visit('/search/Salzburg', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(1);
+      await page.waitFor(10);
 
       let element = await page.$('[data-test-offline-warning]');
 
@@ -82,7 +82,7 @@ describe('when offline', function() {
   it('does not show an offline warning on the location rotue', async function() {
     await visit('/location/2', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(1);
+      await page.waitFor(10);
 
       let element = await page.$('[data-test-offline-warning]');
 
@@ -91,11 +91,11 @@ describe('when offline', function() {
   });
 
   describe('when coming back online', function() {
-    it('enabled the location search field', async function() {
+    it('enables the location search field', async function() {
       await visit('/', async (page) => {
         await page.setOfflineMode(true); // go offline
         await page.setOfflineMode(false); // …and back online 
-        await page.waitFor(1);
+        await page.waitFor(10);
 
         let element = await page.$('[data-test-search-input]:enabled');
 
@@ -103,11 +103,11 @@ describe('when offline', function() {
       });
     });
 
-    it('disables the location search button', async function() {
+    it('enables the location search button', async function() {
       await visit('/', async (page) => {
         await page.setOfflineMode(true); // go offline
         await page.setOfflineMode(false); // …and back online
-        await page.waitFor(1);
+        await page.waitFor(10);
 
         let element = await page.$('[data-test-search-submit]:enabled');
 
@@ -119,7 +119,7 @@ describe('when offline', function() {
       await visit('/', async (page) => {
         await page.setOfflineMode(true); // go offline
         await page.setOfflineMode(false); // …and back online
-        await page.waitFor(1);
+        await page.waitFor(10);
 
         let element = await page.$('[data-test-offline-warning]');
 
