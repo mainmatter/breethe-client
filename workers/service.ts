@@ -25,8 +25,8 @@ self.addEventListener('fetch', function(event: FetchEvent) {
             return response;
           } else {
             return fetch(event.request.clone()).then(function(response) {
-              let contentType = response.headers.get('content-type');
-              if (response.status < 400 && !(contentType || '').startsWith(JSON_API_CONTENT_TYPE)) {
+              let contentType = response.headers.get('content-type') || '';
+              if (response.status < 400 && !contentType.startsWith(JSON_API_CONTENT_TYPE)) {
                 cache.put(event.request, response.clone());
               }
               return response;
