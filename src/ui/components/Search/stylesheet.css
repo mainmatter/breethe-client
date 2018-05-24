@@ -24,12 +24,6 @@
   height: 4rem;
 }
 
-@include for-tablet-portrait-up() {
-  .logo-link {
-    height: 2.5rem;
-  }
-} 
-
 .search-form-wrapper {
   position: relative;
 }
