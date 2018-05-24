@@ -1,10 +1,17 @@
 <div data-test-ppm-client>
+  {{#if showOfflineWarning}}
+    <p class="offline-warning" data-test-offline-warning>
+      You appear to be offline - searching for locations is available online only.
+    </p>
+  {{/if}}
+
   {{#if isSearchMode}}
     <Search
       @searchTerm={{searchTerm}}
       @store={{store}}
       @router={{router}}
       @isSSR={{appState.isSSR}}
+      @isOnline={{isOnline}}
       @pullIndexedDB={{pullIndexedDB}}
       @searchResults={{searchResults}}
     />

@@ -11,17 +11,14 @@ export default class Home extends Component {
   @tracked
   searchTerm = '';
 
-  @tracked
-  isOnline = true;
-
   @tracked('locations')
   get showResults() {
     return this.locations.length > 0;
   }
 
-  @tracked('isOnline')
+  @tracked('args')
   get isSearchDisabled() {
-    return this.args.isSSR || !this.isOnline;
+    return this.args.isSSR || !this.args.isOnline;
   }
 
   constructor(options) {
@@ -33,7 +30,6 @@ export default class Home extends Component {
     } else if (!this.args.isSSR) {
       this.loadRecent();
     }
-    this.updateOnlineStatus();
   }
 
   async loadLocations(searchTerm, searchResults = []) {
@@ -88,14 +84,6 @@ export default class Home extends Component {
       return 0;
     });
     this.locations = locations.slice(0, 3);
-  }
-
-  updateOnlineStatus() {
-    if (!this.args.isSSR) {
-      this.isOnline = navigator.onLine;
-      window.addEventListener('online', () => this.isOnline = true);
-      window.addEventListener('offline', () => this.isOnline = false);
-    }
   }
 
   goToRoute(search) {

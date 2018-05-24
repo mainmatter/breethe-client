@@ -34,6 +34,9 @@ export default class PpmClient extends Component {
   particlesIndex: number = 20;
 
   @tracked
+  isOnline = true;
+
+  @tracked
   mode: string;
   @tracked
   location: {};
@@ -48,6 +51,11 @@ export default class PpmClient extends Component {
   @tracked('mode')
   get isResultsMode() {
     return this.mode === MODE_RESULTS;
+  }
+
+  @tracked('mode', 'isOnline')
+  get showOfflineWarning() {
+    return this.mode === MODE_SEARCH && !this.isOnline;
   }
 
   constructor(options) {
@@ -77,6 +85,7 @@ export default class PpmClient extends Component {
 
     this._setupRouting();
     this._bindInternalLinks();
+    this._bindOnlineStatus();
   }
 
   pullIndexedDB = async () => {
@@ -115,6 +124,14 @@ export default class PpmClient extends Component {
         this.location = params.location;
         this.searchTerm = null;
         break;
+    }
+  }
+
+  _bindOnlineStatus() {
+    if (!this.appState.isSSR) {
+      this.isOnline = navigator.onLine;
+      window.addEventListener('online', () => this.isOnline = true);
+      window.addEventListener('offline', () => this.isOnline = false);
     }
   }
 
