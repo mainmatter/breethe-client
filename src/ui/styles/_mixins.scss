@@ -28,7 +28,7 @@
   &:before {
     content: '';
     display: block;
-    background: no-repeat center url(images/map-marker.svg);
+    background: no-repeat center url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzODQgNTEyIj48cGF0aCBkPSJNMTcyLjMgNTAxLjdDMjcgMjkxIDAgMjY5LjQgMCAxOTIgMCA4NiA4NiAwIDE5MiAwczE5MiA4NiAxOTIgMTkyYzAgNzcuNC0yNyA5OS0xNzIuMyAzMDkuNy05LjUgMTMuNy0yOS45IDEzLjctMzkuNCAwek0xOTIgMjcyYzQ0LjIgMCA4MC0zNS44IDgwLTgwcy0zNS44LTgwLTgwLTgwLTgwIDM1LjgtODAgODAgMzUuOCA4MCA4MCA4MHoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=);
     width: $width;
     height: $height;
     float: left;
