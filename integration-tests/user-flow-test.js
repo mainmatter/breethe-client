@@ -11,7 +11,6 @@ describe('the main user flow', function() {
       expect(page.url()).to.match(/\/search\/Salzburg$/);
 
       await page.click('[data-test-search-result="Salzburg"] a');
-      await page.screenshot('/Users/marcoow/Desktop');
       await page.waitForSelector('[data-test-location]');
 
       expect(page.url()).to.match(/\/location\/2$/);
