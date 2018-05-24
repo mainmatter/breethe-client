@@ -1,9 +1,12 @@
 const CACHE_NAME: string = 'breethe-cache-v1';
 const JSON_API_CONTENT_TYPE: string = 'application/vnd.api+json';
+const HTML_CONTENT_TYPE: string = 'text/html';
 
 const PRE_CACHED_ASSETS: string[] = [
   '/app.js',
-  '/app.css'
+  '/app.css',
+  '/index.html',
+  'https://fonts.googleapis.com/css?family=Poppins:400,500,700'
 ];
 
 self.addEventListener('install', function(event) {
@@ -58,6 +61,16 @@ self.addEventListener('fetch', function(event: FetchEvent) {
             });
           }
         });
+      })
+    );
+  }
+});
+
+self.addEventListener('fetch', function(event: FetchEvent) {
+  if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').startsWith(HTML_CONTENT_TYPE))) {
+    event.respondWith(
+      fetch(event.request).catch(error => {
+        return caches.match('index.html');
       })
     );
   }
