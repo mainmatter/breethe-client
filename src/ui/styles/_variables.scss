@@ -12,7 +12,8 @@ $root-font: (
   font-size: 14px,
   line-height: 28px,
   font-family: $body-font,
-  letter-spacing: 0.24px
+  letter-spacing: 0.24px,
+  font-display: optional
 );
 
 $bold-weight: 700;
