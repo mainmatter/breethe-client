@@ -22,7 +22,7 @@
   outline: none;
   padding: 1rem 0.5rem;
   color: $font-contrast-color;
-  transition: border 100ms ease-in-out;
+  transition: border .25s, opacity .25s;
   font-family: $body-font;
   
   &:focus {
@@ -50,6 +50,7 @@
   outline: none;
   cursor: pointer;
   position: relative;
+  transition: opacity .25s;
   font-family: $body-font;
 
   &:disabled {
