@@ -1,6 +1,31 @@
 const CACHE_NAME: string = 'breethe-cache-v1';
 const JSON_API_CONTENT_TYPE: string = 'application/vnd.api+json';
 
+const PRE_CACHED_ASSETS: string[] = [
+  '/app.js',
+  '/app.css'
+];
+
+self.addEventListener('install', function(event) {
+  let now = Date.now();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      let cachePromises = PRE_CACHED_ASSETS.map(function(asset) {
+        var url = new URL(asset, location.href);
+        var request = new Request(url, { mode: 'no-cors' });
+        return fetch(request).then(function(response) {
+          if (response.status >= 400) {
+            throw new Error('prefetch failed!');
+          }
+          return cache.put(asset, response);
+        });
+      });
+
+      return Promise.all(cachePromises);
+    });
+  });
+});
+
 self.addEventListener('activate', function(event: ExtendableEvent) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
@@ -32,8 +57,6 @@ self.addEventListener('fetch', function(event: FetchEvent) {
               return response;
             });
           }
-        }).catch(function(error) {
-          throw error;
         });
       })
     );
