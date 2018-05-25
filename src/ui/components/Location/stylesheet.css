@@ -2,6 +2,7 @@
 @import '../../styles/_variables';
 
 @block-reference logo from "../../styles/logo.block.css";
+@block-reference loader from "../../styles/loader.block.css";
 
 :scope {
   block-name: Location;
@@ -47,6 +48,7 @@
   height: 10rem;
   padding: 2rem;
   border-radius: 8rem;
+  position: relative;
 }
 
 .indicator-content {
@@ -92,4 +94,13 @@
       border-bottom: none;
     }
   }
+}
+
+.location-loader {
+  height: 4rem;
+  width: 4rem;
+  position: absolute;
+  left: calc(50% - 2.25rem);
+  top: calc(50% - 2.25rem);
+  border-width: .25rem;
 }

@@ -2,8 +2,12 @@ import Component, { tracked } from '@glimmer/component';
 import { debug } from '@glimmer/opcode-compiler';
 
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
+const QUALITY_SCALE = ['very_low', 'low', 'medium', 'high', 'very_high'];
+const QUALITY_LABEL = ['Excellent', 'Good', 'Ok', 'Poor', 'Very poor'];
 
 export default class LocationComponent extends Component {
+  @tracked loading = false;
+
   @tracked location: any = {};
 
   @tracked measurements = [];
@@ -13,15 +17,20 @@ export default class LocationComponent extends Component {
   @tracked('measurements')
   get measurementLists() {
     let { measurements } = this;
-    if (measurements.length === 0) {
-      return measurements;
-    }
+
     let orderedMeasurements = ORDERED_PARAMS.map((param) => {
-      return measurements.find((measurement) => {
-        return measurement.attributes.parameter === param;
+      let measurement = measurements.find((record) => {
+        return record.attributes.parameter === param;
       });
+      if (measurement) {
+        return measurement;
+      }
+      return {
+        attributes: {
+          parameter: param
+        }
+      };
     });
-    orderedMeasurements = orderedMeasurements.filter((measurement) => !!measurement);
 
     let halfWay = Math.ceil(orderedMeasurements.length / 2);
     return {
@@ -34,11 +43,18 @@ export default class LocationComponent extends Component {
   get updatedDate() {
     let { measurements } = this;
     if (measurements.length === 0) {
-      return '––';
+      return '–';
     }
-    let dates = measurements.map((measurement) => {
-      return new Date(measurement.attributes.measuredAt);
-    });
+    let dates = measurements
+      .filter((measurement) => {
+        return !!measurement.attributes.measuredAt;
+      })
+      .map((measurement) => {
+        return new Date(measurement.attributes.measuredAt);
+      });
+    if (dates.length === 0) {
+      return '–';
+    }
     dates.sort((dateLeft, dateRight) => {
       if (dateLeft > dateRight) {
         return 1;
@@ -51,13 +67,50 @@ export default class LocationComponent extends Component {
     return dates[0].toLocaleString();
   }
 
+  @tracked('measurements')
+  get noMeasurements() {
+    return this.measurements.length === 0;
+  }
+
+  @tracked('measurements')
+  get qualityIndex() {
+    let { measurements, noMeasurements } = this;
+    if (noMeasurements) {
+      return 1;
+    }
+    let indexes = measurements
+      .filter((measurement) => {
+        return !!measurement.attributes.qualityIndex;
+      })
+      .map((measurement) => {
+        return QUALITY_SCALE.indexOf(measurement.attributes.qualityIndex);
+      })
+      .sort((a, b) => {
+        if (a > b) {
+          return -1;
+        } else if (a < b) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    return indexes[0];
+  }
+
+  @tracked('qualityIndex')
+  get qualityLabel() {
+    let { qualityIndex } = this;
+    return QUALITY_LABEL[qualityIndex];
+  }
+
   constructor(options) {
     super(options);
     this.loadMeasurements(this.args.location);
   }
 
   async loadMeasurements(locationId) {
-      let { store } = this.args;
+      let { pullIndexedDB, store } = this.args;
+      await pullIndexedDB();
       let currentDate = new Date().toISOString();
       let locationSignature = { type: 'location', id: locationId };
 
@@ -66,6 +119,7 @@ export default class LocationComponent extends Component {
         this.location = store.cache.query(locationQuery);
       } catch (e) {
         try {
+          this.loading = true;
           this.location = await store.query(locationQuery);
         } catch (e) {
           this.notFound = true;
@@ -77,13 +131,16 @@ export default class LocationComponent extends Component {
       );
 
       let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
-      let measurements = store.cache.query(measurementQuery);
-      if (measurements.length === 0) {
-        measurements = await store.query(measurementQuery);
+      this.measurements = store.cache.query(measurementQuery);
+      this.args.updateParticles(this.qualityIndex);
+
+      if (this.measurements.length === 0) {
+        this.loading = true;
       }
-      this.measurements = measurements;
+      this.measurements = await store.query(measurementQuery);
+      this.loading = false;
 
       this.notFound = false;
-      this.args.updateParticles(80);
+      this.args.updateParticles(this.qualityIndex);
   }
 }

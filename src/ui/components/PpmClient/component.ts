@@ -32,6 +32,8 @@ export default class PpmClient extends Component {
 
   @tracked
   particlesIndex: number = 20;
+  @tracked
+  gasIndex: number = 0.20;
 
   @tracked
   isOnline = true;
@@ -97,7 +99,8 @@ export default class PpmClient extends Component {
   }
 
   updateParticles(particlesIndex: number) {
-    this.particlesIndex = particlesIndex;
+    this.particlesIndex = 20 + particlesIndex * 20;
+    this.gasIndex = 0.20 * particlesIndex;
   }
 
   _setupRouting() {

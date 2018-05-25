@@ -30,6 +30,7 @@ export default class Home extends Component {
     } else if (!this.args.isSSR) {
       this.loadRecent();
     }
+    this.args.updateParticles(1);
   }
 
   async loadLocations(searchTerm, searchResults = []) {

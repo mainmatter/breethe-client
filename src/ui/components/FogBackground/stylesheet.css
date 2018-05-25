@@ -1,0 +1,88 @@
+@import '../../styles/_variables';
+
+:scope {
+  block-name: FogBackground;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50vh;
+  filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
+  z-index: -1;
+  overflow: hidden;
+}
+
+.intentisty-index {
+  opacity: 0.2;
+  transition: all 2s ease-in;
+}
+
+%fog {
+  height: 100%;
+  position: absolute;
+  width: 200%;
+}
+
+.image-01, .image-02 {
+  float: left;
+  height: 100%;
+  width: 50%;
+}
+
+/*
+ * Based on: https://codepen.io/Ravyre/pen/gXawyY
+ */
+
+@keyframes foglayer_01_opacity {
+  0% { opacity: .1; }
+  22% { opacity: .5; }
+  40% { opacity: .28; }
+  58% { opacity: .4; }
+  80% { opacity: .16; }
+  100% { opacity: .1; }
+}
+
+@keyframes foglayer_02_opacity {
+  0% { opacity: .5; }
+  25% { opacity: .2; }
+  50% { opacity: .1; }
+  80% { opacity: .3; }
+  100% { opacity: .5; }
+}
+
+@keyframes foglayer_03_opacity {
+  0% { opacity: .8; }
+  27% { opacity: .2; }
+  52% { opacity: .6; }
+  68% { opacity: .3; }
+  100% { opacity: .8; }
+}
+
+@keyframes foglayer_moveme {
+  0% { left: 0; }
+  100% { left: -100%; }
+}
+
+.image-01 {
+  background: url('images/fog1.png') top center/cover no-repeat transparent;
+  background-blend-mode: multiply;
+}
+
+.image-02 {
+  background: url('images/fog2.png') top center/cover no-repeat transparent;
+  background-blend-mode: multiply;
+}
+
+.fog-01 {
+  @extend %fog;
+  animation: foglayer_01_opacity 10s linear infinite, foglayer_moveme 120s linear infinite;
+}
+
+.fog-02 {
+  @extend %fog;
+  animation: foglayer_02_opacity 21s linear infinite, foglayer_moveme 130s linear infinite;
+}
+
+.fog-03 {
+  @extend %fog;
+  animation: foglayer_03_opacity 23s linear infinite, foglayer_moveme 135s linear -12s infinite;
+}

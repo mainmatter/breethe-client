@@ -29,7 +29,7 @@
     {{#if showResults}}
       <ul>
         {{#each locations key="id" as |location|}}
-          <li data-test-search-result={{location.attributes.city}}>
+          <li class="result" data-test-search-result={{location.attributes.city}}>
             <a href="/location/{{location.id}}" class="result-link" data-navigo>
               {{location.attributes.name}}, {{location.attributes.city}}
             </a>

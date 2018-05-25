@@ -21,4 +21,15 @@ export default class SearchForm extends Component {
       base: type
     };
   }
+
+  @tracked('args')
+  get valuePresent() {
+    let value = this.args.value;
+    return value !== null && value !== undefined;
+  }
+
+  @tracked('args')
+  get value() {
+    return `${this.args.value}`;
+  }
 }
