@@ -13,6 +13,15 @@
   font-display: map-get($root-font, font-display);
 }
 
+.offline-warning {
+  color: $warning-color;
+  padding: .5rem;
+  text-align: center;
+  background: rgba($font-color, 0.10);
+  position: fixed;
+  width: 100%;
+}
+
 .background {
   @include background();
 }

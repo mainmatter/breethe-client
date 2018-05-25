@@ -16,6 +16,11 @@ export default class Home extends Component {
     return this.locations.length > 0;
   }
 
+  @tracked('args')
+  get isSearchDisabled() {
+    return this.args.isSSR || !this.args.isOnline;
+  }
+
   constructor(options) {
     super(options);
     assert('Argument \'store\' must be supplied to this component.', this.args.store);

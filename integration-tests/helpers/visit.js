@@ -12,6 +12,11 @@ async function visit(route, options, callback) {
 
   let browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   let page = await browser.newPage();
+
+  // make sure old service workers are gone…
+  await page._client.send('ServiceWorker.enable');
+  await page._client.send('ServiceWorker.stopAllWorkers');
+
   let response = await page.goto(`${BASE_URL}${route}`, gotoOpts);
   let responseBody = await response.text();
 
