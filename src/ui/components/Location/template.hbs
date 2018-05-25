@@ -21,10 +21,16 @@
           {{#if loading}}
             <div class="loader.loader location-loader" data-test-form-loader></div>
           {{else}}
-            <strong class="indicator-index">
-              {{qualityLabel}}
-            </strong>
-            Air Quality
+            {{#if noMeasurements}}
+              <strong class="indicator-index">
+                &mdash;
+              </strong>
+            {{else}}
+              <strong class="indicator-index">
+                {{qualityLabel}}
+              </strong>
+              Air Quality
+            {{/if}}
           {{/if}}
         </div>
       </div>

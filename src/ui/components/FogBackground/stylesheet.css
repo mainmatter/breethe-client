@@ -9,7 +9,11 @@
   filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
   z-index: -1;
   overflow: hidden;
-  opacity: 0.35;
+}
+
+.intentisty-index {
+  opacity: 0.2;
+  transition: all 2s ease-in;
 }
 
 %fog {
@@ -58,25 +62,27 @@
   100% { left: -100%; }
 }
 
-.fog-01 {
-  @extend %fog;
-  animation: foglayer_01_opacity 10s linear infinite, foglayer_moveme 25s linear infinite;
-}
-
 .image-01 {
   background: url('images/fog1.png') top center/cover no-repeat transparent;
+  background-blend-mode: multiply;
 }
 
 .image-02 {
   background: url('images/fog2.png') top center/cover no-repeat transparent;
+  background-blend-mode: multiply;
+}
+
+.fog-01 {
+  @extend %fog;
+  animation: foglayer_01_opacity 10s linear infinite, foglayer_moveme 120s linear infinite;
 }
 
 .fog-02 {
   @extend %fog;
-  animation: foglayer_02_opacity 21s linear infinite, foglayer_moveme 28s linear infinite;
+  animation: foglayer_02_opacity 21s linear infinite, foglayer_moveme 130s linear infinite;
 }
 
 .fog-03 {
   @extend %fog;
-  animation: foglayer_02_opacity 21s linear -10s infinite, foglayer_moveme 35s linear -8s infinite;
+  animation: foglayer_03_opacity 23s linear infinite, foglayer_moveme 135s linear -12s infinite;
 }

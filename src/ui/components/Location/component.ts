@@ -81,8 +81,16 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('measurements')
+  get noMeasurements() {
+    return this.measurements.length === 0;
+  }
+
+  @tracked('measurements')
   get qualityIndex() {
-    let { measurements } = this;
+    let { measurements, noMeasurements } = this;
+    if (noMeasurements) {
+      return 1;
+    }
     let indexes = measurements
       .filter((measurement) => {
         return !!measurement.attributes.qualityIndex;
