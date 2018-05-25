@@ -7,7 +7,7 @@ describe('when offline', function() {
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
-      let element = await page.$('[data-test-ppm-client]');
+      let element = await page.waitForSelector('[data-test-ppm-client]');
 
       expect(element).to.be.ok;
     });
@@ -18,7 +18,7 @@ describe('when offline', function() {
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
-      let element = await page.$('[data-test-ppm-client]');
+      let element = await page.waitForSelector('[data-test-ppm-client]');
 
       expect(element).to.be.ok;
     });
@@ -29,7 +29,7 @@ describe('when offline', function() {
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
-      let element = await page.$('[data-test-ppm-client]');
+      let element = await page.waitForSelector('[data-test-ppm-client]');
 
       expect(element).to.be.ok;
     });
@@ -38,9 +38,8 @@ describe('when offline', function() {
   it('disables the location search field', async function() {
     await visit('/', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(10);
 
-      let element = await page.$('[data-test-search-input]:disabled');
+      let element = await page.waitForSelector('[data-test-search-input]:disabled');
 
       expect(element).to.be.ok;
     });
@@ -49,9 +48,8 @@ describe('when offline', function() {
   it('disables the location search button', async function() {
     await visit('/', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(10);
 
-      let element = await page.$('[data-test-search-submit]:disabled');
+      let element = await page.waitForSelector('[data-test-search-submit]:disabled');
 
       expect(element).to.be.ok;
     });
@@ -60,9 +58,8 @@ describe('when offline', function() {
   it('shows an offline warning on the index rotue', async function() {
     await visit('/', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(10);
 
-      let element = await page.$('[data-test-offline-warning]');
+      let element = await page.waitForSelector('[data-test-offline-warning]');
 
       expect(element).to.be.ok;
     });
@@ -71,9 +68,8 @@ describe('when offline', function() {
   it('shows an offline warning on the search rotue', async function() {
     await visit('/search/Salzburg', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(10);
 
-      let element = await page.$('[data-test-offline-warning]');
+      let element = await page.waitForSelector('[data-test-offline-warning]');
 
       expect(element).to.be.ok;
     });
@@ -101,12 +97,10 @@ describe('when offline', function() {
       await page.click('[data-test-home-link]');
 
       await page.setOfflineMode(true);
-      await page.reload({ waitUntil: 'networkidle0' });
 
       // click the recent location
       await page.click('[data-test-search-result="Salzburg"] a');
       await page.waitForSelector('[data-test-location]');
-
       // check the correct data is still present
       expect(page.url()).to.match(/\/location\/2$/);
       let element = await page.$('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
@@ -120,9 +114,8 @@ describe('when offline', function() {
       await visit('/', async (page) => {
         await page.setOfflineMode(true); // go offline
         await page.setOfflineMode(false); // …and back online 
-        await page.waitFor(10);
 
-        let element = await page.$('[data-test-search-input]:enabled');
+        let element = await page.waitForSelector('[data-test-search-input]:enabled');
 
         expect(element).to.be.ok;
       });
@@ -132,9 +125,8 @@ describe('when offline', function() {
       await visit('/', async (page) => {
         await page.setOfflineMode(true); // go offline
         await page.setOfflineMode(false); // …and back online
-        await page.waitFor(10);
 
-        let element = await page.$('[data-test-search-submit]:enabled');
+        let element = await page.waitForSelector('[data-test-search-submit]:enabled');
 
         expect(element).to.be.ok;
       });
