@@ -10,6 +10,7 @@
   line-height: map-get($root-font, line-height);
   font-family: map-get($root-font, font-family);
   letter-spacing: map-get($root-font, letter-spacing);
+  font-display: map-get($root-font, font-display);
 }
 
 .offline-warning {
@@ -23,4 +24,32 @@
 
 .background {
   @include background();
+}
+
+.footer {
+  color: $font-color;
+  background: rgba($font-color, 0.10);
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.simplabs-link {
+  display: inline-block;
+  color: $font-color;
+}
+
+.openaq-link {
+  color: $font-color;
+}
+
+.simplabs-link:before {
+  content: '';
+  display: block;
+  background: no-repeat center url(images/simplabs-ball.svg);
+  width: 1rem;
+  height: 1.75rem;
+  float: left;
+  margin-right: 0.5rem;
 }

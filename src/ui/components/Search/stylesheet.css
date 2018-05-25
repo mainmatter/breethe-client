@@ -16,6 +16,13 @@
   justify-content: center;
 }
 
+.statement {
+  font-size: 1.25rem;
+  color: $font-color;
+  text-align: center;
+  margin-top: 2rem;
+}
+
 .background {
   @include background();
 }
@@ -23,12 +30,6 @@
 .logo-link {
   height: 4rem;
 }
-
-@include for-tablet-portrait-up() {
-  .logo-link {
-    height: 2.5rem;
-  }
-} 
 
 .search-form-wrapper {
   position: relative;
@@ -67,6 +68,7 @@
   line-height: 1.2rem;
   color: $font-color;
   text-decoration: none;
+  margin-bottom: .5rem;
 }
 
 .search-term {
