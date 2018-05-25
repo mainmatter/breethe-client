@@ -67,6 +67,7 @@
   },
   "ember-addon": {
     "paths": [
+      "lib/google-fonts",
       "lib/sentry",
       "lib/service-worker",
       "lib/strip-test-selectors"
