@@ -4,6 +4,8 @@ import { debug } from '@glimmer/opcode-compiler';
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
 
 export default class LocationComponent extends Component {
+  @tracked loading = false;
+
   @tracked location: any = {};
 
   @tracked measurements = [];
@@ -79,6 +81,7 @@ export default class LocationComponent extends Component {
         this.location = store.cache.query(locationQuery);
       } catch (e) {
         try {
+          this.loading = true;
           this.location = await store.query(locationQuery);
         } catch (e) {
           this.notFound = true;
@@ -92,7 +95,11 @@ export default class LocationComponent extends Component {
       let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
       this.measurements = store.cache.query(measurementQuery);
 
+      if (this.measurements.length === 0) {
+        this.loading = true;
+      }
       this.measurements = await store.query(measurementQuery);
+      this.loading = false;
 
       this.notFound = false;
       this.args.updateParticles(80);
