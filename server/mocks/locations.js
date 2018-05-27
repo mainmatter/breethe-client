@@ -61,7 +61,7 @@ const ALL_MEASUREMENTS = [
       value: 19,
       unit: 'ppm',
       parameter: 'pm25',
-      qualityIndex: 'very_high',
+      qualityIndex: 'medium',
       'measured-at': '2017-11-28T16:00:00.000Z'
     }
   },
