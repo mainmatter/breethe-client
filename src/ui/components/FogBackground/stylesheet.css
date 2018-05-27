@@ -1,19 +1,23 @@
 @import '../../styles/_variables';
+@import '../../styles/_mixins';
 
 :scope {
   block-name: FogBackground;
   position: absolute;
   bottom: 0;
-  width: 100%;
-  height: 50vh;
+  top: 0;
+  right: 0;
+  left: 0;
   filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
   z-index: -1;
   overflow: hidden;
+  background: linear-gradient(map-get($clear-sky, start), map-get($clear-sky, end) 100vH, map-get($clear-sky, end));
 }
 
-.intentisty-index {
-  opacity: 0.2;
-  transition: all 2s ease-in;
+.intentisty {
+  width: 100%;
+  height: 100%;
+  transition: all .5s ease-in;
 }
 
 %fog {

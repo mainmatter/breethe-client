@@ -132,7 +132,7 @@ export default class LocationComponent extends Component {
 
       let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
       this.measurements = store.cache.query(measurementQuery);
-      this.args.updateParticles(this.qualityIndex);
+      this.args.updateFogEffect(this.qualityIndex);
 
       if (this.measurements.length === 0) {
         this.loading = true;
@@ -141,6 +141,6 @@ export default class LocationComponent extends Component {
       this.loading = false;
 
       this.notFound = false;
-      this.args.updateParticles(this.qualityIndex);
+      this.args.updateFogEffect(this.qualityIndex);
   }
 }

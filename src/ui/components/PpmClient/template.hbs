@@ -14,7 +14,7 @@
       @isOnline={{isOnline}}
       @pullIndexedDB={{pullIndexedDB}}
       @searchResults={{searchResults}}
-      @updateParticles={{action updateParticles}}
+      @updateFogEffect={{action updateFogEffect}}
     />
   {{else if isResultsMode}}
     <Location
@@ -22,15 +22,12 @@
       @store={{store}}
       @router={{router}}
       @pullIndexedDB={{pullIndexedDB}}
-      @updateParticles={{action updateParticles}}
+      @updateFogEffect={{action updateFogEffect}}
     />
   {{/if}}
-  {{#if appState.isSSR}}
-    <div class="background"></div>
-  {{else}}
-    <ParticlesBackground @index={{particlesIndex}} />
-    <FogBackground @index={{gasIndex}} />
-  {{/if}}
+  {{#unless appState.isSSR}}
+    <FogBackground @intensity={{fogIntensity}} />
+  {{/unless}}
 
   <p class="footer">built by <a href="https://simplabs.com" class="simplabs-link">simplabs</a>, data from <a href="https://openaq.org" class="openaq-link">openaq.org</a></p>
 </div>

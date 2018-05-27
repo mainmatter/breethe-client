@@ -22,10 +22,6 @@
   width: 100%;
 }
 
-.background {
-  @include background();
-}
-
 .footer {
   color: $font-color;
   background: rgba($font-color, 0.10);
