@@ -21,13 +21,12 @@
       @location={{location}}
       @store={{store}}
       @router={{router}}
+      @isSSR={{appState.isSSR}}
       @pullIndexedDB={{pullIndexedDB}}
       @updateFogEffect={{action updateFogEffect}}
     />
   {{/if}}
-  {{#unless appState.isSSR}}
-    <FogBackground @intensity={{fogIntensity}} />
-  {{/unless}}
+  <FogBackground @intensity={{fogIntensity}} />
 
   <p class="footer">built by <a href="https://simplabs.com" class="simplabs-link">simplabs</a>, data from <a href="https://openaq.org" class="openaq-link">openaq.org</a></p>
 </div>
