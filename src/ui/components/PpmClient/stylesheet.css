@@ -10,7 +10,6 @@
   line-height: map-get($root-font, line-height);
   font-family: map-get($root-font, font-family);
   letter-spacing: map-get($root-font, letter-spacing);
-  font-display: map-get($root-font, font-display);
 }
 
 .offline-warning {

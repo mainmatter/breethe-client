@@ -8,13 +8,12 @@ $font-contrast-color: #6a7790;
 $action-color: #2196f7;
 $warning-color: #ffd800;
 
-$body-font: 'Quicksand', sans-serif;
+$body-font: sans-serif;
 $root-font: (
   font-size: 14px,
   line-height: 28px,
   font-family: $body-font,
-  letter-spacing: 0.24px,
-  font-display: optional
+  letter-spacing: 0.24px
 );
 
 $bold-weight: 700;
