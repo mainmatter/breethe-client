@@ -41,9 +41,11 @@
           {{/each}}
         </ul>
       {{else}}
-        <em class="no-results" data-test-no-results>
-          We could not find locations with your search term.
-        </em>
+        {{#if searchTerm}}
+          <em class="no-results" data-test-no-results>
+            We could not find locations with your search term.
+          </em>
+        {{/if}}
       {{/if}}
     {{/if}}
   </div>
