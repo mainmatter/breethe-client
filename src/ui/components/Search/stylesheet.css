@@ -10,7 +10,8 @@
 }
 
 .header {
-  height: 38.19vh;
+  min-height: 33vh;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
