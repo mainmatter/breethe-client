@@ -83,4 +83,16 @@ module('Component: MeasurementRow', function(hooks) {
     let value = this.containerElement.querySelector('[data-test-measurement-value]').textContent.trim();
     assert.equal(value, '0');
   });
+
+  test('Round values to two significant decimals', async function(assert) {
+    await this.render(hbs`
+      <MeasurementRow
+        @value=2.309
+        @parameter=so2
+        @unit=ppm
+      />
+    `);
+    let value = this.containerElement.querySelector('[data-test-measurement-value]').textContent.trim();
+    assert.equal(value, '2.31');
+  });
 });
