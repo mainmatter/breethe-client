@@ -4,6 +4,7 @@ export default function restoreCache(store: Store)  {
   let cacheContainer = document.querySelector('#orbit-main-cache');
   if (cacheContainer) {
     let data = JSON.parse(cacheContainer.innerHTML);
+    console.log(store);
     data.orbit.forEach((record) => {
       store.cache.patch((t) => t.addRecord(record));
     });

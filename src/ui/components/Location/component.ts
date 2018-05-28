@@ -67,17 +67,13 @@ export default class LocationComponent extends Component {
     return dates[0].toLocaleString();
   }
 
-  @tracked('measurements')
-  get noMeasurements() {
-    return this.measurements.length === 0;
+  get recordsFound() {
+    return this.location && this.measurements.length > 0;
   }
 
   @tracked('measurements')
   get qualityIndex() {
-    let { measurements, noMeasurements } = this;
-    if (noMeasurements) {
-      return 1;
-    }
+    let { measurements } = this;
     let indexes = measurements
       .filter((measurement) => {
         return !!measurement.attributes.qualityIndex;
@@ -105,7 +101,7 @@ export default class LocationComponent extends Component {
 
   constructor(options) {
     super(options);
-    this.loadMeasurements(this.args.location);
+    this.loadMeasurements(this.args.locationId);
   }
 
   async loadMeasurements(locationId) {
@@ -115,41 +111,44 @@ export default class LocationComponent extends Component {
     let locationQuery = (q) => q.findRecord(locationSignature);
     let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
 
-    if (this.args.isSSR) {
+    try {
       this.location = store.cache.query(locationQuery);
       this.measurements = store.cache.query(measurementQuery);
-      if (this.location.length === 0 || this.measurements.length === 0) {
+    } catch(e) {
+      console.error('this did not work', e);
+    } finally {
+      if (!this.recordsFound) {
         this.loading = true;
       }
-    } else {
-      await pullIndexedDB();
-      let currentDate = new Date().toISOString();
+    }
 
+    if (!isSSR) {
       try {
-        this.location = store.cache.query(locationQuery);
-      } catch (e) {
-        try {
-          this.loading = true;
-          this.location = await store.query(locationQuery);
-        } catch (e) {
-          this.notFound = true;
+        let location = await store.query(locationQuery);
+
+        let currentDate = new Date().toISOString();
+        store.update((t) =>
+          t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
+        );
+
+        let measurements = await store.query(measurementQuery);
+
+        if (location && measurements) {
+          this.location = location;
+          this.measurements = measurements;
         }
+
+        if (this.recordsFound) {
+          this.args.updateFogEffect(this.qualityIndex);
+        }
+      } catch (e) {
+        console.error('err', e);
+        this.notFound = !this.recordsFound;
+      } finally {
+        console.log(this.location);
+        console.log(this.measurements);
+        this.loading = false;
       }
-
-      store.update((t) =>
-        t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
-      );
-
-      this.measurements = store.cache.query(measurementQuery);
-      this.args.updateFogEffect(this.qualityIndex);
-
-      if (this.measurements.length === 0) {
-        this.loading = true;
-        this.measurements = await store.query(measurementQuery);
-      }
-      this.loading = false;
-      this.notFound = false;
-      this.args.updateFogEffect(this.qualityIndex);
     }
   }
 }
