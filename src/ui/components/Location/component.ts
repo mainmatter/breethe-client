@@ -115,6 +115,7 @@ export default class LocationComponent extends Component {
       // always try loading data from cache
       this.location = store.cache.query(locationQuery);
       this.measurements = store.cache.query(measurementQuery);
+      console.log('cache', this.location, this.measurements);
     } catch(e) {
       console.error('this did not work', e);
     } finally {
@@ -128,10 +129,10 @@ export default class LocationComponent extends Component {
       try {
         // regardless of whether record was found in cache, refresh location
         let location = await store.query(locationQuery);
-
         // regardless of whether record was found in cache, refresh measurements
         let measurements = await store.query(measurementQuery);
 
+        console.log('refresh', location, measurements);
         // only assign these if found
         if (location && measurements) {
           this.location = location;
@@ -153,8 +154,6 @@ export default class LocationComponent extends Component {
         // only show not found error, if no records were found, if refresh failed, just continue showing records from cache
         this.notFound = !this.recordsFound;
       } finally {
-        console.log(this.location);
-        console.log(this.measurements);
         // loading is done in any case
         this.loading = false;
       }

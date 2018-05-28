@@ -1,7 +1,7 @@
 import Component, { tracked } from '@glimmer/component';
 import Navigo from 'navigo';
 import restoreCache from '../../../utils/data/restore-cache';
-import { initializeStore, setupCoordinator } from '../../../utils/data/setup-store';
+import { setupStore } from '../../../utils/data/setup-store';
 import Location from '../Location/component';
 
 const MODE_SEARCH = 'search';
@@ -27,6 +27,7 @@ export default class PpmClient extends Component {
 
   store;
   local;
+  coordinator;
   searchResults;
   loadedLocal = false;
 
@@ -68,17 +69,18 @@ export default class PpmClient extends Component {
       appData: {}
     };
 
-    let { store, schema } = initializeStore(this.appState);
-    this.store = store;
-
     if (!this.appState.isSSR) {
+      let { store, local, coordinator } = setupStore(this.appState);
+      this.store = store;
+      this.local = local;
+      this.coordinator = coordinator;
       let cacheData = restoreCache(this.store);
       if (cacheData) {
         this.searchResults = cacheData.searchResults;
       }
-      let { local } = setupCoordinator(this.store, schema, this.appState);
-      this.local = local;
     } else if (this.appState.appData) {
+      let { store } = setupStore(this.appState);
+      this.store = store;
       let { searchResults } = this.appState.appData;
       this.searchResults = searchResults;
     }
@@ -92,6 +94,7 @@ export default class PpmClient extends Component {
     if (!this.loadedLocal) {
       let transform = await this.local.pull((q) => q.findRecords());
       await this.store.sync(transform);
+      await this.coordinator.activate();
       this.loadedLocal = true;
     }
   }
