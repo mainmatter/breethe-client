@@ -28,8 +28,15 @@ export default class SearchForm extends Component {
     return value !== null && value !== undefined;
   }
 
+  precisionRound(value, precision) {
+    let factor = Math.pow(10, precision);
+    return Math.round(value * factor) / factor;
+  }
+
   @tracked('args')
   get value() {
-    return `${this.args.value}`;
+    let { value } = this.args;
+    let isNumber = !isNaN(parseFloat(value));
+    return `${(isNumber) ? this.precisionRound(value, 2) : ''}`;
   }
 }
