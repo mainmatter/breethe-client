@@ -29,7 +29,8 @@
     {{#if loading}}
       <div class="loader.loader search-loader" data-test-form-loader></div>
     {{else}}
-      {{#if showResults}}
+    
+      {{#if locations.length}}
         <ul>
           {{#each locations key="id" as |location|}}
             <li class="result" data-test-search-result={{location.attributes.city}}>
@@ -40,11 +41,9 @@
           {{/each}}
         </ul>
       {{else}}
-        {{#if searchTerm}}
-          <em class="no-results">
-            We could not find locations with your search term.
-          </em>
-        {{/if}}
+        <em class="no-results" data-test-no-results>
+          We could not find locations with your search term.
+        </em>
       {{/if}}
     {{/if}}
   </div>

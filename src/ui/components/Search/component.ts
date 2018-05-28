@@ -14,11 +14,6 @@ export default class Home extends Component {
   @tracked
   loading = false;
 
-  @tracked('locations')
-  get showResults() {
-    return this.locations.length > 0;
-  }
-
   @tracked('args')
   get isSearchDisabled() {
     return this.args.isSSR || !this.args.isOnline;
@@ -52,8 +47,7 @@ export default class Home extends Component {
       try {
         let locationsResponse = await fetch(`${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`);
         let locationsPayload: { data: any[] } = await locationsResponse.json();
-        let locations = locationsPayload.data;
-        this.locations = locations;
+        this.locations = locationsPayload.data;
       } catch (e) {
         this.locations = [];
       }
