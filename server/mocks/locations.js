@@ -9,7 +9,7 @@ const ALL_LOCATIONS = [
       name: 'Teglholmsgade',
       city: 'København',
       country: 'Denmark',
-      'last-updated': '2017-03-06',
+      lastUpdated: '2017-03-06',
       coordinates: '55.676098, 12.568337'
     }
   },
@@ -20,7 +20,7 @@ const ALL_LOCATIONS = [
       name: 'Ulrich Scheier Straße',
       city: 'Salzburg',
       country: 'Austria',
-      'last-updated': '2017-03-07',
+      lastUpdated: '2017-03-07',
       coordinates: '47.811195, 13.033229'
     }
   },
@@ -31,7 +31,7 @@ const ALL_LOCATIONS = [
       name: 'Calle San Bernabé',
       city: 'Madrid',
       country: 'Spain',
-      'last-updated': '2017-03-07',
+      lastUpdated: '2017-03-07',
       coordinates: '45.811195, 13.033229'
     }
   }
@@ -46,7 +46,7 @@ const ALL_MEASUREMENTS = [
       unit: 'ppm',
       parameter: 'pm10',
       qualityIndex: 'very_high',
-      'measured-at': '2018-10-28T16:00:00.000Z'
+      measuredAt: '2018-10-28T16:00:00.000Z'
     },
     relationships: {
       location: {
@@ -62,7 +62,7 @@ const ALL_MEASUREMENTS = [
       unit: 'ppm',
       parameter: 'pm25',
       qualityIndex: 'medium',
-      'measured-at': '2017-11-28T16:00:00.000Z'
+      measuredAt: '2017-11-28T16:00:00.000Z'
     }
   },
   {
@@ -72,7 +72,7 @@ const ALL_MEASUREMENTS = [
       value: 39,
       unit: 'micro_grams_m3',
       parameter: 'so2',
-      'measured-at': '2016-12-28T16:00:00.000Z'
+      measuredAt: '2016-12-28T16:00:00.000Z'
     }
   },
   {
@@ -82,7 +82,7 @@ const ALL_MEASUREMENTS = [
       value: 39,
       unit: 'micro_grams_m3',
       parameter: 'o3',
-      'measured-at': '2016-10-28T16:00:00.000Z'
+      measuredAt: '2016-10-28T16:00:00.000Z'
     }
   },
   {
@@ -92,7 +92,7 @@ const ALL_MEASUREMENTS = [
       value: 49,
       unit: 'micro_grams_m3',
       parameter: 'no2',
-      'measured-at': '2016-10-28T16:00:00.000Z'
+      measuredAt: '2016-10-28T16:00:00.000Z'
     }
   },
   {
@@ -102,7 +102,7 @@ const ALL_MEASUREMENTS = [
       value: 35,
       unit: 'micro_grams_m3',
       parameter: 'co',
-      'measured-at': '2016-10-28T16:00:00.000Z'
+      measuredAt: '2016-10-28T16:00:00.000Z'
     }
   }
 ];
