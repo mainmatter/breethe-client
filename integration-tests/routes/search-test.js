@@ -58,5 +58,13 @@ describe('the search route', function() {
         expect(element).to.be.ok;
       });
     });
+
+    it('shows no results in case of errors', async function() {
+      await visit('/search/error', async (page, $response) => {
+        let element = await page.$('[data-test-no-results]');
+
+        expect(element).to.be.ok;
+      });
+    });
   });
 });
