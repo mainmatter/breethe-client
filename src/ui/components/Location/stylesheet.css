@@ -68,6 +68,8 @@
   margin-bottom: 1rem;
   display: block;
   font-weight: $bold-weight;
+  text-align: center;
+  line-height: 2rem;
 }
 
 .measurements-wrapper {

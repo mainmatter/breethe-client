@@ -11,6 +11,9 @@ export default class Home extends Component {
   @tracked
   searchTerm = '';
 
+  @tracked
+  loading = false;
+
   @tracked('locations')
   get showResults() {
     return this.locations.length > 0;
@@ -45,23 +48,15 @@ export default class Home extends Component {
       });
       this.locations = locations;
     } else {
+      this.loading = true;
+
       let locationsResponse = await fetch(`${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`);
       let locationsPayload: { data: any[] } = await locationsResponse.json();
       let locations = locationsPayload.data;
 
       this.locations = locations;
 
-      store.update((t) => {
-        return locations.map((location) => {
-          let signature = { type: 'location', id: location.id };
-          try {
-            store.cache.query((q) => q.findRecord(signature));
-            return t.replaceRecord(location);
-          } catch (e) {
-            return t.addRecord(location);
-          }
-        });
-      });
+      this.loading = false;
     }
   }
 
@@ -87,19 +82,24 @@ export default class Home extends Component {
     this.locations = locations.slice(0, 3);
   }
 
-  goToRoute(search) {
-    if (search) {
+  goToRoute(search, event) {
+    if (search && search.length > 0) {
+      this.searchTerm = search;
       this.loadLocations(search);
+      /**
+       * This 'transition' doesn't trigger any update
+       * in the component. We use it here to update
+       * the URL parameter.
+       */
+      this.args.router.navigate(`/search/${search}`);
     } else {
+      this.searchTerm = '';
       this.loadRecent();
+      this.args.router.navigate(`/`);
     }
-    this.searchTerm = search;
 
-    /**
-     * This 'transition' doesn't trigger any update
-     * in the component. We use it here to update
-     * the URL parameter.
-     */
-    this.args.router.navigate(`/search/${search}`);
+    if (event) {
+      event.preventDefault();
+    }
   }
 }

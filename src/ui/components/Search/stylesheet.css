@@ -41,12 +41,13 @@
 }
 
 .results {
-  margin-top: 4rem;
+  position: relative;
+  min-height: 4rem;
 }
 
 .results-title {
   font-size: 1.2rem;
-  margin-bottom: 1rem;
+  margin: 2rem 0 1rem 0;
   color: $font-color;
 }
 
@@ -75,4 +76,13 @@
   display: inline-block;
   color: $font-color;
   margin-top: 1rem;
+}
+
+.search-loader {
+  height: 4rem;
+  width: 4rem;
+  position: absolute;
+  left: calc(50% - 2.25rem);
+  top: calc(50% - 2.25rem);
+  border-width: .25rem;
 }

@@ -1,7 +1,7 @@
 <div data-test-search>
   <header class="header">
     <h1 class="logo.logo">
-      <a href="/" class="logo.logo-link logo-link" data-navigo>
+      <a href="/" class="logo.logo-link logo-link" onclick={{action goToRoute ''}}>
         Breethe
       </a>
     </h1>
@@ -15,32 +15,36 @@
     {{/if}}
   </div>
 
-  <div class="results">
-    <h2 class="results-title">
-      {{#if searchTerm}}
-        Locations for "<strong class="search-term">{{searchTerm}}</strong>"
-      {{else}}
-        {{#if showResults}}
-          Recent Locations
-        {{/if}}
-      {{/if}}
-    </h2>
-
-    {{#if showResults}}
-      <ul>
-        {{#each locations key="id" as |location|}}
-          <li class="result" data-test-search-result={{location.attributes.city}}>
-            <a href="/location/{{location.id}}" class="result-link" data-navigo>
-              {{location.attributes.name}}, {{location.attributes.city}}
-            </a>
-          </li>
-        {{/each}}
-      </ul>
+  <h2 class="results-title">
+    {{#if searchTerm}}
+      Locations for "<strong class="search-term">{{searchTerm}}</strong>"
     {{else}}
-      {{#if searchTerm}}
-        <em class="no-results">
-          We could not find locations with your search term.
-        </em>
+      {{#if showResults}}
+        Recent Locations
+      {{/if}}
+    {{/if}}
+  </h2>
+
+  <div class="results">
+    {{#if loading}}
+      <div class="loader.loader search-loader" data-test-form-loader></div>
+    {{else}}
+      {{#if showResults}}
+        <ul>
+          {{#each locations key="id" as |location|}}
+            <li class="result" data-test-search-result={{location.attributes.city}}>
+              <a href="/location/{{location.id}}" class="result-link" data-navigo>
+                {{location.attributes.name}}, {{location.attributes.city}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        {{#if searchTerm}}
+          <em class="no-results">
+            We could not find locations with your search term.
+          </em>
+        {{/if}}
       {{/if}}
     {{/if}}
   </div>
