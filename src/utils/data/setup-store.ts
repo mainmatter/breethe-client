@@ -36,7 +36,7 @@ export function setupStore(appState) {
       schema
     });
 
-    let requestStrategy = new RequestStrategy({
+    let remoteRequestStrategy = new RequestStrategy({
       action: 'pull',
       blocking: true,
       on: 'beforeQuery',
@@ -48,7 +48,7 @@ export function setupStore(appState) {
       interfaces: ['queryable', 'syncable']
     });
 
-    let syncStrategy = new SyncStrategy({
+    let remoteStoreSync = new SyncStrategy({
       blocking: true,
       source: 'remote',
       target: 'store'
@@ -62,7 +62,7 @@ export function setupStore(appState) {
 
     const coordinator = new Coordinator({
       sources: [store, local, remote],
-      strategies: [requestStrategy, syncStrategy, localStoreSync, logger]
+      strategies: [remoteRequestStrategy, remoteStoreSync, localStoreSync, logger]
     });
 
     coordinator.activate();

@@ -105,7 +105,7 @@ export default class LocationComponent extends Component {
   }
 
   async loadMeasurements(locationId) {
-    let { pullIndexedDB, store, isSSR } = this.args;
+    let { pullIndexedDB, store, isSSR, localStore } = this.args;
 
     let locationSignature = { type: 'location', id: locationId };
     let locationQuery = (q) => q.findRecord(locationSignature);
@@ -115,6 +115,16 @@ export default class LocationComponent extends Component {
       // always try loading data from cache
       this.location = store.cache.query(locationQuery);
       this.measurements = store.cache.query(measurementQuery);
+
+      // work around a bug in Orbit.js - see https://github.com/orbitjs/orbit/issues/476
+      if (this.recordsFound && !isSSR) {
+        await localStore.push(t => t.replaceRelatedRecords(
+          locationSignature,
+          'measurements',
+          this.measurements
+        ));
+      }
+      console.log(store.cache);
       console.log('cache', this.location, this.measurements);
     } catch(e) {
       console.error('this did not work', e);
@@ -143,6 +153,9 @@ export default class LocationComponent extends Component {
           store.update((t) =>
             t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
           );
+          this.measurements.forEach((record) => {
+            store.cache.patch((t) => t.addRecord(record));
+          });
         }
 
         // if records were found, update fog effect
