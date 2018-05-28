@@ -49,13 +49,14 @@ export default class Home extends Component {
       this.locations = locations;
     } else {
       this.loading = true;
-
-      let locationsResponse = await fetch(`${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`);
-      let locationsPayload: { data: any[] } = await locationsResponse.json();
-      let locations = locationsPayload.data;
-
-      this.locations = locations;
-
+      try {
+        let locationsResponse = await fetch(`${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`);
+        let locationsPayload: { data: any[] } = await locationsResponse.json();
+        let locations = locationsPayload.data;
+        this.locations = locations;
+      } catch (e) {
+        this.locations = [];
+      }
       this.loading = false;
     }
   }
