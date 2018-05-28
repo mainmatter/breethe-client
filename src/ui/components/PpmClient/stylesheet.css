@@ -23,8 +23,8 @@
 }
 
 .footer {
-  color: $font-color;
-  background: rgba($font-color, 0.10);
+  background-color: $font-color;
+  color: $font-contrast-color;
   text-align: center;
   position: fixed;
   bottom: 0;
@@ -33,11 +33,11 @@
 
 .simplabs-link {
   display: inline-block;
-  color: $font-color;
+  color: $font-contrast-color;
 }
 
 .openaq-link {
-  color: $font-color;
+  color: $font-contrast-color;
 }
 
 .simplabs-link:before {
