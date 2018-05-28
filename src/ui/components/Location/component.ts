@@ -112,11 +112,13 @@ export default class LocationComponent extends Component {
     let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
 
     try {
+      // always try loading data from cache
       this.location = store.cache.query(locationQuery);
       this.measurements = store.cache.query(measurementQuery);
     } catch(e) {
       console.error('this did not work', e);
     } finally {
+      // if no records could be found in cache, go to laoding state
       if (!this.recordsFound) {
         this.loading = true;
       }
@@ -124,29 +126,36 @@ export default class LocationComponent extends Component {
 
     if (!isSSR) {
       try {
+        // regardless of whether record was found in cache, refresh location
         let location = await store.query(locationQuery);
 
-        let currentDate = new Date().toISOString();
-        store.update((t) =>
-          t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
-        );
-
+        // regardless of whether record was found in cache, refresh measurements
         let measurements = await store.query(measurementQuery);
 
+        // only assign these if found
         if (location && measurements) {
           this.location = location;
           this.measurements = measurements;
+
+          // remember we saw this location
+          let currentDate = new Date().toISOString();
+          store.update((t) =>
+            t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
+          );
         }
 
+        // if records were found, update fog effect
         if (this.recordsFound) {
           this.args.updateFogEffect(this.qualityIndex);
         }
       } catch (e) {
         console.error('err', e);
+        // only show not found error, if no records were found, if refresh failed, just continue showing records from cache
         this.notFound = !this.recordsFound;
       } finally {
         console.log(this.location);
         console.log(this.measurements);
+        // loading is done in any case
         this.loading = false;
       }
     }
