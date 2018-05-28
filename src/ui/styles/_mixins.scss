@@ -1,7 +1,3 @@
-@mixin gradientBackground($gradient, $clouds: 0, $particles: 0) {
-  background: linear-gradient(map-get($gradient, start), map-get($gradient, end));
-}
-
 @mixin screen-view {
   width: 100%;
   min-height: 100vh;
@@ -35,14 +31,3 @@
     margin-right: 0.5rem;
   }
 } 
-
-@mixin background() {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  @include gradientBackground($clear-sky);
-}
-

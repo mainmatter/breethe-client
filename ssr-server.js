@@ -92,6 +92,7 @@ if (USE_SENTRY) {
 }
 
 app.use(function(err, req, res, next) {
+  console.error(err);
   res.send(HTML);
 });
 

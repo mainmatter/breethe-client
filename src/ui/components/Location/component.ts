@@ -109,12 +109,22 @@ export default class LocationComponent extends Component {
   }
 
   async loadMeasurements(locationId) {
-      let { pullIndexedDB, store } = this.args;
+    let { pullIndexedDB, store, isSSR } = this.args;
+
+    let locationSignature = { type: 'location', id: locationId };
+    let locationQuery = (q) => q.findRecord(locationSignature);
+    let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
+
+    if (this.args.isSSR) {
+      this.location = store.cache.query(locationQuery);
+      this.measurements = store.cache.query(measurementQuery);
+      if (this.location.length === 0 || this.measurements.length === 0) {
+        this.loading = true;
+      }
+    } else {
       await pullIndexedDB();
       let currentDate = new Date().toISOString();
-      let locationSignature = { type: 'location', id: locationId };
 
-      let locationQuery = (q) => q.findRecord(locationSignature);
       try {
         this.location = store.cache.query(locationQuery);
       } catch (e) {
@@ -130,17 +140,16 @@ export default class LocationComponent extends Component {
         t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
       );
 
-      let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
       this.measurements = store.cache.query(measurementQuery);
-      this.args.updateParticles(this.qualityIndex);
+      this.args.updateFogEffect(this.qualityIndex);
 
       if (this.measurements.length === 0) {
         this.loading = true;
+        this.measurements = await store.query(measurementQuery);
       }
-      this.measurements = await store.query(measurementQuery);
       this.loading = false;
-
       this.notFound = false;
-      this.args.updateParticles(this.qualityIndex);
+      this.args.updateFogEffect(this.qualityIndex);
+    }
   }
 }
