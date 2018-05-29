@@ -107,6 +107,7 @@ export default class PpmClient extends Component {
   }
 
   _setupRouting() {
+    console.log(this.appState);
     this.router = new Navigo(this.appState.origin);
 
     this.router
