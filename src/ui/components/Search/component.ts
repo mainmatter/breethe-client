@@ -63,7 +63,7 @@ export default class Home extends Component {
         if (searchTerm) {
           url = `${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`;
         } else {
-          url = `${__ENV_API_HOST__}/api/locations?filter[coordinates]=${location}`;
+          url = `${__ENV_API_HOST__}/api/locations?filter[coordinates]=${coordinates}`;
         }
         let locationsResponse = await fetch(url);
         let locationsPayload: { data: any[] } = await locationsResponse.json();
