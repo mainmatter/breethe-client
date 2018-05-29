@@ -1,7 +1,7 @@
 # Breethe Client
 
-**Breethe is a Progressive Web App built by simplabs. We build custom web and
-mobile solutions for our clients to rely on.**
+**Breethe is a Progressive Web App built by [simplabs](https://simplabs.com).
+We build custom web and mobile solutions for our clients to rely on.**
 
 Breethe allows instant access to up to date air quality data for locations
 across the world. Pollution and global warming are getting worth rather than
