@@ -35,7 +35,7 @@
           {{#each locations key="id" as |location|}}
             <li class="result" data-test-search-result={{location.attributes.city}}>
               <a href="/location/{{location.id}}" class="result-link" data-navigo>
-                {{location.attributes.name}}, {{location.attributes.city}}
+                {{location.attributes.label}}
               </a>
             </li>
           {{/each}}
