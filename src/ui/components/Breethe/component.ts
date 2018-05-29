@@ -15,7 +15,7 @@ interface ILocationParams {
   locationId?: string;
 }
 
-export default class PpmClient extends Component {
+export default class Breethe extends Component {
 
   appState: {
     origin: string,

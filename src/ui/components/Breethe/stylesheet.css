@@ -2,7 +2,7 @@
 @import '../../styles/_variables';
 
 :scope {
-  block-name: PpmClient;
+  block-name: Breethe;
   position: relative;
   @include screen-view();
 

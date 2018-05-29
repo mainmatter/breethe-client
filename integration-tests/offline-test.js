@@ -7,7 +7,7 @@ describe('when offline', function() {
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
-      let element = await page.waitForSelector('[data-test-ppm-client]');
+      let element = await page.waitForSelector('[data-test-breethe]');
 
       expect(element).to.be.ok;
     });
@@ -18,7 +18,7 @@ describe('when offline', function() {
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
-      let element = await page.waitForSelector('[data-test-ppm-client]');
+      let element = await page.waitForSelector('[data-test-breethe]');
 
       expect(element).to.be.ok;
     });
