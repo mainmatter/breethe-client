@@ -9,6 +9,7 @@ const MODE_RESULTS = 'results';
 
 interface ISearchParams {
   searchTerm?: string;
+  coordinates?: number[];
 }
 interface ILocationParams {
   locationId?: string;
@@ -43,6 +44,8 @@ export default class PpmClient extends Component {
   locationId: {};
   @tracked
   searchTerm: string;
+  @tracked
+  coordinates: number[];
 
   @tracked('mode')
   get isSearchMode() {
@@ -109,6 +112,7 @@ export default class PpmClient extends Component {
     this.router
       .on('/', () => this._setMode(MODE_SEARCH))
       .on('/search', () => this._setMode(MODE_SEARCH))
+      .on(/search\/(\-?\d+(\.\d+)?,\s*\-?\d+(\.\d+)?)/, (coordinates) => this._setMode(MODE_SEARCH, { coordinates }))
       .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
       .on('/location/:locationId/', (params) => this._setMode(MODE_RESULTS, params))
       .resolve(this.appState.route);
@@ -122,11 +126,13 @@ export default class PpmClient extends Component {
         params = params as ISearchParams;
         this.locationId = null;
         this.searchTerm = params.searchTerm;
+        this.coordinates = params.coordinates;
         break;
       case MODE_RESULTS:
         params = params as ILocationParams;
         this.locationId = params.locationId;
         this.searchTerm = null;
+        this.coordinates = null;
         break;
     }
   }

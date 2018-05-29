@@ -5,7 +5,7 @@ declare const __ENV_API_HOST__: string;
 
 export default class Home extends Component {
   @tracked
-  location;
+  coordinates;
 
   @tracked
   locations = [];
@@ -25,16 +25,16 @@ export default class Home extends Component {
     super(options);
     assert('Argument \'store\' must be supplied to this component.', this.args.store);
     this.searchTerm = this.args.searchTerm;
-    this.location = this.args.location;
-    if (this.searchTerm && this.searchTerm.length > 0) {
-      this.findLocations(this.searchTerm, this.location, this.args.searchResults);
+    this.coordinates = this.args.coordinates;
+    if ((this.searchTerm && this.searchTerm.length > 0) || (this.coordinates && this.coordinates.length > 0)) {
+      this.findLocations(this.searchTerm, this.coordinates, this.args.searchResults);
     } else if (!this.args.isSSR) {
       this.loadRecent();
     }
     this.args.updateFogEffect(0);
   }
 
-  async findLocations(searchTerm, location, searchResults = []) {
+  async findLocations(searchTerm, coordinates, searchResults = []) {
     let { store } = this.args;
     if (searchResults.length > 0) {
       let locations = searchResults.map((id) => {
@@ -105,10 +105,10 @@ export default class Home extends Component {
     navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 5 * 1000 });
   }
 
-  goToRoute(search, location, event = null) {
+  goToRoute(search, coordinates, event = null) {
     if (search && search.length > 0) {
       this.searchTerm = search;
-      this.location = null;
+      this.coordinates = null;
       this.findLocations(search, null);
       /**
        * This 'transition' doesn't trigger any update
@@ -116,14 +116,14 @@ export default class Home extends Component {
        * the URL parameter.
        */
       this.args.router.navigate(`/search/${search}`);
-    } else if (location && location.length > 0) {
+    } else if (coordinates && coordinates.length > 0) {
       this.searchTerm = '';
-      this.location = location;
-      this.findLocations(null, location);
-      this.args.router.navigate(`/search/${location}`);
+      this.coordinates = coordinates;
+      this.findLocations(null, coordinates);
+      this.args.router.navigate(`/search/${coordinates}`);
     } else {
       this.searchTerm = '';
-      this.location = null;
+      this.coordinates = null;
       this.loadRecent();
       this.args.router.navigate(`/`);
     }

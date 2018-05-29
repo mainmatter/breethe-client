@@ -17,10 +17,10 @@
 
   <h2 class="results-title">
     {{#if searchTerm}}
-      Locations for "<strong class="search-term">{{searchTerm}}</strong>"
+      <span data-test-locations-for-search-term>Locations for "<strong class="search-term">{{searchTerm}}</strong>"</span>
     {{else}}
-      {{#if location}}
-        Locations near you
+      {{#if coordinates}}
+        <span data-test-near-locations>Locations near you</span>
       {{/if}}
       {{#if showResults}}
         Recent Locations

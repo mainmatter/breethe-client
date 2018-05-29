@@ -42,6 +42,14 @@ describe('the search route', function() {
         });
       });
 
+      it('renders the correct title for the search results', async function() {
+        await visit('/search/Salzburg', async (page, $response) => {
+          let element = $response('[data-test-locations-for-search-term]');
+
+          expect(element.length).to.be.ok;
+        });
+      });
+
       it('includes the orbit cache', async function() {
         await visit('/search/Salzburg', async (page, $response) => {
           let cache = JSON.parse($response('#orbit-main-cache').html());
@@ -52,9 +60,17 @@ describe('the search route', function() {
     });
 
     describe('with coordinates', function() {
-      it('includes the search result for a e', async function() {
+      it('includes the search result', async function() {
         await visit('/search/1.11,2.22', async (page, $response) => {
-          let element = $response('[data-test-search-result="Salzburg"]');
+          let element = $response('[data-test-search-result="Madrid"]');
+
+          expect(element.length).to.be.ok;
+        });
+      });
+
+      it('renders the correct title for the search results', async function() {
+        await visit('/search/1.11,2.22', async (page, $response) => {
+          let element = $response('[data-test-near-locations]');
 
           expect(element.length).to.be.ok;
         });
@@ -64,7 +80,7 @@ describe('the search route', function() {
         await visit('/search/1.11,2.22', async (page, $response) => {
           let cache = JSON.parse($response('#orbit-main-cache').html());
 
-          expect(cache.orbit.indexOf(r => r.type === 'location' && r.id === 2 && r.attributes.city === 'Salzburg')).to.be.ok;
+          expect(cache.orbit.indexOf(r => r.type === 'location' && r.id === 2 && r.attributes.city === 'Madrid')).to.be.ok;
         });
       });
     });
@@ -92,6 +108,42 @@ describe('the search route', function() {
         let element = await page.waitForSelector('[data-test-no-results]');
 
         expect(element).to.be.ok;
+      });
+    });
+
+    describe('with a search term', function() {
+      it('renders the search results', async function() {
+        await visit('/search/Salzburg', async (page) => {
+          let element = await page.waitForSelector('[data-test-search-result="Salzburg"]');
+
+          expect(element).to.be.ok;
+        });
+      });
+
+      it('renders the correct title for the search results', async function() {
+        await visit('/search/Salzburg', async (page) => {
+          let element = await page.waitForSelector('[data-test-locations-for-search-term]');
+
+          expect(element).to.be.ok;
+        });
+      });
+    });
+
+    describe('with coordinates', function() {
+      it('renders the search result', async function() {
+        await visit('/search/1.11,2.22', async (page) => {
+          let element = await page.waitForSelector('[data-test-search-result="Madrid"]');
+
+          expect(element).to.be.ok;
+        });
+      });
+
+      it('renders the correct title for the search results', async function() {
+        await visit('/search/1.11,2.22', async (page) => {
+          let element = await page.waitForSelector('[data-test-near-locations]');
+
+          expect(element).to.be.ok;
+        });
       });
     });
   });
