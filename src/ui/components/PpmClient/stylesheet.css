@@ -22,8 +22,8 @@
 }
 
 .footer {
-  background-color: $font-color;
-  color: $font-contrast-color;
+  background-color: $footer-color;
+  color: $font-color;
   text-align: center;
   position: fixed;
   bottom: 0;
@@ -32,19 +32,19 @@
 
 .simplabs-link {
   display: inline-block;
-  color: $font-contrast-color;
+  color: $font-color;
 }
 
 .openaq-link {
-  color: $font-contrast-color;
+  color: $font-color;
 }
 
 .simplabs-link:before {
   content: '';
   display: block;
-  background: no-repeat center url(images/simplabs-ball.svg);
+  background: no-repeat center url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzcgMzciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxLjQxNCI+PHBhdGggZD0iTTIwIDIxLjMzVjM2LjRhMTguMjQ5IDE4LjI0OSAwIDAgMCAxMi45LTcuMjRMMjAgMjEuMzN6TTM0LjcxIDI2LjIyYTE4LjA4IDE4LjA4IDAgMCAwIDEuODgtOEMzNi42MDkgOC44MTggMjkuMzYzLjg2IDIwIDB2MTcuMjlsMTQuNzEgOC45M3pNMS44NCAxMC4yN0ExOC4wNzQgMTguMDc0IDAgMCAwIDAgMTguMmMuMDA2IDkuMzc3IDcuMjM0IDE3LjMwMiAxNi41NyAxOC4xN1YxOS4yM0wxLjg0IDEwLjI3ek0xNi41NyAxNS4xOVYwQTE4LjI1IDE4LjI1IDAgMCAwIDMuNjIgNy4zMmwxMi45NSA3Ljg3eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==);
   width: 1rem;
   height: 1.75rem;
   float: left;
-  margin-right: 0.5rem;
+  margin-right: 0.25rem;
 }
