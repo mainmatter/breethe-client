@@ -29,7 +29,7 @@ describe('when offline', function() {
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
-      let element = await page.waitForSelector('[data-test-ppm-client]');
+      let element = await page.waitForSelector('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
 
       expect(element).to.be.ok;
     });

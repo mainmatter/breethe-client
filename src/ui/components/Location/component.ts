@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 import Component, { tracked } from '@glimmer/component';
 import { debug } from '@glimmer/opcode-compiler';
 
@@ -111,39 +112,45 @@ export default class LocationComponent extends Component {
     let locationQuery = (q) => q.findRecord(locationSignature);
     let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
 
-    try {
-      // always try loading data from cache
+    let readFromCache = () => {
       this.location = store.cache.query(locationQuery);
       this.measurements = store.cache.query(measurementQuery);
+    };
+
+    try {
+      // always try loading data from cache
+      readFromCache();
 
       // work around a bug in Orbit.js - see https://github.com/orbitjs/orbit/issues/476
       if (this.recordsFound && !isSSR) {
-        await localStore.push(t => t.replaceRelatedRecords(
+        await localStore.push((t) => t.replaceRelatedRecords(
           locationSignature,
           'measurements',
           this.measurements
         ));
       }
-      console.log(store.cache);
-      console.log('cache', this.location, this.measurements);
-    } catch(e) {
-      console.error('this did not work', e);
-    } finally {
-      // if no records could be found in cache, go to laoding state
-      if (!this.recordsFound) {
-        this.loading = true;
-      }
+    } catch {
+      // fall through to other loading options…
     }
 
     if (!isSSR) {
       try {
-        // regardless of whether record was found in cache, refresh location
+        await pullIndexedDB();
+        // try loading data from cache again after IndexedDB has been restored
+        readFromCache();
+      } catch {
+        // fall through to other loading options…
+      }
+
+      if (!this.recordsFound) {
+        this.loading = true;
+      }
+
+      try {
+        // regardless of whether record was found in cache, refresh
         let location = await store.query(locationQuery);
-        // regardless of whether record was found in cache, refresh measurements
         let measurements = await store.query(measurementQuery);
 
-        console.log('refresh', location, measurements);
-        // only assign these if found
         if (location && measurements) {
           this.location = location;
           this.measurements = measurements;
@@ -153,17 +160,13 @@ export default class LocationComponent extends Component {
           store.update((t) =>
             t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
           );
-          this.measurements.forEach((record) => {
-            store.cache.patch((t) => t.addRecord(record));
-          });
         }
 
         // if records were found, update fog effect
         if (this.recordsFound) {
           this.args.updateFogEffect(this.qualityIndex);
         }
-      } catch (e) {
-        console.error('err', e);
+      } catch {
         // only show not found error, if no records were found, if refresh failed, just continue showing records from cache
         this.notFound = !this.recordsFound;
       } finally {
