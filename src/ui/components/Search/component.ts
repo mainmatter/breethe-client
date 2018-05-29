@@ -4,6 +4,7 @@ import { assert } from '@orbit/utils';
 declare const __ENV_API_HOST__: string;
 
 export default class Home extends Component {
+  @tracked
   location;
 
   @tracked
@@ -47,7 +48,13 @@ export default class Home extends Component {
     } else {
       this.loading = true;
       try {
-        let locationsResponse = await fetch(`${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`);
+        let url;
+        if (searchTerm) {
+          url = `${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`;
+        } else {
+          url = `${__ENV_API_HOST__}/api/locations?filter[coordinates]=${location}`;
+        }
+        let locationsResponse = await fetch(url);
         let locationsPayload: { data: any[] } = await locationsResponse.json();
         this.locations = locationsPayload.data;
       } catch (e) {
@@ -79,9 +86,29 @@ export default class Home extends Component {
     this.locations = locations.slice(0, 3);
   }
 
-  goToRoute(search, location, event) {
+  searchByLocation(event) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    let onSuccess = (position) => {
+      let { latitude, longitude } = position.coords;
+      this.goToRoute(null, [latitude, longitude]);
+    };
+    let onError = (e) => {
+      // TODO
+      console.error(e);
+      this.loading = false;
+    };
+
+    this.loading = true;
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 5 * 1000 });
+  }
+
+  goToRoute(search, location, event = null) {
     if (search && search.length > 0) {
       this.searchTerm = search;
+      this.location = null;
       this.findLocations(search, null);
       /**
        * This 'transition' doesn't trigger any update
@@ -89,8 +116,14 @@ export default class Home extends Component {
        * the URL parameter.
        */
       this.args.router.navigate(`/search/${search}`);
+    } else if (location && location.length > 0) {
+      this.searchTerm = '';
+      this.location = location;
+      this.findLocations(null, location);
+      this.args.router.navigate(`/search/${location}`);
     } else {
       this.searchTerm = '';
+      this.location = null;
       this.loadRecent();
       this.args.router.navigate(`/`);
     }

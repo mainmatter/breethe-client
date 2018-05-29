@@ -32,6 +32,7 @@ const ALL_LOCATIONS = [
     attributes: {
       name: 'Calle San Bernabé',
       city: 'Madrid',
+      label: 'Calle San Bernabé - Madrid',
       country: 'Spain',
       lastUpdated: '2017-03-07',
       coordinates: '45.811195, 13.033229'
@@ -116,8 +117,13 @@ module.exports = function(app) {
   locationsRouter.get('/', function(req, res) {
     res.type('application/vnd.api+json');
     let queryName = req.query.filter.name;
+    let queryCoordinates = req.query.filter.coordinates;
     if (queryName === 'error') { // this special query can be used for tests to force an error response
       res.sendStatus(500);
+    } else if (queryCoordinates) {
+      res.json({
+        data: ALL_LOCATIONS
+      });
     } else if (queryName) {
       let filteredData = ALL_LOCATIONS.filter((record) => {
         return record.attributes.city.toUpperCase() === queryName.toUpperCase();
@@ -126,9 +132,7 @@ module.exports = function(app) {
         data: filteredData
       });
     } else {
-      res.json({
-        data: ALL_LOCATIONS
-      });
+      res.sendStatus(404);
     }
   });
 

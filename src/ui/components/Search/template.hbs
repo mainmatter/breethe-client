@@ -9,7 +9,7 @@
   </header>
 
   <div class="search-form-wrapper">
-    <SearchForm @term={{searchTerm}} @isDisabled={{isSearchDisabled}} @onSearch={{action goToRoute}} />
+    <SearchForm @term={{searchTerm}} @isDisabled={{isSearchDisabled}} @onSearch={{action goToRoute}} @onSearchByLocation={{action searchByLocation}} />
     {{#if @isSSR}}
       <div class="loader.loader form-loader" data-test-form-laoder></div>
     {{/if}}
@@ -19,6 +19,9 @@
     {{#if searchTerm}}
       Locations for "<strong class="search-term">{{searchTerm}}</strong>"
     {{else}}
+      {{#if location}}
+        Locations near you
+      {{/if}}
       {{#if showResults}}
         Recent Locations
       {{/if}}
