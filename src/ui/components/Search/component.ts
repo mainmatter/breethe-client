@@ -24,14 +24,14 @@ export default class Home extends Component {
     assert('Argument \'store\' must be supplied to this component.', this.args.store);
     this.searchTerm = this.args.searchTerm;
     if (this.searchTerm && this.searchTerm.length > 0) {
-      this.loadLocations(this.searchTerm, this.args.searchResults);
+      this.findLocations(this.searchTerm, this.args.searchResults);
     } else if (!this.args.isSSR) {
       this.loadRecent();
     }
     this.args.updateFogEffect(0);
   }
 
-  async loadLocations(searchTerm, searchResults = []) {
+  async findLocations(searchTerm, searchResults = []) {
     let { store } = this.args;
     if (searchResults.length > 0) {
       let locations = searchResults.map((id) => {
@@ -80,7 +80,7 @@ export default class Home extends Component {
   goToRoute(search, event) {
     if (search && search.length > 0) {
       this.searchTerm = search;
-      this.loadLocations(search);
+      this.findLocations(search);
       /**
        * This 'transition' doesn't trigger any update
        * in the component. We use it here to update
