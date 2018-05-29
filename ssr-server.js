@@ -29,10 +29,19 @@ if (USE_SENTRY) {
 app.use(morgan('common'));
 app.use(express.static('dist', { index: false }));
 
-async function searchLocation(searchTerm) {
-  let response = await request(`${API_HOST}/api/locations?filter%5Bname%5D=${searchTerm}`);
+async function searchLocation(searchTermOrCoordinates) {
+  let url;
+  if (Array.isArray(searchTermOrCoordinates)) {
+    let [lat, lon] = searchTermOrCoordinates;
+    url = `${API_HOST}/api/locations?filter%5Bcoordinates%5D=${lat},${lon}`;
+  } else {
+    url = `${API_HOST}/api/locations?filter%5Bname%5D=${searchTermOrCoordinates}`;
+  }
+
+  let response = await request(url);
   let data = JSON.parse(response).data;
   let ids = data.map((result) => result.id);
+
   return {
     orbit: data,
     searchResults: ids
@@ -71,6 +80,16 @@ async function preprender(req, res, next, data = {orbit: []}) {
 
 app.get('/', preprender);
 app.get('/search', preprender);
+
+app.get('/search/:lat,:lon', async function(req, res, next) {
+  try {
+    let data = await searchLocation([req.params.lat, req.params.lon]);
+    await preprender(req, res, next, data);
+  } catch(e) {
+    next(e);
+  }
+});
+
 app.get('/search/:searchTerm', async function(req, res, next) {
   try {
     let data = await searchLocation(req.params.searchTerm);
@@ -79,6 +98,7 @@ app.get('/search/:searchTerm', async function(req, res, next) {
     next(e);
   }
 });
+
 app.get('/location/:location', async function(req, res, next) {
   try{
     let data = await locationMeasurements(req.params.location);

@@ -9,7 +9,7 @@
   </header>
 
   <div class="search-form-wrapper">
-    <SearchForm @term={{searchTerm}} @isDisabled={{isSearchDisabled}} @onSearch={{action goToRoute}} />
+    <SearchForm @term={{searchTerm}} @isDisabled={{isSearchDisabled}} @onSearch={{action goToRoute}} @onSearchByLocation={{action searchByLocation}} />
     {{#if @isSSR}}
       <div class="loader.loader form-loader" data-test-form-laoder></div>
     {{/if}}
@@ -17,10 +17,14 @@
 
   <h2 class="results-title">
     {{#if searchTerm}}
-      Locations for "<strong class="search-term">{{searchTerm}}</strong>"
+      <span data-test-locations-for-search-term>Locations for "<strong class="search-term">{{searchTerm}}</strong>"</span>
     {{else}}
-      {{#if showResults}}
-        Recent Locations
+      {{#if coordinates}}
+        <span data-test-near-locations>Locations near you</span>
+      {{else}}
+        {{#if showRecent}}
+          <span data-test-recent-locations>Recent Locations</span>
+        {{/if}}
       {{/if}}
     {{/if}}
   </h2>
@@ -41,10 +45,16 @@
           {{/each}}
         </ul>
       {{else}}
-        {{#if searchTerm}}
-          <em class="no-results" data-test-no-results>
-            We could not find locations with your search term.
+        {{#if error}}
+          <em class="error" data-test-location-error>
+            {{error}}
           </em>
+        {{else}}
+          {{#if searchTerm}}
+            <em class="no-results" data-test-no-results>
+              We could not find locations with your search term.
+            </em>
+          {{/if}}
         {{/if}}
       {{/if}}
     {{/if}}

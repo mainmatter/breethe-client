@@ -32,5 +32,42 @@ describe('the index route', function() {
         expect(element).to.be.ok;
       });
     });
+
+    it('allows searching for locations with a search term', async function() {
+      await visit('/', async (page) => {
+        await page.type('[data-test-search-input]', 'Salzburg');
+        await page.click('[data-test-search-submit]');
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+
+        expect(page.url()).to.match(/\/search\/Salzburg$/);
+
+        let element = await page.waitForSelector('[data-test-search-result="Salzburg"] a');
+
+        expect(element).to.be.ok;
+      });
+    });
+
+    it('allows searching for locations with coordinates', async function() {
+      await visit('/', async (page) => {
+        await page.evaluate(() => {
+          navigator.geolocation.getCurrentPosition = function(success, failure) {
+            success({
+              coords: {
+                latitude: 1.11,
+                longitude: 2.22
+              }, timestamp: Date.now()
+            });
+          };
+        });
+        await page.click('[data-test-search-near]');
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+
+        expect(page.url()).to.match(/\/search\/1.11,2.22/);
+
+        let element = await page.waitForSelector('[data-test-search-result="Salzburg"] a');
+
+        expect(element).to.be.ok;
+      });
+    });
   });
 });

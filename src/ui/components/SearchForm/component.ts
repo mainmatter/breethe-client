@@ -13,7 +13,11 @@ export default class SearchForm extends Component {
   submitSearch(event) {
     event.preventDefault();
     let { search } = this;
-    this.args.onSearch(this.search);
+    this.args.onSearch(this.search, null);
+  }
+
+  searchByLocation(event) {
+    this.args.onSearchByLocation(event);
   }
 
   didUpdate() {
