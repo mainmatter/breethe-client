@@ -108,6 +108,7 @@ export default class PpmClient extends Component {
 
     this.router
       .on('/', () => this._setMode(MODE_SEARCH))
+      .on('/search', () => this._setMode(MODE_SEARCH))
       .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
       .on('/location/:locationId/', (params) => this._setMode(MODE_RESULTS, params))
       .resolve(this.appState.route);

@@ -11,6 +11,14 @@ describe('the search route', function() {
       });
     });
 
+    it('is rendered without a search term', async function() {
+      await visit('/search/', async (page, $response) => {
+        let element = $response('[data-test-search]');
+
+        expect(element.length).to.be.ok;
+      });
+    });
+
     it('includes the search result', async function() {
       await visit('/search/Salzburg', async (page, $response) => {
         let element = $response('[data-test-search-result="Salzburg"]');
