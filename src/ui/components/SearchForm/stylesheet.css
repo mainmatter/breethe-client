@@ -42,6 +42,8 @@
   line-height: 1.5rem;
   transition: opacity .25s;
   outline: none;
+  background: transparent;
+  border: none;
 
   &:before {
     content: '';
