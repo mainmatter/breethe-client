@@ -8,6 +8,7 @@ const ALL_LOCATIONS = [
     attributes: {
       name: 'Teglholmsgade',
       city: 'København',
+      label: 'Teglholmsgade - København',
       country: 'Denmark',
       lastUpdated: '2017-03-06',
       coordinates: '55.676098, 12.568337'
@@ -19,6 +20,7 @@ const ALL_LOCATIONS = [
     attributes: {
       name: 'Ulrich Scheier Straße',
       city: 'Salzburg',
+      label: 'Ulrich Scheier Straße - Salzburg',
       country: 'Austria',
       lastUpdated: '2017-03-07',
       coordinates: '47.811195, 13.033229'

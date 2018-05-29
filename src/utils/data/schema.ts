@@ -5,6 +5,7 @@ export const location: ModelDefinition = {
   attributes: {
     name: { type: 'string' },
     city: { type: 'string' },
+    label: { type: 'string' },
     coordinates: { type: 'string' },
     country: { type: 'string' },
     identifier: { type: 'string' },
