@@ -10,7 +10,7 @@
     "build": "ember build -prod",
     "start": "ember server",
     "test": "ember test",
-    "test-integration": "mocha --recursive --exit -t 10s integration-tests/helpers/prepare.js integration-tests",
+    "test-integration": "mocha --recursive --exit -t 20s integration-tests/helpers/prepare.js integration-tests",
     "heroku-postbuild": "ember build -prod",
     "start-ssr": "node ssr-server.js"
   },
