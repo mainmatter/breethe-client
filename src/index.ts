@@ -32,7 +32,7 @@ wrapper(() => {
     }
   });
 
-  app.renderComponent('PpmClient', containerElement, null);
+  app.renderComponent('Breethe', containerElement, null);
 
   app.boot();
 });

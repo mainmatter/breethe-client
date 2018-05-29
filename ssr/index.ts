@@ -24,7 +24,7 @@ export default class GlimmerRenderer {
     let builder = new SerializingBuilder({ element: document.body as any as Element, nextSibling: null });
 
     const app = new SSRApplication({
-      rootName: 'ppm-client',
+      rootName: 'breethe',
       loader,
       builder,
       document,

@@ -41,7 +41,7 @@ export default class SSRApplication extends Application {
       }
     }
 
-    let rootName = 'ppm-client';
+    let rootName = 'breethe';
     this.element = options.element;
     this.registerInitializer({
       initialize(registry) {
@@ -50,7 +50,7 @@ export default class SSRApplication extends Application {
         registry.registerInjection('domTreeConstruction', 'document', `document:/${rootName}/main/main`);
         registry.registerInjection('environment', 'appendOperations', `domTreeConstruction:/${rootName}/main/main`);
         registry.register(`app-state:/${rootName}/main/main`, AppState);
-        registry.registerInjection(`component:/${rootName}/components/PpmClient`, 'appState', `app-state:/${rootName}/main/main`);
+        registry.registerInjection(`component:/${rootName}/components/Breethe`, 'appState', `app-state:/${rootName}/main/main`);
         registry.register(`component-manager:/${rootName}/component-managers/main`, SSRComponentManager);
       },
     });
@@ -66,7 +66,7 @@ export default class SSRApplication extends Application {
     let builder = this.builder.getBuilder(env);
     let dynamicScope = new DynamicScope();
     let templateIterator: TemplateIterator;
-    let self = new UpdatableReference({ roots: [{id: 1, component: 'PpmClient', parent: this.element, nextSibling: null}] });
+    let self = new UpdatableReference({ roots: [{id: 1, component: 'Breethe', parent: this.element, nextSibling: null}] });
 
     try {
       templateIterator = await this.loader.getTemplateIterator(this, env, builder, dynamicScope as any, self);

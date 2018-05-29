@@ -5,7 +5,7 @@ describe('the index route', function() {
   describe('the SSR response', function() {
     it('is rendered', async function() {
       await visit('/', async (page, $response) => {
-        let element = $response('[data-test-ppm-client]');
+        let element = $response('[data-test-breethe]');
     
         expect(element.length).to.be.ok;
       });
@@ -27,7 +27,7 @@ describe('the index route', function() {
   describe('the rehydrated app', function() {
     it('is rendered', async function() {
       await visit('/', async (page) => {
-        let element = await page.waitForSelector('[data-test-ppm-client]');
+        let element = await page.waitForSelector('[data-test-breethe]');
     
         expect(element).to.be.ok;
       });

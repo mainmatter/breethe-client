@@ -20,7 +20,7 @@ const MODULE_CONFIG = require('@glimmer/application-pipeline/dist/lib/broccoli/d
 
 const ApiHost = process.env.API_HOST || 'http://localhost:4200';
 
-class PpmGlimmerApp extends GlimmerApp {
+class BreetheGlimmerApp extends GlimmerApp {
   ssrTree() {
     let tsTree = new Funnel('.', {
       include: ['ssr/**/*', 'config/**/*']
@@ -92,7 +92,7 @@ class PpmGlimmerApp extends GlimmerApp {
 }
 
 module.exports = function(defaults) {
-  let app = new PpmGlimmerApp(defaults, {
+  let app = new BreetheGlimmerApp(defaults, {
     rollup: {
       plugins: [
         resolve({ jsnext: true, module: true, main: true }),
@@ -103,7 +103,7 @@ module.exports = function(defaults) {
       ]
     },
     'css-blocks': {
-      entry: 'PpmClient',
+      entry: 'Breethe',
       output: 'src/ui/styles/app.css',
       getAnalyzer: (app) => {
         let parserOpts = {
