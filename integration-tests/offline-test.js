@@ -78,7 +78,7 @@ describe('when offline', function() {
   it('does not show an offline warning on the location rotue', async function() {
     await visit('/location/2', async (page) => {
       await page.setOfflineMode(true);
-      await page.waitFor(10);
+      await page.waitFor(100);
 
       let element = await page.$('[data-test-offline-warning]');
 
@@ -95,15 +95,17 @@ describe('when offline', function() {
       await page.click('[data-test-search-result="Salzburg"] a');
       await page.waitForSelector('[data-test-location]');
       await page.click('[data-test-home-link]');
+      await page.waitForSelector('[data-test-search]');
 
       await page.setOfflineMode(true);
 
       // click the recent location
+      await page.waitForSelector('[data-test-search-result="Salzburg"]');
       await page.click('[data-test-search-result="Salzburg"] a');
       await page.waitForSelector('[data-test-location]');
       // check the correct data is still present
       expect(page.url()).to.match(/\/location\/2$/);
-      let element = await page.$('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
+      let element = await page.waitForSelector('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
 
       expect(element).to.be.ok;
     });
@@ -113,7 +115,9 @@ describe('when offline', function() {
     it('enables the location search field', async function() {
       await visit('/', async (page) => {
         await page.setOfflineMode(true); // go offline
-        await page.setOfflineMode(false); // …and back online 
+        await page.waitForSelector('[data-test-offline-warning]');
+        await page.setOfflineMode(false); // …and back online
+        await page.waitFor(100);
 
         let element = await page.waitForSelector('[data-test-search-input]:enabled');
 
@@ -124,7 +128,9 @@ describe('when offline', function() {
     it('enables the location search button', async function() {
       await visit('/', async (page) => {
         await page.setOfflineMode(true); // go offline
+        await page.waitForSelector('[data-test-offline-warning]');
         await page.setOfflineMode(false); // …and back online
+        await page.waitFor(100);
 
         let element = await page.waitForSelector('[data-test-search-submit]:enabled');
 
@@ -135,6 +141,7 @@ describe('when offline', function() {
     it('hides the offline warning', async function() {
       await visit('/', async (page) => {
         await page.setOfflineMode(true); // go offline
+        await page.waitForSelector('[data-test-offline-warning]');
         await page.setOfflineMode(false); // …and back online
         await page.waitFor(10);
 

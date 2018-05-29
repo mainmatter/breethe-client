@@ -27,7 +27,7 @@ describe('the index route', function() {
   describe('the rehydrated app', function() {
     it('is rendered', async function() {
       await visit('/', async (page) => {
-        let element = await page.$('[data-test-ppm-client]');
+        let element = await page.waitForSelector('[data-test-ppm-client]');
     
         expect(element).to.be.ok;
       });

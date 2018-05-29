@@ -29,7 +29,7 @@ describe('the location route', function() {
   describe('the rehydrated app', function() {
     it('is rendered', async function() {
       await visit('/location/2', async (page) => {
-        let element = await page.$('[data-test-location]');
+        let element = await page.waitForSelector('[data-test-location]');
     
         expect(element).to.be.ok;
       });

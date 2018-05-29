@@ -32,6 +32,7 @@ describe('the main user flow', function() {
       expect(element).to.be.ok;
 
       await page.click('[data-test-home-link]');
+      await page.waitForSelector('[data-test-search-result="Salzburg"]');
       await page.click('[data-test-search-result="Salzburg"] a');
       element = await page.waitForSelector('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
 
@@ -43,6 +44,7 @@ describe('the main user flow', function() {
     await visit('/search/Salzburg', async (page) => {
       await page.setJavaScriptEnabled(false);
       await page.reload();
+      await page.waitForSelector('[data-test-search-result="Salzburg"]');
       await page.click('[data-test-search-result="Salzburg"] a');
       await page.waitForSelector('[data-test-location]');
 
