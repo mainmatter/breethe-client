@@ -4,6 +4,7 @@ import { assert } from '@orbit/utils';
 declare const __ENV_API_HOST__: string;
 
 export default class Home extends Component {
+  location;
 
   @tracked
   locations = [];
@@ -23,15 +24,16 @@ export default class Home extends Component {
     super(options);
     assert('Argument \'store\' must be supplied to this component.', this.args.store);
     this.searchTerm = this.args.searchTerm;
+    this.location = this.args.location;
     if (this.searchTerm && this.searchTerm.length > 0) {
-      this.findLocations(this.searchTerm, this.args.searchResults);
+      this.findLocations(this.searchTerm, this.location, this.args.searchResults);
     } else if (!this.args.isSSR) {
       this.loadRecent();
     }
     this.args.updateFogEffect(0);
   }
 
-  async findLocations(searchTerm, searchResults = []) {
+  async findLocations(searchTerm, location, searchResults = []) {
     let { store } = this.args;
     if (searchResults.length > 0) {
       let locations = searchResults.map((id) => {
@@ -77,10 +79,10 @@ export default class Home extends Component {
     this.locations = locations.slice(0, 3);
   }
 
-  goToRoute(search, event) {
+  goToRoute(search, location, event) {
     if (search && search.length > 0) {
       this.searchTerm = search;
-      this.findLocations(search);
+      this.findLocations(search, null);
       /**
        * This 'transition' doesn't trigger any update
        * in the component. We use it here to update
