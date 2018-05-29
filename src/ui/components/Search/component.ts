@@ -136,6 +136,7 @@ export default class Home extends Component {
       this.searchTerm = '';
       this.coordinates = coordinates;
       this.findLocations(null, coordinates);
+      console.log('navigating to', coordinates);
       this.args.router.navigate(`/search/${coordinates}`);
     } else {
       this.searchTerm = '';
