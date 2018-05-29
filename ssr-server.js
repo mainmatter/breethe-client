@@ -70,6 +70,7 @@ async function preprender(req, res, next, data = {orbit: []}) {
 }
 
 app.get('/', preprender);
+app.get('/search', preprender);
 app.get('/search/:searchTerm', async function(req, res, next) {
   try {
     let data = await searchLocation(req.params.searchTerm);
