@@ -93,7 +93,7 @@ describe('when offline', function() {
       await page.click('[data-test-search-submit]');
       await page.waitForSelector('[data-test-search-result="Salzburg"]');
       await page.click('[data-test-search-result="Salzburg"] a');
-      await page.waitForSelector('[data-test-location]');
+      await page.waitForSelector('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
       await page.click('[data-test-home-link]');
       await page.waitForSelector('[data-test-search]');
 
@@ -102,10 +102,9 @@ describe('when offline', function() {
       // click the recent location
       await page.waitForSelector('[data-test-search-result="Salzburg"]');
       await page.click('[data-test-search-result="Salzburg"] a');
-      await page.waitForSelector('[data-test-location]');
       // check the correct data is still present
-      expect(page.url()).to.match(/\/location\/2$/);
       let element = await page.waitForSelector('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
+      expect(page.url()).to.match(/\/location\/2$/);
 
       expect(element).to.be.ok;
     });
