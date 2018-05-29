@@ -16,6 +16,10 @@ export default class SearchForm extends Component {
     this.args.onSearch(this.search, null);
   }
 
+  searchByLocation(event) {
+    this.args.onSearchByLocation(event);
+  }
+
   didUpdate() {
     /**
      * There's not didReceiveAttrs hook in Glimmer
