@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 import Component, { tracked } from '@glimmer/component';
 import { debug } from '@glimmer/opcode-compiler';
 
@@ -67,17 +68,13 @@ export default class LocationComponent extends Component {
     return dates[0].toLocaleString();
   }
 
-  @tracked('measurements')
-  get noMeasurements() {
-    return this.measurements.length === 0;
+  get recordsFound() {
+    return this.location && this.measurements.length > 0;
   }
 
   @tracked('measurements')
   get qualityIndex() {
-    let { measurements, noMeasurements } = this;
-    if (noMeasurements) {
-      return 1;
-    }
+    let { measurements } = this;
     let indexes = measurements
       .filter((measurement) => {
         return !!measurement.attributes.qualityIndex;
@@ -105,51 +102,77 @@ export default class LocationComponent extends Component {
 
   constructor(options) {
     super(options);
-    this.loadMeasurements(this.args.location);
+    this.loadMeasurements(this.args.locationId);
   }
 
   async loadMeasurements(locationId) {
-    let { pullIndexedDB, store, isSSR } = this.args;
+    let { pullIndexedDB, store, isSSR, localStore } = this.args;
 
     let locationSignature = { type: 'location', id: locationId };
     let locationQuery = (q) => q.findRecord(locationSignature);
     let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
 
-    if (this.args.isSSR) {
+    let readFromCache = () => {
       this.location = store.cache.query(locationQuery);
       this.measurements = store.cache.query(measurementQuery);
-      if (this.location.length === 0 || this.measurements.length === 0) {
+    };
+
+    try {
+      // always try loading data from cache
+      readFromCache();
+
+      // work around a bug in Orbit.js - see https://github.com/orbitjs/orbit/issues/476
+      if (this.recordsFound && !isSSR) {
+        await localStore.push((t) => t.replaceRelatedRecords(
+          locationSignature,
+          'measurements',
+          this.measurements
+        ));
+      }
+    } catch {
+      // fall through to other loading options…
+    }
+
+    if (!isSSR) {
+      try {
+        await pullIndexedDB();
+        // try loading data from cache again after IndexedDB has been restored
+        readFromCache();
+      } catch {
+        // fall through to other loading options…
+      }
+
+      if (!this.recordsFound) {
         this.loading = true;
       }
-    } else {
-      await pullIndexedDB();
-      let currentDate = new Date().toISOString();
 
       try {
-        this.location = store.cache.query(locationQuery);
-      } catch (e) {
-        try {
-          this.loading = true;
-          this.location = await store.query(locationQuery);
-        } catch (e) {
-          this.notFound = true;
+        // regardless of whether record was found in cache, refresh
+        let location = await store.query(locationQuery);
+        let measurements = await store.query(measurementQuery);
+
+        if (location && measurements) {
+          this.location = location;
+          this.measurements = measurements;
+
+          // remember we saw this location
+          let currentDate = new Date().toISOString();
+          store.update((t) =>
+            t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
+          );
         }
+
+        // if records were found, update fog effect
+        if (this.recordsFound) {
+          this.args.updateFogEffect(this.qualityIndex);
+        }
+      } catch {
+        // only show not found error, if no records were found, if refresh failed, just continue showing records from cache
+        this.notFound = !this.recordsFound;
+      } finally {
+        // loading is done in any case
+        this.loading = false;
       }
-
-      store.update((t) =>
-        t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
-      );
-
-      this.measurements = store.cache.query(measurementQuery);
-      this.args.updateFogEffect(this.qualityIndex);
-
-      if (this.measurements.length === 0) {
-        this.loading = true;
-        this.measurements = await store.query(measurementQuery);
-      }
-      this.loading = false;
-      this.notFound = false;
-      this.args.updateFogEffect(this.qualityIndex);
     }
   }
 }

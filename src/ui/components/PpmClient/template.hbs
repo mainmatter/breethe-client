@@ -18,8 +18,9 @@
     />
   {{else if isResultsMode}}
     <Location
-      @location={{location}}
+      @locationId={{locationId}}
       @store={{store}}
+      @localStore={{local}}
       @router={{router}}
       @isSSR={{appState.isSSR}}
       @pullIndexedDB={{pullIndexedDB}}

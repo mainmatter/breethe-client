@@ -1,7 +1,7 @@
 import Component, { tracked } from '@glimmer/component';
 import Navigo from 'navigo';
 import restoreCache from '../../../utils/data/restore-cache';
-import { initializeStore, setupCoordinator } from '../../../utils/data/setup-store';
+import { setupStore } from '../../../utils/data/setup-store';
 import Location from '../Location/component';
 
 const MODE_SEARCH = 'search';
@@ -11,7 +11,7 @@ interface ISearchParams {
   searchTerm?: string;
 }
 interface ILocationParams {
-  location?: string;
+  locationId?: string;
 }
 
 export default class PpmClient extends Component {
@@ -27,6 +27,7 @@ export default class PpmClient extends Component {
 
   store;
   local;
+  coordinator;
   searchResults;
   loadedLocal = false;
 
@@ -39,7 +40,7 @@ export default class PpmClient extends Component {
   @tracked
   mode: string;
   @tracked
-  location: {};
+  locationId: {};
   @tracked
   searchTerm: string;
 
@@ -68,17 +69,18 @@ export default class PpmClient extends Component {
       appData: {}
     };
 
-    let { store, schema } = initializeStore(this.appState);
-    this.store = store;
-
     if (!this.appState.isSSR) {
+      let { store, local, coordinator } = setupStore(this.appState);
+      this.store = store;
+      this.local = local;
+      this.coordinator = coordinator;
       let cacheData = restoreCache(this.store);
       if (cacheData) {
         this.searchResults = cacheData.searchResults;
       }
-      let { local } = setupCoordinator(this.store, schema, this.appState);
-      this.local = local;
     } else if (this.appState.appData) {
+      let { store } = setupStore(this.appState);
+      this.store = store;
       let { searchResults } = this.appState.appData;
       this.searchResults = searchResults;
     }
@@ -92,6 +94,7 @@ export default class PpmClient extends Component {
     if (!this.loadedLocal) {
       let transform = await this.local.pull((q) => q.findRecords());
       await this.store.sync(transform);
+      await this.coordinator.activate();
       this.loadedLocal = true;
     }
   }
@@ -106,7 +109,7 @@ export default class PpmClient extends Component {
     this.router
       .on('/', () => this._setMode(MODE_SEARCH))
       .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
-      .on('/location/:location/', (params) => this._setMode(MODE_RESULTS, params))
+      .on('/location/:locationId/', (params) => this._setMode(MODE_RESULTS, params))
       .resolve(this.appState.route);
   }
 
@@ -116,12 +119,12 @@ export default class PpmClient extends Component {
     switch (mode) {
       case MODE_SEARCH:
         params = params as ISearchParams;
-        this.location = null;
+        this.locationId = null;
         this.searchTerm = params.searchTerm;
         break;
       case MODE_RESULTS:
         params = params as ILocationParams;
-        this.location = params.location;
+        this.locationId = params.locationId;
         this.searchTerm = null;
         break;
     }

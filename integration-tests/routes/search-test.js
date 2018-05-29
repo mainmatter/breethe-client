@@ -45,7 +45,7 @@ describe('the search route', function() {
   describe('the rehydrated app', function() {
     it('is rendered', async function() {
       await visit('/search/Salzburg', async (page) => {
-        let element = await page.$('[data-test-search]');
+        let element = await page.waitForSelector('[data-test-search]');
 
         expect(element).to.be.ok;
       });
@@ -53,7 +53,7 @@ describe('the search route', function() {
 
     it('renders the search result', async function() {
       await visit('/search/Salzburg', async (page) => {
-        let element = await page.$('[data-test-search-result="Salzburg"]');
+        let element = await page.waitForSelector('[data-test-search-result="Salzburg"]');
 
         expect(element).to.be.ok;
       });
@@ -61,7 +61,7 @@ describe('the search route', function() {
 
     it('shows no results in case of errors', async function() {
       await visit('/search/error', async (page, $response) => {
-        let element = await page.$('[data-test-no-results]');
+        let element = await page.waitForSelector('[data-test-no-results]');
 
         expect(element).to.be.ok;
       });
