@@ -103,14 +103,6 @@ describe('the search route', function() {
       });
     });
 
-    it('shows no results in case of errors', async function() {
-      await visit('/search/error', async (page, $response) => {
-        let element = await page.waitForSelector('[data-test-no-results]');
-
-        expect(element).to.be.ok;
-      });
-    });
-
     it('renders recent locations if there are any', async function() {
       await visit('/search/Salzburg', async (page, $response) => {
         await page.waitForSelector('[data-test-search-result="Salzburg"]');
@@ -155,6 +147,14 @@ describe('the search route', function() {
           expect(element).to.be.ok;
         });
       });
+
+      it('shows a no results message in case of errors', async function() {
+        await visit('/search/error', async (page) => {
+          let element = await page.waitForSelector('[data-test-no-results]');
+
+          expect(element).to.be.ok;
+        });
+      });
     });
 
     describe('with coordinates', function() {
@@ -171,6 +171,40 @@ describe('the search route', function() {
           let element = await page.waitForSelector('[data-test-near-locations]');
 
           expect(element).to.be.ok;
+        });
+      });
+
+      it('shows an error message if accessing the location fails', async function() {
+        await visit('/', async (page) => {
+          await page.evaluate(() => {
+            navigator.geolocation.getCurrentPosition = function(success, failure) {
+              failure({
+                code: 13
+              });
+            };
+          });
+          await page.click('[data-test-search-near]');
+          await page.waitForSelector('[data-test-location-error]');
+          let element = await page.waitForSelector('[data-test-location-error]');
+
+          expect(element).to.be.ok;
+        });
+      });
+
+      it('does not show an error message if the user disallows access to the location', async function() {
+        await visit('/', async (page) => {
+          await page.evaluate(() => {
+            navigator.geolocation.getCurrentPosition = function(success, failure) {
+              failure({
+                code: 1
+              });
+            };
+          });
+          await page.click('[data-test-search-near]');
+          await page.waitFor(100);
+          let element = await page.$('[data-test-location-error]');
+
+          expect(element).to.be.null;
         });
       });
     });

@@ -3,9 +3,14 @@ import { assert } from '@orbit/utils';
 
 declare const __ENV_API_HOST__: string;
 
+const LOCATION_PERMISSION_DENIED: number = 1;
+
 export default class Home extends Component {
   @tracked
   coordinates;
+
+  @tracked
+  error;
 
   @tracked
   locations = [];
@@ -40,6 +45,7 @@ export default class Home extends Component {
   }
 
   async findLocations(searchTerm, coordinates, searchResults = []) {
+    this.error = null;
     let { store } = this.args;
     if (searchResults.length > 0) {
       let locations = searchResults.map((id) => {
@@ -70,6 +76,7 @@ export default class Home extends Component {
   }
 
   async loadRecent() {
+    this.error = null;
     let { pullIndexedDB, store } = this.args;
     await pullIndexedDB();
     let locations = store.cache.query(
@@ -99,13 +106,17 @@ export default class Home extends Component {
     let onSuccess = (position) => {
       let { latitude, longitude } = position.coords;
       this.goToRoute(null, [latitude, longitude]);
-    };
-    let onError = (e) => {
-      // TODO
-      console.error(e);
       this.loading = false;
     };
+    let onError = (e) => {
+      this.loading = false;
+      this.coordinates = [];
+      if (e.code !== LOCATION_PERMISSION_DENIED) {
+        this.error = 'An error occured while trying to access your location.';
+      }
+    };
 
+    this.searchTerm = '';
     this.loading = true;
     navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 5 * 1000 });
   }

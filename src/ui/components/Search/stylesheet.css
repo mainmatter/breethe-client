@@ -79,6 +79,12 @@
   margin-top: 1rem;
 }
 
+.error {
+  display: inline-block;
+  color: $warning-color;
+  margin-top: 1rem;
+}
+
 .search-loader {
   height: 4rem;
   width: 4rem;
