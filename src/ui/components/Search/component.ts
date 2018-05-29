@@ -21,6 +21,11 @@ export default class Home extends Component {
     return this.args.isSSR || !this.args.isOnline;
   }
 
+  @tracked('locations', 'searchTerm', 'coordinates')
+  get showRecent() {
+    return this.locations.length > 0 && !this.searchTerm && !this.coordinates;
+  }
+
   constructor(options) {
     super(options);
     assert('Argument \'store\' must be supplied to this component.', this.args.store);

@@ -111,6 +111,34 @@ describe('the search route', function() {
       });
     });
 
+    it('renders recent locations if there are any', async function() {
+      await visit('/search/Salzburg', async (page, $response) => {
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+        await page.click('[data-test-search-result="Salzburg"] a');
+        await page.waitForSelector('[data-test-location]');
+        await page.click('[data-test-home-link]');
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+
+        element = await page.waitForSelector('[data-test-search-result="Salzburg"] a');
+
+        expect(element).to.be.ok;
+      });
+    });
+
+    it('renders the correct title for recent locations', async function() {
+      await visit('/search/Salzburg', async (page, $response) => {
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+        await page.click('[data-test-search-result="Salzburg"] a');
+        await page.waitForSelector('[data-test-location]');
+        await page.click('[data-test-home-link]');
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+
+        element = await page.waitForSelector('[data-test-recent-locations]');
+
+        expect(element).to.be.ok;
+      });
+    });
+
     describe('with a search term', function() {
       it('renders the search results', async function() {
         await visit('/search/Salzburg', async (page) => {

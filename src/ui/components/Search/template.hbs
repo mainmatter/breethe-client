@@ -21,9 +21,10 @@
     {{else}}
       {{#if coordinates}}
         <span data-test-near-locations>Locations near you</span>
-      {{/if}}
-      {{#if showResults}}
-        Recent Locations
+      {{else}}
+        {{#if showRecent}}
+          <span data-test-recent-locations>Recent Locations</span>
+        {{/if}}
       {{/if}}
     {{/if}}
   </h2>
