@@ -62,8 +62,12 @@
 }
 
 @keyframes foglayer_moveme {
-  0% { left: 0; }
-  100% { left: -100%; }
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100vw, 0);
+  }
 }
 
 .image-01 {
