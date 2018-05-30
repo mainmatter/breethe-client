@@ -48,7 +48,7 @@ const ALL_MEASUREMENTS = [
       value: 15,
       unit: 'ppm',
       parameter: 'pm10',
-      qualityIndex: 'very_high',
+      qualityIndex: 'medium',
       measuredAt: '2018-10-28T16:00:00.000Z'
     },
     relationships: {
@@ -64,7 +64,7 @@ const ALL_MEASUREMENTS = [
       value: 19,
       unit: 'ppm',
       parameter: 'pm25',
-      qualityIndex: 'medium',
+      qualityIndex: 'very_low',
       measuredAt: '2017-11-28T16:00:00.000Z'
     }
   },
