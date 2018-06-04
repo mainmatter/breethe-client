@@ -1,4 +1,5 @@
 import Component, { tracked } from '@glimmer/component';
+import Coordinator from '@orbit/coordinator';
 import IndexedDBSource from '@orbit/indexeddb';
 import Store from '@orbit/store';
 import Navigo from 'navigo';
@@ -33,6 +34,7 @@ export default class Breethe extends Component {
 
   store: Store;
   local: IndexedDBSource;
+  coordinator: Coordinator;
   searchResults: string[];
   loadedLocal: boolean = false;
 
@@ -80,9 +82,10 @@ export default class Breethe extends Component {
     };
 
     if (!this.appState.isSSR) {
-      let { store, local } = setupStore(this.appState);
+      let { store, local, coordinator } = setupStore(this.appState);
       this.store = store;
       this.local = local;
+      this.coordinator = coordinator;
       let cacheData = restoreCache(this.store);
       if (cacheData) {
         this.searchResults = cacheData.searchResults;
@@ -103,6 +106,7 @@ export default class Breethe extends Component {
     if (!this.loadedLocal) {
       let transform = await this.local.pull((q) => q.findRecords());
       await this.store.sync(transform);
+      this.coordinator.activate();
       this.loadedLocal = true;
     }
   }
