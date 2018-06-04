@@ -7,28 +7,37 @@ const QUALITY_SCALE = ['very_low', 'low', 'medium', 'high', 'very_high'];
 const QUALITY_LABEL = ['Excellent', 'Good', 'Ok', 'Poor', 'Very poor'];
 
 export default class LocationComponent extends Component {
-  @tracked loading = false;
+  @tracked
+  location: Location | {} = {};
 
-  @tracked location: any = {};
+  @tracked
+  measurements: Measurement[] = [];
 
-  @tracked measurements = [];
+  @tracked
+  loading: boolean = false;
 
-  @tracked notFound = false;
+  @tracked
+  notFound: boolean = false;
 
   @tracked('measurements')
-  get measurementLists() {
+  get measurementLists(): { first: Measurement[]; second: Measurement[] } {
     let { measurements } = this;
 
-    let orderedMeasurements = ORDERED_PARAMS.map((param) => {
+    let orderedMeasurements = ORDERED_PARAMS.map((parameter) => {
       let measurement = measurements.find((record) => {
-        return record.attributes.parameter === param;
+        return record.attributes.parameter === parameter;
       });
       if (measurement) {
         return measurement;
       }
       return {
+        id: '',
         attributes: {
-          parameter: param
+          parameter,
+          measuredAt: '',
+          unit: '',
+          value: '',
+          qualityIndex: ''
         }
       };
     });
@@ -41,7 +50,7 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('measurements')
-  get updatedDate() {
+  get updatedDate(): string {
     let { measurements } = this;
     if (measurements.length === 0) {
       return '–';
@@ -68,12 +77,12 @@ export default class LocationComponent extends Component {
     return dates[0].toLocaleString();
   }
 
-  get recordsFound() {
+  get recordsFound(): boolean {
     return this.location && this.measurements.length > 0;
   }
 
   @tracked('measurements')
-  get qualityIndex() {
+  get qualityIndex(): number {
     let { measurements } = this;
     let indexes = measurements
       .filter((measurement) => {
@@ -95,7 +104,7 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('qualityIndex')
-  get qualityLabel() {
+  get qualityLabel(): string {
     let { qualityIndex } = this;
     return QUALITY_LABEL[qualityIndex];
   }
@@ -105,7 +114,7 @@ export default class LocationComponent extends Component {
     this.loadMeasurements(this.args.locationId);
   }
 
-  async loadMeasurements(locationId) {
+  async loadMeasurements(locationId: string) {
     let { pullIndexedDB, store, isSSR, localStore } = this.args;
 
     let locationSignature = { type: 'location', id: locationId };

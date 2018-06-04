@@ -4,7 +4,7 @@ export default class SearchForm extends Component {
   @tracked
   search: string = this.args.term || '';
 
-  cacheArgTerm;
+  cacheArgTerm: string;
 
   updateSearch(event) {
     this.search = event.target.value;

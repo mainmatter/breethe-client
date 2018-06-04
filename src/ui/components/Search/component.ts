@@ -7,66 +7,82 @@ const LOCATION_PERMISSION_DENIED: number = 1;
 
 export default class Home extends Component {
   @tracked
-  coordinates;
+  coordinates: number[] | null;
 
   @tracked
-  error;
+  locations: Location[] = [];
 
   @tracked
-  locations = [];
+  searchTerm: string = '';
 
   @tracked
-  searchTerm = '';
+  loading: boolean = false;
 
   @tracked
-  loading = false;
+  error: null | string;
 
   @tracked('args')
-  get isSearchDisabled() {
+  get isSearchDisabled(): boolean {
     return this.args.isSSR || !this.args.isOnline;
   }
 
   @tracked('locations', 'searchTerm', 'coordinates')
-  get showRecent() {
+  get showRecent(): boolean {
     return this.locations.length > 0 && !this.searchTerm && !this.coordinates;
   }
 
   constructor(options) {
     super(options);
-    assert('Argument \'store\' must be supplied to this component.', this.args.store);
-    this.searchTerm = this.args.searchTerm;
-    this.coordinates = this.args.coordinates;
-    if ((this.searchTerm && this.searchTerm.length > 0) || (this.coordinates && this.coordinates.length > 0)) {
-      this.findLocations(this.searchTerm, this.coordinates, this.args.searchResults);
-    } else if (!this.args.isSSR) {
+    assert(
+      'Argument \'store\' must be supplied to this component.',
+      this.args.store
+    );
+
+    let {
+      searchTerm,
+      coordinates,
+      searchResults,
+      isSSR,
+      updateFogEffect
+    } = this.args;
+
+    this.searchTerm = searchTerm;
+    this.coordinates = coordinates;
+
+    if (
+      (searchTerm && searchTerm.length > 0) ||
+      (coordinates && coordinates.length > 0)
+    ) {
+      this.findLocations(searchTerm, coordinates, searchResults);
+    } else if (!isSSR) {
       this.loadRecent();
     }
-    this.args.updateFogEffect(0);
+    updateFogEffect(0);
   }
 
-  async findLocations(searchTerm, coordinates, searchResults = []) {
+  async findLocations(searchTerm: string, coordinates: number[], searchResults: string[] = []) {
     this.error = null;
     let { store } = this.args;
+
     if (searchResults.length > 0) {
-      let locations = searchResults.map((id) => {
+      this.locations = searchResults.map((id) => {
         try {
           return store.cache.query((q) => q.findRecord({ type: 'location', id }));
         } catch (e) {
           return;
         }
       });
-      this.locations = locations;
     } else {
       this.loading = true;
       try {
-        let url;
+        let url: string;
         if (searchTerm) {
           url = `${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`;
         } else {
           url = `${__ENV_API_HOST__}/api/locations?filter[coordinates]=${coordinates}`;
         }
         let locationsResponse = await fetch(url);
-        let locationsPayload: { data: any[] } = await locationsResponse.json();
+        let locationsPayload: { data: Location[] } = await locationsResponse.json();
         this.locations = locationsPayload.data;
       } catch (e) {
         this.locations = [];
@@ -79,9 +95,7 @@ export default class Home extends Component {
     this.error = null;
     let { pullIndexedDB, store } = this.args;
     await pullIndexedDB();
-    let locations = store.cache.query(
-      (q) => q.findRecords('location')
-    );
+    let locations: Location[] = store.cache.query((q) => q.findRecords('location'));
     locations = locations.filter((location) => {
       return !!location.attributes.visitedAt;
     });
@@ -118,10 +132,15 @@ export default class Home extends Component {
 
     this.searchTerm = '';
     this.loading = true;
-    navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 5 * 1000 });
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+      timeout: 5 * 1000
+    });
   }
 
-  goToRoute(search, coordinates, event = null) {
+  goToRoute(search: string, coordinates: number[], event = null) {
+    if (event) {
+      event.preventDefault();
+    }
     if (search && search.length > 0) {
       this.searchTerm = search;
       this.coordinates = null;
@@ -142,10 +161,6 @@ export default class Home extends Component {
       this.coordinates = null;
       this.loadRecent();
       this.args.router.navigate(`/`);
-    }
-
-    if (event) {
-      event.preventDefault();
     }
   }
 }

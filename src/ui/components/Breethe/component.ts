@@ -7,11 +7,11 @@ import Location from '../Location/component';
 const MODE_SEARCH = 'search';
 const MODE_RESULTS = 'results';
 
-interface ISearchParams {
+interface SearchParams {
   searchTerm?: string;
   coordinates?: number[];
 }
-interface ILocationParams {
+interface LocationParams {
   locationId?: string;
 }
 
@@ -118,18 +118,18 @@ export default class Breethe extends Component {
       .resolve(this.appState.route);
   }
 
-  _setMode(mode, params: ISearchParams | ILocationParams = {}) {
+  _setMode(mode, params: SearchParams | LocationParams = {}) {
     this.mode = mode;
 
     switch (mode) {
       case MODE_SEARCH:
-        params = params as ISearchParams;
+        params = params as SearchParams;
         this.locationId = null;
         this.searchTerm = params.searchTerm;
         this.coordinates = params.coordinates;
         break;
       case MODE_RESULTS:
-        params = params as ILocationParams;
+        params = params as LocationParams;
         this.locationId = params.locationId;
         this.searchTerm = null;
         this.coordinates = null;
