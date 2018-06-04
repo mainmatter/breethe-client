@@ -1,12 +1,22 @@
-/* tslint:disable:max-line-length */
 import Component, { tracked } from '@glimmer/component';
 import { debug } from '@glimmer/opcode-compiler';
+import IndexedDBSource from '@orbit/indexeddb';
+import Store from '@orbit/store';
 
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
 const QUALITY_SCALE = ['very_low', 'low', 'medium', 'high', 'very_high'];
 const QUALITY_LABEL = ['Excellent', 'Good', 'Ok', 'Poor', 'Very poor'];
 
 export default class LocationComponent extends Component {
+  args: {
+    locationId: string;
+    isSSR: boolean;
+    store: Store;
+    localStore: IndexedDBSource;
+    updateFogEffect: (index: number) => void;
+    pullIndexedDB: () => void;
+  };
+
   @tracked
   location: Location | {} = {};
 
@@ -176,7 +186,11 @@ export default class LocationComponent extends Component {
           this.args.updateFogEffect(this.qualityIndex);
         }
       } catch {
-        // only show not found error, if no records were found, if refresh failed, just continue showing records from cache
+        /*
+         only show not found error
+         if no records were found, if refresh failed
+           just continue showing records from cache
+        */
         this.notFound = !this.recordsFound;
       } finally {
         // loading is done in any case
