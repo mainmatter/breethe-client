@@ -1,6 +1,12 @@
 import Component, { tracked } from '@glimmer/component';
 
 export default class SearchForm extends Component {
+  args: {
+    term: string,
+    onSearchByTerm: (param: string) => void,
+    onSearchByLocation: (event: any) => void
+  };
+
   @tracked
   search: string = this.args.term || '';
 
@@ -13,7 +19,7 @@ export default class SearchForm extends Component {
   submitSearch(event) {
     event.preventDefault();
     let { search } = this;
-    this.args.onSearch(this.search, null);
+    this.args.onSearchByTerm(this.search);
   }
 
   searchByLocation(event) {

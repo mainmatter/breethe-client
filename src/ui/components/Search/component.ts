@@ -137,10 +137,14 @@ export default class Home extends Component {
     });
   }
 
-  goToRoute(search: string, coordinates: number[], event = null) {
+  searchByTerm(term: string, event = null) {
     if (event) {
       event.preventDefault();
     }
+    this.goToRoute(term);
+  }
+
+  goToRoute(search: string, coordinates?: number[]) {
     if (search && search.length > 0) {
       this.searchTerm = search;
       this.coordinates = null;
