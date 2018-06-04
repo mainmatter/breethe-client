@@ -106,7 +106,6 @@ export default class Home extends Component {
     let onSuccess = (position) => {
       let { latitude, longitude } = position.coords;
       this.goToRoute(null, [latitude, longitude]);
-      this.loading = false;
     };
     let onError = (e) => {
       this.loading = false;
