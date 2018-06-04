@@ -3,6 +3,12 @@ import Component, { tracked } from '@glimmer/component';
 const SUP_PARAMS = ['SO2', 'O3', 'NO2'];
 
 export default class SearchForm extends Component {
+  args: {
+    unit: string;
+    parameter: string;
+    value: string | null;
+  };
+
   @tracked('args')
   get isPPM(): boolean {
     return this.args.unit === 'ppm';
@@ -36,7 +42,8 @@ export default class SearchForm extends Component {
   @tracked('args')
   get value(): string {
     let { value } = this.args;
-    let isNumber = !isNaN(parseFloat(value));
-    return `${(isNumber) ? this.precisionRound(value, 2) : ''}`;
+    let numericValue = parseFloat(value);
+    let isNumber = !isNaN(numericValue);
+    return `${(isNumber) ? this.precisionRound(numericValue, 2) : ''}`;
   }
 }

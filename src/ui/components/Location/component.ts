@@ -157,8 +157,8 @@ export default class LocationComponent extends Component {
 
       try {
         // regardless of whether record was found in cache, refresh
-        let location = await store.query(locationQuery);
-        let measurements = await store.query(measurementQuery);
+        let location: Location = await store.query(locationQuery);
+        let measurements: Measurement[] = await store.query(measurementQuery);
 
         if (location && measurements) {
           this.location = location;
