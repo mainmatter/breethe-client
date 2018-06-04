@@ -1,11 +1,25 @@
 import Component, { tracked } from '@glimmer/component';
+import Store from '@orbit/store';
 import { assert } from '@orbit/utils';
+import Navigo from 'navigo';
 
 declare const __ENV_API_HOST__: string;
 
 const LOCATION_PERMISSION_DENIED: number = 1;
 
 export default class Home extends Component {
+  args: {
+    isSSR: boolean;
+    isOnline: boolean;
+    store: Store;
+    searchTerm: string;
+    coordinates: number[];
+    searchResults: string[];
+    updateFogEffect: (index: number) => void;
+    pullIndexedDB: () => void;
+    router: Navigo;
+  };
+
   @tracked
   coordinates: number[] | null;
 
@@ -35,7 +49,7 @@ export default class Home extends Component {
     super(options);
     assert(
       'Argument \'store\' must be supplied to this component.',
-      this.args.store
+      !!this.args.store
     );
 
     let {
