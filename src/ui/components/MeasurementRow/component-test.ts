@@ -72,6 +72,18 @@ module('Component: MeasurementRow', function(hooks) {
     assert.equal(value, '—');
   });
 
+  test('If value is empty string, render em dash', async function(assert) {
+    await this.render(hbs`
+      <MeasurementRow
+        @parameter=so2
+        @value=''
+        @unit=ppm
+      />
+    `);
+    let value = this.containerElement.querySelector('[data-test-measurement-value-wrapper]').textContent.trim();
+    assert.equal(value, '—');
+  });
+
   test('If 0 value is present, render 0', async function(assert) {
     await this.render(hbs`
       <MeasurementRow
