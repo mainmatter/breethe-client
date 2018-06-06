@@ -108,46 +108,42 @@ export default class Home extends Component {
   async loadRecent() {
     this.error = null;
     let { pullIndexedDB, store } = this.args;
+
     await pullIndexedDB();
+
     let locations: Location[] = store.cache.query((q) => q.findRecords('location'));
-    locations = locations.filter((location) => {
-      return !!location.attributes.visitedAt;
-    });
-    locations.sort((locationL, locationR) => {
-      let dateLeft = new Date(locationL.attributes.visitedAt);
-      let dateRight = new Date(locationR.attributes.visitedAt);
-      if (dateLeft > dateRight) {
-        return -1;
-      } else if (dateLeft < dateRight) {
-        return 1;
-      }
-      return 0;
-    });
+    locations = locations
+      .filter((location) => {
+        return !!location.attributes.visitedAt;
+      })
+      .sort((locationL, locationR) => {
+        let dateLeft = new Date(locationL.attributes.visitedAt);
+        let dateRight = new Date(locationR.attributes.visitedAt);
+        if (dateLeft > dateRight) {
+          return -1;
+        } else if (dateLeft < dateRight) {
+          return 1;
+        }
+        return 0;
+      });
     this.locations = locations.slice(0, 3);
   }
 
-  searchByLocation(event) {
-    if (event) {
-      event.preventDefault();
-    }
+  searchByLocation = async (coordinatesPromise: Promise<number[]>) => {
+    this.loading = true;
+    this.searchTerm = '';
 
-    let onSuccess = (position) => {
-      let { latitude, longitude } = position.coords;
-      this.goToRoute(null, [latitude, longitude]);
-    };
-    let onError = (e) => {
-      this.loading = false;
+    try {
+      let coordinates = await coordinatesPromise;
+      this.goToRoute(null, coordinates);
+    } catch (e) {
       this.coordinates = [];
-      if (e.code !== LOCATION_PERMISSION_DENIED) {
+      if (e !== LOCATION_PERMISSION_DENIED) {
         this.error = 'An error occured while trying to access your location.';
       }
-    };
-
-    this.searchTerm = '';
-    this.loading = true;
-    navigator.geolocation.getCurrentPosition(onSuccess, onError, {
-      timeout: 5 * 1000
-    });
+    } finally {
+      this.loading = false;
+    }
   }
 
   searchByTerm(term: string, event = null) {

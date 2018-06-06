@@ -15,6 +15,9 @@
       @onSearchByTerm={{action searchByTerm}}
       @onSearchByLocation={{action searchByLocation}}
     />
+    
+    <SearchCoordinates onSearch={{searchByLocation}} />
+
     {{#if @isSSR}}
       <div class="loader.loader form-loader" data-test-form-laoder></div>
     {{/if}}
