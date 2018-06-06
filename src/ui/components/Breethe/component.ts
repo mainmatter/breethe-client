@@ -1,64 +1,73 @@
 import Component, { tracked } from '@glimmer/component';
+import Coordinator from '@orbit/coordinator';
+import IndexedDBSource from '@orbit/indexeddb';
+import Store from '@orbit/store';
 import Navigo from 'navigo';
 import restoreCache from '../../../utils/data/restore-cache';
 import { setupStore } from '../../../utils/data/setup-store';
 import Location from '../Location/component';
 
-const MODE_SEARCH = 'search';
-const MODE_RESULTS = 'results';
+const MODE_SEARCH: string = 'search';
+const MODE_RESULTS: string = 'results';
 
-interface ISearchParams {
+interface SearchParams {
   searchTerm?: string;
   coordinates?: number[];
 }
-interface ILocationParams {
+
+interface LocationParams {
   locationId?: string;
+}
+
+interface AppState {
+  origin: string;
+  route: string;
+  isSSR: boolean;
+  appData: any;
 }
 
 export default class Breethe extends Component {
 
-  appState: {
-    origin: string,
-    route: string,
-    isSSR: boolean,
-    appData: any
-  };
+  appState: AppState;
 
-  router;
+  router: Navigo;
 
-  store;
-  local;
-  coordinator;
-  searchResults;
-  loadedLocal = false;
+  store: Store;
+  local: IndexedDBSource;
+  coordinator: Coordinator;
+  searchResults: string[];
+  loadedLocal: boolean = false;
 
   @tracked
-  fogIntensity = 0;
+  fogIntensity: number = 0;
 
   @tracked
-  isOnline = true;
+  isOnline: boolean = true;
 
   @tracked
   mode: string;
+
   @tracked
-  locationId: {};
+  locationId: string;
+
   @tracked
   searchTerm: string;
+
   @tracked
   coordinates: number[];
 
   @tracked('mode')
-  get isSearchMode() {
+  get isSearchMode(): boolean {
     return this.mode === MODE_SEARCH;
   }
 
   @tracked('mode')
-  get isResultsMode() {
+  get isResultsMode(): boolean {
     return this.mode === MODE_RESULTS;
   }
 
   @tracked('mode', 'isOnline')
-  get showOfflineWarning() {
+  get showOfflineWarning(): boolean {
     return this.mode === MODE_SEARCH && !this.isOnline;
   }
 
@@ -97,12 +106,12 @@ export default class Breethe extends Component {
     if (!this.loadedLocal) {
       let transform = await this.local.pull((q) => q.findRecords());
       await this.store.sync(transform);
-      await this.coordinator.activate();
+      this.coordinator.activate();
       this.loadedLocal = true;
     }
   }
 
-  updateFogEffect(intensity) {
+  updateFogEffect(intensity: number) {
     this.fogIntensity = intensity;
   }
 
@@ -118,18 +127,18 @@ export default class Breethe extends Component {
       .resolve(this.appState.route);
   }
 
-  _setMode(mode, params: ISearchParams | ILocationParams = {}) {
+  _setMode(mode: string, params: SearchParams | LocationParams = {}) {
     this.mode = mode;
 
     switch (mode) {
       case MODE_SEARCH:
-        params = params as ISearchParams;
+        params = params as SearchParams;
         this.locationId = null;
         this.searchTerm = params.searchTerm;
         this.coordinates = params.coordinates;
         break;
       case MODE_RESULTS:
-        params = params as ILocationParams;
+        params = params as LocationParams;
         this.locationId = params.locationId;
         this.searchTerm = null;
         this.coordinates = null;

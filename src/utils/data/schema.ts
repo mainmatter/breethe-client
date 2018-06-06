@@ -9,7 +9,7 @@ export const location: ModelDefinition = {
     coordinates: { type: 'string' },
     country: { type: 'string' },
     identifier: { type: 'string' },
-    lastVisited: { type: 'string' }
+    visitedAt: { type: 'string' }
   },
   relationships: {
     measurements: { type: 'hasMany', model: 'measurement', inverse: 'location' }

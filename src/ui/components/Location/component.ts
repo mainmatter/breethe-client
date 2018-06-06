@@ -1,34 +1,53 @@
-/* tslint:disable:max-line-length */
 import Component, { tracked } from '@glimmer/component';
 import { debug } from '@glimmer/opcode-compiler';
+import IndexedDBSource from '@orbit/indexeddb';
+import Store from '@orbit/store';
 
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
 const QUALITY_SCALE = ['very_low', 'low', 'medium', 'high', 'very_high'];
 const QUALITY_LABEL = ['Excellent', 'Good', 'Ok', 'Poor', 'Very poor'];
 
 export default class LocationComponent extends Component {
-  @tracked loading = false;
+  args: {
+    locationId: string;
+    isSSR: boolean;
+    store: Store;
+    localStore: IndexedDBSource;
+    updateFogEffect: (index: number) => void;
+    pullIndexedDB: () => void;
+  };
 
-  @tracked location: any = {};
+  @tracked
+  location: Location | {} = {};
 
-  @tracked measurements = [];
+  @tracked
+  measurements: Measurement[] = [];
 
-  @tracked notFound = false;
+  @tracked
+  loading: boolean = false;
+
+  @tracked
+  notFound: boolean = false;
 
   @tracked('measurements')
-  get measurementLists() {
+  get measurementLists(): { first: Measurement[]; second: Measurement[] } {
     let { measurements } = this;
 
-    let orderedMeasurements = ORDERED_PARAMS.map((param) => {
+    let orderedMeasurements = ORDERED_PARAMS.map((parameter) => {
       let measurement = measurements.find((record) => {
-        return record.attributes.parameter === param;
+        return record.attributes.parameter === parameter;
       });
       if (measurement) {
         return measurement;
       }
       return {
+        id: '',
         attributes: {
-          parameter: param
+          parameter,
+          measuredAt: '',
+          unit: '',
+          value: '',
+          qualityIndex: ''
         }
       };
     });
@@ -41,7 +60,7 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('measurements')
-  get updatedDate() {
+  get updatedDate(): string {
     let { measurements } = this;
     if (measurements.length === 0) {
       return '–';
@@ -68,12 +87,12 @@ export default class LocationComponent extends Component {
     return dates[0].toLocaleString();
   }
 
-  get recordsFound() {
+  get recordsFound(): boolean {
     return this.location && this.measurements.length > 0;
   }
 
   @tracked('measurements')
-  get qualityIndex() {
+  get qualityIndex(): number {
     let { measurements } = this;
     let indexes = measurements
       .filter((measurement) => {
@@ -95,7 +114,7 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('qualityIndex')
-  get qualityLabel() {
+  get qualityLabel(): string {
     let { qualityIndex } = this;
     return QUALITY_LABEL[qualityIndex];
   }
@@ -105,7 +124,7 @@ export default class LocationComponent extends Component {
     this.loadMeasurements(this.args.locationId);
   }
 
-  async loadMeasurements(locationId) {
+  async loadMeasurements(locationId: string) {
     let { pullIndexedDB, store, isSSR, localStore } = this.args;
 
     let locationSignature = { type: 'location', id: locationId };
@@ -148,8 +167,8 @@ export default class LocationComponent extends Component {
 
       try {
         // regardless of whether record was found in cache, refresh
-        let location = await store.query(locationQuery);
-        let measurements = await store.query(measurementQuery);
+        let location: Location = await store.query(locationQuery);
+        let measurements: Measurement[] = await store.query(measurementQuery);
 
         if (location && measurements) {
           this.location = location;
@@ -167,7 +186,11 @@ export default class LocationComponent extends Component {
           this.args.updateFogEffect(this.qualityIndex);
         }
       } catch {
-        // only show not found error, if no records were found, if refresh failed, just continue showing records from cache
+        /*
+         only show not found error
+         if no records were found, if refresh failed
+           just continue showing records from cache
+        */
         this.notFound = !this.recordsFound;
       } finally {
         // loading is done in any case

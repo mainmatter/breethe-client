@@ -1,7 +1,7 @@
 <div data-test-search>
   <header class="header">
     <h1 class="logo.logo">
-      <a href="/" class="logo.logo-link logo-link" onclick={{action goToRoute ''}}>
+      <a href="/" class="logo.logo-link logo-link" onclick={{action searchByTerm ''}}>
         Breethe
       </a>
     </h1>
@@ -9,7 +9,12 @@
   </header>
 
   <div class="search-form-wrapper">
-    <SearchForm @term={{searchTerm}} @isDisabled={{isSearchDisabled}} @onSearch={{action goToRoute}} @onSearchByLocation={{action searchByLocation}} />
+    <SearchForm
+      @term={{searchTerm}}
+      @isDisabled={{isSearchDisabled}}
+      @onSearchByTerm={{action searchByTerm}}
+      @onSearchByLocation={{action searchByLocation}}
+    />
     {{#if @isSSR}}
       <div class="loader.loader form-loader" data-test-form-laoder></div>
     {{/if}}
@@ -57,6 +62,7 @@
           {{/if}}
         {{/if}}
       {{/if}}
+      
     {{/if}}
   </div>
 </div>
