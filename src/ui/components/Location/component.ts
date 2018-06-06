@@ -118,7 +118,7 @@ export default class LocationComponent extends Component {
   }
 
   readFromCache(locationSignature: RecordSignature) {
-    let { store, locationId } = this.args;
+    let { store } = this.args;
     this.location = store.cache.query((q) => q.findRecord(locationSignature));
     this.measurements = store.cache.query((q) =>
       q.findRelatedRecords(locationSignature, 'measurements')
@@ -127,7 +127,7 @@ export default class LocationComponent extends Component {
 
   async loadFromInlineCache(locationSignature: RecordSignature) {
     try {
-      let { isSSR, localStore, locationId } = this.args;
+      let { isSSR, localStore } = this.args;
 
       this.readFromCache(locationSignature);
 
