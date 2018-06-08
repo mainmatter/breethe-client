@@ -1,8 +1,8 @@
-import {Simple} from '@glimmer/interfaces';
-import {DOMTreeConstruction} from '@glimmer/runtime';
+import { Simple } from '@glimmer/interfaces';
+import { DOMTreeConstruction } from '@glimmer/runtime';
 
 export default class SSRDOMTreeConstruction extends DOMTreeConstruction {
-  static create(options: {document: Document}) {
+  static create(options: { document: Document }) {
     return new SSRDOMTreeConstruction(options.document);
   }
 

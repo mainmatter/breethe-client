@@ -1,6 +1,6 @@
-import {assign, Opaque} from '@glimmer/util';
-import {DynamicScope as GlimmerDynamicScope} from '@glimmer/runtime';
-import {PathReference} from '@glimmer/reference';
+import { PathReference } from '@glimmer/reference';
+import { DynamicScope as GlimmerDynamicScope } from '@glimmer/runtime';
+import { assign, Opaque } from '@glimmer/util';
 
 export default class DynamicScope implements GlimmerDynamicScope {
   private bucket: any;

@@ -35,15 +35,15 @@ export default class SearchForm extends Component {
     return !isNaN(numericValue);
   }
 
-  precisionRound(value: number, precision: number): number {
-    let factor = Math.pow(10, precision);
-    return Math.round(value * factor) / factor;
-  }
-
   @tracked('args')
   get value(): string {
     let { value } = this.args;
     let numericValue = parseFloat(value);
     return `${(this.valuePresent) ? this.precisionRound(numericValue, 2) : ''}`;
+  }
+
+  precisionRound(value: number, precision: number): number {
+    let factor = Math.pow(10, precision);
+    return Math.round(value * factor) / factor;
   }
 }

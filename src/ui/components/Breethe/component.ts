@@ -19,13 +19,6 @@ interface LocationParams {
   locationId?: string;
 }
 
-interface AppState {
-  origin: string;
-  route: string;
-  isSSR: boolean;
-  appData: any;
-}
-
 export default class Breethe extends Component {
 
   appState: AppState;
