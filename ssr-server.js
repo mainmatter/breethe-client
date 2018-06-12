@@ -79,7 +79,14 @@ async function preprender(req, res, next, data = {orbit: []}) {
 }
 
 app.get('/', preprender);
-app.get('/search', preprender);
+app.get('/search', async function(req, res, next) {
+  let searchTerm = req.query['search-term'];
+  if (searchTerm) {
+    res.redirect(`/search/${searchTerm}`);
+  } else {
+    await preprender(req, res, next);
+  }
+});
 
 app.get('/search/:lat,:lon', async function(req, res, next) {
   try {
