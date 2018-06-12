@@ -1,5 +1,9 @@
-const { expect } = require('chai');
+const { expect, use } = require('chai');
+const chaiUrl = require('chai-url');
+
 const visit = require('../helpers/visit');
+
+use(chaiUrl);
 
 describe('the search route', function() {
   describe('the SSR response', function() {
@@ -81,6 +85,19 @@ describe('the search route', function() {
           let cache = JSON.parse($response('#orbit-main-cache').html());
 
           expect(cache.orbit.indexOf(r => r.type === 'location' && r.id === 2 && r.attributes.city === 'Madrid')).to.be.ok;
+        });
+      });
+    });
+
+    describe('with no js', function() {
+      it('redirects query param to url', async function() {
+        await visit('/search?search-term=Munich', async (page) => {
+          expect(page.url()).to.have.path('/search/Munich');
+        });
+      });
+      it('redirects /search-by-coordinates', async function() {
+        await visit('/search-by-coordinates', async (page) => {
+          expect(page.url()).to.have.path('/search/29.4889,-98.3987');
         });
       });
     });
