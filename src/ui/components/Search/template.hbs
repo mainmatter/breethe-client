@@ -18,10 +18,6 @@
       />
       
       <SearchCoordinates @onSearch={{searchByLocation}} />
-
-      {{#if @isSSR}}
-        <div class="loader.loader form-loader" data-test-form-loader></div>
-      {{/if}}
     </section>
 
     <h2 class="results-title" id="search-results-title">

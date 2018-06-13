@@ -37,7 +37,7 @@ export default class Home extends Component {
 
   @tracked('args')
   get isSearchDisabled(): boolean {
-    return this.args.isSSR || !this.args.isOnline;
+    return !this.args.isOnline;
   }
 
   @tracked('locations', 'searchTerm', 'coordinates')
