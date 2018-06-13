@@ -11,15 +11,15 @@ describe('the index route', function() {
       });
     });
 
-    it('disables the location search field', async function() {
+    it('enables the location search field', async function() {
       await visit('/', async (page, $response) => {
-        expect($response('[data-test-search-input]').is(':disabled')).to.be.true;
+        expect($response('[data-test-search-input]').is(':disabled')).to.be.false;
       });
     });
 
-    it('disables the location search button', async function() {
+    it('enables the location search button', async function() {
       await visit('/', async (page, $response) => {
-        expect($response('[data-test-search-submit]').is(':disabled')).to.be.true;
+        expect($response('[data-test-search-submit]').is(':disabled')).to.be.false;
       });
     });
   });

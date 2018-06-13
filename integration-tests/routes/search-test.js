@@ -23,9 +23,17 @@ describe('the search route', function() {
       });
     });
 
-    it('renders a loader over the search form', async function() {
+    it('renders no loader over the search form', async function() {
       await visit('/search/Salzburg', async (page, $response) => {
         let element = $response('[data-test-form-loader]');
+
+        expect(element.length).to.be.not.ok;
+      });
+    });
+
+    it('includes the search result', async function() {
+      await visit('/search/Salzburg', async (page, $response) => {
+        let element = $response('[data-test-search-result="Salzburg"]');
 
         expect(element.length).to.be.ok;
       });
