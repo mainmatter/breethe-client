@@ -7,6 +7,11 @@ const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
 const QUALITY_SCALE = ['very_low', 'low', 'medium', 'high', 'very_high'];
 const QUALITY_LABEL = ['Excellent', 'Good', 'Ok', 'Poor', 'Very poor'];
 
+interface RecordSignature {
+  type: string;
+  id: string;
+}
+
 export default class LocationComponent extends Component {
   args: {
     locationId: string;
@@ -28,6 +33,10 @@ export default class LocationComponent extends Component {
 
   @tracked
   notFound: boolean = false;
+
+  get recordsFound(): boolean {
+    return this.location && this.measurements.length > 0;
+  }
 
   @tracked('measurements')
   get measurementLists(): { first: Measurement[]; second: Measurement[] } {
@@ -61,39 +70,22 @@ export default class LocationComponent extends Component {
 
   @tracked('measurements')
   get updatedDate(): string {
-    let { measurements } = this;
-    if (measurements.length === 0) {
-      return '–';
-    }
+    let { measurements, sortMeasurements } = this;
     let dates = measurements
       .filter((measurement) => {
         return !!measurement.attributes.measuredAt;
       })
       .map((measurement) => {
         return new Date(measurement.attributes.measuredAt);
-      });
-    if (dates.length === 0) {
-      return '–';
-    }
-    dates.sort((dateLeft, dateRight) => {
-      if (dateLeft > dateRight) {
-        return 1;
-      } else if (dateLeft < dateRight) {
-        return -1;
-      }
-      return 0;
-    });
+      })
+      .sort(sortMeasurements);
 
-    return dates[0].toLocaleString();
-  }
-
-  get recordsFound(): boolean {
-    return this.location && this.measurements.length > 0;
+    return dates.length > 0 ? dates[0].toLocaleString() : '–';
   }
 
   @tracked('measurements')
   get qualityIndex(): number {
-    let { measurements } = this;
+    let { measurements, sortMeasurements } = this;
     let indexes = measurements
       .filter((measurement) => {
         return !!measurement.attributes.qualityIndex;
@@ -101,15 +93,7 @@ export default class LocationComponent extends Component {
       .map((measurement) => {
         return QUALITY_SCALE.indexOf(measurement.attributes.qualityIndex);
       })
-      .sort((a, b) => {
-        if (a > b) {
-          return -1;
-        } else if (a < b) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      .sort(sortMeasurements);
     return indexes[0];
   }
 
@@ -124,78 +108,104 @@ export default class LocationComponent extends Component {
     this.loadMeasurements(this.args.locationId);
   }
 
-  async loadMeasurements(locationId: string) {
-    let { pullIndexedDB, store, isSSR, localStore } = this.args;
+  sortMeasurements(left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    }
+    return 0;
+  }
 
-    let locationSignature = { type: 'location', id: locationId };
-    let locationQuery = (q) => q.findRecord(locationSignature);
-    let measurementQuery = (q) => q.findRelatedRecords(locationSignature, 'measurements');
+  readFromCache(locationSignature: RecordSignature) {
+    let { store } = this.args;
+    this.location = store.cache.query((q) => q.findRecord(locationSignature));
+    this.measurements = store.cache.query((q) =>
+      q.findRelatedRecords(locationSignature, 'measurements')
+    );
+  }
 
-    let readFromCache = () => {
-      this.location = store.cache.query(locationQuery);
-      this.measurements = store.cache.query(measurementQuery);
-    };
-
+  async loadFromInlineCache(locationSignature: RecordSignature) {
     try {
-      // always try loading data from cache
-      readFromCache();
+      let { isSSR, localStore } = this.args;
+
+      this.readFromCache(locationSignature);
 
       // work around a bug in Orbit.js - see https://github.com/orbitjs/orbit/issues/476
       if (this.recordsFound && !isSSR) {
-        await localStore.push((t) => t.replaceRelatedRecords(
-          locationSignature,
-          'measurements',
-          this.measurements
-        ));
+        await localStore.push((t) =>
+          t.replaceRelatedRecords(
+            locationSignature,
+            'measurements',
+            this.measurements
+          )
+        );
       }
     } catch {
-      // fall through to other loading options…
+      // Allow other methods to find data
     }
+  }
+
+  async loadFromIndexedDB(locationSignature: RecordSignature) {
+    try {
+      await this.args.pullIndexedDB();
+      // try loading data from cache again after IndexedDB has been restored
+      this.readFromCache(locationSignature);
+    } catch {
+      // Allow other methods to find data
+    }
+  }
+
+  async loadFromAPI(locationSignature: RecordSignature) {
+    let { store } = this.args;
+    try {
+      let location: Location = await store.query((q) =>
+        q.findRecord(locationSignature)
+      );
+      let measurements: Measurement[] = await store.query((q) =>
+        q.findRelatedRecords(locationSignature, 'measurements')
+      );
+
+      if (location && measurements) {
+        this.location = location;
+        this.measurements = measurements;
+
+        // Remember we saw this location
+        let currentDate = new Date().toISOString();
+        store.update((t) =>
+          t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
+        );
+      }
+
+      // If records were found, update fog effect
+      if (this.recordsFound) {
+        this.args.updateFogEffect(this.qualityIndex);
+      }
+    } catch {
+      // Only show error if no records could be found in any source
+      this.notFound = !this.recordsFound;
+    }
+  }
+
+  async loadMeasurements(locationId: string) {
+    let { store, isSSR } = this.args;
+
+    let locationSignature = { type: 'location', id: locationId };
+
+    await this.loadFromInlineCache(locationSignature);
 
     if (!isSSR) {
-      try {
-        await pullIndexedDB();
-        // try loading data from cache again after IndexedDB has been restored
-        readFromCache();
-      } catch {
-        // fall through to other loading options…
-      }
+      await this.loadFromIndexedDB(locationSignature);
 
       if (!this.recordsFound) {
         this.loading = true;
       }
 
-      try {
-        // regardless of whether record was found in cache, refresh
-        let location: Location = await store.query(locationQuery);
-        let measurements: Measurement[] = await store.query(measurementQuery);
+      // Regardless of whether record was found in cache, refresh from API
+      await this.loadFromAPI(locationSignature);
 
-        if (location && measurements) {
-          this.location = location;
-          this.measurements = measurements;
-
-          // remember we saw this location
-          let currentDate = new Date().toISOString();
-          store.update((t) =>
-            t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
-          );
-        }
-
-        // if records were found, update fog effect
-        if (this.recordsFound) {
-          this.args.updateFogEffect(this.qualityIndex);
-        }
-      } catch {
-        /*
-         only show not found error
-         if no records were found, if refresh failed
-           just continue showing records from cache
-        */
-        this.notFound = !this.recordsFound;
-      } finally {
-        // loading is done in any case
-        this.loading = false;
-      }
+      // Loading is done in any case
+      this.loading = false;
     }
   }
 }

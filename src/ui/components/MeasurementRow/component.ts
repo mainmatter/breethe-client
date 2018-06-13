@@ -31,19 +31,19 @@ export default class SearchForm extends Component {
   @tracked('args')
   get valuePresent(): boolean {
     let value = this.args.value;
-    return value !== null && value !== undefined;
-  }
-
-  precisionRound(value: number, precision: number): number {
-    let factor = Math.pow(10, precision);
-    return Math.round(value * factor) / factor;
+    let numericValue = parseFloat(value);
+    return !isNaN(numericValue);
   }
 
   @tracked('args')
   get value(): string {
     let { value } = this.args;
     let numericValue = parseFloat(value);
-    let isNumber = !isNaN(numericValue);
-    return `${(isNumber) ? this.precisionRound(numericValue, 2) : ''}`;
+    return `${(this.valuePresent) ? this.precisionRound(numericValue, 2) : ''}`;
+  }
+
+  precisionRound(value: number, precision: number): number {
+    let factor = Math.pow(10, precision);
+    return Math.round(value * factor) / factor;
   }
 }

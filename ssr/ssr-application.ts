@@ -1,8 +1,10 @@
-import SSRDOMTreeConstruction from './ssr-dom-tree-construction';
-import SSRComponentManager from './ssr-component-manager';
 import DynamicScope from './dynamic-scope';
-import { TemplateIterator } from '@glimmer/runtime';
+import SSRComponentManager from './ssr-component-manager';
+import SSRDOMTreeConstruction from './ssr-dom-tree-construction';
+
 import { UpdatableReference } from '@glimmer/component';
+import { TemplateIterator } from '@glimmer/runtime';
+
 // tslint:disable-next-line:no-var-requires
 const SimpleDOM = require('simple-dom');
 
@@ -23,15 +25,17 @@ export default class SSRApplication extends Application {
   constructor(options: SSROptions) {
     super(options);
 
+    // tslint:disable-next-line:max-classes-per-file
     class AppState {
-      isSSR: boolean;
-      route: string;
-      origin: string;
-      appData: any;
 
       static create() {
         return new AppState();
       }
+
+      isSSR: boolean;
+      route: string;
+      origin: string;
+      appData: any;
 
       constructor() {
         this.route = options.route;
@@ -46,18 +50,39 @@ export default class SSRApplication extends Application {
     this.registerInitializer({
       initialize(registry) {
         // inject appendOperations into environment in order to get working createElement and setAttribute.
-        registry.register(`domTreeConstruction:/${rootName}/main/main`, SSRDOMTreeConstruction);
-        registry.registerInjection('domTreeConstruction', 'document', `document:/${rootName}/main/main`);
-        registry.registerInjection('environment', 'appendOperations', `domTreeConstruction:/${rootName}/main/main`);
-        registry.register(`app-state:/${rootName}/main/main`, AppState);
-        registry.registerInjection(`component:/${rootName}/components/Breethe`, 'appState', `app-state:/${rootName}/main/main`);
-        registry.register(`component-manager:/${rootName}/component-managers/main`, SSRComponentManager);
+        registry.register(
+          `domTreeConstruction:/${rootName}/main/main`,
+          SSRDOMTreeConstruction
+        );
+        registry.registerInjection(
+          'domTreeConstruction',
+          'document',
+          `document:/${rootName}/main/main`
+        );
+        registry.registerInjection(
+          'environment',
+          'appendOperations',
+          `domTreeConstruction:/${rootName}/main/main`
+        );
+        registry.register(
+          `app-state:/${rootName}/main/main`,
+          AppState
+        );
+        registry.registerInjection(
+          `component:/${rootName}/components/Breethe`,
+          'appState', `app-state:/${rootName}/main/main`
+        );
+        registry.register(
+          `component-manager:/${rootName}/component-managers/main`,
+          SSRComponentManager
+        );
       },
     });
     this.initialize();
     this.env = this.lookup(`environment:/${this.rootName}/main/main`);
   }
 
+  // tslint:disable-next-line:no-empty
   scheduleRerender() {}
 
   async renderToString(): Promise<string> {
@@ -66,7 +91,9 @@ export default class SSRApplication extends Application {
     let builder = this.builder.getBuilder(env);
     let dynamicScope = new DynamicScope();
     let templateIterator: TemplateIterator;
-    let self = new UpdatableReference({ roots: [{id: 1, component: 'Breethe', parent: this.element, nextSibling: null}] });
+    let self = new UpdatableReference({
+      roots: [{id: 1, component: 'Breethe', parent: this.element, nextSibling: null}]
+    });
 
     try {
       templateIterator = await this.loader.getTemplateIterator(this, env, builder, dynamicScope as any, self);
