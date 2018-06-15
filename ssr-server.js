@@ -94,19 +94,13 @@ app.get('/search', async function(req, res, next) {
 app.get('/search-by-coordinates', async function(req, res, next) {
   try {
     let ip = req.clientIp;
-
-    // If IP is localhost, use a sample IP for testing
-    if (ip === '::1') {
-      ip = '207.97.227.239';
-    }
-
     let geoData = geoip.lookup(ip);
 
     if (geoData) {
       let [ lat, lon ] = geoData.ll;
       res.redirect(`/search/${lat},${lon}`);
     } else {
-      res.redirect(`/search/`);
+      res.redirect(`/search/0,0`);
     }
   } catch(e) {
     next(e);

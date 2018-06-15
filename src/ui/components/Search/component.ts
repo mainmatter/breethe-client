@@ -13,7 +13,7 @@ export default class Home extends Component {
     isOnline: boolean;
     store: Store;
     searchTerm: string;
-    coordinates: number[];
+    coordinates: string;
     searchResults: string[];
     updateFogEffect: (index: number) => void;
     pullIndexedDB: () => void;
@@ -21,7 +21,7 @@ export default class Home extends Component {
   };
 
   @tracked
-  coordinates: number[] | null;
+  coordinates: string | null;
 
   @tracked
   locations: Location[] = [];
@@ -43,6 +43,12 @@ export default class Home extends Component {
   @tracked('locations', 'searchTerm', 'coordinates')
   get showRecent(): boolean {
     return this.locations.length > 0 && !this.searchTerm && !this.coordinates;
+  }
+
+  @tracked('coordinates')
+  get notFoundCoordinates(): boolean {
+    let { coordinates } = this;
+    return coordinates === '0,0';
   }
 
   constructor(options) {
@@ -74,9 +80,13 @@ export default class Home extends Component {
     updateFogEffect(0);
   }
 
-  async findLocations(searchTerm: string, coordinates: number[], searchResults: string[] = []) {
+  async findLocations(searchTerm: string, coordinates: string, searchResults: string[] = []) {
     this.error = null;
     let { store } = this.args;
+
+    if (!searchTerm && this.notFoundCoordinates) {
+      return;
+    }
 
     if (searchResults.length > 0) {
       this.locations = searchResults.map((id) => {
@@ -129,8 +139,9 @@ export default class Home extends Component {
     this.locations = locations.slice(0, 3);
   }
 
-  searchByLocation = async (coordinatesPromise: Promise<number[]>) => {
+  searchByLocation = async (coordinatesPromise: Promise<string>) => {
     this.loading = true;
+    this.error = null;
     this.searchTerm = '';
 
     try {
@@ -153,7 +164,7 @@ export default class Home extends Component {
     this.goToRoute(term);
   }
 
-  goToRoute(search: string, coordinates?: number[]) {
+  goToRoute(search: string, coordinates?: string) {
     if (search && search.length > 0) {
       this.searchTerm = search;
       this.coordinates = null;

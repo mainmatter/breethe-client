@@ -38,7 +38,6 @@
       {{#if loading}}
         <div class="loader.loader search-loader" data-test-form-loader></div>
       {{else}}
-      
         {{#if locations.length}}
           <ul>
             {{#each locations key="id" as |location|}}
@@ -50,6 +49,11 @@
             {{/each}}
           </ul>
         {{else}}
+          {{#if @locationNotFound}}
+            <em class="error" data-test-coordinates-error>
+              We could not estimate your location. Please use the search box.
+            </em>
+          {{/if}}
           {{#if error}}
             <em class="error" data-test-location-error>
               {{error}}
@@ -62,7 +66,6 @@
             {{/if}}
           {{/if}}
         {{/if}}
-        
       {{/if}}
     </section>
   </main>

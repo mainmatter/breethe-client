@@ -104,8 +104,11 @@ describe('the search route', function() {
         });
       });
       it('redirects /search-by-coordinates', async function() {
-        await visit('/search-by-coordinates', async (page) => {
-          expect(page.url()).to.have.path('/search/29.4889,-98.3987');
+        await visit('/search-by-coordinates', async (page, $response) => {
+          expect(page.url()).to.have.path('/search/0,0');
+
+          let error = $response('[data-test-coordinates-error]');
+          expect(error).to.be.ok;
         });
       });
     });
