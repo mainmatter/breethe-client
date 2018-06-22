@@ -10,18 +10,6 @@ describe('the index route', function() {
         expect(element.length).to.be.ok;
       });
     });
-
-    it('enables the location search field', async function() {
-      await visit('/', async (page, $response) => {
-        expect($response('[data-test-search-input]').is(':disabled')).to.be.false;
-      });
-    });
-
-    it('enables the location search button', async function() {
-      await visit('/', async (page, $response) => {
-        expect($response('[data-test-search-submit]').is(':disabled')).to.be.false;
-      });
-    });
   });
 
   describe('the rehydrated app', function() {
