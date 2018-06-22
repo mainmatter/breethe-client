@@ -97,7 +97,7 @@ describe('the search route', function() {
 
     it('redirects /search-by-coordinates', async function() {
       await visit('/search-by-coordinates', async (page, $response) => {
-        expect(page.url()).to.have.path('/search/0,0');
+        expect(page.url()).to.have.path('/search/200,200');
 
         let error = $response('[data-test-coordinates-error]');
         expect(error).to.be.ok;

@@ -100,7 +100,7 @@ app.get('/search-by-coordinates', async function(req, res, next) {
       let [ lat, lon ] = geoData.ll;
       res.redirect(`/search/${lat},${lon}`);
     } else {
-      res.redirect(`/search/0,0`);
+      res.redirect(`/search/200,200`);
     }
   } catch(e) {
     next(e);

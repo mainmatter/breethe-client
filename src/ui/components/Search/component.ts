@@ -48,7 +48,7 @@ export default class Home extends Component {
   @tracked('coordinates')
   get notFoundCoordinates(): boolean {
     let { coordinates } = this;
-    return coordinates === '0,0';
+    return coordinates === '200,200';
   }
 
   constructor(options) {
