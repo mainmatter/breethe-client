@@ -89,19 +89,18 @@ describe('the search route', function() {
       });
     });
 
-    describe('with no js', function() {
-      it('redirects query param to url', async function() {
-        await visit('/search?search-term=Munich', async (page) => {
-          expect(page.url()).to.have.path('/search/Munich');
-        });
+    it('redirects query param to url', async function() {
+      await visit('/search?search-term=Munich', async (page) => {
+        expect(page.url()).to.have.path('/search/Munich');
       });
-      it('redirects /search-by-coordinates', async function() {
-        await visit('/search-by-coordinates', async (page, $response) => {
-          expect(page.url()).to.have.path('/search/0,0');
+    });
 
-          let error = $response('[data-test-coordinates-error]');
-          expect(error).to.be.ok;
-        });
+    it('redirects /search-by-coordinates', async function() {
+      await visit('/search-by-coordinates', async (page, $response) => {
+        expect(page.url()).to.have.path('/search/0,0');
+
+        let error = $response('[data-test-coordinates-error]');
+        expect(error).to.be.ok;
       });
     });
   });
@@ -224,6 +223,29 @@ describe('the search route', function() {
 
           expect(element).to.be.null;
         });
+      });
+    });
+  });
+
+  describe('without javascript', function() {
+    it('renders search results', async function() {
+      await visit('/search/Salzburg', { disableJavascript: true }, async(page, $response) => {
+
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+        await page.click('[data-test-search-result="Salzburg"] a');
+        await page.waitForSelector('[data-test-location]');
+  
+        expect(page.url()).to.have.path('/location/2');
+      });
+    });
+
+    it('allows searching', async function() {
+      await visit('/search/', { disableJavascript: true }, async(page, $response) => {
+        await page.type('[data-test-search-input]', 'Salzburg');
+        await page.click('[data-test-search-submit]');
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+
+        expect(page.url()).to.have.path('/search/Salzburg');
       });
     });
   });
