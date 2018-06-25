@@ -19,7 +19,7 @@ export default class SearchForm extends Component {
       };
 
       let onError = (e) => {
-        reject(e.code);
+        reject(e);
       };
 
       navigator.geolocation.getCurrentPosition(onSuccess, onError, {
