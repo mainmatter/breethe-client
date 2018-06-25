@@ -48,18 +48,18 @@
 
 @keyframes foglayer_02_opacity {
   0% { opacity: .5; }
-  25% { opacity: .2; }
-  50% { opacity: .1; }
-  80% { opacity: .3; }
+  25% { opacity: .4; }
+  50% { opacity: .3; }
+  80% { opacity: .2; }
   100% { opacity: .5; }
 }
 
 @keyframes foglayer_03_opacity {
   0% { opacity: 1; }
   27% { opacity: .4; }
-  52% { opacity: .7; }
-  68% { opacity: .5; }
-  100% { opacity: .9; }
+  52% { opacity: .5; }
+  68% { opacity: .4; }
+  100% { opacity: .7; }
 }
 
 @keyframes foglayer_moveme {
