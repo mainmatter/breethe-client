@@ -13,7 +13,7 @@ export default class Home extends Component {
     isOnline: boolean;
     store: Store;
     searchTerm: string;
-    coordinates: string;
+    coordinates: string[];
     searchResults: string[];
     updateFogEffect: (index: number) => void;
     pullIndexedDB: () => void;
@@ -21,7 +21,7 @@ export default class Home extends Component {
   };
 
   @tracked
-  coordinates: string | null;
+  coordinates: string[] | null;
 
   @tracked
   locations: Location[] = [];
@@ -48,7 +48,13 @@ export default class Home extends Component {
   @tracked('coordinates')
   get notFoundCoordinates(): boolean {
     let { coordinates } = this;
-    return coordinates === '200,200';
+    if (!coordinates) {
+      return false;
+    }
+    let [lat, long] = coordinates;
+    let latitude = Math.abs(parseFloat(lat));
+    let longitude = Math.abs(parseFloat(long));
+    return latitude > 90 || longitude > 180;
   }
 
   constructor(options) {
@@ -80,7 +86,7 @@ export default class Home extends Component {
     updateFogEffect(0);
   }
 
-  async findLocations(searchTerm: string, coordinates: string, searchResults: string[] = []) {
+  async findLocations(searchTerm: string, coordinates: string[], searchResults: string[] = []) {
     this.error = null;
     let { store } = this.args;
 
@@ -103,7 +109,8 @@ export default class Home extends Component {
         if (searchTerm) {
           url = `${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`;
         } else {
-          url = `${__ENV_API_HOST__}/api/locations?filter[coordinates]=${coordinates}`;
+          let [lat, long] = coordinates;
+          url = `${__ENV_API_HOST__}/api/locations?filter[coordinates]=${lat},${long}`;
         }
         let locationsResponse = await fetch(url);
         let locationsPayload: { data: Location[] } = await locationsResponse.json();
@@ -139,7 +146,7 @@ export default class Home extends Component {
     this.locations = locations.slice(0, 3);
   }
 
-  searchByLocation = async (coordinatesPromise: Promise<string>) => {
+  searchByLocation = async (coordinatesPromise: Promise<string[]>) => {
     this.loading = true;
     this.error = null;
     this.searchTerm = '';
@@ -164,7 +171,7 @@ export default class Home extends Component {
     this.goToRoute(term);
   }
 
-  goToRoute(search: string, coordinates?: string) {
+  goToRoute(search: string, coordinates?: string[]) {
     if (search && search.length > 0) {
       this.searchTerm = search;
       this.coordinates = null;
