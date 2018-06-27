@@ -176,11 +176,6 @@ export default class LocationComponent extends Component {
           t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
         );
       }
-
-      // If records were found, update fog effect
-      if (this.recordsFound) {
-        this.args.updateFogEffect(this.qualityIndex);
-      }
     } catch {
       // Only show error if no records could be found in any source
       this.notFound = !this.recordsFound;
@@ -203,6 +198,11 @@ export default class LocationComponent extends Component {
 
       // Regardless of whether record was found in cache, refresh from API
       await this.loadFromAPI(locationSignature);
+
+      // If records were found, update fog effect
+      if (this.recordsFound) {
+        this.args.updateFogEffect(this.qualityIndex);
+      }
 
       // Loading is done in any case
       this.loading = false;

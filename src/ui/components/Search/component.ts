@@ -138,7 +138,7 @@ export default class Home extends Component {
       this.goToRoute(null, coordinates);
     } catch (e) {
       this.coordinates = [];
-      if (e !== LOCATION_PERMISSION_DENIED) {
+      if (e.code !== LOCATION_PERMISSION_DENIED) {
         this.error = 'An error occured while trying to access your location.';
       }
     } finally {
