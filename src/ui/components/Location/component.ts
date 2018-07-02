@@ -39,11 +39,23 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('measurements')
-  get measurementLists(): { first: Measurement[]; second: Measurement[] } {
+  get sortedMeasurements(): Measurement[] {
     let { measurements } = this;
+    return [...measurements].sort((left, right) => {
+      // Sort most recent dates first
+      return this.sortMeasurements(
+        right.attributes.measuredAt,
+        left.attributes.measuredAt
+      );
+    });
+  }
+
+  @tracked('sortedMeasurements')
+  get measurementLists(): { first: Measurement[]; second: Measurement[] } {
+    let { sortedMeasurements } = this;
 
     let orderedMeasurements = ORDERED_PARAMS.map((parameter) => {
-      let measurement = measurements.find((record) => {
+      let measurement = sortedMeasurements.find((record) => {
         return record.attributes.parameter === parameter;
       });
       if (measurement) {
@@ -70,8 +82,8 @@ export default class LocationComponent extends Component {
 
   @tracked('measurements')
   get updatedDate(): string {
-    let { measurements, sortMeasurements } = this;
-    let dates = measurements
+    let { measurementLists, sortMeasurements } = this;
+    let dates = [...measurementLists.first, ...measurementLists.second]
       .filter((measurement) => {
         return !!measurement.attributes.measuredAt;
       })
