@@ -24,7 +24,6 @@
   height: 100%;
   position: absolute;
   width: 200%;
-  will-change: transform;
 }
 
 .image-01, .image-02 {
