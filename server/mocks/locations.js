@@ -95,7 +95,7 @@ const ALL_MEASUREMENTS = [
       value: 49,
       unit: 'micro_grams_m3',
       parameter: 'no2',
-      measuredAt: '2016-10-28T16:00:00.000Z'
+      measuredAt: '2015-10-28T16:00:00.000Z'
     }
   },
   {
@@ -105,7 +105,27 @@ const ALL_MEASUREMENTS = [
       value: 35,
       unit: 'micro_grams_m3',
       parameter: 'co',
-      measuredAt: '2016-10-28T16:00:00.000Z'
+      measuredAt: '2015-10-28T16:00:00.000Z'
+    }
+  },
+  {
+    type: 'measurement',
+    id: '15',
+    attributes: {
+      value: 51,
+      unit: 'micro_grams_m3',
+      parameter: 'no2',
+      measuredAt: '2017-10-28T16:00:00.000Z'
+    }
+  },
+  {
+    type: 'measurement',
+    id: '16',
+    attributes: {
+      value: 37,
+      unit: 'micro_grams_m3',
+      parameter: 'co',
+      measuredAt: '2017-10-28T16:00:00.000Z'
     }
   }
 ];

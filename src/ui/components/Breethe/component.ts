@@ -5,7 +5,6 @@ import Store from '@orbit/store';
 import Navigo from 'navigo';
 import restoreCache from '../../../utils/data/restore-cache';
 import { setupStore } from '../../../utils/data/setup-store';
-import Location from '../Location/component';
 
 const MODE_SEARCH: string = 'search';
 const MODE_RESULTS: string = 'results';

@@ -34,5 +34,29 @@ describe('the location route', function() {
         expect(element).to.be.ok;
       });
     });
+
+    it('shows most recent data points', async function() {
+      await visit('/location/2', async (page, $response) => {
+        let element = await page.waitForSelector('[data-test-measurement="NO"]');
+
+        let no2Value = $response('[data-test-measurement="NO"] [data-test-measurement-value]').text().trim();
+        let coValue = $response('[data-test-measurement="CO"] [data-test-measurement-value]').text().trim();
+
+        expect(element).to.be.ok;
+        expect(no2Value).to.equal('51');
+        expect(coValue).to.equal('37');
+      });
+    });
+
+    it('calculates the date based on the measurements displayed', async function() {
+      await visit('/location/2', async (page, $response) => {
+        let element = await page.waitForSelector('[data-test-last-update]');
+
+        let dateValue = $response('[data-test-last-update]').text().trim();
+
+        expect(element).to.be.ok;
+        expect(dateValue).to.match(/(2016).(10).(28)/);
+      });
+    })
   });
 });
