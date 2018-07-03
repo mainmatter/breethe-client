@@ -1,5 +1,4 @@
 import Component, { tracked } from '@glimmer/component';
-import { debug } from '@glimmer/opcode-compiler';
 import IndexedDBSource from '@orbit/indexeddb';
 import Store from '@orbit/store';
 
@@ -44,8 +43,8 @@ export default class LocationComponent extends Component {
     return [...measurements].sort((left, right) => {
       // Sort most recent dates first
       return this.sortMeasurements(
-        right.attributes.measuredAt,
-        left.attributes.measuredAt
+        new Date(right.attributes.measuredAt),
+        new Date(left.attributes.measuredAt)
       );
     });
   }
@@ -194,8 +193,41 @@ export default class LocationComponent extends Component {
     }
   }
 
+  removeDuplicates(locationSignature: RecordSignature) {
+    let { store } = this.args;
+    // Find duplicates
+    let duplicates = ORDERED_PARAMS.reduce((accumulator, parameter) => {
+      let measuredIds = this.sortedMeasurements
+        .filter((record) => {
+          return record.attributes.parameter === parameter;
+        })
+        .map((record) => record.id);
+      if (measuredIds.length > 1) {
+        return [...accumulator, ...measuredIds.slice(1)];
+      }
+      return accumulator;
+    }, [] as string[]);
+
+    if (duplicates.length > 0) {
+      // Remove duplicates from this.measurements
+      this.measurements = this.measurements.filter((record) => {
+        return duplicates.indexOf(record.id) === -1;
+      });
+      // Remove duplicates from IndexedDB
+      duplicates.forEach((id) => {
+        let measurementSignature = { type: 'measurement', id };
+        store.update((t) => t.removeFromRelatedRecords(
+          locationSignature,
+          'measurements',
+          measurementSignature
+        ));
+        store.update((t) => t.removeRecord(measurementSignature));
+      });
+    }
+  }
+
   async loadMeasurements(locationId: string) {
-    let { store, isSSR } = this.args;
+    let { isSSR } = this.args;
 
     let locationSignature = { type: 'location', id: locationId };
 
@@ -210,6 +242,9 @@ export default class LocationComponent extends Component {
 
       // Regardless of whether record was found in cache, refresh from API
       await this.loadFromAPI(locationSignature);
+
+      // Delete duplicates by removing older entries
+      this.removeDuplicates(locationSignature);
 
       // If records were found, update fog effect
       if (this.recordsFound) {
