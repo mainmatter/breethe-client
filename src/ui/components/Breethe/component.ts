@@ -11,7 +11,7 @@ const MODE_RESULTS: string = 'results';
 
 interface SearchParams {
   searchTerm?: string;
-  coordinates?: string;
+  coordinates?: string[];
 }
 
 interface LocationParams {
@@ -113,7 +113,10 @@ export default class Breethe extends Component {
     this.router
       .on('/', () => this._setMode(MODE_SEARCH))
       .on('/search', () => this._setMode(MODE_SEARCH))
-      .on(/search\/(\-?\d+(\.\d+)?,\s*\-?\d+(\.\d+)?)/, (coordinates) => this._setMode(MODE_SEARCH, { coordinates }))
+      .on(/search\/(\-?\d+(\.\d+)?,\s*\-?\d+(\.\d+)?)/, (coordinatesRaw: string) => {
+        let coordinates: string[] = coordinatesRaw.match(/[-+]?[0-9]*\.?[0-9]+/g);
+        this._setMode(MODE_SEARCH, { coordinates });
+      })
       .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
       .on('/location/:locationId/', (params) => this._setMode(MODE_RESULTS, params))
       .resolve(this.appState.route);
@@ -127,8 +130,7 @@ export default class Breethe extends Component {
         params = params as SearchParams;
         this.locationId = null;
         this.searchTerm = params.searchTerm;
-        let { coordinates } = params;
-        this.coordinates = (coordinates) ? coordinates.match(/[-+]?[0-9]*\.?[0-9]+/g) : null;
+        this.coordinates = params.coordinates;
         break;
       case MODE_RESULTS:
         params = params as LocationParams;
