@@ -15,6 +15,7 @@ export default class Home extends Component {
     searchTerm: string;
     coordinates: string[];
     searchResults: string[];
+    locationNotFound: boolean;
     updateFogEffect: (index: number) => void;
     pullIndexedDB: () => void;
     router: Navigo;
@@ -47,14 +48,7 @@ export default class Home extends Component {
 
   @tracked('coordinates')
   get notFoundCoordinates(): boolean {
-    let { coordinates } = this;
-    if (!coordinates) {
-      return false;
-    }
-    let [lat, long] = coordinates;
-    let latitude = Math.abs(parseFloat(lat));
-    let longitude = Math.abs(parseFloat(long));
-    return latitude > 90 || longitude > 180;
+    return this.args.locationNotFound;
   }
 
   constructor(options) {
@@ -68,6 +62,7 @@ export default class Home extends Component {
       searchTerm,
       coordinates,
       searchResults,
+      locationNotFound,
       isSSR,
       updateFogEffect
     } = this.args;
@@ -75,14 +70,17 @@ export default class Home extends Component {
     this.searchTerm = searchTerm;
     this.coordinates = coordinates;
 
-    if (
-      (searchTerm && searchTerm.length > 0) ||
-      (coordinates && coordinates.length > 0)
-    ) {
-      this.findLocations(searchTerm, coordinates, searchResults);
-    } else if (!isSSR) {
-      this.loadRecent();
+    if (!locationNotFound) {
+      if (
+        (searchTerm && searchTerm.length > 0) ||
+        (coordinates && coordinates.length > 0)
+      ) {
+        this.findLocations(searchTerm, coordinates, searchResults);
+      } else if (!isSSR) {
+        this.loadRecent();
+      }
     }
+
     updateFogEffect(0);
   }
 

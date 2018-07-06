@@ -97,13 +97,20 @@ describe('the search route', function() {
 
     it('redirects /search-by-coordinates', async function() {
       await visit('/search-by-coordinates', async (page, $response) => {
-        expect(page.url()).to.have.path('/search/200,200');
+        expect(page.url()).to.have.path('/search/location-not-found');
 
         let error = $response('[data-test-coordinates-error]');
         expect(error).to.be.ok;
       });
     });
+
+    it('redirects to coordinates from IP', async function() {
+      await visit('/search-by-coordinates', { clientIP: '207.97.227.239'}, async (page, $response) => {
+        expect(page.url()).to.have.path('/search/29.4889,-98.3987');
+      });
+    });
   });
+
 
   describe('the rehydrated app', function() {
     it('is rendered', async function() {

@@ -12,6 +12,7 @@ const MODE_RESULTS: string = 'results';
 interface SearchParams {
   searchTerm?: string;
   coordinates?: string[];
+  locationNotFound?: boolean;
 }
 
 interface LocationParams {
@@ -47,6 +48,9 @@ export default class Breethe extends Component {
 
   @tracked
   coordinates: string[];
+
+  @tracked
+  locationNotFound: boolean;
 
   @tracked('mode')
   get isSearchMode(): boolean {
@@ -117,6 +121,7 @@ export default class Breethe extends Component {
         let coordinates: string[] = coordinatesRaw.match(/[-+]?[0-9]*\.?[0-9]+/g);
         this._setMode(MODE_SEARCH, { coordinates });
       })
+      .on('/search/location-not-found', () => this._setMode(MODE_SEARCH, { locationNotFound: true }))
       .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
       .on('/location/:locationId/', (params) => this._setMode(MODE_RESULTS, params))
       .resolve(this.appState.route);
@@ -131,6 +136,7 @@ export default class Breethe extends Component {
         this.locationId = null;
         this.searchTerm = params.searchTerm;
         this.coordinates = params.coordinates;
+        this.locationNotFound = params.locationNotFound;
         break;
       case MODE_RESULTS:
         params = params as LocationParams;
