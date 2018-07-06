@@ -170,59 +170,50 @@ export default class LocationComponent extends Component {
   async loadFromAPI(locationSignature: RecordSignature) {
     let { store } = this.args;
     try {
-      let location: Location = await store.query((q) =>
+      this.location = await store.query((q) =>
         q.findRecord(locationSignature)
       );
-      let measurements: Measurement[] = await store.query((q) =>
+    } catch {
+      // Fail silently
+    }
+    try {
+      // Remove old data
+      let cachedResults = this.measurements = store.cache.query((q) =>
+        q.findRelatedRecords(locationSignature, 'measurements')
+      );
+      cachedResults.forEach((oldMeasurement: Measurement) => {
+      let measurementSignature = { type: 'measurement', id: oldMeasurement.id };
+      store.update((t) => t.removeFromRelatedRecords(
+        locationSignature,
+        'measurements',
+        measurementSignature
+      ));
+      store.update((t) =>
+        t.removeRecord(measurementSignature));
+      });
+
+      // Fetch new data
+      this.measurements = await store.query((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
       );
 
-      if (location && measurements) {
-        this.location = location;
-        this.measurements = measurements;
-
-        // Remember we saw this location
-        let currentDate = new Date().toISOString();
-        store.update((t) =>
-          t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
-        );
-      }
+      // Remember we saw this location
+      let currentDate = new Date().toISOString();
+      store.update((t) =>
+        t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
+      );
     } catch {
       // Only show error if no records could be found in any source
       this.notFound = !this.recordsFound;
-    }
-  }
 
-  removeDuplicates(locationSignature: RecordSignature) {
-    let { store } = this.args;
-    // Find duplicates
-    let duplicates = ORDERED_PARAMS.reduce((accumulator, parameter) => {
-      let measuredIds = this.sortedMeasurements
-        .filter((record) => {
-          return record.attributes.parameter === parameter;
-        })
-        .map((record) => record.id);
-      if (measuredIds.length > 1) {
-        return [...accumulator, ...measuredIds.slice(1)];
+      // Restore measurements to cache if any
+      if (this.measurements) {
+        this.measurements.forEach((oldMeasurement) => {
+          store.update((t) =>
+            t.addRecord(oldMeasurement)
+          );
+        });
       }
-      return accumulator;
-    }, [] as string[]);
-
-    if (duplicates.length > 0) {
-      // Remove duplicates from this.measurements
-      this.measurements = this.measurements.filter((record) => {
-        return duplicates.indexOf(record.id) === -1;
-      });
-      // Remove duplicates from IndexedDB
-      duplicates.forEach((id) => {
-        let measurementSignature = { type: 'measurement', id };
-        store.update((t) => t.removeFromRelatedRecords(
-          locationSignature,
-          'measurements',
-          measurementSignature
-        ));
-        store.update((t) => t.removeRecord(measurementSignature));
-      });
     }
   }
 
@@ -242,9 +233,6 @@ export default class LocationComponent extends Component {
 
       // Regardless of whether record was found in cache, refresh from API
       await this.loadFromAPI(locationSignature);
-
-      // Delete duplicates by removing older entries
-      this.removeDuplicates(locationSignature);
 
       // If records were found, update fog effect
       if (this.recordsFound) {

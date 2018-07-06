@@ -92,26 +92,6 @@ const ALL_MEASUREMENTS = [
     type: 'measurement',
     id: '5',
     attributes: {
-      value: 49,
-      unit: 'micro_grams_m3',
-      parameter: 'no2',
-      measuredAt: '2015-10-28T16:00:00.000Z'
-    }
-  },
-  {
-    type: 'measurement',
-    id: '6',
-    attributes: {
-      value: 35,
-      unit: 'micro_grams_m3',
-      parameter: 'co',
-      measuredAt: '2015-10-28T16:00:00.000Z'
-    }
-  },
-  {
-    type: 'measurement',
-    id: '15',
-    attributes: {
       value: 51,
       unit: 'micro_grams_m3',
       parameter: 'no2',
@@ -120,7 +100,7 @@ const ALL_MEASUREMENTS = [
   },
   {
     type: 'measurement',
-    id: '16',
+    id: '6',
     attributes: {
       value: 37,
       unit: 'micro_grams_m3',
