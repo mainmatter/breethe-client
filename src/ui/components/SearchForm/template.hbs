@@ -1,4 +1,4 @@
-<form action="/search" onsubmit={{action submitSearch}} class="search-form">
+<form action="/search" method="GET" onsubmit={{action submitSearch}} class="search-form">
   <input
     value={{search}}
     oninput={{action updateSearch}}

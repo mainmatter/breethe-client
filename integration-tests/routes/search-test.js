@@ -228,17 +228,6 @@ describe('the search route', function() {
   });
 
   describe('without javascript', function() {
-    it('renders search results', async function() {
-      await visit('/search/Salzburg', { disableJavascript: true }, async(page, $response) => {
-
-        await page.waitForSelector('[data-test-search-result="Salzburg"]');
-        await page.click('[data-test-search-result="Salzburg"] a');
-        await page.waitForSelector('[data-test-location]');
-  
-        expect(page.url()).to.have.path('/location/2');
-      });
-    });
-
     it('allows searching', async function() {
       await visit('/search/', { disableJavascript: true }, async(page, $response) => {
         await page.type('[data-test-search-input]', 'Salzburg');
