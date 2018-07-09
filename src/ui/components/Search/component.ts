@@ -86,9 +86,9 @@ export default class Home extends Component {
 
   async findLocations(searchTerm: string, coordinates: string[], searchResults: string[] = []) {
     this.error = null;
-    let { store } = this.args;
+    let { store, locationNotFound } = this.args;
 
-    if (!searchTerm && this.notFoundCoordinates) {
+    if (!searchTerm && locationNotFound) {
       return;
     }
 

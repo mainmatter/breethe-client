@@ -117,10 +117,9 @@ export default class Breethe extends Component {
     this.router
       .on('/', () => this._setMode(MODE_SEARCH))
       .on('/search', () => this._setMode(MODE_SEARCH))
-      .on(/search\/(\-?\d+(\.\d+)?,\s*\-?\d+(\.\d+)?)/, (coordinatesRaw: string) => {
-        let coordinates: string[] = coordinatesRaw.match(/[-+]?[0-9]*\.?[0-9]+/g);
-        this._setMode(MODE_SEARCH, { coordinates });
-      })
+      .on(/search\/([-+]?[0-9]*\.?[0-9]*),([-+]?[0-9]*\.?[0-9]*)/, (lat, lon) =>
+        this._setMode(MODE_SEARCH, { coordinates: [lat, lon] })
+      )
       .on('/search/location-not-found', () => this._setMode(MODE_SEARCH, { locationNotFound: true }))
       .on('/search/:searchTerm', (params) => this._setMode(MODE_SEARCH, params))
       .on('/location/:locationId/', (params) => this._setMode(MODE_RESULTS, params))
