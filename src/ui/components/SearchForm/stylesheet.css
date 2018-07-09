@@ -8,11 +8,6 @@
 @include for-tablet-portrait-up() {
   :scope {
     display: flex;
-    flex-flow: column nowrap;
-  }
-
-  .search-form {
-    display: flex;
     flex-flow: row nowrap;
   }
 }
