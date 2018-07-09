@@ -42,6 +42,11 @@ export default class SearchForm extends Component {
     return `${(this.valuePresent) ? this.precisionRound(numericValue, 2) : ''}`;
   }
 
+  @tracked('args')
+  get measurementLabelledId(): string {
+    return `measurement-${this.args.parameter}`;
+  }
+
   precisionRound(value: number, precision: number): number {
     let factor = Math.pow(10, precision);
     return Math.round(value * factor) / factor;

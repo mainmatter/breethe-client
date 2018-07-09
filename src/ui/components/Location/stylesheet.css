@@ -7,6 +7,11 @@
 :scope {
   block-name: Location;
   @include component-screen();
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+  justify-content: space-between;
 }
 
 .logo-link {
@@ -14,12 +19,7 @@
 }
 
 .location-data {
-  box-sizing: border-box;
   padding: 1rem;
-  display: flex;
-  flex-flow: column nowrap;
-  min-height: 100vh;
-  justify-content: space-between;
 }
 
 .title {
