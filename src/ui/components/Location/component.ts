@@ -2,6 +2,8 @@ import Component, { tracked } from '@glimmer/component';
 import IndexedDBSource from '@orbit/indexeddb';
 import Store from '@orbit/store';
 
+declare const __ENV_API_HOST__: string;
+
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
 const QUALITY_SCALE = ['very_low', 'low', 'medium', 'high', 'very_high'];
 const QUALITY_LABEL = ['Excellent', 'Good', 'Ok', 'Poor', 'Very poor'];
@@ -177,6 +179,10 @@ export default class LocationComponent extends Component {
       // Fail silently
     }
     try {
+      let url = `${__ENV_API_HOST__}/api/locations/${locationSignature.id}/measurements`;
+      let measurementsResponse: Response = await fetch(url);
+      let measurementsPayload: { data: Measurement[] } = await measurementsResponse.json();
+
       // Remove old data
       let cachedResults = this.measurements = store.cache.query((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
@@ -192,8 +198,13 @@ export default class LocationComponent extends Component {
         t.removeRecord(measurementSignature));
       });
 
-      // Fetch new data
-      this.measurements = await store.query((q) =>
+      // Add new data to store
+      await store.update((t) => {
+        return measurementsPayload.data.map((record) => {
+          return t.addRecord(record);
+        });
+      });
+      this.measurements = store.cache.query((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
       );
 
@@ -205,15 +216,6 @@ export default class LocationComponent extends Component {
     } catch {
       // Only show error if no records could be found in any source
       this.notFound = !this.recordsFound;
-
-      // Restore measurements to cache if any
-      if (this.measurements) {
-        this.measurements.forEach((oldMeasurement) => {
-          store.update((t) =>
-            t.addRecord(oldMeasurement)
-          );
-        });
-      }
     }
   }
 
