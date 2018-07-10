@@ -187,15 +187,27 @@ export default class LocationComponent extends Component {
       let cachedResults = this.measurements = store.cache.query((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
       );
-      cachedResults.forEach((oldMeasurement: Measurement) => {
-      let measurementSignature = { type: 'measurement', id: oldMeasurement.id };
-      store.update((t) => t.removeFromRelatedRecords(
-        locationSignature,
-        'measurements',
-        measurementSignature
-      ));
-      store.update((t) =>
-        t.removeRecord(measurementSignature));
+
+      // Remove relationships
+      await store.update((t) => {
+        return cachedResults.map((result) => {
+          let measurementSignature = { type: 'measurement', id: result.id };
+          return t.removeFromRelatedRecords(
+            locationSignature,
+            'measurements',
+            measurementSignature
+          );
+        });
+      });
+
+      // Remove old records
+      await store.update((t) => {
+        return cachedResults.map((result) => {
+          let measurementSignature = { type: 'measurement', id: result.id };
+          return t.removeRecord(
+            measurementSignature
+          );
+        });
       });
 
       // Add new data to store
