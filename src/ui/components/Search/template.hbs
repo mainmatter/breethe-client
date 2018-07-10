@@ -8,64 +8,66 @@
     <p class="statement">Air Quality Data for Locations around the World</p>
   </header>
 
-  <div class="search-form-wrapper">
-    <SearchForm
-      @term={{searchTerm}}
-      @isDisabled={{isSearchDisabled}}
-      @onSearchByTerm={{action searchByTerm}}
-      @onSearchByLocation={{action searchByLocation}}
-    />
-    
-    <SearchCoordinates @onSearch={{searchByLocation}} />
+  <main>
+    <section class="search-form-wrapper" aria-label="Search locations">
+      <SearchForm
+        @term={{searchTerm}}
+        @isDisabled={{isSearchDisabled}}
+        @onSearchByTerm={{action searchByTerm}}
+        @onSearchByLocation={{action searchByLocation}}
+      />
+      
+      <SearchCoordinates @onSearch={{searchByLocation}} />
 
-    {{#if @isSSR}}
-      <div class="loader.loader form-loader" data-test-form-laoder></div>
-    {{/if}}
-  </div>
-
-  <h2 class="results-title">
-    {{#if searchTerm}}
-      <span data-test-locations-for-search-term>Locations for "<strong class="search-term">{{searchTerm}}</strong>"</span>
-    {{else}}
-      {{#if coordinates}}
-        <span data-test-near-locations>Locations near you</span>
-      {{else}}
-        {{#if showRecent}}
-          <span data-test-recent-locations>Recent Locations</span>
-        {{/if}}
+      {{#if @isSSR}}
+        <div class="loader.loader form-loader" data-test-form-loader></div>
       {{/if}}
-    {{/if}}
-  </h2>
+    </section>
 
-  <div class="results">
-    {{#if loading}}
-      <div class="loader.loader search-loader" data-test-form-loader></div>
-    {{else}}
-    
-      {{#if locations.length}}
-        <ul>
-          {{#each locations key="id" as |location|}}
-            <li class="result" data-test-search-result={{location.attributes.city}}>
-              <a href="/location/{{location.id}}" class="result-link" data-navigo>
-                {{location.attributes.label}}
-              </a>
-            </li>
-          {{/each}}
-        </ul>
+    <h2 class="results-title" id="search-results-title">
+      {{#if searchTerm}}
+        <span data-test-locations-for-search-term>Locations for "<strong class="search-term">{{searchTerm}}</strong>"</span>
       {{else}}
-        {{#if error}}
-          <em class="error" data-test-location-error>
-            {{error}}
-          </em>
+        {{#if coordinates}}
+          <span data-test-near-locations>Locations near you</span>
         {{else}}
-          {{#if searchTerm}}
-            <em class="no-results" data-test-no-results>
-              We could not find locations with your search term.
-            </em>
+          {{#if showRecent}}
+            <span data-test-recent-locations>Recent Locations</span>
           {{/if}}
         {{/if}}
       {{/if}}
+    </h2>
+
+    <section class="results" aria-labelledby="search-results-title">
+      {{#if loading}}
+        <div class="loader.loader search-loader" data-test-form-loader></div>
+      {{else}}
       
-    {{/if}}
-  </div>
+        {{#if locations.length}}
+          <ul>
+            {{#each locations key="id" as |location|}}
+              <li class="result" data-test-search-result={{location.attributes.city}}>
+                <a href="/location/{{location.id}}" class="result-link" data-navigo>
+                  {{location.attributes.label}}
+                </a>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          {{#if error}}
+            <em class="error" data-test-location-error>
+              {{error}}
+            </em>
+          {{else}}
+            {{#if searchTerm}}
+              <em class="no-results" data-test-no-results>
+                We could not find locations with your search term.
+              </em>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+        
+      {{/if}}
+    </section>
+  </main>
 </div>
