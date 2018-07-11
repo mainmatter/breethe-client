@@ -46,11 +46,6 @@ export default class Home extends Component {
     return this.locations.length > 0 && !this.searchTerm && !this.coordinates;
   }
 
-  @tracked('coordinates')
-  get notFoundCoordinates(): boolean {
-    return this.args.locationNotFound;
-  }
-
   constructor(options) {
     super(options);
     assert(
