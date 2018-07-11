@@ -1,5 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
-import IndexedDBSource from '@orbit/indexeddb';
+import IndexedDBStore from '@orbit/indexeddb';
+import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
 
 declare const __ENV_API_HOST__: string;
@@ -18,7 +19,8 @@ export default class LocationComponent extends Component {
     locationId: string;
     isSSR: boolean;
     store: Store;
-    localStore: IndexedDBSource;
+    localStore: IndexedDBStore;
+    remoteStore: JSONAPIStore;
     updateFogEffect: (index: number) => void;
     pullIndexedDB: () => void;
   };
@@ -170,7 +172,7 @@ export default class LocationComponent extends Component {
   }
 
   async loadFromAPI(locationSignature: RecordSignature) {
-    let { store } = this.args;
+    let { store, localStore } = this.args;
     try {
       this.location = await store.query((q) =>
         q.findRecord(locationSignature)
@@ -179,9 +181,9 @@ export default class LocationComponent extends Component {
       // Fail silently
     }
     try {
-      let url = `${__ENV_API_HOST__}/api/locations/${locationSignature.id}/measurements`;
-      let measurementsResponse: Response = await fetch(url);
-      let measurementsPayload: { data: Measurement[] } = await measurementsResponse.json();
+      let transform = await localStore.pull((q) =>
+        q.findRelatedRecords(locationSignature, 'measurements')
+      );
 
       // Remove old data
       let cachedResults = this.measurements = store.cache.query((q) =>
@@ -211,11 +213,7 @@ export default class LocationComponent extends Component {
       });
 
       // Add new data to store
-      await store.update((t) => {
-        return measurementsPayload.data.map((record) => {
-          return t.addRecord(record);
-        });
-      });
+      await store.sync(transform);
       this.measurements = store.cache.query((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
       );

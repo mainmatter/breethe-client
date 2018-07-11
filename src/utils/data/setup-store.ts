@@ -7,7 +7,14 @@ import { schema as schemaDefinition } from './schema';
 
 declare const __ENV_API_HOST__: string;
 
-export function setupStore(appState: AppState): { store: Store; local?: IndexedDBStore; coordinator?: Coordinator } {
+interface StoreSetup {
+  store: Store;
+  local?: IndexedDBStore;
+  remote?: JSONAPIStore;
+  coordinator?: Coordinator;
+}
+
+export function setupStore(appState: AppState): StoreSetup {
   let schema = new Schema(schemaDefinition);
   let store = new Store({ schema });
 
@@ -70,6 +77,7 @@ export function setupStore(appState: AppState): { store: Store; local?: IndexedD
     return {
       store,
       local,
+      remote,
       coordinator
     };
   }
