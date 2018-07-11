@@ -3,8 +3,6 @@ import IndexedDBStore from '@orbit/indexeddb';
 import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
 
-declare const __ENV_API_HOST__: string;
-
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
 const QUALITY_SCALE = ['very_low', 'low', 'medium', 'high', 'very_high'];
 const QUALITY_LABEL = ['Excellent', 'Good', 'Ok', 'Poor', 'Very poor'];
@@ -42,23 +40,11 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('measurements')
-  get sortedMeasurements(): Measurement[] {
-    let { measurements } = this;
-    return [...measurements].sort((left, right) => {
-      // Sort most recent dates first
-      return this.sortMeasurements(
-        new Date(right.attributes.measuredAt),
-        new Date(left.attributes.measuredAt)
-      );
-    });
-  }
-
-  @tracked('sortedMeasurements')
   get measurementLists(): { first: Measurement[]; second: Measurement[] } {
-    let { sortedMeasurements } = this;
+    let { measurements } = this;
 
     let orderedMeasurements = ORDERED_PARAMS.map((parameter) => {
-      let measurement = sortedMeasurements.find((record) => {
+      let measurement = measurements.find((record) => {
         return record.attributes.parameter === parameter;
       });
       if (measurement) {

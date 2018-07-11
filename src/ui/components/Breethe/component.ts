@@ -1,6 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
 import Coordinator from '@orbit/coordinator';
-import IndexedDBSource from '@orbit/indexeddb';
+import IndexedDBStore from '@orbit/indexeddb';
 import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
 import Navigo from 'navigo';
@@ -21,13 +21,12 @@ interface LocationParams {
 }
 
 export default class Breethe extends Component {
-
   appState: AppState;
 
   router: Navigo;
 
   store: Store;
-  local: IndexedDBSource;
+  local: IndexedDBStore;
   remote: JSONAPIStore;
   coordinator: Coordinator;
   searchResults: string[];
