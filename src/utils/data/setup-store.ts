@@ -55,12 +55,6 @@ export function setupStore(appState: AppState): StoreSetup {
       interfaces: ['queryable', 'syncable']
     });
 
-    let remoteStoreSync = new SyncStrategy({
-      blocking: true,
-      source: 'remote',
-      target: 'store'
-    });
-
     const localStoreSync = new SyncStrategy({
       source: 'store',
       target: 'local',
@@ -69,10 +63,8 @@ export function setupStore(appState: AppState): StoreSetup {
 
     const coordinator = new Coordinator({
       sources: [store, local, remote],
-      strategies: [remoteRequestStrategy, remoteStoreSync, localStoreSync, logger]
+      strategies: [remoteRequestStrategy, localStoreSync, logger]
     });
-
-    coordinator.activate();
 
     return {
       store,

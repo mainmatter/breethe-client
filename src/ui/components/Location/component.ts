@@ -1,4 +1,5 @@
 import Component, { tracked } from '@glimmer/component';
+import { Transform } from '@orbit/data';
 import IndexedDBStore from '@orbit/indexeddb';
 import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
@@ -158,7 +159,7 @@ export default class LocationComponent extends Component {
   }
 
   async loadFromAPI(locationSignature: RecordSignature) {
-    let { store, localStore } = this.args;
+    let { store, localStore, remoteStore } = this.args;
     try {
       this.location = await store.query((q) =>
         q.findRecord(locationSignature)
@@ -167,35 +168,30 @@ export default class LocationComponent extends Component {
       // Fail silently
     }
     try {
-      let transform = await localStore.pull((q) =>
+      // Fetch data from the API
+      let transform: Transform[] = await remoteStore.pull((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
       );
 
       // Remove old data
-      let cachedResults = this.measurements = store.cache.query((q) =>
+      let cachedResults = store.cache.query((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
       );
 
-      // Remove relationships
+      // Remove previous relationships and records
       await store.update((t) => {
-        return cachedResults.map((result) => {
+        return cachedResults.reduce((accumulator, result) => {
           let measurementSignature = { type: 'measurement', id: result.id };
-          return t.removeFromRelatedRecords(
+          let deleteRelationship = t.removeFromRelatedRecords(
             locationSignature,
             'measurements',
             measurementSignature
           );
-        });
-      });
-
-      // Remove old records
-      await store.update((t) => {
-        return cachedResults.map((result) => {
-          let measurementSignature = { type: 'measurement', id: result.id };
-          return t.removeRecord(
+          let deleteRecord = t.removeRecord(
             measurementSignature
           );
-        });
+          return [...accumulator, deleteRelationship, deleteRecord];
+        }, [] as Transform[]);
       });
 
       // Add new data to store
