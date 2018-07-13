@@ -159,9 +159,15 @@ export default class LocationComponent extends Component {
   }
 
   async loadFromAPI(locationSignature: RecordSignature) {
-    let { store, localStore, remoteStore } = this.args;
+    let { store, remoteStore } = this.args;
     try {
-      this.location = await store.query((q) =>
+      // Fetch data from the API
+      let transform = await remoteStore.pull((q) =>
+        q.findRecord(locationSignature)
+      );
+      // Sync it with the store
+      store.sync(transform);
+      this.location = await store.cache.query((q) =>
         q.findRecord(locationSignature)
       );
     } catch {
