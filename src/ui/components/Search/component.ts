@@ -13,7 +13,7 @@ export default class Home extends Component {
     isOnline: boolean;
     store: Store;
     searchTerm: string;
-    coordinates: string[];
+    coordinates: number[];
     searchResults: string[];
     locationNotFound: boolean;
     updateFogEffect: (index: number) => void;
@@ -22,7 +22,7 @@ export default class Home extends Component {
   };
 
   @tracked
-  coordinates: string[] | null;
+  coordinates: number[] | null;
 
   @tracked
   locations: Location[] = [];
@@ -79,7 +79,7 @@ export default class Home extends Component {
     updateFogEffect(0);
   }
 
-  async findLocations(searchTerm: string, coordinates: string[], searchResults: string[] = []) {
+  async findLocations(searchTerm: string, coordinates: number[], searchResults: string[] = []) {
     this.error = null;
     let { store, locationNotFound } = this.args;
 
@@ -139,7 +139,7 @@ export default class Home extends Component {
     this.locations = locations.slice(0, 3);
   }
 
-  searchByLocation = async (coordinatesPromise: Promise<string[]>) => {
+  searchByLocation = async (coordinatesPromise: Promise<number[]>) => {
     this.loading = true;
     this.error = null;
     this.searchTerm = '';
@@ -164,7 +164,7 @@ export default class Home extends Component {
     this.goToRoute(term);
   }
 
-  goToRoute(search: string, coordinates?: string[]) {
+  goToRoute(search: string, coordinates?: number[]) {
     if (search && search.length > 0) {
       this.searchTerm = search;
       this.coordinates = null;

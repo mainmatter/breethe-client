@@ -11,7 +11,7 @@ const MODE_RESULTS: string = 'results';
 
 interface SearchParams {
   searchTerm?: string;
-  coordinates?: string[];
+  coordinates?: number[];
   locationNotFound?: boolean;
 }
 
@@ -47,7 +47,7 @@ export default class Breethe extends Component {
   searchTerm: string;
 
   @tracked
-  coordinates: string[];
+  coordinates: number[];
 
   @tracked
   locationNotFound: boolean;
