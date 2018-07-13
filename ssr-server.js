@@ -5,6 +5,8 @@ const vm = require('vm');
 const morgan = require('morgan');
 const request = require('request-promise-native');
 const GlimmerRenderer = require('./dist/ssr-app.js');
+const geoip = require('geoip-lite');
+const requestIp = require('request-ip');
 
 const HTML = fs.readFileSync('dist/index.html').toString();
 
@@ -28,6 +30,7 @@ if (USE_SENTRY) {
 
 app.use(morgan('common'));
 app.use(express.static('dist', { index: false }));
+app.use(requestIp.mw())
 
 async function searchLocation(searchTermOrCoordinates) {
   let url;
@@ -79,7 +82,30 @@ async function preprender(req, res, next, data = {orbit: []}) {
 }
 
 app.get('/', preprender);
-app.get('/search', preprender);
+app.get('/search', async function(req, res, next) {
+  let searchTerm = req.query['search-term'];
+  if (searchTerm) {
+    res.redirect(`/search/${searchTerm}`);
+  } else {
+    await preprender(req, res, next);
+  }
+});
+
+app.get('/search-by-coordinates', async function(req, res, next) {
+  try {
+    let ip = req.clientIp;
+    let geoData = geoip.lookup(ip);
+
+    if (geoData) {
+      let [ lat, lon ] = geoData.ll;
+      res.redirect(`/search/${lat},${lon}`);
+    } else {
+      res.redirect(`/search/location-not-found`);
+    }
+  } catch(e) {
+    next(e);
+  }
+});
 
 app.get('/search/:lat,:lon', async function(req, res, next) {
   try {

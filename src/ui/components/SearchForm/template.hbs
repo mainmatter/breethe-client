@@ -1,10 +1,11 @@
-<form onsubmit={{action submitSearch}}>
+<form action="/search" method="GET" onsubmit={{action submitSearch}}>
   <input
     value={{search}}
     oninput={{action updateSearch}}
-    placeholder="Enter location"
     disabled={{@isDisabled}}
-    class="search-term" 
+    placeholder="Enter location"
+    class="search-term"
+    name="search-term"
     aria-label="Location name"
     data-test-search-input
   >

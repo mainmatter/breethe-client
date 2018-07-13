@@ -1,5 +1,9 @@
-const { expect } = require('chai');
+const { expect, use } = require('chai');
+const chaiUrl = require('chai-url');
+
 const visit = require('../helpers/visit');
+
+use(chaiUrl);
 
 describe('the search route', function() {
   describe('the SSR response', function() {
@@ -19,9 +23,9 @@ describe('the search route', function() {
       });
     });
 
-    it('renders a loader over the search form', async function() {
+    it('includes the search result', async function() {
       await visit('/search/Salzburg', async (page, $response) => {
-        let element = $response('[data-test-form-loader]');
+        let element = $response('[data-test-search-result="Salzburg"]');
 
         expect(element.length).to.be.ok;
       });
@@ -84,7 +88,29 @@ describe('the search route', function() {
         });
       });
     });
+
+    it('redirects query param to url', async function() {
+      await visit('/search?search-term=Munich', async (page) => {
+        expect(page.url()).to.have.path('/search/Munich');
+      });
+    });
+
+    it('redirects /search-by-coordinates', async function() {
+      await visit('/search-by-coordinates', async (page, $response) => {
+        expect(page.url()).to.have.path('/search/location-not-found');
+
+        let error = $response('[data-test-coordinates-error]');
+        expect(error).to.be.ok;
+      });
+    });
+
+    it('redirects to coordinates from IP', async function() {
+      await visit('/search-by-coordinates', { clientIP: '207.97.227.239'}, async (page, $response) => {
+        expect(page.url()).to.have.path('/search/29.4889,-98.3987');
+      });
+    });
   });
+
 
   describe('the rehydrated app', function() {
     it('is rendered', async function() {
@@ -204,6 +230,18 @@ describe('the search route', function() {
 
           expect(element).to.be.null;
         });
+      });
+    });
+  });
+
+  describe('without javascript', function() {
+    it('allows searching', async function() {
+      await visit('/search/', { disableJavascript: true }, async(page, $response) => {
+        await page.type('[data-test-search-input]', 'Salzburg');
+        await page.click('[data-test-search-submit]');
+        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+
+        expect(page.url()).to.have.path('/search/Salzburg');
       });
     });
   });

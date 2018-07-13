@@ -13,6 +13,16 @@ async function visit(route, options, callback) {
   let browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   let page = await browser.newPage();
 
+  if (options.clientIP) {
+    page.setExtraHTTPHeaders({
+      'X-Client-IP': options.clientIP
+    });
+  }
+
+  if (options.disableJavascript) {
+    page.setJavaScriptEnabled(false);
+  }
+
   // make sure old service workers are gone…
   await page._client.send('ServiceWorker.enable');
   await page._client.send('ServiceWorker.stopAllWorkers');

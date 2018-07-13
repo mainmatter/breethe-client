@@ -15,6 +15,7 @@ export default class Home extends Component {
     searchTerm: string;
     coordinates: number[];
     searchResults: string[];
+    locationNotFound: boolean;
     updateFogEffect: (index: number) => void;
     pullIndexedDB: () => void;
     router: Navigo;
@@ -37,7 +38,7 @@ export default class Home extends Component {
 
   @tracked('args')
   get isSearchDisabled(): boolean {
-    return this.args.isSSR || !this.args.isOnline;
+    return !this.args.isOnline;
   }
 
   @tracked('locations', 'searchTerm', 'coordinates')
@@ -56,6 +57,7 @@ export default class Home extends Component {
       searchTerm,
       coordinates,
       searchResults,
+      locationNotFound,
       isSSR,
       updateFogEffect
     } = this.args;
@@ -63,20 +65,27 @@ export default class Home extends Component {
     this.searchTerm = searchTerm;
     this.coordinates = coordinates;
 
-    if (
-      (searchTerm && searchTerm.length > 0) ||
-      (coordinates && coordinates.length > 0)
-    ) {
-      this.findLocations(searchTerm, coordinates, searchResults);
-    } else if (!isSSR) {
-      this.loadRecent();
+    if (!locationNotFound) {
+      if (
+        (searchTerm && searchTerm.length > 0) ||
+        (coordinates && coordinates.length > 0)
+      ) {
+        this.findLocations(searchTerm, coordinates, searchResults);
+      } else if (!isSSR) {
+        this.loadRecent();
+      }
     }
+
     updateFogEffect(0);
   }
 
   async findLocations(searchTerm: string, coordinates: number[], searchResults: string[] = []) {
     this.error = null;
-    let { store } = this.args;
+    let { store, locationNotFound } = this.args;
+
+    if (!searchTerm && locationNotFound) {
+      return;
+    }
 
     if (searchResults.length > 0) {
       this.locations = searchResults.map((id) => {
@@ -93,7 +102,8 @@ export default class Home extends Component {
         if (searchTerm) {
           url = `${__ENV_API_HOST__}/api/locations?filter[name]=${searchTerm}`;
         } else {
-          url = `${__ENV_API_HOST__}/api/locations?filter[coordinates]=${coordinates}`;
+          let [lat, long] = coordinates;
+          url = `${__ENV_API_HOST__}/api/locations?filter[coordinates]=${lat},${long}`;
         }
         let locationsResponse = await fetch(url);
         let locationsPayload: { data: Location[] } = await locationsResponse.json();
@@ -131,6 +141,7 @@ export default class Home extends Component {
 
   searchByLocation = async (coordinatesPromise: Promise<number[]>) => {
     this.loading = true;
+    this.error = null;
     this.searchTerm = '';
 
     try {
