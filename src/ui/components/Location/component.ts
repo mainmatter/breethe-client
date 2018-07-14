@@ -179,7 +179,7 @@ export default class LocationComponent extends Component {
         q.findRelatedRecords(locationSignature, 'measurements')
       );
 
-      // Remove old data
+      // Find cached items
       let cachedResults = store.cache.query((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
       );
