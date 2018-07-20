@@ -127,15 +127,14 @@ export default class LocationComponent extends Component {
     );
   }
 
-  async loadFromInlineCache(locationSignature: RecordSignature) {
+  loadFromInlineCache(locationSignature: RecordSignature) {
+    let { isSSR, localStore } = this.args;
     try {
-      let { isSSR, localStore } = this.args;
-
       this.readFromCache(locationSignature);
 
       // work around a bug in Orbit.js - see https://github.com/orbitjs/orbit/issues/476
       if (this.recordsFound && !isSSR) {
-        await localStore.push((t) =>
+        localStore.push((t) =>
           t.replaceRelatedRecords(
             locationSignature,
             'measurements',
@@ -143,8 +142,11 @@ export default class LocationComponent extends Component {
           )
         );
       }
-    } catch {
-      // Allow other methods to find data
+    } catch (error) {
+      // Re-throw the exception if we're on SSR because we cannot recover
+      if (isSSR) {
+        throw error;
+      }
     }
   }
 
@@ -162,7 +164,7 @@ export default class LocationComponent extends Component {
     let { store, remoteStore } = this.args;
     try {
       // Fetch data from the API
-      let transform = await remoteStore.pull((q) =>
+      let transform: Transform[] = await remoteStore.pull((q) =>
         q.findRecord(locationSignature)
       );
       // Sync it with the store
@@ -222,10 +224,12 @@ export default class LocationComponent extends Component {
 
     let locationSignature = { type: 'location', id: locationId };
 
-    await this.loadFromInlineCache(locationSignature);
+    this.loadFromInlineCache(locationSignature);
 
     if (!isSSR) {
-      await this.loadFromIndexedDB(locationSignature);
+      if (!this.recordsFound) {
+        await this.loadFromIndexedDB(locationSignature);
+      }
 
       if (!this.recordsFound) {
         this.loading = true;
