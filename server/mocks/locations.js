@@ -153,9 +153,12 @@ module.exports = function(app) {
   locationsRouter.get('/:id/measurements', function(req, res) {
     let locationId = req.params.id;
     if (locationId <= ALL_LOCATIONS.length) {
+
       let data = ALL_MEASUREMENTS.map((measurement) => {
+        let id = `${Date.now()}-${measurement.id}`;
         return {
           ...measurement,
+          id,
           relationships: {
             location: {
               data: { type: 'location', id: locationId }

@@ -58,5 +58,34 @@ describe('the location route', function() {
         expect(dateValue).to.match(/(2016).(10).(28)/);
       });
     })
+
+    it('cache does not accumulate old data', async function() {
+      await visit('/location/2', async (page) => {
+        await page.waitForSelector('[data-test-measurement="NO"]');
+        await page.reload();
+        await page.waitForSelector('[data-test-measurement="NO"]');
+  
+        let rowsCount = await page.evaluate(() => {
+          return new Promise((resolve, reject) => {
+            let opendb = window.indexedDB.open('orbit', 1);
+            opendb.onsuccess = () => {
+              let db = opendb.result;
+              let transaction = db
+              .transaction('measurement')
+              .objectStore('measurement')
+              .count();
+    
+              transaction.onsuccess = (event) => {
+                resolve(event.target.result);
+              };
+              transaction.onerror = (error) => {
+                reject(error);
+              };
+            };
+          });
+        });
+        expect(rowsCount).to.equal(6);
+      });
+    });
   });
 });

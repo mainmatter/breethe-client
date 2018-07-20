@@ -163,6 +163,9 @@ export default class LocationComponent extends Component {
   async loadFromAPI(locationSignature: RecordSignature) {
     let { store, remoteStore } = this.args;
     try {
+      // Activate the coordinator
+      await this.args.pullIndexedDB();
+
       // Fetch data from the API
       let transform: Transform[] = await remoteStore.pull((q) =>
         q.findRecord(locationSignature)
