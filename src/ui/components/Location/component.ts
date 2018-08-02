@@ -171,7 +171,7 @@ export default class LocationComponent extends Component {
         q.findRecord(locationSignature)
       );
       // Sync it with the store
-      store.sync(transform);
+      await store.sync(transform);
       this.location = await store.cache.query((q) =>
         q.findRecord(locationSignature)
       );
