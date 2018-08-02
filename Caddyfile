@@ -1,0 +1,17 @@
+# Use this to run the app behind an HTTP server (in this case Caddy - https://caddyserver.com).
+# This is helpful for running benchmarks.
+# 1. build the app for the production API `API_HOST=https://ppm-server.herokuapp.com ember b`
+# 2. run the SSR server in one tab with `API_HOST=https://ppm-server.herokuapp.com node ssr-server.js`
+# 3. run the Caddy server in a second tab with `sudo caddy` (`sudo` is required so caddy can bind to privileged port 443)
+# 4. open https://dev.breethe/ in your browser (assuming you have an entry for `dev.breethe` in your `/etc/hosts`)
+
+dev.breethe:443 {
+  tls self_signed
+  gzip
+
+  proxy / localhost:3000 {
+    except /assets
+  }
+
+  root dist/
+}
