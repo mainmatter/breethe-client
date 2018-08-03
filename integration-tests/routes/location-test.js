@@ -61,11 +61,8 @@ describe('the location route', function() {
 
     it('cache does not accumulate old data', async function() {
       await visit('/location/2', async (page) => {
-        await page.waitForSelector('[data-test-measurement="NO"]');
-        await page.reload();
-        await page.waitForSelector('[data-test-measurement="NO"]');
-  
-        let rowsCount = await page.evaluate(() => {
+
+        let countIndexedDBRows = () => {
           return new Promise((resolve, reject) => {
             let opendb = window.indexedDB.open('orbit', 1);
             opendb.onsuccess = () => {
@@ -83,8 +80,14 @@ describe('the location route', function() {
               };
             };
           });
-        });
-        expect(rowsCount).to.equal(6);
+        };
+        await page.waitForSelector('[data-test-measurement="NO"]');
+        let firstCount = await page.evaluate(countIndexedDBRows);
+        await page.reload();
+        await page.waitForSelector('[data-test-measurement="NO"]');
+        let secondCount = await page.evaluate(countIndexedDBRows);
+        
+        expect(firstCount).to.equal(secondCount);
       });
     });
   });
