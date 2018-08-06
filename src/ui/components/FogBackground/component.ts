@@ -5,13 +5,7 @@ export default class FogBackground extends Component {
   shownIntensity: number;
   particles: FloatingParticle[] = [];
   ctx: CanvasRenderingContext2D;
-
-  @tracked('args')
-  get calculate(): string {
-    let { intensity } = this.args;
-    let opacity = Math.pow(2.5, intensity) / 10;
-    return `opacity: ${(opacity > 1) ? 1 : opacity}`;
-  }
+  checkDeleted: boolean = false;
 
   particlesForIntensity(intensity: number): number {
     return Math.round(10 + (Math.pow(2.5, intensity)) * 10);
@@ -41,10 +35,16 @@ export default class FogBackground extends Component {
     let { intensity } = this.args;
     let { shownIntensity } = this;
 
-    if (intensity > shownIntensity) {
+    if (intensity !== shownIntensity) {
       let currentParticles = this.particlesForIntensity(shownIntensity);
       let targetParticles = this.particlesForIntensity(intensity);
-      this.addParticles(targetParticles - currentParticles);
+      console.info(targetParticles);
+      if (intensity > shownIntensity) {
+        this.addParticles(targetParticles - currentParticles);
+      } else {
+        this.removeParticles(currentParticles - targetParticles);
+      }
+      this.shownIntensity = intensity;
     }
   }
 
@@ -59,23 +59,32 @@ export default class FogBackground extends Component {
     this.particles = [...this.particles, ...newParticles];
   }
 
+  removeParticles(count: number) {
+    let { particles } = this;
+    for (let i = 0; i < count; i++) {
+      particles[i].toDelete = true;
+    }
+    this.checkDeleted = true;
+  }
+
   drawParticles = () => {
     let { ctx, particles } = this;
     let { innerWidth, innerHeight } = window;
 
     ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-    // for (let particle of this.particles) {
-    //   particle.draw(ctx, innerWidth, innerHeight);
-    // }
     let length = this.particles.length;
     for (let i = 0; i < length; i++ ) {
       particles[i].draw(ctx, innerWidth, innerHeight);
     }
+    let clearedParticles = particles.filter((particle) => {
+      return !(particle.toDelete && particle.radius <= 0);
+    });
 
-    // this.particles.forEach((particle) => {
-    //   particle.draw(ctx, innerWidth, innerHeight);
-    // });
+    if (clearedParticles.length !== particles.length) {
+      this.particles = clearedParticles;
+    }
+
     window.requestAnimationFrame(this.drawParticles);
   }
 }

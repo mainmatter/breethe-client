@@ -13,8 +13,10 @@ export default class FloatingParticle {
   radius: number = 0;
 
   opacity: number = Math.random();
-
   color: string = COLORS[Math.round(Math.random() * COLORS.length) - 1];
+
+  toDelete: boolean = false;
+  deleted: boolean = false;
 
   constructor(x, y) {
     this.startX = x;
@@ -46,6 +48,9 @@ export default class FloatingParticle {
     this.startY = startY;
     if (this.radius < this.targetRadius) {
       this.radius = radius + 0.25;
+    }
+    if (this.toDelete && radius > 0) {
+      this.radius = radius - 0.25;
     }
   }
 }
