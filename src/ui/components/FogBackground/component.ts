@@ -2,6 +2,7 @@ import Component, { tracked } from '@glimmer/component';
 import FloatingParticle from './particle';
 
 export default class FogBackground extends Component {
+  shownIntensity: number;
   particles: FloatingParticle[] = [];
   ctx: CanvasRenderingContext2D;
 
@@ -13,7 +14,7 @@ export default class FogBackground extends Component {
   }
 
   particlesForIntensity(intensity: number): number {
-    return 10 + (Math.pow(2.5, intensity)) * 10;
+    return Math.round(10 + (Math.pow(2.5, intensity)) * 10);
   }
 
   didInsertElement() {
@@ -32,7 +33,19 @@ export default class FogBackground extends Component {
 
     let initialParticles = this.particlesForIntensity(this.args.intensity);
     this.addParticles(initialParticles);
+    this.shownIntensity = this.args.intensity;
     window.requestAnimationFrame(this.drawParticles);
+  }
+
+  didUpdate() {
+    let { intensity } = this.args;
+    let { shownIntensity } = this;
+
+    if (intensity > shownIntensity) {
+      let currentParticles = this.particlesForIntensity(shownIntensity);
+      let targetParticles = this.particlesForIntensity(intensity);
+      this.addParticles(targetParticles - currentParticles);
+    }
   }
 
   addParticles(extras: number) {
@@ -47,7 +60,7 @@ export default class FogBackground extends Component {
   }
 
   drawParticles = () => {
-    let { ctx } = this;
+    let { ctx, particles } = this;
     let { innerWidth, innerHeight } = window;
 
     ctx.clearRect(0, 0, innerWidth, innerHeight);
@@ -57,7 +70,7 @@ export default class FogBackground extends Component {
     // }
     let length = this.particles.length;
     for (let i = 0; i < length; i++ ) {
-      this.particles[i].draw(ctx, innerWidth, innerHeight);
+      particles[i].draw(ctx, innerWidth, innerHeight);
     }
 
     // this.particles.forEach((particle) => {

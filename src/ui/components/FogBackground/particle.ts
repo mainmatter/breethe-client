@@ -1,33 +1,20 @@
-interface Particle {
-  startX: number;
-  startY: number;
-
-  speed: {
-    x: number,
-    y: number
-  };
-
-  radius: number;
-
-  draw: (canvas: CanvasRenderingContext2D, maxWidth: number, maxHeight: number) => void;
-}
-
 const COLORS = ['#33b0e2', '#37a8dc', '#2776bb'];
 
-export default class FloatingParticle implements Particle {
-  startX;
-  startY;
+export default class FloatingParticle {
+  startX: number;
+  startY: number;
 
   speed = {
     x: Math.round(-1 + Math.random() * 2),
     y: Math.round(-1 + Math.random() * 2)
   };
 
-  radius = Math.round(5 + Math.random() * 3);
+  targetRadius: number = Math.round(5 + Math.random() * 3);
+  radius: number = 0;
 
-  opacity = Math.random();
+  opacity: number = Math.random();
 
-  color = COLORS[Math.round(Math.random() * COLORS.length) - 1];
+  color: string = COLORS[Math.round(Math.random() * COLORS.length) - 1];
 
   constructor(x, y) {
     this.startX = x;
@@ -46,7 +33,7 @@ export default class FloatingParticle implements Particle {
     startX += this.speed.x;
     startY += this.speed.y;
 
-    let diameter = 2 * this.radius;
+    let diameter = 2 * radius;
 
     if (startX > maxWidth + diameter || startX < -1 * diameter) {
       this.speed.x = -1 * this.speed.x;
@@ -57,5 +44,8 @@ export default class FloatingParticle implements Particle {
 
     this.startX = startX;
     this.startY = startY;
+    if (this.radius < this.targetRadius) {
+      this.radius = radius + 0.25;
+    }
   }
 }
