@@ -8,7 +8,6 @@
   top: 0;
   right: 0;
   left: 0;
-  filter: blur(2px) grayscale(0.2) saturate(1.2) sepia(0.2);
   z-index: -1;
   overflow: hidden;
   background: linear-gradient(map-get($clear-sky, start), map-get($clear-sky, end) 100vH, map-get($clear-sky, end));

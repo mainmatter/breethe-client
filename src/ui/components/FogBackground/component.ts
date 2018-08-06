@@ -13,7 +13,7 @@ export default class FogBackground extends Component {
   }
 
   particlesForIntensity(intensity: number): number {
-    return 50 + (Math.pow(2.5, intensity)) * 10;
+    return 10 + (Math.pow(2.5, intensity)) * 10;
   }
 
   didInsertElement() {
@@ -31,7 +31,6 @@ export default class FogBackground extends Component {
     this.ctx = ctx;
 
     let initialParticles = this.particlesForIntensity(this.args.intensity);
-    console.log(initialParticles);
     this.addParticles(initialParticles);
     window.requestAnimationFrame(this.drawParticles);
   }
@@ -39,8 +38,8 @@ export default class FogBackground extends Component {
   addParticles(extras: number) {
     let newParticles = [];
     for (let i = 0; i < extras; i++) {
-      let posX = Math.random() * window.innerWidth;
-      let posY = Math.random() * window.innerHeight;
+      let posX = Math.round(Math.random() * window.innerWidth);
+      let posY = Math.round(Math.random() * window.innerHeight);
       let newParticle = new FloatingParticle(posX, posY);
       newParticles.push(newParticle);
     }
@@ -49,12 +48,21 @@ export default class FogBackground extends Component {
 
   drawParticles = () => {
     let { ctx } = this;
+    let { innerWidth, innerHeight } = window;
 
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-    this.particles.forEach((particle) => {
-      particle.draw(ctx);
-    });
+    // for (let particle of this.particles) {
+    //   particle.draw(ctx, innerWidth, innerHeight);
+    // }
+    let length = this.particles.length;
+    for (let i = 0; i < length; i++ ) {
+      this.particles[i].draw(ctx, innerWidth, innerHeight);
+    }
+
+    // this.particles.forEach((particle) => {
+    //   particle.draw(ctx, innerWidth, innerHeight);
+    // });
     window.requestAnimationFrame(this.drawParticles);
   }
 }
