@@ -38,7 +38,6 @@ export default class FogBackground extends Component {
     if (intensity !== shownIntensity) {
       let currentParticles = this.particlesForIntensity(shownIntensity);
       let targetParticles = this.particlesForIntensity(intensity);
-      console.info(targetParticles);
       if (intensity > shownIntensity) {
         this.addParticles(targetParticles - currentParticles);
       } else {
