@@ -6,24 +6,38 @@ export default class FogBackground extends Component {
   particles: FloatingParticle[] = [];
   ctx: CanvasRenderingContext2D;
   checkDeleted: boolean = false;
+  fogImage: HTMLImageElement;
 
   particlesForIntensity(intensity: number): number {
-    return Math.round(10 + (Math.pow(2.5, intensity)) * 10);
+    return Math.round((Math.pow(2.5, intensity)) * 3) - 3;
   }
 
   didInsertElement() {
+    this.particlesBackground();
+  }
+
+  loadFogImage(): Promise<HTMLImageElement> {
+    let fogImage = new Image(500, 500);
+    return new Promise((resolve, reject) => {
+      fogImage.onload = () => {
+        resolve(fogImage);
+      };
+      fogImage.onerror = (error) => {
+        reject(error);
+      };
+      fogImage.src = '/images/fog-particle.png';
+    });
+  }
+
+  async particlesBackground() {
     let canvas: HTMLCanvasElement = document.querySelector('#ParticlesBackgroundCanvas');
     let ctx = canvas.getContext('2d');
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    ctx.beginPath();
-    ctx.arc(300, 300, 200, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    ctx.fill();
-
     this.ctx = ctx;
+    this.fogImage = await this.loadFogImage();
 
     let initialParticles = this.particlesForIntensity(this.args.intensity);
     this.addParticles(initialParticles);
@@ -52,7 +66,7 @@ export default class FogBackground extends Component {
     for (let i = 0; i < extras; i++) {
       let posX = Math.round(Math.random() * window.innerWidth);
       let posY = Math.round(Math.random() * window.innerHeight);
-      let newParticle = new FloatingParticle(posX, posY);
+      let newParticle = new FloatingParticle(posX, posY, this.fogImage);
       newParticles.push(newParticle);
     }
     this.particles = [...this.particles, ...newParticles];
@@ -77,7 +91,7 @@ export default class FogBackground extends Component {
       particles[i].draw(ctx, innerWidth, innerHeight);
     }
     let clearedParticles = particles.filter((particle) => {
-      return !(particle.toDelete && particle.radius <= 0);
+      return !(particle.toDelete && particle.opacity <= 0);
     });
 
     if (clearedParticles.length !== particles.length) {

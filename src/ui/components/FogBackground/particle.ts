@@ -1,5 +1,3 @@
-const COLORS = ['#33b0e2', '#37a8dc', '#2776bb'];
-
 export default class FloatingParticle {
   startX: number;
   startY: number;
@@ -9,48 +7,46 @@ export default class FloatingParticle {
     y: Math.round(-1 + Math.random() * 2)
   };
 
-  targetRadius: number = Math.round(5 + Math.random() * 3);
-  radius: number = 0;
-
-  opacity: number = Math.random();
-  color: string = COLORS[Math.round(Math.random() * COLORS.length) - 1];
+  opacity: number = 0;
+  targetOpacity: number = Math.random();
 
   toDelete: boolean = false;
   deleted: boolean = false;
 
-  constructor(x, y) {
+  image: HTMLImageElement;
+  imageWidth = 500;
+
+  constructor(x, y, image) {
     this.startX = x;
     this.startY = y;
+    this.image = image;
   }
 
   draw(ctx: CanvasRenderingContext2D, maxWidth: number, maxHeight: number) {
-    let { startX, startY, radius, color, opacity } = this;
+    let { startX, startY, opacity, targetOpacity, imageWidth } = this;
 
     ctx.beginPath();
+    ctx.drawImage(this.image, startX, startY, imageWidth, imageWidth);
     ctx.globalAlpha = opacity;
-    ctx.arc(startX, startY, radius, 0, Math.PI * 2);
-    ctx.fillStyle = color;
     ctx.fill();
 
     startX += this.speed.x;
     startY += this.speed.y;
 
-    let diameter = 2 * radius;
-
-    if (startX > maxWidth + diameter || startX < -1 * diameter) {
+    if (startX > maxWidth + imageWidth || startX < -1 * imageWidth) {
       this.speed.x = -1 * this.speed.x;
     }
-    if (startY > maxHeight + diameter || startY < -1 * diameter) {
+    if (startY > maxHeight + imageWidth || startY < -1 * imageWidth) {
       this.speed.y = -1 * this.speed.y;
     }
 
     this.startX = startX;
     this.startY = startY;
-    if (this.radius < this.targetRadius) {
-      this.radius = radius + 0.25;
+    if (opacity < this.targetOpacity) {
+      this.opacity = opacity + 0.05;
     }
-    if (this.toDelete && radius > 0) {
-      this.radius = radius - 0.25;
+    if (this.toDelete && opacity > 0) {
+      this.opacity = opacity - 0.10;
     }
   }
 }
