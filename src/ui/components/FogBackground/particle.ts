@@ -47,13 +47,13 @@ export default class FloatingParticle {
 
     let outcomeOpacity = targetOpacity * opacityFactor;
     if (opacity < outcomeOpacity) {
-      opacity = opacity + 0.05;
+      opacity = opacity + 0.02;
       if (opacity > outcomeOpacity) {
         opacity = outcomeOpacity;
       }
     }
     if (opacity > outcomeOpacity) {
-      opacity = opacity - 0.05;
+      opacity = opacity - 0.02;
       if (opacity < 0) {
         opacity = 0;
       }

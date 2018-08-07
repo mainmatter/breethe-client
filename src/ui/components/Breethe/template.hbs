@@ -29,7 +29,10 @@
       @updateFogEffect={{action updateFogEffect}}
     />
   {{/if}}
-  <FogBackground @intensity={{fogIntensity}} />
+
+  {{#unless appState.isSSR}}
+    <FogBackground @intensity={{fogIntensity}} />
+  {{/unless}}
 
   <footer class="footer">
     built by
