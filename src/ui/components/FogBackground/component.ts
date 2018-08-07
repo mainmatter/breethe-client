@@ -2,14 +2,13 @@ import Component, { tracked } from '@glimmer/component';
 import FloatingParticle from './particle';
 
 export default class FogBackground extends Component {
-  shownIntensity: number;
   particles: FloatingParticle[] = [];
   ctx: CanvasRenderingContext2D;
   checkDeleted: boolean = false;
   fogImage: HTMLImageElement;
 
   particlesForIntensity(intensity: number): number {
-    return Math.round((Math.pow(2.5, intensity)) * 3) - 3;
+    return 0.10 * Math.pow(2, intensity);
   }
 
   didInsertElement() {
@@ -39,26 +38,8 @@ export default class FogBackground extends Component {
     this.ctx = ctx;
     this.fogImage = await this.loadFogImage();
 
-    let initialParticles = this.particlesForIntensity(this.args.intensity);
-    this.addParticles(initialParticles);
-    this.shownIntensity = this.args.intensity;
+    this.addParticles(115);
     window.requestAnimationFrame(this.drawParticles);
-  }
-
-  didUpdate() {
-    let { intensity } = this.args;
-    let { shownIntensity } = this;
-
-    if (intensity !== shownIntensity) {
-      let currentParticles = this.particlesForIntensity(shownIntensity);
-      let targetParticles = this.particlesForIntensity(intensity);
-      if (intensity > shownIntensity) {
-        this.addParticles(targetParticles - currentParticles);
-      } else {
-        this.removeParticles(currentParticles - targetParticles);
-      }
-      this.shownIntensity = intensity;
-    }
   }
 
   addParticles(extras: number) {
@@ -72,14 +53,6 @@ export default class FogBackground extends Component {
     this.particles = [...this.particles, ...newParticles];
   }
 
-  removeParticles(count: number) {
-    let { particles } = this;
-    for (let i = 0; i < count; i++) {
-      particles[i].toDelete = true;
-    }
-    this.checkDeleted = true;
-  }
-
   drawParticles = () => {
     let { ctx, particles } = this;
     let { innerWidth, innerHeight } = window;
@@ -88,14 +61,8 @@ export default class FogBackground extends Component {
 
     let length = this.particles.length;
     for (let i = 0; i < length; i++ ) {
-      particles[i].draw(ctx, innerWidth, innerHeight);
-    }
-    let clearedParticles = particles.filter((particle) => {
-      return !(particle.toDelete && particle.opacity <= 0);
-    });
-
-    if (clearedParticles.length !== particles.length) {
-      this.particles = clearedParticles;
+      let opacityFactor = this.particlesForIntensity(this.args.intensity);
+      particles[i].draw(ctx, innerWidth, innerHeight, opacityFactor);
     }
 
     window.requestAnimationFrame(this.drawParticles);
