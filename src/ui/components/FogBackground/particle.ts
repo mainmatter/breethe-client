@@ -22,31 +22,42 @@ export default class FloatingParticle {
     this.image = image;
   }
 
-  draw(ctx: CanvasRenderingContext2D, maxWidth: number, maxHeight: number) {
+  draw(ctx: CanvasRenderingContext2D, maxWidth: number, maxHeight: number, opacityFactor: number) {
     let { startX, startY, opacity, targetOpacity, imageWidth } = this;
 
-    ctx.beginPath();
-    ctx.drawImage(this.image, startX, startY, imageWidth, imageWidth);
-    ctx.globalAlpha = opacity;
-    ctx.fill();
+    if (opacity !== 0) {
+      ctx.beginPath();
+      ctx.drawImage(this.image, startX, startY, imageWidth, imageWidth);
+      ctx.globalAlpha = opacity;
+      ctx.fill();
 
-    startX += this.speed.x;
-    startY += this.speed.y;
+      startX += this.speed.x;
+      startY += this.speed.y;
 
-    if (startX > maxWidth + imageWidth || startX < -1 * imageWidth) {
-      this.speed.x = -1 * this.speed.x;
-    }
-    if (startY > maxHeight + imageWidth || startY < -1 * imageWidth) {
-      this.speed.y = -1 * this.speed.y;
+      if (startX > maxWidth + imageWidth || startX < -1 * imageWidth) {
+        this.speed.x = -1 * this.speed.x;
+      }
+      if (startY > maxHeight + imageWidth || startY < -1 * imageWidth) {
+        this.speed.y = -1 * this.speed.y;
+      }
+
+      this.startX = startX;
+      this.startY = startY;
     }
 
-    this.startX = startX;
-    this.startY = startY;
-    if (opacity < this.targetOpacity) {
-      this.opacity = opacity + 0.05;
+    let outcomeOpacity = targetOpacity * opacityFactor;
+    if (opacity < outcomeOpacity) {
+      opacity = opacity + 0.05;
+      if (opacity > outcomeOpacity) {
+        opacity = outcomeOpacity;
+      }
     }
-    if (this.toDelete && opacity > 0) {
-      this.opacity = opacity - 0.10;
+    if (opacity > outcomeOpacity) {
+      opacity = opacity - 0.05;
+      if (opacity < 0) {
+        opacity = 0;
+      }
     }
+    this.opacity = opacity;
   }
 }
