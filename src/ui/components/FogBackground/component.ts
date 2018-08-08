@@ -8,7 +8,7 @@ export default class FogBackground extends Component {
   fogImage: HTMLImageElement;
 
   particlesForIntensity(intensity: number): number {
-    return 0.10 * Math.pow(2, intensity);
+    return (intensity === 0) ? 0 : 0.10 * Math.pow(2, intensity);
   }
 
   didInsertElement() {
@@ -45,12 +45,12 @@ export default class FogBackground extends Component {
   drawParticles = () => {
     let { ctx, particles } = this;
     let { innerWidth, innerHeight } = window;
+    let opacityFactor = this.particlesForIntensity(this.args.intensity);
 
     ctx.clearRect(0, 0, innerWidth, innerHeight);
 
     let length = this.particles.length;
     for (let i = 0; i < length; i++ ) {
-      let opacityFactor = this.particlesForIntensity(this.args.intensity);
       particles[i].draw(ctx, this.fogImage, innerWidth, innerHeight, opacityFactor);
     }
 
