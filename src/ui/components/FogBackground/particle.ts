@@ -31,8 +31,7 @@ export default class FloatingParticle {
 
     if (opacity !== 0) {
       ctx.beginPath();
-      // ctx.drawImage(image, startX, startY, imageWidth, imageWidth);
-      ctx.fillRect(startX, startY, 100, 100);
+      ctx.drawImage(image, startX, startY, imageWidth, imageWidth);
       ctx.globalAlpha = opacity;
       ctx.fill();
 
@@ -55,18 +54,16 @@ export default class FloatingParticle {
     let step = 0.03;
 
     if (outcomeOpacity === 0 && opacity > 0) {
-      opacity = (opacity < step) ? 0 : opacity - step;
+      opacity = opacity - step;
       if (opacity < 0) {
         opacity = 0;
       }
     } else {
-      if (Math.abs(delta) > step) {
-        if (delta > 0) {
+      if (Math.abs(delta) > step && delta > 0) {
           opacity = opacity + step;
           if (opacity > 1) {
             opacity = 1;
           }
-        }
       }
     }
 
