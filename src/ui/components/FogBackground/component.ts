@@ -12,32 +12,21 @@ export default class FogBackground extends Component {
   }
 
   didInsertElement() {
-    this.particlesBackground();
-  }
-
-  loadFogImage(): Promise<HTMLImageElement> {
-    let fogImage = new Image(500, 500);
-    return new Promise((resolve, reject) => {
-      fogImage.onload = () => {
-        resolve(fogImage);
-      };
-      fogImage.onerror = (error) => {
-        reject(error);
-      };
-      fogImage.src = '/images/fog-particle.png';
-    });
+    if (window.requestAnimationFrame) {
+      this.particlesBackground();
+    }
   }
 
   async particlesBackground() {
     let canvas: HTMLCanvasElement = document.querySelector('#ParticlesBackgroundCanvas');
+    let image: HTMLImageElement = document.querySelector('#ParticleImage');
     let ctx = canvas.getContext('2d');
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     this.ctx = ctx;
-    this.fogImage = await this.loadFogImage();
-
+    this.fogImage = image;
     this.addParticles(115);
     window.requestAnimationFrame(this.drawParticles);
   }
@@ -47,7 +36,7 @@ export default class FogBackground extends Component {
     for (let i = 0; i < extras; i++) {
       let posX = Math.round(Math.random() * window.innerWidth);
       let posY = Math.round(Math.random() * window.innerHeight);
-      let newParticle = new FloatingParticle(posX, posY, this.fogImage);
+      let newParticle = new FloatingParticle(posX, posY);
       newParticles.push(newParticle);
     }
     this.particles = [...this.particles, ...newParticles];
@@ -62,7 +51,7 @@ export default class FogBackground extends Component {
     let length = this.particles.length;
     for (let i = 0; i < length; i++ ) {
       let opacityFactor = this.particlesForIntensity(this.args.intensity);
-      particles[i].draw(ctx, innerWidth, innerHeight, opacityFactor);
+      particles[i].draw(ctx, this.fogImage, innerWidth, innerHeight, opacityFactor);
     }
 
     window.requestAnimationFrame(this.drawParticles);

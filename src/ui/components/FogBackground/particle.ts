@@ -13,21 +13,26 @@ export default class FloatingParticle {
   toDelete: boolean = false;
   deleted: boolean = false;
 
-  image: HTMLImageElement;
   imageWidth = 500;
 
-  constructor(x, y, image) {
+  constructor(x, y) {
     this.startX = x;
     this.startY = y;
-    this.image = image;
   }
 
-  draw(ctx: CanvasRenderingContext2D, maxWidth: number, maxHeight: number, opacityFactor: number) {
+  draw(
+    ctx: CanvasRenderingContext2D,
+    image: HTMLImageElement,
+    maxWidth: number,
+    maxHeight: number,
+    opacityFactor: number
+  ) {
     let { startX, startY, opacity, targetOpacity, imageWidth } = this;
 
     if (opacity !== 0) {
       ctx.beginPath();
-      ctx.drawImage(this.image, startX, startY, imageWidth, imageWidth);
+      ctx.drawImage(image, startX, startY, imageWidth, imageWidth);
+      // ctx.fillRect(startX, startY, 100, 100);
       ctx.globalAlpha = opacity;
       ctx.fill();
 
