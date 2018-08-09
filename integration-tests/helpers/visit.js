@@ -12,7 +12,6 @@ async function visit(route, options, callback) {
 
   let browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   let page = await browser.newPage();
-  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
 
   if (options.clientIP) {
     page.setExtraHTTPHeaders({
