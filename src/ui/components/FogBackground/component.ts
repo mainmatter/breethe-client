@@ -45,15 +45,14 @@ export default class FogBackground extends Component {
     window.requestAnimationFrame(this.drawParticles);
   }
 
-  setupParticles(extras: number) {
-    let newParticles = [];
-    for (let i = 0; i < extras; i++) {
+  setupParticles(particles: number) {
+    this.particles = [];
+    for (let i = 0; i < particles; i++) {
       let posX = Math.round(Math.random() * window.innerWidth);
       let posY = Math.round(Math.random() * window.innerHeight);
-      let newParticle = new FloatingParticle(posX, posY);
-      newParticles.push(newParticle);
+      let particle = new FloatingParticle(posX, posY);
+      this.particles.push(particle);
     }
-    this.particles = [...this.particles, ...newParticles];
   }
 
   drawParticles = () => {
