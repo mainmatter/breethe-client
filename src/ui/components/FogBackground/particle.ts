@@ -3,8 +3,8 @@ export default class FloatingParticle {
   startY: number;
 
   speed = {
-    x: Math.round(-1 + Math.random() * 2),
-    y: Math.round(-1 + Math.random() * 2)
+    x: (-1 + Math.random() * 2),
+    y: (-1 + Math.random() * 2)
   };
 
   opacity: number = 0;

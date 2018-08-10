@@ -41,15 +41,15 @@ export default class FogBackground extends Component {
 
     this.ctx = ctx;
     this.fogImage = image;
-    this.setupParticles(115);
+    this.setupParticles(60, canvas.width, canvas.height, image);
     window.requestAnimationFrame(this.drawParticles);
   }
 
-  setupParticles(particles: number) {
+  setupParticles(particles: number, canvasWidth: number, canvasHeight: number, image: HTMLImageElement) {
     this.particles = [];
     for (let i = 0; i < particles; i++) {
-      let posX = Math.round(Math.random() * window.innerWidth);
-      let posY = Math.round(Math.random() * window.innerHeight);
+      let posX = Math.random() * canvasWidth - (image.width / 2);
+      let posY = Math.random() * canvasHeight - (image.height / 2);
       let particle = new FloatingParticle(posX, posY);
       this.particles.push(particle);
     }
