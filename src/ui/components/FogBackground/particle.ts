@@ -13,8 +13,6 @@ export default class FloatingParticle {
   toDelete: boolean = false;
   deleted: boolean = false;
 
-  imageWidth = 500;
-
   constructor(x, y) {
     this.startX = x;
     this.startY = y;
@@ -27,21 +25,21 @@ export default class FloatingParticle {
     maxHeight: number,
     opacityFactor: number
   ) {
-    let { startX, startY, opacity, targetOpacity, imageWidth } = this;
+    let { startX, startY, opacity, targetOpacity } = this;
 
     if (opacity !== 0) {
       ctx.beginPath();
-      ctx.drawImage(image, startX, startY, imageWidth, imageWidth);
+      ctx.drawImage(image, startX, startY, image.width, image.height);
       ctx.globalAlpha = opacity;
       ctx.fill();
 
       startX += this.speed.x;
       startY += this.speed.y;
 
-      if (startX > maxWidth + imageWidth || startX < -1 * imageWidth) {
+      if (startX > maxWidth + image.width || startX < -1 * image.width) {
         this.speed.x = -1 * this.speed.x;
       }
-      if (startY > maxHeight + imageWidth || startY < -1 * imageWidth) {
+      if (startY > maxHeight + image.height || startY < -1 * image.height) {
         this.speed.y = -1 * this.speed.y;
       }
 
