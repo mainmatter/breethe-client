@@ -60,10 +60,10 @@ export default class FloatingParticle {
       }
     } else {
       if (Math.abs(delta) > step && delta > 0) {
-          opacity = opacity + step;
-          if (opacity > 1) {
-            opacity = 1;
-          }
+        opacity = opacity + step;
+        if (opacity > 1) {
+          opacity = 1;
+        }
       }
     }
 

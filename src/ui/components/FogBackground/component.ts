@@ -1,25 +1,39 @@
-import Component, { tracked } from '@glimmer/component';
+import Component from '@glimmer/component';
 import FloatingParticle from './particle';
 
 export default class FogBackground extends Component {
   particles: FloatingParticle[] = [];
   ctx: CanvasRenderingContext2D;
-  checkDeleted: boolean = false;
   fogImage: HTMLImageElement;
-
-  particlesForIntensity(intensity: number): number {
-    return (intensity === 0) ? 0 : 0.10 * Math.pow(2, intensity);
-  }
 
   didInsertElement() {
     if (window.requestAnimationFrame) {
-      this.particlesBackground();
+      this.renderParticlesBackground();
     }
   }
 
-  async particlesBackground() {
-    let canvas: HTMLCanvasElement = document.querySelector('#ParticlesBackgroundCanvas');
-    let image: HTMLImageElement = document.querySelector('#ParticleImage');
+  particlesForIntensity(intensity: number): number {
+    return intensity === 0 ? 0 : 0.1 * Math.pow(2, intensity);
+  }
+
+  loadFogImage(): Promise<HTMLImageElement> {
+    let fogImage = new Image(500, 500);
+    return new Promise((resolve, reject) => {
+      fogImage.onload = () => {
+        resolve(fogImage);
+      };
+      fogImage.onerror = (error) => {
+        reject(error);
+      };
+      fogImage.src = '/images/fog-particle.png';
+    });
+  }
+
+  async renderParticlesBackground() {
+    let canvas: HTMLCanvasElement = document.querySelector(
+      '#ParticlesBackgroundCanvas'
+    );
+    let image = await this.loadFogImage();
     let ctx = canvas.getContext('2d');
 
     canvas.width = window.innerWidth;
@@ -27,11 +41,11 @@ export default class FogBackground extends Component {
 
     this.ctx = ctx;
     this.fogImage = image;
-    this.addParticles(115);
+    this.setupParticles(115);
     window.requestAnimationFrame(this.drawParticles);
   }
 
-  addParticles(extras: number) {
+  setupParticles(extras: number) {
     let newParticles = [];
     for (let i = 0; i < extras; i++) {
       let posX = Math.round(Math.random() * window.innerWidth);
@@ -50,8 +64,14 @@ export default class FogBackground extends Component {
     ctx.clearRect(0, 0, innerWidth, innerHeight);
 
     let length = this.particles.length;
-    for (let i = 0; i < length; i++ ) {
-      particles[i].draw(ctx, this.fogImage, innerWidth, innerHeight, opacityFactor);
+    for (let i = 0; i < length; i++) {
+      particles[i].draw(
+        ctx,
+        this.fogImage,
+        innerWidth,
+        innerHeight,
+        opacityFactor
+      );
     }
 
     window.requestAnimationFrame(this.drawParticles);
