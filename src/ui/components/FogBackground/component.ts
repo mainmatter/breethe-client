@@ -12,7 +12,7 @@ export default class FogBackground extends Component {
     }
   }
 
-  particlesForIntensity(intensity: number): number {
+  opacityForIntensity(intensity: number): number {
     return intensity === 0 ? 0 : 0.1 * Math.pow(2, intensity);
   }
 
@@ -58,7 +58,7 @@ export default class FogBackground extends Component {
   drawParticles = () => {
     let { ctx, particles } = this;
     let { innerWidth, innerHeight } = window;
-    let opacityFactor = this.particlesForIntensity(this.args.intensity);
+    let opacityFactor = this.opacityForIntensity(this.args.intensity);
 
     ctx.clearRect(0, 0, innerWidth, innerHeight);
 
