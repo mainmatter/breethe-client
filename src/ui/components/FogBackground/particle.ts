@@ -36,10 +36,10 @@ export default class FloatingParticle {
       startX += this.speed.x;
       startY += this.speed.y;
 
-      if (startX > maxWidth + image.width || startX < -1 * image.width) {
+      if (startX + (image.width / 2) > maxWidth || startX < -1 * (image.width / 2)) {
         this.speed.x = -1 * this.speed.x;
       }
-      if (startY > maxHeight + image.height || startY < -1 * image.height) {
+      if (startY + (image.height / 2) > maxHeight || startY < -1 * (image.height / 2)) {
         this.speed.y = -1 * this.speed.y;
       }
 
