@@ -2,29 +2,15 @@ const { expect } = require('chai');
 const visit = require('./helpers/visit');
 
 async function waitForAllServiceWorkers(page) {
-  const allRegistrationsActivated = await page.evaluate(() => navigator.serviceWorker.getRegistrations().then(registrations => {
-    if(!registrations.length) {
-      return false;
-    } 
-
-    let result = registrations.every((registration) => {
-      return registration.active && registration.active.state === 'activated'
-    });
-
-    return result;
-  }));
-  
-  if(!allRegistrationsActivated) {
-    await page.waitFor(500);
-    return waitForAllServiceWorkers(page);
-  }
+  return await page.evaluate(() => {
+    return navigator.serviceWorker.ready;
+  });
 }
 
 describe('when offline', function() {
   it('the app loads on the index route', async function() {
     await visit('/', async (page) => {
       await waitForAllServiceWorkers(page);
-      await page.waitFor(100);
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
@@ -37,7 +23,6 @@ describe('when offline', function() {
   it('the app loads on the search route', async function() {
     await visit('/search/Salzburg', async (page) => {
       await waitForAllServiceWorkers(page);
-      await page.waitFor(100);
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
@@ -50,7 +35,6 @@ describe('when offline', function() {
   it('the app loads on the location route', async function() { 
     await visit('/location/2', async (page) => {
       await waitForAllServiceWorkers(page);
-      await page.waitFor(100);
       await page.setOfflineMode(true);
       await page.reload();
 
