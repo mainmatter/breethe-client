@@ -1,9 +1,16 @@
 const { expect } = require('chai');
 const visit = require('./helpers/visit');
 
+async function waitForAllServiceWorkers(page) {
+  return await page.evaluate(() => {
+    return navigator.serviceWorker.ready;
+  });
+}
+
 describe('when offline', function() {
   it('the app loads on the index route', async function() {
-    await visit('/', { waitUntil: 'networkidle0' }, async (page) => {
+    await visit('/', async (page) => {
+      await waitForAllServiceWorkers(page);
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
@@ -14,7 +21,8 @@ describe('when offline', function() {
   });
 
   it('the app loads on the search route', async function() {
-    await visit('/search/Salzburg', { waitUntil: 'networkidle0' }, async (page) => {
+    await visit('/search/Salzburg', async (page) => {
+      await waitForAllServiceWorkers(page);
       await page.setOfflineMode(true);
       await page.reload({ waitUntil: 'networkidle0' });
 
@@ -24,10 +32,11 @@ describe('when offline', function() {
     });
   });
 
-  it('the app loads on the location route', async function() {
-    await visit('/location/2', { waitUntil: 'networkidle0' }, async (page) => {
+  it('the app loads on the location route', async function() { 
+    await visit('/location/2', async (page) => {
+      await waitForAllServiceWorkers(page);
       await page.setOfflineMode(true);
-      await page.reload({ waitUntil: 'networkidle0' });
+      await page.reload();
 
       let element = await page.waitForSelector('[data-test-measurement="PM10"] [data-test-measurement-value="15"]');
 
