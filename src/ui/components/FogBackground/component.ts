@@ -12,7 +12,7 @@ export default class FogBackground extends Component {
     }
   }
 
-  particlesForIntensity(intensity: number): number {
+  opacityForIntensity(intensity: number): number {
     return intensity === 0 ? 0 : 0.1 * Math.pow(2, intensity);
   }
 
@@ -41,25 +41,24 @@ export default class FogBackground extends Component {
 
     this.ctx = ctx;
     this.fogImage = image;
-    this.setupParticles(115);
+    this.setupParticles(60, canvas.width, canvas.height, image);
     window.requestAnimationFrame(this.drawParticles);
   }
 
-  setupParticles(extras: number) {
-    let newParticles = [];
-    for (let i = 0; i < extras; i++) {
-      let posX = Math.round(Math.random() * window.innerWidth);
-      let posY = Math.round(Math.random() * window.innerHeight);
-      let newParticle = new FloatingParticle(posX, posY);
-      newParticles.push(newParticle);
+  setupParticles(particles: number, canvasWidth: number, canvasHeight: number, image: HTMLImageElement) {
+    this.particles = [];
+    for (let i = 0; i < particles; i++) {
+      let posX = Math.random() * canvasWidth - (image.width / 2);
+      let posY = Math.random() * canvasHeight - (image.height / 2);
+      let particle = new FloatingParticle(posX, posY);
+      this.particles.push(particle);
     }
-    this.particles = [...this.particles, ...newParticles];
   }
 
   drawParticles = () => {
     let { ctx, particles } = this;
     let { innerWidth, innerHeight } = window;
-    let opacityFactor = this.particlesForIntensity(this.args.intensity);
+    let opacityFactor = this.opacityForIntensity(this.args.intensity);
 
     ctx.clearRect(0, 0, innerWidth, innerHeight);
 
