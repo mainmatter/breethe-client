@@ -30,9 +30,7 @@
     />
   {{/if}}
 
-  {{#unless appState.isSSR}}
-    <FogBackground @intensity={{fogIntensity}} />
-  {{/unless}}
+  <FogBackground @intensity={{fogIntensity}} @isSSR={{appState.isSSR}} />
 
   <footer class="footer">
     built by

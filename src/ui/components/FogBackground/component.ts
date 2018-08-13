@@ -6,8 +6,13 @@ export default class FogBackground extends Component {
   ctx: CanvasRenderingContext2D;
   fogImage: HTMLImageElement;
 
+  args: {
+    intensity: number;
+    isSSR: boolean;
+  };
+
   didInsertElement() {
-    if (window.requestAnimationFrame) {
+    if (window.requestAnimationFrame && !this.args.isSSR) {
       this.renderParticlesBackground();
     }
   }
