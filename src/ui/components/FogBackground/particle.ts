@@ -29,7 +29,7 @@ export default class FloatingParticle {
 
     if (opacity !== 0) {
       ctx.beginPath();
-      ctx.drawImage(image, startX, startY, image.width, image.height);
+      ctx.drawImage(image, Math.round(startX), Math.round(startY), image.width, image.height);
       ctx.globalAlpha = opacity;
       ctx.fill();
 
