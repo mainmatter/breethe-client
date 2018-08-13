@@ -3,6 +3,7 @@ import FloatingParticle from './particle';
 
 export default class FogBackground extends Component {
   particles: FloatingParticle[] = [];
+  canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   fogImage: HTMLImageElement;
 
@@ -38,14 +39,18 @@ export default class FogBackground extends Component {
     let canvas: HTMLCanvasElement = document.querySelector(
       '#ParticlesBackgroundCanvas'
     );
+    let background: HTMLDivElement = document.querySelector(
+      '#ParticlesBackground'
+    );
     let image = await this.loadFogImage();
     let ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = background.clientWidth;
+    canvas.height = background.clientHeight;
 
     this.ctx = ctx;
     this.fogImage = image;
+    this.canvas = canvas;
     this.setupParticles(60, canvas.width, canvas.height, image);
     window.requestAnimationFrame(this.drawParticles);
   }
@@ -62,10 +67,10 @@ export default class FogBackground extends Component {
 
   drawParticles = () => {
     let { ctx, particles } = this;
-    let { innerWidth, innerHeight } = window;
+    let { width, height } = this.canvas;
     let opacityFactor = this.opacityForIntensity(this.args.intensity);
 
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    ctx.clearRect(0, 0, width, height);
 
     let length = this.particles.length;
     for (let i = 0; i < length; i++) {
