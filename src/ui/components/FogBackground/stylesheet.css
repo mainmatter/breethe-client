@@ -12,3 +12,11 @@
   overflow: hidden;
   background: linear-gradient(map-get($clear-sky, start), map-get($clear-sky, end) 100vH, map-get($clear-sky, end));
 }
+
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
