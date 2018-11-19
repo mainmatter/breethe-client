@@ -3,10 +3,10 @@
 **Breethe is a Progressive Web App built by [simplabs](https://simplabs.com).
 We build custom web and mobile solutions for our clients to rely on.**
 
+## Improving Understanding of Air Quality Across the World
+
 Breethe allows instant access to up to date air quality data for locations
-across the world. Pollution and global warming are getting worth rather than
-better and affect everyone's daily lives - easily accessible data on how bad
-things actually are might help raising attention and awareness 🌳💨
+across the world. Pollution and global warming are getting worse, rather than better, and it affects everyone's daily lives - easily accessible data on how bad things are might help to raise attention and awareness. 🌳💨
 
 The data is retrieved from the [openaq](https://openaq.org) API - be sure to
 check that project out!
