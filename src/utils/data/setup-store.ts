@@ -1,4 +1,4 @@
-import Coordinator, { EventLoggingStrategy, RequestStrategy, SyncStrategy } from '@orbit/coordinator';
+import Coordinator, { RequestStrategy, SyncStrategy } from '@orbit/coordinator';
 import Orbit, { Schema } from '@orbit/data';
 import IndexedDBStore from '@orbit/indexeddb';
 import JSONAPIStore from '@orbit/jsonapi';
@@ -44,10 +44,6 @@ export function setupStore(appState: AppState): { store: Store; local?: IndexedD
       target: 'remote',
     });
 
-    let logger = new EventLoggingStrategy({
-      interfaces: ['queryable', 'syncable']
-    });
-
     let remoteStoreSync = new SyncStrategy({
       blocking: true,
       source: 'remote',
@@ -62,7 +58,7 @@ export function setupStore(appState: AppState): { store: Store; local?: IndexedD
 
     const coordinator = new Coordinator({
       sources: [store, local, remote],
-      strategies: [remoteRequestStrategy, remoteStoreSync, localStoreSync, logger]
+      strategies: [remoteRequestStrategy, remoteStoreSync, localStoreSync]
     });
 
     coordinator.activate();
