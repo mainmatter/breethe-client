@@ -18,6 +18,9 @@ const renderer = new GlimmerRenderer();
 const { SENTRY_DSN } = process.env;
 const USE_SENTRY = !!SENTRY_DSN;
 
+const { ASSET_CACHE_DURATION } = process.env;
+const MAX_ASSET_AGE = ASSET_CACHE_DURATION === 'Infinity' ? Infinity : 0;
+
 if (USE_SENTRY) {
   Raven.config(SENTRY_DSN).install();
 }
@@ -29,7 +32,7 @@ if (USE_SENTRY) {
 }
 
 app.use(morgan('common'));
-app.use(express.static('dist', { index: false }));
+app.use(express.static('dist', { index: false, maxAge: MAX_ASSET_AGE }));
 app.use(requestIp.mw())
 
 async function searchLocation(searchTermOrCoordinates) {
