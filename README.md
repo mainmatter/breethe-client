@@ -71,7 +71,7 @@ You will need the following things properly installed on your computer.
 
 ## License
 
-Breethe is developed by and &copy; [simplabs GmbH](http://simplabs.com) and
+Breethe is developed by &copy; [simplabs GmbH](http://simplabs.com) and
 contributors. While we invite everyone to use this for inspiration and
 reference, we do not grant a license to reuse or redistribute this in any form.
 
