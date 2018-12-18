@@ -442,6 +442,12 @@
   dependencies:
     "@orbit/utils" "^0.15.14"
 
+"@orbit/core@^0.15.23":
+  version "0.15.23"
+  resolved "https://registry.yarnpkg.com/@orbit/core/-/core-0.15.23.tgz#3f6656f37d6bf9bdf5ef03ae26726cb8ba03776d"
+  dependencies:
+    "@orbit/utils" "^0.15.23"
+
 "@orbit/data@^0.15.14":
   version "0.15.14"
   resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.15.14.tgz#5c269de32e9500c5f25f55b1345775110c59c97b"
@@ -449,9 +455,16 @@
     "@orbit/core" "^0.15.14"
     "@orbit/utils" "^0.15.14"
 
-"@orbit/immutable@^0.15.14":
-  version "0.15.14"
-  resolved "https://registry.yarnpkg.com/@orbit/immutable/-/immutable-0.15.14.tgz#8c6958841d45f7f947282d8f39d88094d20bd152"
+"@orbit/data@^0.15.23":
+  version "0.15.23"
+  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.15.23.tgz#5b71585d65d4b96b9e79e0feb281f4c957547307"
+  dependencies:
+    "@orbit/core" "^0.15.23"
+    "@orbit/utils" "^0.15.23"
+
+"@orbit/immutable@^0.15.23":
+  version "0.15.23"
+  resolved "https://registry.yarnpkg.com/@orbit/immutable/-/immutable-0.15.23.tgz#728ad2d3901a1a5db15be62dddce301f0341502e"
 
 "@orbit/indexeddb@^0.15.14":
   version "0.15.14"
@@ -469,18 +482,22 @@
     "@orbit/data" "^0.15.14"
     "@orbit/utils" "^0.15.14"
 
-"@orbit/store@^0.15.14":
-  version "0.15.14"
-  resolved "https://registry.yarnpkg.com/@orbit/store/-/store-0.15.14.tgz#f1ec7c32b7c331e86919649edb70631321125f9e"
+"@orbit/store@^0.15.25":
+  version "0.15.25"
+  resolved "https://registry.yarnpkg.com/@orbit/store/-/store-0.15.25.tgz#a7dad18ef6fdc0ff515d7654aa6d11928a02a7b9"
   dependencies:
-    "@orbit/core" "^0.15.14"
-    "@orbit/data" "^0.15.14"
-    "@orbit/immutable" "^0.15.14"
-    "@orbit/utils" "^0.15.14"
+    "@orbit/core" "^0.15.23"
+    "@orbit/data" "^0.15.23"
+    "@orbit/immutable" "^0.15.23"
+    "@orbit/utils" "^0.15.23"
 
 "@orbit/utils@^0.15.14":
   version "0.15.14"
   resolved "https://registry.yarnpkg.com/@orbit/utils/-/utils-0.15.14.tgz#9b9509d4a80244db588ad88df0664c69474cc73b"
+
+"@orbit/utils@^0.15.23":
+  version "0.15.23"
+  resolved "https://registry.yarnpkg.com/@orbit/utils/-/utils-0.15.23.tgz#3c3c00414e9a0a8aa3b1907025e30ca31b98e65b"
 
 "@simple-dom/document@^1.4.0":
   version "1.4.0"
