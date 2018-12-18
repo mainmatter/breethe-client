@@ -36,12 +36,12 @@ export default class Home extends Component {
   @tracked
   error: null | string;
 
-  @tracked('args')
+  @tracked
   get isSearchDisabled(): boolean {
     return !this.args.isOnline;
   }
 
-  @tracked('locations', 'searchTerm', 'coordinates')
+  @tracked
   get showRecent(): boolean {
     return this.locations.length > 0 && !this.searchTerm && !this.coordinates;
   }

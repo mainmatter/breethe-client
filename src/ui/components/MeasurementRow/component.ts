@@ -9,12 +9,12 @@ export default class SearchForm extends Component {
     value: string | null;
   };
 
-  @tracked('args')
+  @tracked
   get isPPM(): boolean {
     return this.args.unit === 'ppm';
   }
 
-  @tracked('args')
+  @tracked
   get paramName(): { base: string, sup?: string } {
     let type = this.args.parameter.toUpperCase();
     if (SUP_PARAMS.indexOf(type) >= 0) {
@@ -28,21 +28,21 @@ export default class SearchForm extends Component {
     };
   }
 
-  @tracked('args')
+  @tracked
   get valuePresent(): boolean {
     let value = this.args.value;
     let numericValue = parseFloat(value);
     return !isNaN(numericValue);
   }
 
-  @tracked('args')
+  @tracked
   get value(): string {
     let { value } = this.args;
     let numericValue = parseFloat(value);
     return `${(this.valuePresent) ? this.precisionRound(numericValue, 2) : ''}`;
   }
 
-  @tracked('args')
+  @tracked
   get measurementLabelledId(): string {
     return `measurement-${this.args.parameter}`;
   }

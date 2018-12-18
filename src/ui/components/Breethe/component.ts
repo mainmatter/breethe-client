@@ -52,17 +52,17 @@ export default class Breethe extends Component {
   @tracked
   locationNotFound: boolean;
 
-  @tracked('mode')
+  @tracked
   get isSearchMode(): boolean {
     return this.mode === MODE_SEARCH;
   }
 
-  @tracked('mode')
+  @tracked
   get isResultsMode(): boolean {
     return this.mode === MODE_RESULTS;
   }
 
-  @tracked('mode', 'isOnline')
+  @tracked
   get showOfflineWarning(): boolean {
     return this.mode === MODE_SEARCH && !this.isOnline;
   }
