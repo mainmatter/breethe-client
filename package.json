@@ -66,7 +66,7 @@
     "request-promise-native": "^1.0.5",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-node-resolve": "^3.3.0",
-    "simple-dom": "^1.4.0-alpha.82914663"
+    "simple-dom": "^1.4.0"
   },
   "ember-addon": {
     "paths": [
