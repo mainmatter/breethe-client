@@ -37,7 +37,7 @@ module.exports = function(environment) {
     rootURL: '/',
     modulePrefix: 'breethe',
     locationType: 'auto',
-    moduleConfiguration
+    resolverConfiguration: moduleConfiguration
   };
 
   return ENV;
