@@ -128,6 +128,64 @@
     silent-error "^1.1.0"
     walk-sync "^0.3.1"
 
+"@glimmer/application-pipeline@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/application-pipeline/-/application-pipeline-0.14.0.tgz#146d152d1403162156d326fcfa14de93155dafe7"
+  integrity sha512-r6+xvI/ewaJreBCDWY40GAqih1U/Tr6tmQUoVldiUzZPs4HXnMaoOn+JcCyYu1A+5R6Ic1U78A5g1q8+iT+wHw==
+  dependencies:
+    "@glimmer/app-compiler" "^0.9.0"
+    "@glimmer/resolution-map-builder" "^0.5.1"
+    "@glimmer/resolver-configuration-builder" "^0.1.2"
+    babel-core "^6.26.0"
+    babel-plugin-debug-macros "^0.1.7"
+    babel-plugin-external-helpers "^6.22.0"
+    babel-preset-env "^1.5.1"
+    broccoli-babel-transpiler "^6.0.0"
+    broccoli-caching-writer "^3.0.3"
+    broccoli-concat "^3.2.2"
+    broccoli-config-loader "^1.0.0"
+    broccoli-config-replace "^1.1.2"
+    broccoli-debug "^0.6.2"
+    broccoli-file-creator "^1.1.1"
+    broccoli-merge-trees "^2.0.0"
+    broccoli-persistent-filter "^1.3.1"
+    broccoli-rollup "^2.0.0"
+    broccoli-source "^1.1.0"
+    broccoli-string-replace "^0.1.1"
+    broccoli-typescript-compiler "^2.2.0"
+    common-tags "^1.4.0"
+    ember-build-utilities "^0.4.0"
+    ember-cli-inject-live-reload "^1.4.1"
+    ember-cli-normalize-entity-name "^1.0.0"
+    ember-cli-preprocess-registry "4.0.0-beta.1"
+    ember-cli-string-utils "^1.1.0"
+    exists-sync "^0.0.4"
+    glob "^7.1.2"
+    heimdalljs-logger "^0.1.9"
+    lodash.defaultsdeep "^4.6.0"
+    rollup "^0.57.0"
+    rollup-plugin-babel "^3.0.3"
+    rollup-plugin-node-resolve "^3.0.3"
+    silent-error "^1.1.0"
+    walk-sync "^0.3.1"
+
+"@glimmer/application@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/application/-/application-0.13.0.tgz#1268daee149beba1eb7f48155adcc572029d4598"
+  integrity sha512-DmQUY8fU8sdKnxzNAFUaKqPORSUJozSKHr1oV+lwdkn3RDRHLhG/R+Zcy5m5xJgqw/mAbAhZMMAPIe3RHIw8aw==
+  dependencies:
+    "@glimmer/compiler" "^0.34.7"
+    "@glimmer/component" "^0.13.0"
+    "@glimmer/di" "^0.1.9"
+    "@glimmer/env" "^0.1.7"
+    "@glimmer/interfaces" "^0.34.7"
+    "@glimmer/object-reference" "^0.34.7"
+    "@glimmer/opcode-compiler" "^0.34.7"
+    "@glimmer/reference" "^0.34.7"
+    "@glimmer/resolver" "^0.3.0"
+    "@glimmer/runtime" "^0.34.7"
+    "@glimmer/util" "^0.34.7"
+
 "@glimmer/application@^0.9.1":
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/@glimmer/application/-/application-0.9.1.tgz#2f60ea013ab7e7ecda01a48988834e66716ac04c"
@@ -145,10 +203,17 @@
     "@glimmer/runtime" "^0.31.0"
     "@glimmer/util" "^0.31.0"
 
+<<<<<<< HEAD
 "@glimmer/blueprint@~0.9.1":
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/@glimmer/blueprint/-/blueprint-0.9.1.tgz#e6302f9d7d8ba16f24ef935e09d36f54821ea332"
   integrity sha512-K3OaVkTM30XxbbYqMr+pU+KPj4YBdf8GNKXeOSRGFxwzohr7u1w8JbJ16HwAe0DNDWUaAMbJBrObtLcjH82DLw==
+=======
+"@glimmer/blueprint@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/blueprint/-/blueprint-0.13.0.tgz#235247666dd8a031c6c20e6d484643c2d3e9b32b"
+  integrity sha512-VIvPVf+16Plf9tugkXxsAplf2oUju5hkUTIsl/5i8GR7Rx4/BXCPK5vy6F1qvPh76ZlWIn8XG0lp+UYOrY1O1w==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     ember-cli-string-utils "^1.1.0"
 
@@ -205,6 +270,27 @@
     "@glimmer/util" "^0.33.7"
     "@glimmer/wire-format" "^0.33.7"
 
+"@glimmer/compiler@^0.34.7":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.34.8.tgz#bd61d598224bb2332282c27c690b075f20f0646e"
+  integrity sha512-0w2co35LPybdx9WPNmcZ+ZHajqeNPwzLTeXa/K/sJw9Z3o7aHL1uHVcdd1BVZS6UMf/tqtLt0Yr2uHbYYXgoQA==
+  dependencies:
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/syntax" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
+    "@glimmer/wire-format" "^0.34.8"
+
+"@glimmer/component@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/component/-/component-0.13.0.tgz#17992f4f2c7330b3f26d2999f4deed4f7c9f80f7"
+  integrity sha512-oNyS/6QwV3ZFKVCmJworTb4D8apwDZJEV5h5yw1dJcZTSChME2iTEPeZoxkPLvOk6YC/onxsQiZ7fUcNVm9O3A==
+  dependencies:
+    "@glimmer/di" "^0.1.9"
+    "@glimmer/env" "^0.1.7"
+    "@glimmer/reference" "^0.34.7"
+    "@glimmer/runtime" "^0.34.7"
+    "@glimmer/util" "^0.34.7"
+
 "@glimmer/component@^0.9.1":
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/@glimmer/component/-/component-0.9.1.tgz#9c103457ee0c9e0e9ffb6e7957c151bb10378383"
@@ -230,6 +316,14 @@
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/encoder/-/encoder-0.31.0.tgz#a4daf4aea35aaec1373007169aea2f50e155e993"
   integrity sha512-wyM9xDhmRjjczaYS0Jnb96jKm3qG3bsED0y5s1uIbkw1o0wB3ohA21K2WAJRzhQc1KtZBwh9VyLS+wO1sA0+6w==
+<<<<<<< HEAD
+=======
+
+"@glimmer/encoder@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/encoder/-/encoder-0.34.8.tgz#e3548dab4fc639800fcc9267c236781c848f3ddd"
+  integrity sha512-E6HGSu1XDXk8fWUQPiN6DarYUUV43PqQV+xUICuIlrBKH6WZSx9NeZaxi6q8nqmSnoAyhcPjHIrg3l0sypNs8w==
+>>>>>>> 12df226... upgrade @glimmer packages
 
 "@glimmer/env@^0.1.7":
   version "0.1.7"
@@ -264,18 +358,37 @@
   dependencies:
     "@glimmer/wire-format" "^0.33.7"
 
+"@glimmer/interfaces@^0.34.7", "@glimmer/interfaces@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.34.8.tgz#421ff213a69120d42ffacf6edc184f8e78e558f5"
+  integrity sha512-ZKrrk/mqZTzGQtr7YA6fc+F2PuglPScgdZFPnSlcJobdEZh2LX4cBKAoUeafuDUMqJqUq7gvm+dQx71l8fEz6Q==
+  dependencies:
+    "@glimmer/wire-format" "^0.34.8"
+
 "@glimmer/low-level@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/low-level/-/low-level-0.31.0.tgz#c5ed9c825fa67498f5285e8fe8003ec54d58d826"
   integrity sha512-2FkXIFVq27XFdaXOtuGsDDAU8rTdNL5GmB9pxiW4pnnvGuMajajxqNYsXMSCscWqwNsJdHtSK0gS/gj60KWypw==
 
+<<<<<<< HEAD
 "@glimmer/node@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/node/-/node-0.31.0.tgz#2e3cc933695038d5eff965be825d90a8130511a3"
   integrity sha512-I82IED4EEDv1uD/xOZRgEdSrY3hr9ei4BfIGtb9CbpcNNyUuSQkzjvIm7U9CyzbzN2YqZSKnMwMqmTw8sYOLVw==
+=======
+"@glimmer/low-level@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/low-level/-/low-level-0.34.8.tgz#ac82953d68171ed5640a8d58045afd57d35ed0ac"
+  integrity sha512-lGL/YFxk9K8a4vBSidCUFN2qq+qjBK37qTgoiHJBVtxYiKHeNjlR6vhwY6u2F4xNWwQc6+O7Q/reLHQVKLHdaw==
+
+"@glimmer/node@^0.34.7":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/node/-/node-0.34.8.tgz#294c96c1e6c09a22dc2a136eb9582a0557f87d0b"
+  integrity sha512-VLES5dCdEUv0gjFdvjeNqrpSdrsSTdWpqumfdch1/iD84dr4sU6F+0kMDYOLWs8JhGXtNm6CFp4/c496KjsNqQ==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
-    "@glimmer/interfaces" "^0.31.0"
-    "@glimmer/runtime" "^0.31.0"
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/runtime" "^0.34.8"
     simple-dom "^0.3.0"
 
 "@glimmer/object-reference@^0.31.0":
@@ -285,6 +398,14 @@
   dependencies:
     "@glimmer/reference" "^0.31.0"
     "@glimmer/util" "^0.31.0"
+
+"@glimmer/object-reference@^0.34.7":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/object-reference/-/object-reference-0.34.8.tgz#fe28ad045aa073aa0bed60f92b0884b087b76050"
+  integrity sha512-UFRIFxh1DIeAvboibkIs1Mym+pwJQwwqpmZZ2pbHkVTgDDt/VQOHYdO5qo/aq1EBsrJgF/sRkTITNA8zCSl+5Q==
+  dependencies:
+    "@glimmer/reference" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
 
 "@glimmer/opcode-compiler@^0.31.0":
   version "0.31.0"
@@ -298,6 +419,19 @@
     "@glimmer/vm" "^0.31.0"
     "@glimmer/wire-format" "^0.31.0"
 
+"@glimmer/opcode-compiler@^0.34.7":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/opcode-compiler/-/opcode-compiler-0.34.8.tgz#9851f94162dd1c691b4db4d37b84d817a0a717c4"
+  integrity sha512-6J9S2gQ+nQFThZzLL96kw/c2JbQfFMTOQkWsita42KG5kD31PwfW6yWV37UwVAoMrIQG9ngwetvz9ZpXbe+P1g==
+  dependencies:
+    "@glimmer/encoder" "^0.34.8"
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/program" "^0.34.8"
+    "@glimmer/reference" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
+    "@glimmer/vm" "^0.34.8"
+    "@glimmer/wire-format" "^0.34.8"
+
 "@glimmer/program@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/program/-/program-0.31.0.tgz#0a535154d52ca14f821f70880ec8eb12dc1830de"
@@ -307,12 +441,28 @@
     "@glimmer/interfaces" "^0.31.0"
     "@glimmer/util" "^0.31.0"
 
+"@glimmer/program@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/program/-/program-0.34.8.tgz#6d0867f6c1bbfbad5835946717e26fb8fb842a7c"
+  integrity sha512-3uKq6DPnbBibWFurJW/GFYww0XUSrN2VhKDNRyf9lMTduCSvSU6ZWF1fTDhGKy50ts+v+u+/e1Wn7fhi5WpiuA==
+  dependencies:
+    "@glimmer/encoder" "^0.34.8"
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
+
 "@glimmer/reference@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/reference/-/reference-0.31.0.tgz#b4908e4549f54fec69d2a4b515c4e75c78b7a363"
   integrity sha512-MvlsVVv7tbF2uiGYMMp4X36aArlzR/T8ZW3kPAkV5Q7nyYflD3T13GXQ1WFY9PXbjnd3IkyuREjz9OvPs4nHag==
   dependencies:
     "@glimmer/util" "^0.31.0"
+
+"@glimmer/reference@^0.34.7", "@glimmer/reference@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/reference/-/reference-0.34.8.tgz#441933512355afc7da131c5908d818eff07bf15c"
+  integrity sha512-WQOhGFf5fMa94NqWiuxtnBi42YwBBsnMgEpBKdH+Q+AkYYkac2GBOINXIv+YFnfnb6SaaB5cdpfaj7+64uLOHQ==
+  dependencies:
+    "@glimmer/util" "^0.34.8"
 
 "@glimmer/resolution-map-builder@0.5.1", "@glimmer/resolution-map-builder@^0.5.1":
   version "0.5.1"
@@ -367,14 +517,34 @@
     "@glimmer/vm" "^0.31.0"
     "@glimmer/wire-format" "^0.31.0"
 
+<<<<<<< HEAD
 "@glimmer/ssr@0.9.1":
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/@glimmer/ssr/-/ssr-0.9.1.tgz#6733c85d9a365ab5a416ee731cd211a4ccad5b84"
   integrity sha512-IluPQlRCWgGmjHG5cZzzrzZDjTXAtiztfsMKBhyu67XrBpHup9/yx/7Mr1WQ+s2FBBetr58sBoZs/y8bDLNRqg==
+=======
+"@glimmer/runtime@^0.34.7", "@glimmer/runtime@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/runtime/-/runtime-0.34.8.tgz#85831f857e3a67c6de5a7531b6d570586a3f70b4"
+  integrity sha512-pPD8/fnaJciqaQh0a9HuIR21EbxtQUcTC0Y1KNcBS56d38qRomJ8yVu3EdybWzoW+xeUj1bNsCavK1nIqmQQPg==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
-    "@glimmer/application" "^0.9.1"
-    "@glimmer/node" "^0.31.0"
-    "@glimmer/runtime" "^0.31.0"
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/low-level" "^0.34.8"
+    "@glimmer/program" "^0.34.8"
+    "@glimmer/reference" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
+    "@glimmer/vm" "^0.34.8"
+    "@glimmer/wire-format" "^0.34.8"
+
+"@glimmer/ssr@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/ssr/-/ssr-0.13.0.tgz#227b3f1f2726f5847a7a4098c49d536c6d88973a"
+  integrity sha512-16h8TMUL2EzaQTp+ErIi4lkCVwtOXDFcPAqr8UsjVi1hIMptPF9YnlDWHoE+1x2I7Th7Qw3ekGgA4IUM3pY2Ow==
+  dependencies:
+    "@glimmer/application" "^0.13.0"
+    "@glimmer/node" "^0.34.7"
+    "@glimmer/runtime" "^0.34.7"
 
 "@glimmer/syntax@^0.29.1":
   version "0.29.10"
@@ -406,10 +576,27 @@
     handlebars "^4.0.6"
     simple-html-tokenizer "^0.5.0"
 
+<<<<<<< HEAD
 "@glimmer/test-helpers@^0.30.3":
   version "0.30.3"
   resolved "https://registry.yarnpkg.com/@glimmer/test-helpers/-/test-helpers-0.30.3.tgz#57bd84fba9aa498de025f8d0b4c3f0ab2e9afa97"
   integrity sha512-l/jlzWpxczTIuFHZjG1ZiFB52f97BiuKk9DRTIfcnELv7OQJDzocBZA6/hmzgUmSA8On7DJTG2qLEJn4OkSW1w==
+=======
+"@glimmer/syntax@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.34.8.tgz#fc7c54faa450111a4c97200100f7510294217156"
+  integrity sha512-/RL994WYz/UwlkqgEtHizJ71kde99bDCxsqXENcKu7dY1DxqHQ82brya9vLgw2avwn9YXndE5ZVSVr0ontaGcw==
+  dependencies:
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
+    handlebars "^4.0.6"
+    simple-html-tokenizer "^0.5.3"
+
+"@glimmer/test-helpers@^0.31.2":
+  version "0.31.2"
+  resolved "https://registry.yarnpkg.com/@glimmer/test-helpers/-/test-helpers-0.31.2.tgz#3614cca5e1714ce08c41175ba2505e3329dca732"
+  integrity sha512-Ft36aWOkpW84YgIlf8hNySKJaQALPCySJwNY6g2CgU07sxahnxt4HCSZSi6wrJo+JMR0cXGU4Q8yU8GyNpLnBA==
+>>>>>>> 12df226... upgrade @glimmer packages
 
 "@glimmer/util@^0.29.10":
   version "0.29.10"
@@ -425,6 +612,14 @@
   version "0.33.7"
   resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.33.7.tgz#6717c669f9aeb5e248bfffbe7017f51d8a7841d4"
   integrity sha512-VlIhkZIh/zrC5Kg1ufr5QnwqjdtIrmkzYfkz5BHU0PaTcciLqY2dY1K5iVCmpWfvr6shu05e1zU/sgAQ5O6X6w==
+<<<<<<< HEAD
+=======
+
+"@glimmer/util@^0.34.7", "@glimmer/util@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.34.8.tgz#0f1349b3134bb55d4887da73919863401647525b"
+  integrity sha512-a5RpA/dAHAf1GAsFuxmmDMzzPt8Yukyfi4sNkjVgBJ18OCq4AT2kGct32r3LZftEmJ1UmTzUPdSNnbRuyujI+A==
+>>>>>>> 12df226... upgrade @glimmer packages
 
 "@glimmer/vm@^0.31.0":
   version "0.31.0"
@@ -434,6 +629,15 @@
     "@glimmer/interfaces" "^0.31.0"
     "@glimmer/program" "^0.31.0"
     "@glimmer/util" "^0.31.0"
+
+"@glimmer/vm@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/vm/-/vm-0.34.8.tgz#4485dcf41f1caa4bf05449c4dfb440bb88afc039"
+  integrity sha512-eZ1VCxkC9ZLN4yZvb7vpKC/5BYY70O8y+tffCyDWoxfhZGCHaCv/Bi8yFlodQfISqHKaW5e9pLKfg8IqAybBKw==
+  dependencies:
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/program" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
 
 "@glimmer/wire-format@^0.29.10":
   version "0.29.10"
@@ -455,6 +659,13 @@
   integrity sha512-wuxLwae0dxoswXpXfHIjs4UGpl1X+XhBCZfTL4Yj1AOlPCQPvDbvsFJm9JtOkIoLI9hJIKMOLICt6XSdzGFzNQ==
   dependencies:
     "@glimmer/util" "^0.33.7"
+
+"@glimmer/wire-format@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.34.8.tgz#5f792d4c8789d77a801e7d4c742ea42f55d24816"
+  integrity sha512-VNwUgWmQ0QmHTUhpX3z70FKnQyBZSxJfz8YQzTf4sMPNj6XBH48msIc+56PTpWbwEoIHIrt68tA9uOZV3gCcrg==
+  dependencies:
+    "@glimmer/util" "^0.34.8"
 
 "@opticss/element-analysis@^0.3.0":
   version "0.3.0"
@@ -480,6 +691,7 @@
   dependencies:
     typescript-collections "^1.2.5"
 
+<<<<<<< HEAD
 "@orbit/coordinator@^0.15.23":
   version "0.15.23"
   resolved "https://registry.yarnpkg.com/@orbit/coordinator/-/coordinator-0.15.23.tgz#aac121bb61d794018e0069c39b8fb24b0abf5e7d"
@@ -489,17 +701,36 @@
   version "0.15.23"
   resolved "https://registry.yarnpkg.com/@orbit/core/-/core-0.15.23.tgz#3f6656f37d6bf9bdf5ef03ae26726cb8ba03776d"
   integrity sha512-/IDqttFC7eUbyy9NABctYsCrnGIaut4VZfXFQodvd74Rmc1C3+4XbkYmH26zCG/ALQIAhY5odiN9vvzOrHyV0Q==
+=======
+"@orbit/coordinator@^0.15.13":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/coordinator/-/coordinator-0.15.14.tgz#bdf2a7b9a18fd66382071119aa3e61e1fb994964"
+  integrity sha512-ywDZFcZ38S3AE1Vn9Qdw6atPVf3gtup2u2ItX9Ps75Z29nJIdaysSPLHKaGYmgjZJuMLScvjSzJD5Rys1x6YCw==
+
+"@orbit/core@^0.15.14":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/core/-/core-0.15.14.tgz#a43bfb660e59d682b4d41fb8c70c81e1748a72b6"
+  integrity sha512-IGRvNJ0Xq4M2apWvMjbVBNgZ80Y2SgfYghl4PFLBAg8yGLQJwdmf+h5BlNNiGOT1veCDV+G1j3xEk+KNNtdhqg==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     "@orbit/utils" "^0.15.23"
 
+<<<<<<< HEAD
 "@orbit/data@^0.15.23":
   version "0.15.23"
   resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.15.23.tgz#5b71585d65d4b96b9e79e0feb281f4c957547307"
   integrity sha512-7ZQt9KYCGWIZLpLQHaOVWyMlU5iddPOEfkesY1We4ob+cbWFv4ZvGHuT0Br4ki1LhoAkh1Zz2dB76NR/WQXOBg==
+=======
+"@orbit/data@^0.15.14":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.15.14.tgz#5c269de32e9500c5f25f55b1345775110c59c97b"
+  integrity sha512-jLHOdIO7eKKeQwA3Khhm6/scik96iQlGEz/3H6hJkpxjNPrZ6rtITgc3GlKeb1gEHh0z5SHlo9EeVpkOBEM1pw==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     "@orbit/core" "^0.15.23"
     "@orbit/utils" "^0.15.23"
 
+<<<<<<< HEAD
 "@orbit/immutable@^0.15.23":
   version "0.15.23"
   resolved "https://registry.yarnpkg.com/@orbit/immutable/-/immutable-0.15.23.tgz#728ad2d3901a1a5db15be62dddce301f0341502e"
@@ -509,34 +740,66 @@
   version "0.15.25"
   resolved "https://registry.yarnpkg.com/@orbit/indexeddb/-/indexeddb-0.15.25.tgz#e89b1a937d7e12fe0c051c29c98db301e461e641"
   integrity sha512-nqzLE4//4crXkXFyiJFoaJbCpSwdhU/SKrEIkg1xFCZMdT42Pcz/c5ATSIdJOcb+5yj33HhAlNPQ6Qb1062jtw==
+=======
+"@orbit/immutable@^0.15.14":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/immutable/-/immutable-0.15.14.tgz#8c6958841d45f7f947282d8f39d88094d20bd152"
+  integrity sha512-FSEj15nZuakGDeya15gECkQHUDdrNflvyOrkw3Y+l7954zNvDgDndtqIOJd6OoNx7a8htAfrMGVdo/IJKzPbKQ==
+
+"@orbit/indexeddb@^0.15.14":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/indexeddb/-/indexeddb-0.15.14.tgz#bd41d0aec7919ce9fac788a1f99a1b5f83880444"
+  integrity sha512-1NRqcu4PmaLFRu867ruWEzUhPd9LX5ctPTwgrcH4AZGpDn+3p4rpL2Ke3XWF1M5Fi1u62pmGSxxEFs06U3w4oQ==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     "@orbit/core" "^0.15.23"
     "@orbit/data" "^0.15.23"
     "@orbit/utils" "^0.15.23"
 
+<<<<<<< HEAD
 "@orbit/jsonapi@^0.15.25":
   version "0.15.25"
   resolved "https://registry.yarnpkg.com/@orbit/jsonapi/-/jsonapi-0.15.25.tgz#aee41ee19b601ebf8a97c2743d98fd973daa6528"
   integrity sha512-j9K/itPZo4RkXBxKCDgIpAkGZK0A0y1LJ96s9ziCxmSHVSVHG1upLXuqIsoL9+3poEz+5KczRPC9OpsC6HKVDQ==
+=======
+"@orbit/jsonapi@^0.15.14":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/jsonapi/-/jsonapi-0.15.14.tgz#8815c5eb6a7f275d57566ebc8551e4f7a914846b"
+  integrity sha512-KnmHv4PmdCZKJ9cNFD3m7FDiNgWvoEJLYITpwkx3jFuqlAgE3cd6X/IGCnNNczWU0lhF4iB6Ko5RdYXaUqOCLw==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     "@orbit/core" "^0.15.23"
     "@orbit/data" "^0.15.23"
     "@orbit/utils" "^0.15.23"
 
+<<<<<<< HEAD
 "@orbit/store@^0.15.25":
   version "0.15.25"
   resolved "https://registry.yarnpkg.com/@orbit/store/-/store-0.15.25.tgz#a7dad18ef6fdc0ff515d7654aa6d11928a02a7b9"
   integrity sha512-CL07LcMp8MrF3iaw6GcU1RnPWeWtUZjTqldh9tJeGgj9PqSJKIxTrAVfXdmBfem8IEee9KdSepTKJbXW0FeOrA==
+=======
+"@orbit/store@^0.15.14":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/store/-/store-0.15.14.tgz#f1ec7c32b7c331e86919649edb70631321125f9e"
+  integrity sha512-VBujjeyM5Jz1faTEwT+0cMSE4s7V/B/zXmACCnZxSSA0EM6T2AYrvMi3HeNXl+aexiCVVDy/OfjZRweS2UbkXg==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     "@orbit/core" "^0.15.23"
     "@orbit/data" "^0.15.23"
     "@orbit/immutable" "^0.15.23"
     "@orbit/utils" "^0.15.23"
 
+<<<<<<< HEAD
 "@orbit/utils@^0.15.23":
   version "0.15.23"
   resolved "https://registry.yarnpkg.com/@orbit/utils/-/utils-0.15.23.tgz#3c3c00414e9a0a8aa3b1907025e30ca31b98e65b"
   integrity sha512-+7l34ROgaq2SISR6uU4/amz8TjG0HxL7XgGEeuxAinhFzO/vI8/G/kER7Jah885esM+ZmGVLrU5c6ddkHm0H3Q==
+=======
+"@orbit/utils@^0.15.14":
+  version "0.15.14"
+  resolved "https://registry.yarnpkg.com/@orbit/utils/-/utils-0.15.14.tgz#9b9509d4a80244db588ad88df0664c69474cc73b"
+  integrity sha512-78e2h+3+xpMCCAtWJeRgPAWhvACuGVhZ/nIWlqxX3f6LMrIFtwCWBfUy8PRk4RFfaMO+zT8ty85HYiKsjzX6HA==
+>>>>>>> 12df226... upgrade @glimmer packages
 
 "@simple-dom/document@^1.4.0":
   version "1.4.0"
@@ -568,6 +831,16 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@simple-dom/void-map/-/void-map-1.4.0.tgz#f15f07568fe1076740407266aa5e6eac249bc78c"
   integrity sha512-VDhLEyVCbuhOBBgHol9ShzIv9O8UCzdXeH4FoXu2DOcu/nnvTjLTck+BgXsCLv5ynDiUdoqsREEVFnoyPpFKVw==
+<<<<<<< HEAD
+=======
+
+"@types/acorn@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/acorn/-/acorn-4.0.3.tgz#d1f3e738dde52536f9aad3d3380d14e448820afd"
+  integrity sha512-gou/kWQkGPMZjdCKNZGDpqxLm9+ErG/pFZKPX4tvCjr0Xf4FCYYX3nAsu7aDVKJV3KUe27+mvqqyWT/9VZoM/A==
+  dependencies:
+    "@types/estree" "*"
+>>>>>>> 12df226... upgrade @glimmer packages
 
 "@types/async@^2.0.40":
   version "2.0.49"
@@ -578,6 +851,19 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.29.tgz#a1e514adfbd92f03a224ba54d693111dbf1f3754"
   integrity sha1-oeUUrfvZLwOiJLpU1pMRHb8fN1Q=
+<<<<<<< HEAD
+=======
+
+"@types/estree@*":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
+  integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
+
+"@types/estree@0.0.38":
+  version "0.0.38"
+  resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.38.tgz#c1be40aa933723c608820a99a373a16d215a1ca2"
+  integrity sha512-F/v7t1LwS4vnXuPooJQGBRKRGIoxWUTmA4VHfqjOccFsNDThD5bfUNpITive6s352O7o384wcpEaDV8rHCehDA==
+>>>>>>> 12df226... upgrade @glimmer packages
 
 "@types/events@*":
   version "1.2.0"
@@ -607,11 +893,24 @@
   version "8.10.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.3.tgz#ee34a5c732703cf45d2fadc163a299a6b2f456c2"
   integrity sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g==
+<<<<<<< HEAD
 
 "@types/qunit@^2.5.3":
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/@types/qunit/-/qunit-2.5.3.tgz#e7df363b5e1d1ba034b5fdd34b560d5ec0914225"
   integrity sha512-b9xNH1wBOnY+yiCT2DiAC0yi7GCF5g6whiAFA/dpd9RtL/Jn2XR7e4yyeAQwH3TUeF00zikmYqYxS0K8+EKTKQ==
+=======
+
+"@types/node@^9.6.0":
+  version "9.6.40"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.40.tgz#2d69cefbc090cb0bb824542a4c575b14dde7d3aa"
+  integrity sha512-M3HHoXXndsho/sTbQML2BJr7/uwNhMg8P0D4lb+UsM65JQZx268faiz9hKpY4FpocWqpwlLwa8vevw8hLtKjOw==
+
+"@types/qunit@^2.0.31":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@types/qunit/-/qunit-2.5.0.tgz#fab886ca4160ba8bf299b146a8f54ee3057c8e32"
+  integrity sha512-thhSizaUp9hPZjV3HaMtzRFwGANxLnqsjgdotXFtfVCCUfY4jgbzFRVKYrqsOExkk3OImgMWKk3opx2vethVbw==
+>>>>>>> 12df226... upgrade @glimmer packages
 
 "@types/recursive-readdir@^2.2.0":
   version "2.2.0"
@@ -632,6 +931,18 @@ accepts@~1.3.4, accepts@~1.3.5:
   dependencies:
     mime-types "~2.1.18"
     negotiator "0.6.1"
+
+acorn-dynamic-import@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-3.0.0.tgz#901ceee4c7faaef7e07ad2a47e890675da50a278"
+  integrity sha512-zVWV8Z8lislJoOKKqdNMOB+s6+XV5WERty8MnKBeFgwA+19XJjJHs2RP5dzM57FftIs+jQnRToLiWazKr6sSWg==
+  dependencies:
+    acorn "^5.0.0"
+
+acorn@^5.0.0, acorn@^5.5.3:
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
+  integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
 
 acorn@^5.2.1:
   version "5.5.3"
@@ -658,10 +969,17 @@ ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
+<<<<<<< HEAD
 ajv@^6.5.5:
   version "6.6.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.6.2.tgz#caceccf474bf3fc3ce3b147443711a24063cc30d"
   integrity sha512-FBHEW6Jf5TB9MGBgUUA9XHkTbjXYfAUjY43ACMfmdMRHniyoMHjHjzD50OK8LGDWQwp4rWEsIq5kEqq7rvIM1g==
+=======
+ajv@^5.1.0:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
+  integrity sha1-c7Xuyj+rZT49P5Qis0GtQiBdyWU=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
@@ -683,6 +1001,14 @@ amd-name-resolver@1.0.0:
   integrity sha1-Dlk7KNb6MyarF5gQftrqlhBG6Ng=
   dependencies:
     ensure-posix-path "^1.0.1"
+
+amd-name-resolver@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/amd-name-resolver/-/amd-name-resolver-1.2.1.tgz#cea40abff394268307df647ce340c83eda6e9cfc"
+  integrity sha512-cm0sUV2S8L6pwq0wpu0cHdA2KeEAmCVKy+R/qeZl/VxEn3JmU8WMM0IQrKyrnMXLXbULkZ7ptTaX8vKA0NhNvQ==
+  dependencies:
+    ensure-posix-path "^1.0.1"
+    object-hash "^1.3.1"
 
 amdefine@>=0.0.4:
   version "1.0.1"
@@ -952,11 +1278,14 @@ aws4@^1.2.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.7.0.tgz#d4d0e9b9dbfca77bf08eeb0a8a471550fe39e289"
   integrity sha512-32NDda82rhwD9/JBCCkB+MRYDp0oSvlo2IL6rQWA10PQi7tDUM3eqMSltXmY+Oyl/7N3P3qNtAlv7X0d9bI28w==
+<<<<<<< HEAD
 
 aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -1589,10 +1918,17 @@ bluebird@^3.1.1, bluebird@^3.4.6:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
   integrity sha512-MKiLiV+I1AA596t9w1sQJ8jkiSr5+ZKi0WKrYGUn6d1Fx+Ij4tIj+m2WMQSGczs5jZVxV339chE8iwk6F64wjA==
 
+<<<<<<< HEAD
 body-parser@1.18.3:
   version "1.18.3"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.3.tgz#5b292198ffdd553b3a0f20ded0592b956955c8b4"
   integrity sha1-WykhmP/dVTs6DyDe0FkrlWlVyLQ=
+=======
+body-parser@1.18.2:
+  version "1.18.2"
+  resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.2.tgz#87678a19d84b47d859b83199bd59bce222b10454"
+  integrity sha1-h2eKGdhLR9hZuDGZvVm84iKxBFQ=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     bytes "3.0.0"
     content-type "~1.0.4"
@@ -1627,6 +1963,23 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+<<<<<<< HEAD
+=======
+boom@4.x.x:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/boom/-/boom-4.3.1.tgz#4f8a3005cb4a7e3889f749030fd25b96e01d2e31"
+  integrity sha1-T4owBctKfjiJ90kDD9JbluAdLjE=
+  dependencies:
+    hoek "4.x.x"
+
+boom@5.x.x:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/boom/-/boom-5.2.0.tgz#5dd9da6ee3a5f302077436290cb717d3f4a54e02"
+  integrity sha512-Z5BTk6ZRe4tXXQlkqftmsAUANpXmuwlsF5Oov8ThoMbQRzdGTA1ngYRW160GexgOgjsFOKJz0LYhoNi+2AMBUw==
+  dependencies:
+    hoek "4.x.x"
+
+>>>>>>> 12df226... upgrade @glimmer packages
 bower-config@^1.3.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/bower-config/-/bower-config-1.4.1.tgz#85fd9df367c2b8dbbd0caa4c5f2bad40cd84c2cc"
@@ -1978,6 +2331,23 @@ broccoli-rollup@^1.2.0, broccoli-rollup@^1.3.0:
     symlink-or-copy "^1.1.8"
     walk-sync "^0.3.1"
 
+broccoli-rollup@^2.0.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/broccoli-rollup/-/broccoli-rollup-2.1.1.tgz#0b77dc4b7560a53e998ea85f3b56772612d4988d"
+  integrity sha512-aky/Ovg5DbsrsJEx2QCXxHLA6ZR+9u1TNVTf85soP4gL8CjGGKQ/JU8R3BZ2ntkWzo6/83RCKzX6O+nlNKR5MQ==
+  dependencies:
+    "@types/node" "^9.6.0"
+    amd-name-resolver "^1.2.0"
+    broccoli-plugin "^1.2.1"
+    fs-tree-diff "^0.5.2"
+    heimdalljs "^0.2.1"
+    heimdalljs-logger "^0.1.7"
+    magic-string "^0.24.0"
+    node-modules-path "^1.0.1"
+    rollup "^0.57.1"
+    symlink-or-copy "^1.1.8"
+    walk-sync "^0.3.1"
+
 broccoli-slow-trees@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/broccoli-slow-trees/-/broccoli-slow-trees-2.0.0.tgz#9741afe992787add64aec7f7c8211dfcc058278d"
@@ -2243,6 +2613,14 @@ cardinal@^1.0.0:
     ansicolors "~0.2.1"
     redeyed "~1.0.0"
 
+<<<<<<< HEAD
+=======
+caseless@~0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.11.0.tgz#715b96ea9841593cc33067923f5ec60ebda4f7d7"
+  integrity sha1-cVuW6phBWTzDMGeSP17GDr2k99c=
+
+>>>>>>> 12df226... upgrade @glimmer packages
 caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
@@ -2261,10 +2639,17 @@ chai-url@^1.0.4:
   resolved "https://registry.yarnpkg.com/chai-url/-/chai-url-1.0.4.tgz#827e0fd7835c848b8ab8e2ce1d65d40521e62026"
   integrity sha1-gn4P14NchIuKuOLOHWXUBSHmICY=
 
+<<<<<<< HEAD
 chai@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/chai/-/chai-4.2.0.tgz#760aa72cf20e3795e84b12877ce0e83737aa29e5"
   integrity sha512-XQU3bhBukrOsQCuwZndwGcCVQHyZi53fQ6Ys1Fym7E4olpIqqZZhhoFJoaKVvV17lWQoXYwgWN2nF5crA8J2jw==
+=======
+chai@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/chai/-/chai-4.1.2.tgz#0f64584ba642f0f2ace2806279f4f06ca23ad73c"
+  integrity sha1-D2RYS6ZC8PKs4oBiefTwbKI61zw=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     assertion-error "^1.1.0"
     check-error "^1.0.2"
@@ -2524,6 +2909,7 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
   integrity sha1-cj599ugBrFYTETp+RFqbactjKBg=
+<<<<<<< HEAD
   dependencies:
     delayed-stream "~1.0.0"
 
@@ -2531,6 +2917,8 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.7.tgz#2d1d24317afb8abe95d6d2c0b07b57813539d828"
   integrity sha512-brWl9y6vOB1xYPZcpZde3N9zDByXTosAeMDo4p1wzo6UMOX4vumB+TP1RZ76sfE6Md68Q0NJSrE/gbezd4Ul+w==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     delayed-stream "~1.0.0"
 
@@ -2744,10 +3132,17 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+<<<<<<< HEAD
 cors@^2.8.5:
   version "2.8.5"
   resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
   integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
+=======
+cors@^2.8.4:
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.4.tgz#2bd381f2eb201020105cd50ea59da63090694686"
+  integrity sha1-K9OB8usgECAQXNUOpZ2mMJBpRoY=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     object-assign "^4"
     vary "^1"
@@ -2792,6 +3187,16 @@ cryptiles@2.x.x:
   dependencies:
     boom "2.x.x"
 
+<<<<<<< HEAD
+=======
+cryptiles@3.x.x:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/cryptiles/-/cryptiles-3.1.2.tgz#a89fbb220f5ce25ec56e8c4aa8a4fd7b5b0d29fe"
+  integrity sha1-qJ+7Ig9c4l7FboxKqKT9e1sNKf4=
+  dependencies:
+    boom "5.x.x"
+
+>>>>>>> 12df226... upgrade @glimmer packages
 crypto-random-string@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
@@ -2851,6 +3256,13 @@ dashdash@^1.12.0:
   integrity sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=
   dependencies:
     assert-plus "^1.0.0"
+
+date-time@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/date-time/-/date-time-2.1.0.tgz#0286d1b4c769633b3ca13e1e62558d2dbdc2eba2"
+  integrity sha512-/9+C44X7lot0IeiyfgJmETtRMhBidBYM2QFFIkGa0U1k+hSyY87Nw7PY3eDqpvCBm7I3WCSfPeZskW/YYq6m4g==
+  dependencies:
+    time-zone "^1.0.0"
 
 debug@2.6.9, debug@^2.1.0, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.3.3, debug@^2.4.0, debug@^2.6.8:
   version "2.6.9"
@@ -2935,7 +3347,16 @@ delegates@^1.0.0:
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
   integrity sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
 
+<<<<<<< HEAD
 depd@~1.1.2:
+=======
+depd@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
+  integrity sha1-V4O04cRZ8G+lyif5kfPQbnoxA1k=
+
+depd@~1.1.1, depd@~1.1.2:
+>>>>>>> 12df226... upgrade @glimmer packages
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
@@ -3085,6 +3506,7 @@ ember-cli-inject-live-reload@^1.4.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/ember-cli-inject-live-reload/-/ember-cli-inject-live-reload-1.7.0.tgz#af94336e015336127dfb98080ad442bb233e37ed"
   integrity sha512-+0zOwJlf4iR5NcvyeU7E7xU1qDfniP/+mXfNTfAEhHO2eE9sjQvasKV84O1sIIyLk2LMIjFPbGt7uv5fQcIGwg==
+<<<<<<< HEAD
 
 ember-cli-inject-live-reload@^2.0.1:
   version "2.0.1"
@@ -3093,6 +3515,8 @@ ember-cli-inject-live-reload@^2.0.1:
   dependencies:
     clean-base-url "^1.0.0"
     ember-cli-version-checker "^2.1.2"
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 ember-cli-is-package-missing@^1.0.0:
   version "1.0.0"
@@ -3595,10 +4019,17 @@ expand-tilde@^1.2.2:
   dependencies:
     os-homedir "^1.0.1"
 
+<<<<<<< HEAD
 express@^4.10.7, express@^4.12.3, express@^4.16.4:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
   integrity sha512-j12Uuyb4FMrd/qQAm6uCHAkPtO8FDTRJZBDd5D2KOL2eLaz1yUNdUB/NOIyq0iU4q4cFarsUCrnFDPBcnksuOg==
+=======
+express@^4.10.7, express@^4.12.3, express@^4.16.3:
+  version "4.16.3"
+  resolved "https://registry.yarnpkg.com/express/-/express-4.16.3.tgz#6af8a502350db3246ecc4becf6b5a34d22f7ed53"
+  integrity sha1-avilAjUNsyRuzEvs9rWjTSL37VM=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     accepts "~1.3.5"
     array-flatten "1.1.1"
@@ -3650,11 +4081,14 @@ extend@^3.0.0, extend@~3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
   integrity sha1-p1Xqe8Gt/MWjHOfnYtuq3F5jZEQ=
+<<<<<<< HEAD
 
 extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 external-editor@^1.1.0:
   version "1.1.1"
@@ -3706,10 +4140,17 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
+<<<<<<< HEAD
 fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
   integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
+=======
+fast-deep-equal@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
+  integrity sha1-wFNHeBfIa1HaqFPIHgWbcz0CNhQ=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
@@ -3920,10 +4361,17 @@ form-data@~2.1.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
+<<<<<<< HEAD
 form-data@~2.3.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.3.tgz#dcce52c05f644f298c6a7ab936bd724ceffbf3a6"
   integrity sha512-1lLKB2Mu3aGP1Q/2eCOx0fNbRMe7XdwktwOruhfqqd0rIJWwN4Dh+E3hrPSlDCXnSR7UtZ1N38rVXm+6+MEhJQ==
+=======
+form-data@~2.3.1:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.2.tgz#4970498be604c20c005d4f5c23aecd21d6b49099"
+  integrity sha1-SXBJi+YEwgwAXU9cI67NIda0kJk=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
@@ -4105,6 +4553,21 @@ gaze@^1.0.0:
   dependencies:
     globule "^1.0.0"
 
+<<<<<<< HEAD
+=======
+generate-function@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/generate-function/-/generate-function-2.0.0.tgz#6858fe7c0969b7d4e9093337647ac79f60dfbe74"
+  integrity sha1-aFj+fAlpt9TpCTM3ZHrHn2DfvnQ=
+
+generate-object-property@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/generate-object-property/-/generate-object-property-1.2.0.tgz#9c0e1c40308ce804f4783618b937fa88f99d50d0"
+  integrity sha1-nA4cQDCM6AT0eDYYuTf6iPmdUNA=
+  dependencies:
+    is-property "^1.0.0"
+
+>>>>>>> 12df226... upgrade @glimmer packages
 geoip-lite@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/geoip-lite/-/geoip-lite-1.2.1.tgz#39c48ef93e498a259ece46bc9e98cf3ddb680d8b"
@@ -4335,6 +4798,19 @@ har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"
   integrity sha1-qUwiJOvKwEeCoNkDVSHyRzW37JI=
+<<<<<<< HEAD
+=======
+
+har-validator@~2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/har-validator/-/har-validator-2.0.6.tgz#cdcbc08188265ad119b6a5a7c8ab70eecfb5d27d"
+  integrity sha1-zcvAgYgmWtEZtqWnyKtw7s+10n0=
+  dependencies:
+    chalk "^1.1.1"
+    commander "^2.9.0"
+    is-my-json-valid "^2.12.4"
+    pinkie-promise "^2.0.0"
+>>>>>>> 12df226... upgrade @glimmer packages
 
 har-validator@~4.2.1:
   version "4.2.1"
@@ -4344,10 +4820,17 @@ har-validator@~4.2.1:
     ajv "^4.9.1"
     har-schema "^1.0.5"
 
+<<<<<<< HEAD
 har-validator@~5.1.0:
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/har-validator/-/har-validator-5.1.3.tgz#1ef89ebd3e4996557675eed9893110dc350fa080"
   integrity sha512-sNvOCzEQNr/qrvJgc3UG/kD4QtlHycrzwS+6mfTrrSq97BvaYcPZZI1ZSqGSPR73Cxn4LKTD4PttRwfU7jWq5g==
+=======
+har-validator@~5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/har-validator/-/har-validator-5.0.3.tgz#ba402c266194f15956ef15e0fcf242993f6a7dfd"
+  integrity sha1-ukAsJmGU8VlW7xXg/PJCmT9qff0=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     ajv "^6.5.5"
     har-schema "^2.0.0"
@@ -4451,6 +4934,19 @@ hawk@3.1.3, hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
+<<<<<<< HEAD
+=======
+hawk@~6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/hawk/-/hawk-6.0.2.tgz#af4d914eb065f9b5ce4d9d11c1cb2126eecc3038"
+  integrity sha512-miowhl2+U7Qle4vdLqDdPt9m09K6yZhkLDTWGoUiUzrQCn+mHHSmfJgAyGaLRZbPmTqfFFjRV1QWCW0VWUJBbQ==
+  dependencies:
+    boom "4.x.x"
+    cryptiles "3.x.x"
+    hoek "4.x.x"
+    sntp "2.x.x"
+
+>>>>>>> 12df226... upgrade @glimmer packages
 he@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
@@ -4495,6 +4991,14 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
   integrity sha1-ILt0A9POo5jpHcRxCo/xuCdKJe0=
+<<<<<<< HEAD
+=======
+
+hoek@4.x.x:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"
+  integrity sha512-QLg82fGkfnJ/4iy1xZ81/9SIJiq1NGFUMGs6ParyjBZr6jW2Ufj/snDqTHixNlHdPNwN2RLVD0Pi3igeK9+JfA==
+>>>>>>> 12df226... upgrade @glimmer packages
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -4528,7 +5032,21 @@ htmlparser2@^3.9.1:
     inherits "^2.0.1"
     readable-stream "^2.0.2"
 
+<<<<<<< HEAD
 http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
+=======
+http-errors@1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
+  integrity sha1-CgAsyFcHGSp+eUbO7cERVfYOxzY=
+  dependencies:
+    depd "1.1.1"
+    inherits "2.0.3"
+    setprototypeof "1.0.3"
+    statuses ">= 1.3.1 < 2"
+
+http-errors@~1.6.2:
+>>>>>>> 12df226... upgrade @glimmer packages
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
   integrity sha1-i1VoC7S+KDoLW/TqLjhYC+HZMg0=
@@ -4577,7 +5095,16 @@ https-proxy-agent@^2.1.0:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
+<<<<<<< HEAD
 iconv-lite@0.4.23, iconv-lite@^0.4.13:
+=======
+iconv-lite@0.4.19:
+  version "0.4.19"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
+  integrity sha512-oTZqweIP51xaGPI4uPa56/Pri/480R+mo7SeU+YETByQNhDG55ycFyNLIgta9vXhILrxXDmF7ZGhqZIcuN0gJQ==
+
+iconv-lite@^0.4.13:
+>>>>>>> 12df226... upgrade @glimmer packages
   version "0.4.23"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
   integrity sha512-neyTUVFtahjf0mB3dZT77u+8O0QB89jFdnBkd5P1JgYPbPaia3gXXOVL2fq8VyU2gMMD7SaN7QukTB/pmXYvDA==
@@ -4677,10 +5204,17 @@ invert-kv@^1.0.0:
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
   integrity sha1-EEqOSqym09jNFXqO+L+rLXo//bY=
 
+<<<<<<< HEAD
 ipaddr.js@1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.8.0.tgz#eaa33d6ddd7ace8f7f6fe0c9ca0440e706738b1e"
   integrity sha1-6qM9bd16zo9/b+DJygRA5wZzix4=
+=======
+ipaddr.js@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.6.0.tgz#e3fa357b773da619f26e95f049d055c72796f86b"
+  integrity sha1-4/o1e3c9phnybpXwSdBVxyeW+Gs=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
@@ -4826,6 +5360,25 @@ is-module@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-module/-/is-module-1.0.0.tgz#3258fb69f78c14d5b815d664336b4cffb6441591"
   integrity sha1-Mlj7afeMFNW4FdZkM2tM/7ZEFZE=
+<<<<<<< HEAD
+=======
+
+is-my-ip-valid@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-my-ip-valid/-/is-my-ip-valid-1.0.0.tgz#7b351b8e8edd4d3995d4d066680e664d94696824"
+  integrity sha512-gmh/eWXROncUzRnIa1Ubrt5b8ep/MGSnfAUI3aRp+sqTCs1tv1Isl8d8F6JmkN3dXKc3ehZMrtiPN9eL03NuaQ==
+
+is-my-json-valid@^2.12.4:
+  version "2.17.2"
+  resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.17.2.tgz#6b2103a288e94ef3de5cf15d29dd85fc4b78d65c"
+  integrity sha512-IBhBslgngMQN8DDSppmgDv7RNrlFotuuDsKcrCP3+HbFaVivIBU7u9oiiErw8sH4ynx3+gOGQ3q2otkgiSi6kg==
+  dependencies:
+    generate-function "^2.0.0"
+    generate-object-property "^1.1.0"
+    is-my-ip-valid "^1.0.0"
+    jsonpointer "^4.0.0"
+    xtend "^4.0.0"
+>>>>>>> 12df226... upgrade @glimmer packages
 
 is-number@^2.1.0:
   version "2.1.0"
@@ -4879,6 +5432,21 @@ is-promise@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
   integrity sha1-eaKp7OfwlugPNtKy87wWwf9L8/o=
+<<<<<<< HEAD
+=======
+
+is-property@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/is-property/-/is-property-1.0.2.tgz#57fe1c4e48474edd65b09911f26b1cd4095dda84"
+  integrity sha1-V/4cTkhHTt1lsJkR8msc1Ald2oQ=
+
+is-reference@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/is-reference/-/is-reference-1.1.0.tgz#50e6ef3f64c361e2c53c0416cdc9420037f2685b"
+  integrity sha512-h37O/IX4efe56o9k41II1ECMqKwtqHa7/12dLDEzJIFux2x15an4WCDb0/eKdmUgRpLJ3bR0DrzDc7vOrVgRDw==
+  dependencies:
+    "@types/estree" "0.0.38"
+>>>>>>> 12df226... upgrade @glimmer packages
 
 is-regex@^1.0.4:
   version "1.0.4"
@@ -5033,10 +5601,17 @@ json-parse-better-errors@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
   integrity sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
 
+<<<<<<< HEAD
 json-schema-traverse@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz#69f6a87d9513ab8bb8fe63bdb0979c448e684660"
   integrity sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==
+=======
+json-schema-traverse@^0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-0.3.1.tgz#349a6d44c53a51de89b40805c5d5e59b417d3340"
+  integrity sha1-NJptRMU6Ud6JtAgFxdXlm0F9M0A=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 json-schema@0.2.3:
   version "0.2.3"
@@ -5085,6 +5660,14 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
+<<<<<<< HEAD
+=======
+
+jsonpointer@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/jsonpointer/-/jsonpointer-4.0.1.tgz#4fd92cb34e0e9db3c89c8622ecf51f9b978c6cb9"
+  integrity sha1-T9kss04OnbPInIYi7PUfm5eMbLk=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -5175,6 +5758,11 @@ load-json-file@^1.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
+
+locate-character@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/locate-character/-/locate-character-2.0.5.tgz#f2d2614d49820ecb3c92d80d193b8db755f74c0f"
+  integrity sha512-n2GmejDXtOPBAZdIiEFy5dJ5N38xBCXLNOtw2WpB9kGh6pnrEuKlwYI+Tkpofc4wDtVXHtoAOJaMRlYG/oYaxg==
 
 locate-path@^2.0.0:
   version "2.0.0"
@@ -5620,6 +6208,13 @@ magic-string@^0.22.4:
   dependencies:
     vlq "^0.2.2"
 
+magic-string@^0.24.0:
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.24.1.tgz#7e38e5f126cae9f15e71f0cf8e450818ca7d5a8f"
+  integrity sha512-YBfNxbJiixMzxW40XqJEIldzHyh5f7CZKalo1uZffevyrPEX8Qgo9s0dmcORLHdV47UyvJg8/zD+6hQG3qvJrA==
+  dependencies:
+    sourcemap-codec "^1.4.1"
+
 make-dir@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.2.0.tgz#6d6a49eead4aae296c53bbf3a1a008bd6c89469b"
@@ -5826,11 +6421,14 @@ micromatch@^3.1.4:
   version "1.33.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.33.0.tgz#a3492050a5cb9b63450541e39d9788d2272783db"
   integrity sha512-BHJ/EKruNIqJf/QahvxwQZXKygOQ256myeN/Ew+THcAa5q+PjyTTMMeNQC4DZw5AwfvelsUrA6B67NKMqXDbzQ==
+<<<<<<< HEAD
 
 mime-db@~1.37.0:
   version "1.37.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.37.0.tgz#0b6a0ce6fdbe9576e25f1f2d2fde8830dc0ad0d8"
   integrity sha512-R3C4db6bgQhlIhPU48fUtdVmKnflq+hRdad7IyKhtFj06VPNVdk2RhiYL3UjQIlso8L+YxAtFkobT0VK+S/ybg==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 mime-types@^2.1.12, mime-types@^2.1.18, mime-types@~2.1.18, mime-types@~2.1.7:
   version "2.1.18"
@@ -6026,10 +6624,17 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.4.tgz#d93962f6c52f2c1558c0fbda6d512819f1efe1c4"
   integrity sha512-2NpiFHqC87y/zFke0fC0spBXL3bBsoh/p5H1EFhshxjCR5+0g2d6BiXbUFz9v1sAcxsk2htp2eQnNIci2dIYcA==
 
+<<<<<<< HEAD
 node-gyp@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-3.8.0.tgz#540304261c330e80d0d5edce253a68cb3964218c"
   integrity sha512-3g8lYefrRRzvGeSowdJKAKyks8oUpLEd/DyPV4eMhVlhJ0aNaZqIrNUIPuEWWTAoPqyFkfGrM67MC69baqn6vA==
+=======
+node-gyp@^3.3.1:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-3.6.2.tgz#9bfbe54562286284838e750eac05295853fa1c60"
+  integrity sha1-m/vlRWIoYoSDjnUOrAUpWFP6HGA=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     fstream "^1.0.0"
     glob "^7.0.3"
@@ -6081,10 +6686,17 @@ node-pre-gyp@^0.6.39:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
+<<<<<<< HEAD
 node-sass@^4.11.0:
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.11.0.tgz#183faec398e9cbe93ba43362e2768ca988a6369a"
   integrity sha512-bHUdHTphgQJZaF1LASx0kAviPH7sGlcyNhWade4eVIpFp6tsn7SV8xNMTbsQFpEV9VXpnwTTnNYlfsZXgGgmkA==
+=======
+node-sass@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.9.0.tgz#d1b8aa855d98ed684d6848db929a20771cc2ae52"
+  integrity sha512-QFHfrZl6lqRU3csypwviz2XLgGNOoWQbo2GOvtsfQqOfL4cy1BtWnhx/XUeAO9LT3ahBzSRXcEO6DdvAH9DzSg==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     async-foreach "^0.1.3"
     chalk "^1.1.1"
@@ -6189,11 +6801,14 @@ oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
   integrity sha1-Rqarfwrq2N6unsBWV4C31O/rnUM=
+<<<<<<< HEAD
 
 oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
   integrity sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 object-assign@4.1.1, object-assign@^4, object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
@@ -6213,6 +6828,11 @@ object-copy@^0.1.0:
     copy-descriptor "^0.1.0"
     define-property "^0.2.5"
     kind-of "^3.0.3"
+
+object-hash@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-1.3.1.tgz#fde452098a951cb145f039bb7d455449ddc126df"
+  integrity sha512-OSuu/pU4ENM9kmREg0BdNrUDIl1heYa4mBZacJc+vVWz4GtAwu7jO8s4AIt2aGRUTqxykpWzI3Oqnsm13tTMDA==
 
 object-keys@^1.0.8:
   version "1.0.11"
@@ -6398,6 +7018,11 @@ parse-json@^2.2.0:
   dependencies:
     error-ex "^1.2.0"
 
+parse-ms@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/parse-ms/-/parse-ms-1.0.1.tgz#56346d4749d78f23430ca0c713850aef91aa361d"
+  integrity sha1-VjRtR0nXjyNDDKDHE4UK75GqNh0=
+
 parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
@@ -6467,11 +7092,14 @@ path-parse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
   integrity sha1-PBrfhx6pzWyUMbbqK9dKD/BVxME=
+<<<<<<< HEAD
 
 path-parse@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 path-posix@^1.0.0:
   version "1.0.0"
@@ -6570,6 +7198,16 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
+<<<<<<< HEAD
+=======
+
+pretty-ms@^3.1.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-3.2.0.tgz#87a8feaf27fc18414d75441467d411d6e6098a25"
+  integrity sha512-ZypexbfVUGTFxb0v+m1bUyy92DHe5SyYlnyY0msyms5zd3RwyvNgyxZZsXXgoyzlxjx5MiqtXUdhUfvQbe0A2Q==
+  dependencies:
+    parse-ms "^1.0.0"
+>>>>>>> 12df226... upgrade @glimmer packages
 
 printf@^0.2.3:
   version "0.2.5"
@@ -6605,10 +7243,17 @@ promise-map-series@^0.2.1:
   dependencies:
     rsvp "^3.0.14"
 
+<<<<<<< HEAD
 proxy-addr@~2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.4.tgz#ecfc733bf22ff8c6f407fa275327b9ab67e48b93"
   integrity sha512-5erio2h9jp5CHGwcybmxmVqHmnCBZeewlfJ0pex+UW7Qny7OOZXTtH56TGNyBizkgiOwhJtMKrVzDTeKcySZwA==
+=======
+proxy-addr@~2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.3.tgz#355f262505a621646b3130a728eb647e22055341"
+  integrity sha512-jQTChiCJteusULxjBp8+jftSQE5Obdl3k4cnmLA6WXtK6XFuWRnvVL7aCiBqaLPM8c4ph0S4tKna8XvmIwEnXQ==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     forwarded "~0.1.2"
     ipaddr.js "1.8.0"
@@ -6622,11 +7267,14 @@ pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
   integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
+<<<<<<< HEAD
 
 psl@^1.1.24:
   version "1.1.31"
   resolved "https://registry.yarnpkg.com/psl/-/psl-1.1.31.tgz#e9aa86d0101b5b105cbe93ac6b784cd547276184"
   integrity sha512-/6pt4+C+T+wZUieKR620OpzN/LlnNKuWjy1iFLQ/UG35JqHlR/89MP1d96dUfkf6Dne3TuLQzOYEYshJ+Hx8mw==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 "pullstream@>= 0.4.1 < 1":
   version "0.4.1"
@@ -6650,11 +7298,14 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
   integrity sha1-wNWmOycYgArY4esPpSachN1BhF4=
+<<<<<<< HEAD
 
 punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 puppeteer@^1.4.0:
   version "1.4.0"
@@ -6679,6 +7330,14 @@ qs@^6.4.0:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
   integrity sha512-eRzhrN1WSINYCDCbrz796z37LOe3m5tmW7RQf6oBntukAG1nmovJvhnwHHRMAfeoItc1m2Hk02WER2aQ/iqs+A==
+<<<<<<< HEAD
+=======
+
+qs@~6.3.0:
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.2.tgz#e75bd5f6e268122a2a0e0bda630b2550c166502c"
+  integrity sha1-51vV9uJoEioqDgvaYwslUMFmUCw=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 qs@~6.4.0:
   version "6.4.0"
@@ -6733,10 +7392,17 @@ range-parser@~1.2.0:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
   integrity sha1-9JvmtIeJTdxA3MlKMi9hEJLgDV4=
 
+<<<<<<< HEAD
 raven@^2.6.4:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/raven/-/raven-2.6.4.tgz#458d4a380c8fbb59e0150c655625aaf60c167ea3"
   integrity sha512-6PQdfC4+DQSFncowthLf+B6Hr0JpPsFBgTVYTAOq7tCmx/kR4SXbeawtPch20+3QfUcQDoJBLjWW1ybvZ4kXTw==
+=======
+raven@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/raven/-/raven-2.6.1.tgz#9b1945c02b93ef84e92e0dd2843095c1294530b3"
+  integrity sha512-ucfPDuOkChtMMgNAXUFRvVWdw7IbR1GOCNV8Ch9Z2eM5xUPEUq9amgianjydsmkbeFWaQ6DaDxG81fH3Lx0t+w==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     cookie "0.3.1"
     md5 "^2.2.1"
@@ -6744,10 +7410,17 @@ raven@^2.6.4:
     timed-out "4.0.1"
     uuid "3.3.2"
 
+<<<<<<< HEAD
 raw-body@2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.3.3.tgz#1b324ece6b5706e153855bc1148c65bb7f6ea0c3"
   integrity sha512-9esiElv1BrZoI3rCDuOuKCBRbuApGGaDPQfjSflGxdy4oyzqghxu6klEkkVIvBje+FF0BX9coEv8KqW6X/7njw==
+=======
+raw-body@2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.3.2.tgz#bcd60c77d3eb93cde0050295c3f379389bc88f89"
+  integrity sha1-vNYMd9Prk83gBQKVw/N5OJvIj4k=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     bytes "3.0.0"
     http-errors "1.6.3"
@@ -6957,10 +7630,17 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
+<<<<<<< HEAD
 request-ip@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/request-ip/-/request-ip-2.1.3.tgz#99ab2bafdeaf2002626e28083cb10597511d9e14"
   integrity sha512-J3qdE/IhVM3BXkwMIVO4yFrvhJlU3H7JH16+6yHucadT4fePnR8dyh+vEs6FIx0S2x5TCt2ptiPfHcn0sqhbYQ==
+=======
+request-ip@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/request-ip/-/request-ip-2.0.2.tgz#deeae6d4af21768497db8cd05fa37143f8f1257e"
+  integrity sha1-3urm1K8hdoSX24zQX6NxQ/jxJX4=
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     is_js "^0.9.0"
 
@@ -6980,6 +7660,35 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.0"
     tough-cookie ">=2.3.3"
 
+<<<<<<< HEAD
+=======
+request@2:
+  version "2.87.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.87.0.tgz#32f00235cd08d482b4d0d68db93a829c0ed5756e"
+  integrity sha512-fcogkm7Az5bsS6Sl0sibkbhcKsnyon/jV1kF3ajGmF0c8HrttdKTPRT9hieOaQHA5HEq6r8OyWOo/o781C1tNw==
+  dependencies:
+    aws-sign2 "~0.7.0"
+    aws4 "^1.6.0"
+    caseless "~0.12.0"
+    combined-stream "~1.0.5"
+    extend "~3.0.1"
+    forever-agent "~0.6.1"
+    form-data "~2.3.1"
+    har-validator "~5.0.3"
+    http-signature "~1.2.0"
+    is-typedarray "~1.0.0"
+    isstream "~0.1.2"
+    json-stringify-safe "~5.0.1"
+    mime-types "~2.1.17"
+    oauth-sign "~0.8.2"
+    performance-now "^2.1.0"
+    qs "~6.5.1"
+    safe-buffer "^5.1.1"
+    tough-cookie "~2.3.3"
+    tunnel-agent "^0.6.0"
+    uuid "^3.1.0"
+
+>>>>>>> 12df226... upgrade @glimmer packages
 request@2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
@@ -7008,10 +7717,17 @@ request@2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
+<<<<<<< HEAD
 request@^2.85.0, request@^2.87.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
+=======
+request@^2.85.0:
+  version "2.85.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.85.0.tgz#5a03615a47c61420b3eb99b7dba204f83603e1fa"
+  integrity sha512-8H7Ehijd4js+s6wuVPLjwORxD4zeuyjYugprdOXlPSqaApmL/QOy+EB/beICHVCHkGMKNh5rvihb5ov+IDw4mg==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     aws-sign2 "~0.7.0"
     aws4 "^1.8.0"
@@ -7032,7 +7748,37 @@ request@^2.85.0, request@^2.87.0, request@^2.88.0:
     safe-buffer "^5.1.2"
     tough-cookie "~2.4.3"
     tunnel-agent "^0.6.0"
+<<<<<<< HEAD
     uuid "^3.3.2"
+=======
+    uuid "^3.1.0"
+
+request@~2.79.0:
+  version "2.79.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
+  integrity sha1-Tf5b9r6LjNw3/Pk+BLZVd3InEN4=
+  dependencies:
+    aws-sign2 "~0.6.0"
+    aws4 "^1.2.1"
+    caseless "~0.11.0"
+    combined-stream "~1.0.5"
+    extend "~3.0.0"
+    forever-agent "~0.6.1"
+    form-data "~2.1.1"
+    har-validator "~2.0.6"
+    hawk "~3.1.3"
+    http-signature "~1.1.0"
+    is-typedarray "~1.0.0"
+    isstream "~0.1.2"
+    json-stringify-safe "~5.0.1"
+    mime-types "~2.1.7"
+    oauth-sign "~0.8.1"
+    qs "~6.3.0"
+    stringstream "~0.0.4"
+    tough-cookie "~2.3.0"
+    tunnel-agent "~0.4.1"
+    uuid "^3.0.0"
+>>>>>>> 12df226... upgrade @glimmer packages
 
 require-directory@^2.1.1:
   version "2.1.1"
@@ -7043,6 +7789,14 @@ require-main-filename@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
   integrity sha1-l/cXtp1IeE9fUmpsWqj/3aBVpNE=
+<<<<<<< HEAD
+=======
+
+require-relative@^0.8.7:
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/require-relative/-/require-relative-0.8.7.tgz#7999539fc9e047a37928fa196f8e1563dabd36de"
+  integrity sha1-eZlTn8ngR6N5KPoZb44VY9q9Nt4=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 requires-port@1.x.x:
   version "1.0.0"
@@ -7126,6 +7880,13 @@ rollup-plugin-babel@^2.7.1:
     object-assign "^4.1.0"
     rollup-pluginutils "^1.5.0"
 
+rollup-plugin-babel@^3.0.3:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-3.0.7.tgz#5b13611f1ab8922497e9d15197ae5d8a23fe3b1e"
+  integrity sha512-bVe2y0z/V5Ax1qU8NX/0idmzIwJPdUGu8Xx3vXH73h0yGjxfv2gkFI82MBVg49SlsFlLTBadBHb67zy4TWM3hA==
+  dependencies:
+    rollup-pluginutils "^1.5.0"
+
 rollup-plugin-commonjs@^8.3.0:
   version "8.4.1"
   resolved "https://registry.yarnpkg.com/rollup-plugin-commonjs/-/rollup-plugin-commonjs-8.4.1.tgz#5c9cea2b2c3de322f5fbccd147e07ed5e502d7a0"
@@ -7141,6 +7902,18 @@ rollup-plugin-node-resolve@^3.0.2:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-3.3.0.tgz#c26d110a36812cbefa7ce117cadcd3439aa1c713"
   integrity sha512-9zHGr3oUJq6G+X0oRMYlzid9fXicBdiydhwGChdyeNRGPcN/majtegApRKHLR5drboUvEWU+QeUmGTyEZQs3WA==
+<<<<<<< HEAD
+=======
+  dependencies:
+    builtin-modules "^2.0.0"
+    is-module "^1.0.0"
+    resolve "^1.1.6"
+
+rollup-plugin-node-resolve@^3.0.3:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-3.4.0.tgz#908585eda12e393caac7498715a01e08606abc89"
+  integrity sha512-PJcd85dxfSBWih84ozRtBkB731OjXk0KnzN0oGp7WOWcarAFkVa71cV5hTJg2qpVsV2U8EUwrzHP3tvy9vS3qg==
+>>>>>>> 12df226... upgrade @glimmer packages
   dependencies:
     builtin-modules "^2.0.0"
     is-module "^1.0.0"
@@ -7187,6 +7960,23 @@ rollup@^0.41.4, rollup@^0.41.6:
   dependencies:
     source-map-support "^0.4.0"
 
+rollup@^0.57.0, rollup@^0.57.1:
+  version "0.57.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.57.1.tgz#0bb28be6151d253f67cf4a00fea48fb823c74027"
+  integrity sha512-I18GBqP0qJoJC1K1osYjreqA8VAKovxuI3I81RSk0Dmr4TgloI0tAULjZaox8OsJ+n7XRrhH6i0G2By/pj1LCA==
+  dependencies:
+    "@types/acorn" "^4.0.3"
+    acorn "^5.5.3"
+    acorn-dynamic-import "^3.0.0"
+    date-time "^2.1.0"
+    is-reference "^1.1.0"
+    locate-character "^2.0.5"
+    pretty-ms "^3.1.0"
+    require-relative "^0.8.7"
+    rollup-pluginutils "^2.0.1"
+    signal-exit "^3.0.2"
+    sourcemap-codec "^1.4.1"
+
 rsvp@^3.0.14, rsvp@^3.0.16, rsvp@^3.0.17, rsvp@^3.0.18, rsvp@^3.0.21, rsvp@^3.0.6, rsvp@^3.3.3, rsvp@^3.5.0:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
@@ -7223,11 +8013,14 @@ safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
   integrity sha512-kKvNJn6Mm93gAczWVJg7wH+wGYWNrDHdWvpUmHyEsgCtIwwo3bqPtV4tR5tuPaUhTOo/kvhVwd8XwwOllGYkbg==
+<<<<<<< HEAD
 
 safe-buffer@5.1.2, safe-buffer@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   integrity sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 safe-json-parse@~1.0.1:
   version "1.0.1"
@@ -7365,6 +8158,14 @@ set-value@^2.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/setimmediate/-/setimmediate-1.0.5.tgz#290cbb232e306942d7d7ea9b83732ab7856f8285"
   integrity sha1-KQy7Iy4waULX1+qbg3Mqt4VvgoU=
+<<<<<<< HEAD
+=======
+
+setprototypeof@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
+  integrity sha1-ZlZ+NwQ+608E2RvWWMDL77VbjgQ=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 setprototypeof@1.1.0:
   version "1.1.0"
@@ -7425,6 +8226,14 @@ simple-html-tokenizer@^0.5.0:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.5.2.tgz#37369afb804891c095ddddf2527fa67e05a1b11c"
   integrity sha1-Nzaa+4BIkcCV3d3yUn+mfgWhsRw=
+<<<<<<< HEAD
+=======
+
+simple-html-tokenizer@^0.5.3:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.5.7.tgz#8eca336ecfbe2b3c6166cbb31b2682088de79f40"
+  integrity sha512-APW9iYbkJ5cijjX4Ljhf3VG8SwYPUJT5gZrwci/wieMabQxWFiV5VwsrP5c6GMRvXKEQMGkAB1d9dvW66dTqpg==
+>>>>>>> 12df226... upgrade @glimmer packages
 
 slash@^1.0.0:
   version "1.0.0"
@@ -7475,6 +8284,16 @@ sntp@1.x.x:
   dependencies:
     hoek "2.x.x"
 
+<<<<<<< HEAD
+=======
+sntp@2.x.x:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/sntp/-/sntp-2.1.0.tgz#2c6cec14fedc2222739caf9b5c3d85d1cc5a2cc8"
+  integrity sha512-FL1b58BDrqS3A11lJ0zEdnJ3UOKqVxawAkF3k7F0CVN7VQ34aZrV+G8BZ1WC9ZL7NyrwsW0oviwsWDgRuVYtJg==
+  dependencies:
+    hoek "4.x.x"
+
+>>>>>>> 12df226... upgrade @glimmer packages
 socket.io-adapter@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/socket.io-adapter/-/socket.io-adapter-1.1.1.tgz#2a805e8a14d6372124dd9159ad4502f8cb07f06b"
@@ -7589,6 +8408,11 @@ source-map@~0.1.x:
   integrity sha1-wkvBRspRfBRx9drL4lcbK3+eM0Y=
   dependencies:
     amdefine ">=0.0.4"
+
+sourcemap-codec@^1.4.1:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/sourcemap-codec/-/sourcemap-codec-1.4.4.tgz#c63ea927c029dd6bd9a2b7fa03b3fec02ad56e9f"
+  integrity sha512-CYAPYdBu34781kLHkaW3m6b/uUSyMOC2R61gcYMWooeuaGtjof86ZA/8T+qVPPt7np1085CR9hmMGrySwEc8Xg==
 
 sourcemap-validator@^1.0.5:
   version "1.1.0"
@@ -7931,6 +8755,14 @@ through@^2.3.6, through@^2.3.8:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
+<<<<<<< HEAD
+=======
+
+time-zone@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/time-zone/-/time-zone-1.0.0.tgz#99c5bf55958966af6d06d83bdf3800dc82faec5d"
+  integrity sha1-mcW/VZWJZq9tBtg73zgA3IL67F0=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 timed-out@4.0.1:
   version "4.0.1"
@@ -8095,6 +8927,14 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
+<<<<<<< HEAD
+=======
+tunnel-agent@~0.4.1:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.4.3.tgz#6373db76909fe570e08d73583365ed828a74eeeb"
+  integrity sha1-Y3PbdpCf5XDgjXNYM2Xtgop07us=
+
+>>>>>>> 12df226... upgrade @glimmer packages
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
@@ -8130,15 +8970,26 @@ typescript-memoize@^1.0.0-alpha.3:
   dependencies:
     core-js "2.4.1"
 
+<<<<<<< HEAD
+=======
+typescript@~2.6.0:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
+  integrity sha1-PFtv1/beCRQmkCfwPAlGdY92c6Q=
+
+>>>>>>> 12df226... upgrade @glimmer packages
 typescript@~2.7.1:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
   integrity sha512-p5TCYZDAO0m4G344hD+wx/LATebLWZNkkh2asWUFqSsD2OrDNhbAHuSjobrmsUmdzjJjEeZVU9g1h3O6vpstnw==
+<<<<<<< HEAD
 
 typescript@~3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.2.tgz#fe8101c46aa123f8353523ebdcf5730c2ae493e5"
   integrity sha512-VCj5UiSyHBjwfYacmDuc/NOk4QQixbE+Wn7MFJuS0nRuPQbof132Pw4u53dm264O8LPc2MVsc7RJNml5szurkg==
+=======
+>>>>>>> 12df226... upgrade @glimmer packages
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.5"
@@ -8328,10 +9179,17 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
+<<<<<<< HEAD
 uuid@3.3.2, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
+=======
+uuid@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.0.tgz#6728fc0459c450d796a99c31837569bdf672d728"
+  integrity sha1-Zyj8BFnEUNeWqZwxg3VpvfZy1yg=
+>>>>>>> 12df226... upgrade @glimmer packages
 
 uuid@^3.0.0:
   version "3.2.1"
