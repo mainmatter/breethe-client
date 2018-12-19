@@ -205,6 +205,17 @@
     "@glimmer/util" "^0.33.7"
     "@glimmer/wire-format" "^0.33.7"
 
+"@glimmer/component@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/component/-/component-0.13.0.tgz#17992f4f2c7330b3f26d2999f4deed4f7c9f80f7"
+  integrity sha512-oNyS/6QwV3ZFKVCmJworTb4D8apwDZJEV5h5yw1dJcZTSChME2iTEPeZoxkPLvOk6YC/onxsQiZ7fUcNVm9O3A==
+  dependencies:
+    "@glimmer/di" "^0.1.9"
+    "@glimmer/env" "^0.1.7"
+    "@glimmer/reference" "^0.34.7"
+    "@glimmer/runtime" "^0.34.7"
+    "@glimmer/util" "^0.34.7"
+
 "@glimmer/component@^0.9.1":
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/@glimmer/component/-/component-0.9.1.tgz#9c103457ee0c9e0e9ffb6e7957c151bb10378383"
@@ -230,6 +241,11 @@
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/encoder/-/encoder-0.31.0.tgz#a4daf4aea35aaec1373007169aea2f50e155e993"
   integrity sha512-wyM9xDhmRjjczaYS0Jnb96jKm3qG3bsED0y5s1uIbkw1o0wB3ohA21K2WAJRzhQc1KtZBwh9VyLS+wO1sA0+6w==
+
+"@glimmer/encoder@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/encoder/-/encoder-0.34.8.tgz#e3548dab4fc639800fcc9267c236781c848f3ddd"
+  integrity sha512-E6HGSu1XDXk8fWUQPiN6DarYUUV43PqQV+xUICuIlrBKH6WZSx9NeZaxi6q8nqmSnoAyhcPjHIrg3l0sypNs8w==
 
 "@glimmer/env@^0.1.7":
   version "0.1.7"
@@ -264,10 +280,22 @@
   dependencies:
     "@glimmer/wire-format" "^0.33.7"
 
+"@glimmer/interfaces@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.34.8.tgz#421ff213a69120d42ffacf6edc184f8e78e558f5"
+  integrity sha512-ZKrrk/mqZTzGQtr7YA6fc+F2PuglPScgdZFPnSlcJobdEZh2LX4cBKAoUeafuDUMqJqUq7gvm+dQx71l8fEz6Q==
+  dependencies:
+    "@glimmer/wire-format" "^0.34.8"
+
 "@glimmer/low-level@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/low-level/-/low-level-0.31.0.tgz#c5ed9c825fa67498f5285e8fe8003ec54d58d826"
   integrity sha512-2FkXIFVq27XFdaXOtuGsDDAU8rTdNL5GmB9pxiW4pnnvGuMajajxqNYsXMSCscWqwNsJdHtSK0gS/gj60KWypw==
+
+"@glimmer/low-level@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/low-level/-/low-level-0.34.8.tgz#ac82953d68171ed5640a8d58045afd57d35ed0ac"
+  integrity sha512-lGL/YFxk9K8a4vBSidCUFN2qq+qjBK37qTgoiHJBVtxYiKHeNjlR6vhwY6u2F4xNWwQc6+O7Q/reLHQVKLHdaw==
 
 "@glimmer/node@^0.31.0":
   version "0.31.0"
@@ -307,12 +335,28 @@
     "@glimmer/interfaces" "^0.31.0"
     "@glimmer/util" "^0.31.0"
 
+"@glimmer/program@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/program/-/program-0.34.8.tgz#6d0867f6c1bbfbad5835946717e26fb8fb842a7c"
+  integrity sha512-3uKq6DPnbBibWFurJW/GFYww0XUSrN2VhKDNRyf9lMTduCSvSU6ZWF1fTDhGKy50ts+v+u+/e1Wn7fhi5WpiuA==
+  dependencies:
+    "@glimmer/encoder" "^0.34.8"
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
+
 "@glimmer/reference@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/reference/-/reference-0.31.0.tgz#b4908e4549f54fec69d2a4b515c4e75c78b7a363"
   integrity sha512-MvlsVVv7tbF2uiGYMMp4X36aArlzR/T8ZW3kPAkV5Q7nyYflD3T13GXQ1WFY9PXbjnd3IkyuREjz9OvPs4nHag==
   dependencies:
     "@glimmer/util" "^0.31.0"
+
+"@glimmer/reference@^0.34.7", "@glimmer/reference@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/reference/-/reference-0.34.8.tgz#441933512355afc7da131c5908d818eff07bf15c"
+  integrity sha512-WQOhGFf5fMa94NqWiuxtnBi42YwBBsnMgEpBKdH+Q+AkYYkac2GBOINXIv+YFnfnb6SaaB5cdpfaj7+64uLOHQ==
+  dependencies:
+    "@glimmer/util" "^0.34.8"
 
 "@glimmer/resolution-map-builder@0.5.1", "@glimmer/resolution-map-builder@^0.5.1":
   version "0.5.1"
@@ -366,6 +410,19 @@
     "@glimmer/util" "^0.31.0"
     "@glimmer/vm" "^0.31.0"
     "@glimmer/wire-format" "^0.31.0"
+
+"@glimmer/runtime@^0.34.7":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/runtime/-/runtime-0.34.8.tgz#85831f857e3a67c6de5a7531b6d570586a3f70b4"
+  integrity sha512-pPD8/fnaJciqaQh0a9HuIR21EbxtQUcTC0Y1KNcBS56d38qRomJ8yVu3EdybWzoW+xeUj1bNsCavK1nIqmQQPg==
+  dependencies:
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/low-level" "^0.34.8"
+    "@glimmer/program" "^0.34.8"
+    "@glimmer/reference" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
+    "@glimmer/vm" "^0.34.8"
+    "@glimmer/wire-format" "^0.34.8"
 
 "@glimmer/ssr@0.9.1":
   version "0.9.1"
@@ -426,6 +483,11 @@
   resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.33.7.tgz#6717c669f9aeb5e248bfffbe7017f51d8a7841d4"
   integrity sha512-VlIhkZIh/zrC5Kg1ufr5QnwqjdtIrmkzYfkz5BHU0PaTcciLqY2dY1K5iVCmpWfvr6shu05e1zU/sgAQ5O6X6w==
 
+"@glimmer/util@^0.34.7", "@glimmer/util@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.34.8.tgz#0f1349b3134bb55d4887da73919863401647525b"
+  integrity sha512-a5RpA/dAHAf1GAsFuxmmDMzzPt8Yukyfi4sNkjVgBJ18OCq4AT2kGct32r3LZftEmJ1UmTzUPdSNnbRuyujI+A==
+
 "@glimmer/vm@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@glimmer/vm/-/vm-0.31.0.tgz#5ea4b84723e184a869a09f6a24a3715eb9056599"
@@ -434,6 +496,15 @@
     "@glimmer/interfaces" "^0.31.0"
     "@glimmer/program" "^0.31.0"
     "@glimmer/util" "^0.31.0"
+
+"@glimmer/vm@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/vm/-/vm-0.34.8.tgz#4485dcf41f1caa4bf05449c4dfb440bb88afc039"
+  integrity sha512-eZ1VCxkC9ZLN4yZvb7vpKC/5BYY70O8y+tffCyDWoxfhZGCHaCv/Bi8yFlodQfISqHKaW5e9pLKfg8IqAybBKw==
+  dependencies:
+    "@glimmer/interfaces" "^0.34.8"
+    "@glimmer/program" "^0.34.8"
+    "@glimmer/util" "^0.34.8"
 
 "@glimmer/wire-format@^0.29.10":
   version "0.29.10"
@@ -455,6 +526,13 @@
   integrity sha512-wuxLwae0dxoswXpXfHIjs4UGpl1X+XhBCZfTL4Yj1AOlPCQPvDbvsFJm9JtOkIoLI9hJIKMOLICt6XSdzGFzNQ==
   dependencies:
     "@glimmer/util" "^0.33.7"
+
+"@glimmer/wire-format@^0.34.8":
+  version "0.34.8"
+  resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.34.8.tgz#5f792d4c8789d77a801e7d4c742ea42f55d24816"
+  integrity sha512-VNwUgWmQ0QmHTUhpX3z70FKnQyBZSxJfz8YQzTf4sMPNj6XBH48msIc+56PTpWbwEoIHIrt68tA9uOZV3gCcrg==
+  dependencies:
+    "@glimmer/util" "^0.34.8"
 
 "@opticss/element-analysis@^0.3.0":
   version "0.3.0"
