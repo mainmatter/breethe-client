@@ -60,7 +60,7 @@
     "geoip-lite": "^1.2.1",
     "morgan": "^1.9.1",
     "navigo": "^7.1.2",
-    "raven": "^2.6.1",
+    "raven": "^2.6.4",
     "request": "^2.85.0",
     "request-ip": "^2.0.2",
     "request-promise-native": "^1.0.5",
