@@ -33,7 +33,7 @@
     "@types/qunit": "^2.0.31",
     "broccoli-asset-rev": "^2.5.0",
     "broccoli-clean-css": "^2.0.1",
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.4",
     "ember-cli": "^3.0.0",
