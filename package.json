@@ -48,7 +48,7 @@
     "puppeteer": "^1.4.0",
     "qunitjs": "^2.3.3",
     "rollup-plugin-replace": "^2.0.0",
-    "typescript": "~2.6.0"
+    "typescript": "~3.2.2"
   },
   "engines": {
     "node": ">= 4.0"
