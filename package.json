@@ -35,7 +35,7 @@
     "broccoli-clean-css": "^2.0.1",
     "chai": "^4.2.0",
     "cheerio": "^1.0.0-rc.2",
-    "cors": "^2.8.4",
+    "cors": "^2.8.5",
     "ember-cli": "^3.0.0",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-inject-live-reload": "^2.0.1",
