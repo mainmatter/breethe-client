@@ -83,8 +83,10 @@ class BreetheGlimmerApp extends GlimmerApp {
     appTree = new Rollup(appTree, {
       rollup: {
         entry: 'ssr/index.js',
-        dest: 'ssr-app.js',
-        format: 'cjs',
+        output: {
+          dest: 'ssr-app.js',
+          format: 'cjs'
+        },
         onwarn: function(warning) {
           if (warning.code === 'THIS_IS_UNDEFINED') {
             return;
