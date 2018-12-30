@@ -17,7 +17,7 @@
   "devDependencies": {
     "@css-blocks/ember-cli": "^0.19.0",
     "@glimmer/application": "^0.9.1",
-    "@glimmer/application-pipeline": "^0.11.1",
+    "@glimmer/application-pipeline": "^0.14.0",
     "@glimmer/blueprint": "~0.9.1",
     "@glimmer/component": "^0.9.1",
     "@glimmer/inline-precompile": "^1.0.1",
