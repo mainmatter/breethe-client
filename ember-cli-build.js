@@ -128,7 +128,7 @@ module.exports = function(defaults) {
       output: 'src/ui/styles/app.css',
       parserOpts: {
         preprocessors: {
-          scss: scssPreprocessor
+          css: scssPreprocessor
         }
       }
     },

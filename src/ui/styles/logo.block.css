@@ -4,13 +4,11 @@
 .logo {
   color: $font-color;
   margin-top: 1rem;
-}
 
-@include for-tablet-portrait-up() {
-  .logo {
+  @include for-tablet-portrait-up() {
     margin-top: 2rem;
-  }
-} 
+  } 
+}
 
 .logo-link {
   display: block;
