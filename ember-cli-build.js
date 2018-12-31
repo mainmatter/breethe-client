@@ -80,11 +80,11 @@ class BreetheGlimmerApp extends GlimmerApp {
     let ssrTree = this.ssrTree();
 
     let appTree = new MergeTrees([jsTree, ssrTree]);
-    appTree = new Rollup(appTree, {
+    return new Rollup(appTree, {
       rollup: {
-        entry: 'ssr/index.js',
+        input: 'ssr/index.js',
         output: {
-          dest: 'ssr-app.js',
+          file: 'ssr-app.js',
           format: 'cjs'
         },
         onwarn: function(warning) {
@@ -102,8 +102,6 @@ class BreetheGlimmerApp extends GlimmerApp {
         ]
       }
     });
-
-    return appTree;
   }
 
   package() {
