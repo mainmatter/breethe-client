@@ -7,7 +7,14 @@ import { schema as schemaDefinition } from './schema';
 
 declare const __ENV_API_HOST__: string;
 
-export function setupStore(appState: AppState): { store: Store; local?: IndexedDBStore; coordinator?: Coordinator } {
+interface StoreSetup {
+  store: Store;
+  local?: IndexedDBStore;
+  remote?: JSONAPIStore;
+  coordinator?: Coordinator;
+}
+
+export function setupStore(appState: AppState): StoreSetup {
   let schema = new Schema(schemaDefinition);
   let store = new Store({ schema });
 
@@ -48,12 +55,6 @@ export function setupStore(appState: AppState): { store: Store; local?: IndexedD
       interfaces: ['queryable', 'syncable']
     });
 
-    let remoteStoreSync = new SyncStrategy({
-      blocking: true,
-      source: 'remote',
-      target: 'store'
-    });
-
     const localStoreSync = new SyncStrategy({
       source: 'store',
       target: 'local',
@@ -62,14 +63,13 @@ export function setupStore(appState: AppState): { store: Store; local?: IndexedD
 
     const coordinator = new Coordinator({
       sources: [store, local, remote],
-      strategies: [remoteRequestStrategy, remoteStoreSync, localStoreSync, logger]
+      strategies: [remoteRequestStrategy, localStoreSync, logger]
     });
-
-    coordinator.activate();
 
     return {
       store,
       local,
+      remote,
       coordinator
     };
   }

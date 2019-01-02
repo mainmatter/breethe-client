@@ -1,6 +1,7 @@
 import Component, { tracked } from '@glimmer/component';
-import { debug } from '@glimmer/opcode-compiler';
-import IndexedDBSource from '@orbit/indexeddb';
+import { Transform } from '@orbit/data';
+import IndexedDBStore from '@orbit/indexeddb';
+import JSONAPIStore from '@orbit/jsonapi';
 import Store from '@orbit/store';
 
 const ORDERED_PARAMS = ['pm10', 'pm25', 'so2', 'no2', 'o3', 'co'];
@@ -17,7 +18,8 @@ export default class LocationComponent extends Component {
     locationId: string;
     isSSR: boolean;
     store: Store;
-    localStore: IndexedDBSource;
+    localStore: IndexedDBStore;
+    remoteStore: JSONAPIStore;
     updateFogEffect: (index: number) => void;
     pullIndexedDB: () => void;
   };
@@ -39,23 +41,11 @@ export default class LocationComponent extends Component {
   }
 
   @tracked('measurements')
-  get sortedMeasurements(): Measurement[] {
-    let { measurements } = this;
-    return [...measurements].sort((left, right) => {
-      // Sort most recent dates first
-      return this.sortMeasurements(
-        right.attributes.measuredAt,
-        left.attributes.measuredAt
-      );
-    });
-  }
-
-  @tracked('sortedMeasurements')
   get measurementLists(): { first: Measurement[]; second: Measurement[] } {
-    let { sortedMeasurements } = this;
+    let { measurements } = this;
 
     let orderedMeasurements = ORDERED_PARAMS.map((parameter) => {
-      let measurement = sortedMeasurements.find((record) => {
+      let measurement = measurements.find((record) => {
         return record.attributes.parameter === parameter;
       });
       if (measurement) {
@@ -137,15 +127,14 @@ export default class LocationComponent extends Component {
     );
   }
 
-  async loadFromInlineCache(locationSignature: RecordSignature) {
+  loadFromInlineCache(locationSignature: RecordSignature) {
+    let { isSSR, localStore } = this.args;
     try {
-      let { isSSR, localStore } = this.args;
-
       this.readFromCache(locationSignature);
 
       // work around a bug in Orbit.js - see https://github.com/orbitjs/orbit/issues/476
       if (this.recordsFound && !isSSR) {
-        await localStore.push((t) =>
+        localStore.push((t) =>
           t.replaceRelatedRecords(
             locationSignature,
             'measurements',
@@ -153,8 +142,11 @@ export default class LocationComponent extends Component {
           )
         );
       }
-    } catch {
-      // Allow other methods to find data
+    } catch (error) {
+      // Re-throw the exception if we're on SSR because we cannot recover
+      if (isSSR) {
+        throw error;
+      }
     }
   }
 
@@ -169,25 +161,61 @@ export default class LocationComponent extends Component {
   }
 
   async loadFromAPI(locationSignature: RecordSignature) {
-    let { store } = this.args;
+    let { store, remoteStore } = this.args;
     try {
-      let location: Location = await store.query((q) =>
+      // Activate the coordinator
+      await this.args.pullIndexedDB();
+
+      // Fetch data from the API
+      let transform: Transform[] = await remoteStore.pull((q) =>
         q.findRecord(locationSignature)
       );
-      let measurements: Measurement[] = await store.query((q) =>
+      // Sync it with the store
+      await store.sync(transform);
+      this.location = await store.cache.query((q) =>
+        q.findRecord(locationSignature)
+      );
+    } catch {
+      // Fail silently
+    }
+    try {
+      // Fetch data from the API
+      let transform: Transform[] = await remoteStore.pull((q) =>
         q.findRelatedRecords(locationSignature, 'measurements')
       );
 
-      if (location && measurements) {
-        this.location = location;
-        this.measurements = measurements;
+      // Find cached items
+      let cachedResults = store.cache.query((q) =>
+        q.findRelatedRecords(locationSignature, 'measurements')
+      );
 
-        // Remember we saw this location
-        let currentDate = new Date().toISOString();
-        store.update((t) =>
-          t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
-        );
-      }
+      // Remove previous relationships and records
+      await store.update((t) => {
+        return cachedResults.reduce((accumulator, result) => {
+          let measurementSignature = { type: 'measurement', id: result.id };
+          let deleteRelationship = t.removeFromRelatedRecords(
+            locationSignature,
+            'measurements',
+            measurementSignature
+          );
+          let deleteRecord = t.removeRecord(
+            measurementSignature
+          );
+          return [...accumulator, deleteRelationship, deleteRecord];
+        }, [] as Transform[]);
+      });
+
+      // Add new data to store
+      await store.sync(transform);
+      this.measurements = store.cache.query((q) =>
+        q.findRelatedRecords(locationSignature, 'measurements')
+      );
+
+      // Remember we saw this location
+      let currentDate = new Date().toISOString();
+      store.update((t) =>
+        t.replaceAttribute(locationSignature, 'visitedAt', currentDate)
+      );
     } catch {
       // Only show error if no records could be found in any source
       this.notFound = !this.recordsFound;
@@ -195,14 +223,16 @@ export default class LocationComponent extends Component {
   }
 
   async loadMeasurements(locationId: string) {
-    let { store, isSSR } = this.args;
+    let { isSSR } = this.args;
 
     let locationSignature = { type: 'location', id: locationId };
 
-    await this.loadFromInlineCache(locationSignature);
+    this.loadFromInlineCache(locationSignature);
 
     if (!isSSR) {
-      await this.loadFromIndexedDB(locationSignature);
+      if (!this.recordsFound) {
+        await this.loadFromIndexedDB(locationSignature);
+      }
 
       if (!this.recordsFound) {
         this.loading = true;

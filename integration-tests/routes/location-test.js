@@ -58,5 +58,37 @@ describe('the location route', function() {
         expect(dateValue).to.match(/(2016).(10).(28)/);
       });
     })
+
+    it('cache does not accumulate old data', async function() {
+      await visit('/location/2', async (page) => {
+
+        let countIndexedDBRows = () => {
+          return new Promise((resolve, reject) => {
+            let opendb = window.indexedDB.open('orbit', 1);
+            opendb.onsuccess = () => {
+              let db = opendb.result;
+              let transaction = db
+              .transaction('measurement')
+              .objectStore('measurement')
+              .count();
+    
+              transaction.onsuccess = (event) => {
+                resolve(event.target.result);
+              };
+              transaction.onerror = (error) => {
+                reject(error);
+              };
+            };
+          });
+        };
+        await page.waitForSelector('[data-test-measurement="NO"]');
+        let firstCount = await page.evaluate(countIndexedDBRows);
+        await page.reload();
+        await page.waitForSelector('[data-test-measurement="NO"]');
+        let secondCount = await page.evaluate(countIndexedDBRows);
+        
+        expect(firstCount).to.equal(secondCount);
+      });
+    });
   });
 });
