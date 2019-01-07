@@ -106,7 +106,7 @@ describe('the search route', function() {
 
     it('redirects to coordinates from IP', async function() {
       await visit('/search-by-coordinates', { clientIP: '207.97.227.239'}, async (page, $response) => {
-        expect(page.url()).to.have.path('/search/29.4889,-98.3987');
+        expect(page.url()).to.have.path('/search/29.4969,-98.4032');
       });
     });
   });

@@ -12,13 +12,34 @@ const Funnel = require('broccoli-funnel');
 const Rollup = require('broccoli-rollup');
 const BroccoliCleanCss = require('broccoli-clean-css');
 const Map = require('broccoli-stew').map;
-const GlimmerAnalyzer = require('@css-blocks/glimmer').GlimmerAnalyzer;
-const GlimmerProject = require('@css-blocks/glimmer').Project;
 const Sass = require('node-sass');
 
 const MODULE_CONFIG = require('@glimmer/application-pipeline/dist/lib/broccoli/default-module-configuration.js').default;
 
 const ApiHost = process.env.API_HOST || 'http://localhost:4200';
+
+function scssPreprocessor(file, data, _configuration, _sourceMap) {
+  return new Promise((resolve, reject) => {
+    const sassOptions = {
+      file,
+      data,
+      outputStyle: 'expanded',
+      sourceMap: true,
+      outFile: file
+    };
+    Sass.render(sassOptions, (err, res) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve({
+          content: res.css.toString(),
+          sourceMap: res.map.toString(),
+          dependencies: [],
+        })
+      };
+    });
+  })
+}
 
 class BreetheGlimmerApp extends GlimmerApp {
   ssrTree() {
@@ -59,11 +80,13 @@ class BreetheGlimmerApp extends GlimmerApp {
     let ssrTree = this.ssrTree();
 
     let appTree = new MergeTrees([jsTree, ssrTree]);
-    appTree = new Rollup(appTree, {
+    return new Rollup(appTree, {
       rollup: {
-        entry: 'ssr/index.js',
-        dest: 'ssr-app.js',
-        format: 'cjs',
+        input: 'ssr/index.js',
+        output: {
+          file: 'ssr-app.js',
+          format: 'cjs'
+        },
         onwarn: function(warning) {
           if (warning.code === 'THIS_IS_UNDEFINED') {
             return;
@@ -79,8 +102,6 @@ class BreetheGlimmerApp extends GlimmerApp {
         ]
       }
     });
-
-    return appTree;
   }
 
   package() {
@@ -105,17 +126,10 @@ module.exports = function(defaults) {
     'css-blocks': {
       entry: 'Breethe',
       output: 'src/ui/styles/app.css',
-      getAnalyzer: (app) => {
-        let parserOpts = {
-          preprocessors: {
-            css: function(filePath, content, _options, sourceMap) {
-              let sourceDir = path.dirname(filePath);
-              let result = Sass.renderSync({ data: content, sourceMap: true, outFile: filePath, includePaths: [sourceDir] });
-              return Promise.resolve({ content: result.css.toString(), sourceMap: result.map.toString() });
-            }
-          }
-        };
-        return new GlimmerAnalyzer(new GlimmerProject(app.project.root, MODULE_CONFIG, parserOpts), parserOpts, {});
+      parserOpts: {
+        preprocessors: {
+          css: scssPreprocessor
+        }
       }
     },
     minifyCSS: {
