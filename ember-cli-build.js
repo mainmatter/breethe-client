@@ -54,7 +54,8 @@ class BreetheGlimmerApp extends GlimmerApp {
           target: 'es6',
           moduleResolution: 'node'
         }
-      }
+      },
+      throwOnError: false
     });
   }
 
