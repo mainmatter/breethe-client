@@ -14,13 +14,13 @@ async function visit(route, options, callback) {
   let page = await browser.newPage();
 
   if (options.clientIP) {
-    page.setExtraHTTPHeaders({
+    await page.setExtraHTTPHeaders({
       'X-Client-IP': options.clientIP
     });
   }
 
   if (options.disableJavascript) {
-    page.setJavaScriptEnabled(false);
+    await page.setJavaScriptEnabled(false);
   }
 
   // make sure old service workers are gone…
