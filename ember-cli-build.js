@@ -42,6 +42,14 @@ function scssPreprocessor(file, data, _configuration, _sourceMap) {
 }
 
 class BreetheGlimmerApp extends GlimmerApp {
+  javascriptTree() {
+    let originalNodeEnv =  process.env.NODE_ENV;
+    process.env.NODE_ENV = null;
+    let result = super.javascriptTree();
+    process.env.NODE_ENV = originalNodeEnv;
+    return result;
+  }
+
   ssrTree() {
     let tsTree = new Funnel('.', {
       include: ['ssr/**/*', 'config/**/*']
