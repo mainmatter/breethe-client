@@ -5,13 +5,17 @@ describe('the main flow without javascript', function() {
   it('works', async function() {
     await visit('/', { disableJavascript: true }, async (page) => {
       await page.type('[data-test-search-input]', 'Salzburg');
-      await page.click('[data-test-search-submit]');
-      await page.waitForSelector('[data-test-search-result="Salzburg"]');
+      await Promise.all([
+        page.click('[data-test-search-submit]'),
+        page.waitForNavigation({ waitUntil: 'domcontentloaded' })
+      ]);
 
       expect(page.url()).to.match(/\/search\/Salzburg$/);
 
-      await page.click('[data-test-search-result="Salzburg"] a');
-      await page.waitForSelector('[data-test-location]');
+      await Promise.all([
+        page.click('[data-test-search-result="Salzburg"] a'),
+        page.waitForNavigation()
+      ]);
 
       expect(page.url()).to.match(/\/location\/2$/);
 
