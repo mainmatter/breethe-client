@@ -238,8 +238,10 @@ describe('the search route', function() {
     it('allows searching', async function() {
       await visit('/search/', { disableJavascript: true }, async(page, $response) => {
         await page.type('[data-test-search-input]', 'Salzburg');
-        await page.click('[data-test-search-submit]');
-        await page.waitForSelector('[data-test-search-result="Salzburg"]');
+        await Promise.all([
+          page.click('[data-test-search-submit]'),
+          page.waitForNavigation({ waitUntil: 'domcontentloaded' })
+        ]);
 
         expect(page.url()).to.have.path('/search/Salzburg');
       });
