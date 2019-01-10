@@ -170,12 +170,12 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@css-blocks/broccoli@^0.20.0-beta.4":
-  version "0.20.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@css-blocks/broccoli/-/broccoli-0.20.0-beta.4.tgz#f62d5d54991fdafb2c5c0335c81d3a9f3f7da59f"
-  integrity sha512-v8pJP3rVhyw5nAqqFxWL23kzUIFpSXGmEtQITvqtDK8KmeHOJCmdgtuZzM98h1MFkbazdYbhfwHZLeG9unJ2Pg==
+"@css-blocks/broccoli@^0.20.0-beta.5":
+  version "0.20.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@css-blocks/broccoli/-/broccoli-0.20.0-beta.5.tgz#32567054aaf9ca580090756dcbe92736508da0c7"
+  integrity sha512-j5z2GqnHsBruTs2SQ3kNFPE7s7e28pMBfZ76kAwWSZOytXLqorZcBx9mMtqBHoLVhjMU+7bzgDNcFd6f9ypIsQ==
   dependencies:
-    "@css-blocks/core" "^0.20.0-beta.4"
+    "@css-blocks/core" "^0.20.0-beta.5"
     "@glimmer/compiler" "^0.33.0"
     "@glimmer/syntax" "^0.33.0"
     "@opticss/template-api" "^0.4.0"
@@ -191,10 +191,10 @@
     symlink-or-copy "^1.2.0"
     walk-sync "^0.3.3"
 
-"@css-blocks/core@^0.20.0-beta.4":
-  version "0.20.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@css-blocks/core/-/core-0.20.0-beta.4.tgz#f128e110efd9d561025bf20613f00179671920fe"
-  integrity sha512-89ba0wpVZcUfyVo+cuYKd6dK8hIfBMH2QzN5gL8nWcrZ+WHqFwPOCztVtYxB1J7l41AGh0jNbu6KiybgcDF/2Q==
+"@css-blocks/core@^0.20.0-beta.5":
+  version "0.20.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@css-blocks/core/-/core-0.20.0-beta.5.tgz#31dc08c0b4c311c450cbc77307c7da6aed3a9756"
+  integrity sha512-Fhd1Y5/1W7iuQ555nhFDQE4hGTmVe+9vsh+w08jpPpGM5KgaAG7r5/OM1ToftSxC2Ioi5xirS5eGc2IibpGu0Q==
   dependencies:
     "@opticss/element-analysis" "^0.4.0"
     "@opticss/template-api" "^0.4.0"
@@ -212,13 +212,13 @@
     source-map "^0.6.1"
     watch "^1.0.2"
 
-"@css-blocks/ember-cli@^0.20.0-beta.4":
-  version "0.20.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@css-blocks/ember-cli/-/ember-cli-0.20.0-beta.4.tgz#2c60342bdbd4715b9a1149ec832540cf44eaf43e"
-  integrity sha512-NRa/F5+C5hXeKFhQQw2gYrUh7isNuqTicAjCEklukKimI5zUFwo1KjzwIWPhs1TXctkAM12jrPjQqBWOWLHlhA==
+"@css-blocks/ember-cli@^0.20.0-beta.5":
+  version "0.20.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@css-blocks/ember-cli/-/ember-cli-0.20.0-beta.5.tgz#d9191bc844037913092502463ca70be6e73f71ac"
+  integrity sha512-3twiwbYT5cXJgM/sxhx6p5NBfIVwR+Wg5eYAkFholUSsMTfsKgrvUBjO6kx5jVhU4NWHk+B9+IT0JjlSw7PTxQ==
   dependencies:
-    "@css-blocks/broccoli" "^0.20.0-beta.4"
-    "@css-blocks/glimmer" "^0.20.0-beta.4"
+    "@css-blocks/broccoli" "^0.20.0-beta.5"
+    "@css-blocks/glimmer" "^0.20.0-beta.5"
     "@glimmer/application-pipeline" "^0.11.1"
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^3.0.0"
@@ -228,13 +228,13 @@
     fs-extra "^7.0.0"
     symlink-or-copy "^1.2.0"
 
-"@css-blocks/glimmer@^0.20.0-beta.4":
-  version "0.20.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@css-blocks/glimmer/-/glimmer-0.20.0-beta.4.tgz#559835f248ffaa73c8206222f8da6e8b70eb81e5"
-  integrity sha512-brd9OgSRNvegxtJaL9exoXZjfeC5lOmdQJlE14yzpo/ENQIggjGMUs8Qpuk/6dG9kc71V9y3FTOI6jA7Ka8wWg==
+"@css-blocks/glimmer@^0.20.0-beta.5":
+  version "0.20.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@css-blocks/glimmer/-/glimmer-0.20.0-beta.5.tgz#9975165834548492411839196c24f4b90abb0ba9"
+  integrity sha512-7lRgeMNsjni+wcbI90YXm2A3+ww7Ti3Epmy3v3MWwvGKE8wMqvYPK0DYL3+gYMvDViusjepwz7P2pnLMoY+O+Q==
   dependencies:
     "@amiller-gh/glimmer-analyzer" "^0.4.0"
-    "@css-blocks/core" "^0.20.0-beta.4"
+    "@css-blocks/core" "^0.20.0-beta.5"
     "@glimmer/compiler" "^0.33.0"
     "@glimmer/resolution-map-builder" "0.5.1"
     "@glimmer/resolver" "^0.4.3"
