@@ -145,7 +145,8 @@ module.exports = function(defaults) {
       enabled: process.env.EMBER_ENV === 'production'
     },
     fingerprint: {
-      exclude: ['ssr-app.js']
+      exclude: ['ssr-app.js'],
+      replaceExtensions: ['html', 'css', 'js', 'webmanifest']
     }
   });
 
