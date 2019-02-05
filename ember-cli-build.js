@@ -14,8 +14,6 @@ const BroccoliCleanCss = require('broccoli-clean-css');
 const Map = require('broccoli-stew').map;
 const Sass = require('node-sass');
 
-const MODULE_CONFIG = require('@glimmer/application-pipeline/dist/lib/broccoli/default-module-configuration.js').default;
-
 const ApiHost = process.env.API_HOST || 'http://localhost:4200';
 
 function scssPreprocessor(file, data, _configuration, _sourceMap) {
