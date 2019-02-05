@@ -1,11 +1,11 @@
 @import '../../styles/_mixins';
 @import '../../styles/_variables';
 
-@block-reference logo from "../../styles/logo.block.css";
-@block-reference loader from "../../styles/loader.block.css";
+@block screen from "../../styles/screen.block.css";
 
 :scope {
   block-name: Location;
+  extends: screen;
   @include component-screen();
   box-sizing: border-box;
   display: flex;
@@ -98,7 +98,7 @@
   }
 }
 
-.location-loader {
+.loader {
   height: 4rem;
   width: 4rem;
   position: absolute;

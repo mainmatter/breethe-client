@@ -17,3 +17,19 @@
   text-indent: -1000000px;
   overflow: hidden;
 }
+
+
+.loader {
+  animation: spin 1s linear infinite;
+  border-style: solid;
+  border-color: $font-color;
+  border-top-color: $action-color;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
