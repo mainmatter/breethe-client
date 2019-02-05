@@ -4,8 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     environment,
     rootURL: '/',
-    modulePrefix: 'breethe',
-    locationType: 'auto',
+    modulePrefix: 'breethe'
   };
 
   return ENV;
