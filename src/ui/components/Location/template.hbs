@@ -3,8 +3,8 @@
     <em>We couldn't load the requested location.</em>
   {{else}}
     <header>
-      <h1 class="logo.logo">
-        <a href="/" class="logo.logo-link logo-link" aria-label="Find another location" data-navigo data-test-home-link>
+      <h1 class="logo">
+        <a href="/" class="logo-link" aria-label="Find another location" data-navigo data-test-home-link>
           Breethe
         </a>
       </h1>
@@ -21,7 +21,7 @@
       <div class="indicator">
         <div class="indicator-content">
           {{#if loading}}
-            <div class="loader.loader location-loader" data-test-form-loader></div>
+            <div class="loader" data-test-form-loader></div>
           {{else}}
             <strong class="indicator-index" aria-label="Air Quality">
               {{qualityLabel}}

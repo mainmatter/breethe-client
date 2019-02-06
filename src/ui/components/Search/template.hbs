@@ -1,7 +1,7 @@
 <div data-test-search>
   <header class="header">
-    <h1 class="logo.logo">
-      <a href="/" class="logo.logo-link logo-link" onclick={{action searchByTerm ''}}>
+    <h1 class="logo">
+      <a href="/" class="logo-link" onclick={{action searchByTerm ''}}>
         Breethe
       </a>
     </h1>
@@ -36,7 +36,7 @@
 
     <section class="results" aria-labelledby="search-results-title">
       {{#if loading}}
-        <div class="loader.loader search-loader" data-test-form-loader></div>
+        <div class="loader" data-test-form-loader></div>
       {{else}}
         {{#if locations.length}}
           <ul>
