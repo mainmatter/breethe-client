@@ -50,8 +50,18 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
+To run the app without SSR and using the mock data you can use:
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
+
+If you want to run the app behind an HTTP server (in this case Caddy - https://caddyserver.com) with real data:
+
+* Build the app for the production API `API_HOST=https://ppm-server.herokuapp.com ember b`
+* Run the SSR server in one tab with `API_HOST=https://ppm-server.herokuapp.com node ssr-server.js`
+* Run the Caddy server in a second tab with `sudo caddy` (`sudo` is required so caddy can bind to privileged port 443)
+* Open https://dev.breethe/ in your browser (assuming you have an entry for `dev.breethe` in your `/etc/hosts`)
+
+This is helpful for running benchmarks
 
 ### Building
 
