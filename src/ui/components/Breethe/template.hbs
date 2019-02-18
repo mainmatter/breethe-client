@@ -1,4 +1,4 @@
-<div data-test-breethe>
+<div data-test-breethe data-has-ssr-response={{appState.isSSR}}>
   {{#if showOfflineWarning}}
     <p class="offline-warning" data-test-offline-warning>
       You appear to be offline - searching for locations is available online only.
