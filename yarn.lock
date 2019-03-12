@@ -170,12 +170,12 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@css-blocks/broccoli@^0.20.0-beta.7":
-  version "0.20.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@css-blocks/broccoli/-/broccoli-0.20.0-beta.7.tgz#0128b3cc281db62f55ff900cd44092b7086fd1f8"
-  integrity sha512-QN0DGpuDeqd0wUzAtYHftbBn2giy0NYp+tbpQ3CvASGeSltPD56Eci3rG1KdStjKnv178i6h8aFtIpxz+TaZjQ==
+"@css-blocks/broccoli@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@css-blocks/broccoli/-/broccoli-0.20.0.tgz#3854877a29e86d92c380f398629f1326d91958e3"
+  integrity sha512-QwJ/arMsRPKI32wTJGa2pCO609+ov8YZNjpw2JUFvfxTgrmbxvg6FzhSAGu6q20ZHuqgoKWamL+kXNbn2sh31g==
   dependencies:
-    "@css-blocks/core" "^0.20.0-beta.7"
+    "@css-blocks/core" "^0.20.0"
     "@glimmer/compiler" "^0.33.0"
     "@glimmer/syntax" "^0.33.0"
     "@opticss/template-api" "^0.4.0"
@@ -191,10 +191,10 @@
     symlink-or-copy "^1.2.0"
     walk-sync "^0.3.3"
 
-"@css-blocks/core@^0.20.0-beta.7":
-  version "0.20.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@css-blocks/core/-/core-0.20.0-beta.7.tgz#1da50816d6d1f542c9d80e31abf7cbe315b586fd"
-  integrity sha512-exbVDFL9l7HdjIDgY5QHy+xXehY+R91bbWMvyHBTQOKA+CDX9Q4ToANIO9uGvbHBOFumcSRZl5B74klW/Sp9JQ==
+"@css-blocks/core@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@css-blocks/core/-/core-0.20.0.tgz#a44543dcc9a9de4c38c9d06ea0312d884cad98e8"
+  integrity sha512-4kQrM0b9eYEy//JSNRGxIEmuc6SFnH4hpe+TSD4Z1sDwen9c6qmyQVv2DXhvN2GjQMMaqKV8dLvvI5mWx2NL0w==
   dependencies:
     "@opticss/element-analysis" "^0.4.0"
     "@opticss/template-api" "^0.4.0"
@@ -212,13 +212,13 @@
     source-map "^0.6.1"
     watch "^1.0.2"
 
-"@css-blocks/ember-cli@^0.20.0-beta.8":
-  version "0.20.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@css-blocks/ember-cli/-/ember-cli-0.20.0-beta.8.tgz#c3796617cb187d0ee6f1ad80e4b44f40c7b2da61"
-  integrity sha512-6LwIKZSCUzwRJRVWcGRUew7rp0UvNSQsl51zuBwDZi7gvhoJrGfHxLn9K//uK5e4vzmi87VJu82MimlstEnVhA==
+"@css-blocks/ember-cli@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@css-blocks/ember-cli/-/ember-cli-0.20.0.tgz#a4d4f7100c7812cfabd78e1f8a9c0e943e0706a5"
+  integrity sha512-fYrSdYMmfeehEmP5y2wW0XADyUH7EkN+uaj0UcAqW/urv2Nllu8knhUJHuhIYQzelQ8HGGro6ZGmPhWgtGqDwQ==
   dependencies:
-    "@css-blocks/broccoli" "^0.20.0-beta.7"
-    "@css-blocks/glimmer" "^0.20.0-beta.7"
+    "@css-blocks/broccoli" "^0.20.0"
+    "@css-blocks/glimmer" "^0.20.0"
     "@glimmer/application-pipeline" "^0.11.1"
     broccoli-concat "^3.7.3"
     broccoli-funnel "^2.0.1"
@@ -229,13 +229,13 @@
     fs-extra "^7.0.0"
     symlink-or-copy "^1.2.0"
 
-"@css-blocks/glimmer@^0.20.0-beta.7":
-  version "0.20.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@css-blocks/glimmer/-/glimmer-0.20.0-beta.7.tgz#e414e7941ff0a2ac2f0b7353e633ed83483585e6"
-  integrity sha512-Iw85S9lQAwWqgBHLoyb5lrQbu5+JYIbwCbg5reLMSUCWpe5bOddLR1dbFrzq43RPWFZ3Q8+7I+ewrHSMOzmjFA==
+"@css-blocks/glimmer@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@css-blocks/glimmer/-/glimmer-0.20.0.tgz#271f2ccf54d43ec992265538d9c21bedbc021c6d"
+  integrity sha512-4RELid+Z1CocAbnIwyvgJdFFATefNvPiQXiwDfO/t7JuUu1QQyPgLKPbORkXZR1gjZeo89Brqeu6ulXl82v2Ww==
   dependencies:
     "@amiller-gh/glimmer-analyzer" "^0.4.0"
-    "@css-blocks/core" "^0.20.0-beta.7"
+    "@css-blocks/core" "^0.20.0"
     "@glimmer/compiler" "^0.33.0"
     "@glimmer/resolution-map-builder" "0.5.1"
     "@glimmer/resolver" "^0.4.3"
