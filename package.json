@@ -52,7 +52,7 @@
     "typescript": "~3.4.5"
   },
   "engines": {
-    "node": ">= 4.0"
+    "node": "^10"
   },
   "private": true,
   "dependencies": {
