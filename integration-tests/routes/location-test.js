@@ -55,7 +55,7 @@ describe('the location route', function() {
         let dateValue = $response('[data-test-last-update]').text().trim();
 
         expect(element).to.be.ok;
-        expect(dateValue).to.match(/(2016).(10).(28)/);
+        expect(dateValue).to.match(/10\/28\/2016/);
       });
     })
   });
