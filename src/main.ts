@@ -4,7 +4,8 @@ import moduleMap from '../config/module-map';
 import resolverConfiguration from '../config/resolver-configuration';
 
 export default class App extends Application {
-  constructor({ hasSSRBody = false }) {
+  constructor(options = { hasSSRBody: false }) {
+    let hasSSRBody = options.hasSSRBody;
     let moduleRegistry = new BasicModuleRegistry(moduleMap);
     let resolver = new Resolver(resolverConfiguration, moduleRegistry);
     const element = document.body;
