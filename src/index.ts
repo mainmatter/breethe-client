@@ -10,7 +10,7 @@ if (typeof Raven !== 'undefined') {
 wrapper(() => {
   const containerElement = document.getElementById('app');
   const hasSSRBody = document.querySelector('[data-has-ssr-response]');
-  const app = new App({ hasSSRBody });
+  const app = new App({ hasSSRBody: !!hasSSRBody });
 
   setPropertyDidChange(() => {
     app.scheduleRerender();
