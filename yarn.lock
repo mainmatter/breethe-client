@@ -1495,6 +1495,11 @@
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.50.tgz#117540e026d64e1846093abbd5adc7e27fda7bcb"
   integrity sha512-VMhZMMQgV1zsR+lX/0IBfAk+8Eb7dPVMWiQGFAt3qjo5x7Ml6b77jUo0e1C3ToD+XRDXqtrfw+6AB0uUsPEr3Q==
 
+"@types/broccoli-plugin@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@types/broccoli-plugin/-/broccoli-plugin-1.3.0.tgz#38f8462fecaebc4e09a32e4d4ed1b9808f75bbca"
+  integrity sha512-SLk4/hFc2kGvgwNFrpn2O1juxFOllcHAywvlo7VwxfExLzoz1GGJ0oIZCwj5fwSpvHw4AWpZjJ1fUvb62PDayQ==
+
 "@types/debug@4.1.4":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.4.tgz#56eec47706f0fd0b7c694eae2f3172e6b0b769da"
@@ -3019,17 +3024,15 @@ broccoli-rollup@^2.0.0:
     symlink-or-copy "^1.1.8"
     walk-sync "^0.3.1"
 
-broccoli-rollup@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/broccoli-rollup/-/broccoli-rollup-4.0.0.tgz#52cb89b8927ffd08342e995e7cd885ff4578fa52"
-  integrity sha512-bxbWGFtlxICS5To3loKKX+Ov6G84WFdPIZH2of6EJjYyXr4Tm0sG0x1jsa871SFaLX/l9Ki5k2yFggr2E71Hhw==
+broccoli-rollup@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/broccoli-rollup/-/broccoli-rollup-4.1.0.tgz#0090615f9149e60c6f3f72125947c2d706c06fc1"
+  integrity sha512-37aubtpDkYy5b8fAy0ownEqU/rUBB0LexaEWG+fabj2zB0xBp07EjA6ihYw+WMi/3mko1gQA90bA6rJigGIupw==
   dependencies:
-    "@types/node" "^12.0.2"
+    "@types/broccoli-plugin" "^1.3.0"
     broccoli-plugin "^2.0.0"
     fs-tree-diff "^2.0.1"
     heimdalljs "^0.2.6"
-    heimdalljs-logger "^0.1.10"
-    magic-string "^0.25.2"
     node-modules-path "^1.0.1"
     rollup "^1.12.0"
     symlink-or-copy "^1.2.0"
