@@ -797,21 +797,21 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@css-blocks/broccoli@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/@css-blocks/broccoli/-/broccoli-0.23.0.tgz#8a372ebb3e09ca5f4bd1152ae8accb9372d9248a"
-  integrity sha512-7qOtCxIgtF4T9hJ9ABWVT6awpkBgirJrKqHqBtID3/aCBSalW9bF2UCwQiasbGbJqWpPcRQxgFU7qVTGpMfZhg==
+"@css-blocks/broccoli@^0.23.2":
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/@css-blocks/broccoli/-/broccoli-0.23.2.tgz#b4f20ce0cfcf08ae0daffac77d8b8a6f538bf0a1"
+  integrity sha512-9aClpdygogASRaTO3pW1g4ap1YIz7ldbMQMtqS/dIjPcOiQ9S5R46B74jYP9lsbI/3sBvKdhHUGAdxbccl5tnw==
   dependencies:
     "@css-blocks/core" "^0.23.0"
-    "@glimmer/compiler" "^0.40.1"
-    "@glimmer/syntax" "^0.40.1"
+    "@glimmer/compiler" "^0.41.0"
+    "@glimmer/syntax" "^0.41.0"
     "@opticss/template-api" "^0.6.2"
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^3.0.0"
     broccoli-plugin "^2.0.0"
     colors "^1.2.1"
     debug "^4.1.1"
-    fs-extra "^7.0.1"
+    fs-extra "^8.0.0"
     fs-tree-diff "^2.0.0"
     glob "^7.1.2"
     opticss "^0.6.2"
@@ -839,13 +839,13 @@
     source-map "^0.7.3"
     watch "^1.0.2"
 
-"@css-blocks/ember-cli@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/@css-blocks/ember-cli/-/ember-cli-0.23.0.tgz#4b994f05b649f3c5c3c056517d574c22ffc2c9e4"
-  integrity sha512-eWa/hh9IT45JFTeQFGKqt1/ndVsIK3FUlz1jFwb7ruzMNqS3lC9F04dhwQwoNmI1FzGmXBd9J9UNGn3y/5gYZg==
+"@css-blocks/ember-cli@^0.23.2":
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/@css-blocks/ember-cli/-/ember-cli-0.23.2.tgz#31a616d21aa44dc04caee976d817a26743279bd6"
+  integrity sha512-URo4EyNUyp6O4ImSmkHh10z21soUHr/H2PgW80XVY1z3yicr1QaBW8DPhr8c5ixiUyod08vk4cgmi6Y6PXyjWg==
   dependencies:
-    "@css-blocks/broccoli" "^0.23.0"
-    "@css-blocks/glimmer" "^0.23.0"
+    "@css-blocks/broccoli" "^0.23.2"
+    "@css-blocks/glimmer" "^0.23.2"
     "@glimmer/application-pipeline" "^0.15.0"
     broccoli-concat "^3.7.3"
     broccoli-funnel "^2.0.1"
@@ -853,25 +853,25 @@
     debug "^4.1.1"
     ember-cli-babel "7.7.3"
     ember-cli-htmlbars "^3.0.0"
-    fs-extra "^7.0.1"
+    fs-extra "^8.0.0"
     symlink-or-copy "^1.2.0"
 
-"@css-blocks/glimmer@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/@css-blocks/glimmer/-/glimmer-0.23.0.tgz#b7eec257e1539611fd8d382de4c8420cefbc018b"
-  integrity sha512-W4lykppAv7BRfeiMW1C50C7yzgWehzc1sPxhi/OnlT9J2ZJdpYseiG+cDDlLNionEPyOktSL0SoSZt8e8Awd1Q==
+"@css-blocks/glimmer@^0.23.2":
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/@css-blocks/glimmer/-/glimmer-0.23.2.tgz#6fc68f3fca9dd3b067c731e9df5712e523e14fbb"
+  integrity sha512-tGmsmWYGdnj10ccuEGR0UsAurn+NibaZyaQLz/eGFiLwUPE2uuGfB5dTSo79HC4hMPZQUt2BYED/VSAtlpitZg==
   dependencies:
     "@amiller-gh/glimmer-analyzer" "^0.4.0"
     "@css-blocks/core" "^0.23.0"
-    "@glimmer/compiler" "^0.40.1"
+    "@glimmer/compiler" "^0.41.0"
     "@glimmer/resolution-map-builder" "0.5.1"
     "@glimmer/resolver" "^0.4.3"
-    "@glimmer/syntax" "^0.40.1"
+    "@glimmer/syntax" "^0.41.0"
     "@opticss/element-analysis" "^0.6.1"
     "@opticss/template-api" "^0.6.2"
     "@opticss/util" "^0.6.1"
     debug "^4.1.1"
-    fs-extra "^7.0.1"
+    fs-extra "^8.0.0"
     glob "^7.1.2"
     global "^4.3.2"
     object.values "^1.0.4"
@@ -1025,15 +1025,15 @@
     "@glimmer/util" "^0.34.8"
     "@glimmer/wire-format" "^0.34.8"
 
-"@glimmer/compiler@^0.40.1":
-  version "0.40.1"
-  resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.40.1.tgz#07bec11559b5cacd3d489f518eac0ec4b6d23d71"
-  integrity sha512-gho/5QkJRMes2KqG8kyArTttSCEG3c7F9HNV1ed62LAfijhkRoMT0oEKpEFHLpXBKnQCohV/zX9EfzhvkvhgeQ==
+"@glimmer/compiler@^0.41.0":
+  version "0.41.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.41.0.tgz#e7a719ff4215a1a5fa6af8f8cb5e6d634a2f7972"
+  integrity sha512-NFr22rJBKGqPxwTuYbFJcFsd6FLaRLKbOW3mgXj6DejgPG6ppOxVqysrQfi8Zp543FfKfy0isnPMRwzSAvECSg==
   dependencies:
-    "@glimmer/interfaces" "^0.40.1"
-    "@glimmer/syntax" "^0.40.1"
-    "@glimmer/util" "^0.40.1"
-    "@glimmer/wire-format" "^0.40.1"
+    "@glimmer/interfaces" "^0.41.0"
+    "@glimmer/syntax" "^0.41.0"
+    "@glimmer/util" "^0.41.0"
+    "@glimmer/wire-format" "^0.41.0"
 
 "@glimmer/component@^0.13.0":
   version "0.13.0"
@@ -1103,10 +1103,10 @@
   dependencies:
     "@glimmer/wire-format" "^0.34.8"
 
-"@glimmer/interfaces@^0.40.1":
-  version "0.40.1"
-  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.40.1.tgz#eb767718c47872243db50c993700a385940c2cb2"
-  integrity sha512-gk+3Ij3hrJHPBJpCQE1wF54sh4M/NRx/JOJOhCzsyrf488IDnw2v93ZDEwBd7O3EcQDaRZMOQq6M3FNh/0YZpw==
+"@glimmer/interfaces@^0.41.0":
+  version "0.41.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.41.0.tgz#3f571a181025406f29faed9006d0a914afb577b1"
+  integrity sha512-d0Ryj8iV3FiyMyT4QpwHNg2QFFEmdzI5cJFcbmC+OmuTe6eOQ52mLDlw1+D+a3ZDv8Jfj3l0QkEcEugCxDY+1Q==
 
 "@glimmer/low-level@^0.31.0":
   version "0.31.0"
@@ -1295,13 +1295,13 @@
     handlebars "^4.0.6"
     simple-html-tokenizer "^0.5.3"
 
-"@glimmer/syntax@^0.40.1":
-  version "0.40.1"
-  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.40.1.tgz#6c387ca8d3080350c039092586adba37ba2bf351"
-  integrity sha512-lZ0xv9wNBVt1tteWszQy+PZbVi8v1vmlYjCTU9s/q2H1khrnVe6VYvicVapGATqlMQ84reRqJkQKdgfpy+ig6A==
+"@glimmer/syntax@^0.41.0":
+  version "0.41.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.41.0.tgz#af033e48475e29a4784900c13695925d752f462d"
+  integrity sha512-sYmgUMdK0jX+3ZNX9C2TKvL1YZGsKIcXRicwnzoTC7F56z29CbSCc7o6Zf0CI4L2Q7FSnHDxldlSe48wBAr6vQ==
   dependencies:
-    "@glimmer/interfaces" "^0.40.1"
-    "@glimmer/util" "^0.40.1"
+    "@glimmer/interfaces" "^0.41.0"
+    "@glimmer/util" "^0.41.0"
     handlebars "^4.0.13"
     simple-html-tokenizer "^0.5.7"
 
@@ -1320,10 +1320,10 @@
   resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.34.8.tgz#0f1349b3134bb55d4887da73919863401647525b"
   integrity sha512-a5RpA/dAHAf1GAsFuxmmDMzzPt8Yukyfi4sNkjVgBJ18OCq4AT2kGct32r3LZftEmJ1UmTzUPdSNnbRuyujI+A==
 
-"@glimmer/util@^0.40.1":
-  version "0.40.1"
-  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.40.1.tgz#e4bd667d36422261248df039dd46bfe963655bd3"
-  integrity sha512-YuV7hhjrPi/2YYc+GCyOBzrG1xSolQ4Fg/dkQdpDkTA03UkC9BiCQRxbOK4SjlV9IuBSEIv/Is6BOfkQ8hhX2g==
+"@glimmer/util@^0.41.0":
+  version "0.41.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.41.0.tgz#743fa455d1d7fa0ce29688e932c231a99c0752cf"
+  integrity sha512-aKmQy62eRFhOZET9XmTB8MOA32G1FmD4d9HWL21OfdcGM4IbguRrWLMQc2DRh1YOE2AaT0PBrFrPmpNwFp5tpQ==
 
 "@glimmer/vm@^0.31.0":
   version "0.31.0"
@@ -1357,13 +1357,13 @@
   dependencies:
     "@glimmer/util" "^0.34.8"
 
-"@glimmer/wire-format@^0.40.1":
-  version "0.40.1"
-  resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.40.1.tgz#9824acc0eac133c6317d83c0c51621f8992201a2"
-  integrity sha512-fT9+UNSOkYP4hyMVnIderzKnAFvsr6at7Wd9YfgUsBGHtkpFPAHM0T9yinR1DznXJ+eoTnCnm+HJ/lZAPtwTpw==
+"@glimmer/wire-format@^0.41.0":
+  version "0.41.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.41.0.tgz#a50edcdcae0d11e68dffa04d96dd37a007f708b4"
+  integrity sha512-4n0xgXQ5czqxDUjeOq+rN+5C3qDJ+Ce1NCl2jfrhw9lUdQisT2BmjSRf7CMXQZTonjVub1Lgjk9jpuT0UBaNvg==
   dependencies:
-    "@glimmer/interfaces" "^0.40.1"
-    "@glimmer/util" "^0.40.1"
+    "@glimmer/interfaces" "^0.41.0"
+    "@glimmer/util" "^0.41.0"
 
 "@opticss/element-analysis@^0.6.1":
   version "0.6.1"
@@ -5370,6 +5370,15 @@ fs-extra@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.1.tgz#4f189c44aa123b895f722804f55ea23eadc348e9"
   integrity sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
+fs-extra@^8.0.0:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.0.1.tgz#90294081f978b1f182f347a440a209154344285b"
+  integrity sha512-W+XLrggcDzlle47X/XnS7FXrXu9sDo+Ze9zpndeBxdgv88FHLm1HtmkhEwavruS6koanBjp098rUpHs65EmG7A==
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
