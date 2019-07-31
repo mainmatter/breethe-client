@@ -1416,19 +1416,28 @@
     "@orbit/core" "^0.15.23"
     "@orbit/utils" "^0.15.23"
 
+"@orbit/data@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.16.0.tgz#85e03d4ef560f5ecda00364a5a80378678cb5993"
+  integrity sha512-InidpkEMGDO5UHF6Mmdxt9fxAdjkVGuc3S9h7mnDGwx4Osbhqo1Y8YzWwXPOe0xvLNTKXt62G50VdcjKMUTxUA==
+  dependencies:
+    "@orbit/core" "^0.16.0"
+    "@orbit/utils" "^0.16.0"
+
 "@orbit/immutable@^0.15.23":
   version "0.15.23"
   resolved "https://registry.yarnpkg.com/@orbit/immutable/-/immutable-0.15.23.tgz#728ad2d3901a1a5db15be62dddce301f0341502e"
   integrity sha512-NHREGM9U+weyJc1/yyX1l9z0woK6tAm2WJR4XJ3u/mTeed11oe9dEhOWhrJO19NagkiNWlx+htH/URvZtTqPzw==
 
-"@orbit/indexeddb@^0.15.25":
-  version "0.15.25"
-  resolved "https://registry.yarnpkg.com/@orbit/indexeddb/-/indexeddb-0.15.25.tgz#e89b1a937d7e12fe0c051c29c98db301e461e641"
-  integrity sha512-nqzLE4//4crXkXFyiJFoaJbCpSwdhU/SKrEIkg1xFCZMdT42Pcz/c5ATSIdJOcb+5yj33HhAlNPQ6Qb1062jtw==
+"@orbit/indexeddb@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@orbit/indexeddb/-/indexeddb-0.16.0.tgz#a06a49630e14b50f661f91b1de89a4f967d3208e"
+  integrity sha512-cQ3DBDWGUMqSN6Yb6tsWTw1Oomn3Dq1jFwzsn/ycvARx/SYwWpE9luo1L1MWpKxYJCnvOhTVoDSjdsCfOQLvQw==
   dependencies:
-    "@orbit/core" "^0.15.23"
-    "@orbit/data" "^0.15.23"
-    "@orbit/utils" "^0.15.23"
+    "@orbit/core" "^0.16.0"
+    "@orbit/data" "^0.16.0"
+    "@orbit/record-cache" "^0.16.0"
+    "@orbit/utils" "^0.16.0"
 
 "@orbit/jsonapi@^0.15.25":
   version "0.15.25"
@@ -1438,6 +1447,15 @@
     "@orbit/core" "^0.15.23"
     "@orbit/data" "^0.15.23"
     "@orbit/utils" "^0.15.23"
+
+"@orbit/record-cache@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@orbit/record-cache/-/record-cache-0.16.0.tgz#1aea935fa049ca4acfbc0f69fe09586b9a98934b"
+  integrity sha512-nJONCdCj2yC5+u3raozgBr/qgVB95UXE5eFOH41tXcTg2IvPvF99OsM4yUc4DaHzAkIDCFNh+f7vJ0vWxM1PQg==
+  dependencies:
+    "@orbit/core" "^0.16.0"
+    "@orbit/data" "^0.16.0"
+    "@orbit/utils" "^0.16.0"
 
 "@orbit/store@^0.15.25":
   version "0.15.25"
