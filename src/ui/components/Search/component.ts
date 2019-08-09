@@ -1,6 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
+import Orbit from '@orbit/core';
 import Store from '@orbit/store';
-import { assert } from '@orbit/utils';
 import Navigo from 'navigo';
 
 declare const __ENV_API_HOST__: string;
@@ -48,7 +48,7 @@ export default class Home extends Component {
 
   constructor(options) {
     super(options);
-    assert(
+    Orbit.assert(
       'Argument \'store\' must be supplied to this component.',
       !!this.args.store
     );
