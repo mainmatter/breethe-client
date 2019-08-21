@@ -28,7 +28,7 @@
     "@orbit/core": "^0.16.1",
     "@orbit/data": "^0.16.0",
     "@orbit/indexeddb": "^0.16.0",
-    "@orbit/jsonapi": "^0.16.0",
+    "@orbit/jsonapi": "^0.16.1",
     "@orbit/store": "^0.16.0",
     "@types/qunit": "^2.9.0",
     "broccoli-asset-rev": "^3.0.0",
