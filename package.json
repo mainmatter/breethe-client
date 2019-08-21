@@ -25,7 +25,7 @@
     "@glimmer/ssr": "^0.13.0",
     "@glimmer/test-helpers": "^0.31.2",
     "@orbit/coordinator": "^0.16.0",
-    "@orbit/core": "^0.16.0",
+    "@orbit/core": "^0.16.1",
     "@orbit/data": "^0.16.0",
     "@orbit/indexeddb": "^0.16.0",
     "@orbit/jsonapi": "^0.16.0",
