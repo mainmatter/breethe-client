@@ -1389,14 +1389,14 @@
   dependencies:
     typescript-collections "^1.2.5"
 
-"@orbit/coordinator@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@orbit/coordinator/-/coordinator-0.16.0.tgz#5cc22c8cecf50f7c7494bd79bc0d47bddc4e46b4"
-  integrity sha512-ORDT/AhEyWFx/Wpy9u4PkJ+Y6lywHe5RGLjyCDeGy66n+4CxTTlo6wm+GWhFtJlzpaTBqdNrMbYFdadUetbpVg==
+"@orbit/coordinator@^0.16.2":
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/@orbit/coordinator/-/coordinator-0.16.2.tgz#826311cfe3d1e66a6aa4e9e6c661ca697d1adadf"
+  integrity sha512-P/7QqxPMjdpnj+XxXrDzMRO8MuoyzwdzLH7fdywKenzkH5yxmotCqaqP+bc6zh9/anyctGSmKxNR0C2xMrS8rw==
   dependencies:
-    "@orbit/core" "^0.16.0"
-    "@orbit/data" "^0.16.0"
-    "@orbit/utils" "^0.16.0"
+    "@orbit/core" "^0.16.1"
+    "@orbit/data" "^0.16.1"
+    "@orbit/utils" "^0.16.1"
 
 "@orbit/core@^0.16.0", "@orbit/core@^0.16.1":
   version "0.16.1"
@@ -1405,13 +1405,13 @@
   dependencies:
     "@orbit/utils" "^0.16.1"
 
-"@orbit/data@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.16.0.tgz#85e03d4ef560f5ecda00364a5a80378678cb5993"
-  integrity sha512-InidpkEMGDO5UHF6Mmdxt9fxAdjkVGuc3S9h7mnDGwx4Osbhqo1Y8YzWwXPOe0xvLNTKXt62G50VdcjKMUTxUA==
+"@orbit/data@^0.16.0", "@orbit/data@^0.16.1":
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.16.1.tgz#a4f5945ff9345f9ef0390ee536d72bfbfb219dde"
+  integrity sha512-goIgkDeyIr8t5hEu0Wf/H9UQLek/TeIvnKO8SKduuEwKQ9vu/1EGGTooCUyQfvy7QIWYO/zBXBIjbukxqFFF3g==
   dependencies:
-    "@orbit/core" "^0.16.0"
-    "@orbit/utils" "^0.16.0"
+    "@orbit/core" "^0.16.1"
+    "@orbit/utils" "^0.16.1"
 
 "@orbit/immutable@^0.16.0":
   version "0.16.0"
