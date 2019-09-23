@@ -1404,13 +1404,13 @@
   dependencies:
     "@orbit/utils" "^0.16.3"
 
-"@orbit/data@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.16.0.tgz#85e03d4ef560f5ecda00364a5a80378678cb5993"
-  integrity sha512-InidpkEMGDO5UHF6Mmdxt9fxAdjkVGuc3S9h7mnDGwx4Osbhqo1Y8YzWwXPOe0xvLNTKXt62G50VdcjKMUTxUA==
+"@orbit/data@^0.16.0", "@orbit/data@^0.16.3":
+  version "0.16.3"
+  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.16.3.tgz#c4bebb3d3be313538cd3c5630fa7ff7aadff804d"
+  integrity sha512-e3DyYqpULl4W7QGXr3/SvHVb95byQT1P2gcyBLZpFlMawhxIiT2E1qSWAmutkrK7d7NfKEk9xBlnEcMnIlpc6A==
   dependencies:
-    "@orbit/core" "^0.16.0"
-    "@orbit/utils" "^0.16.0"
+    "@orbit/core" "^0.16.3"
+    "@orbit/utils" "^0.16.3"
 
 "@orbit/immutable@^0.16.0":
   version "0.16.0"
@@ -1427,15 +1427,15 @@
     "@orbit/record-cache" "^0.16.0"
     "@orbit/utils" "^0.16.0"
 
-"@orbit/jsonapi@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@orbit/jsonapi/-/jsonapi-0.16.0.tgz#e4210b1740ee4e85340741777cf71f826530ccaf"
-  integrity sha512-fMWeL+JFc0U0jLNfAAf38pTKO9jBoL8DSx9sDSiTmNmNg7MlE07LryR7K3gM7sIrtxLzNtj2J9TNwLY3J5GuoA==
+"@orbit/jsonapi@^0.16.3":
+  version "0.16.3"
+  resolved "https://registry.yarnpkg.com/@orbit/jsonapi/-/jsonapi-0.16.3.tgz#82e4f5bc168a1d4418d7ae20769e868d666a80bf"
+  integrity sha512-O3VY1WwFy1xDdbI72HY+Ofb3VpiRxjYJIk923eul/fww23UnwbVYNkHuxdAXVvj2giELJOxlgOX+QmoxR24IXg==
   dependencies:
-    "@orbit/core" "^0.16.0"
-    "@orbit/data" "^0.16.0"
-    "@orbit/serializers" "^0.16.0"
-    "@orbit/utils" "^0.16.0"
+    "@orbit/core" "^0.16.3"
+    "@orbit/data" "^0.16.3"
+    "@orbit/serializers" "^0.16.3"
+    "@orbit/utils" "^0.16.3"
 
 "@orbit/memory@^0.16.0":
   version "0.16.0"
@@ -1457,10 +1457,10 @@
     "@orbit/data" "^0.16.0"
     "@orbit/utils" "^0.16.0"
 
-"@orbit/serializers@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@orbit/serializers/-/serializers-0.16.0.tgz#f0f6e4c8fc6eaa5846aada8ab9c26c8b74634644"
-  integrity sha512-zeMALOCOBTLJVyA9CCmtXrLXbKdw/oIeoeKjkHD4nYmd1nn5wTr7gtUeyu5S/G9Xog7tH8Cb4pp/sO8CIOP58g==
+"@orbit/serializers@^0.16.3":
+  version "0.16.3"
+  resolved "https://registry.yarnpkg.com/@orbit/serializers/-/serializers-0.16.3.tgz#fce96a2b0d65f86086c473f1c1d19bfccb9235bd"
+  integrity sha512-PC5KKi76pqT7apCK3SuAkvO7MZX3McaITp2cY1IvFp88NpnqUyRvmkP/OqdeTmMD0v9LUT0m+ZAGHh6eCj9ZnQ==
 
 "@orbit/store@^0.16.0":
   version "0.16.0"
