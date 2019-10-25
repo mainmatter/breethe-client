@@ -46,7 +46,7 @@
     "glob": "^7.1.5",
     "mocha": "^6.2.2",
     "node-sass": "^4.13.0",
-    "puppeteer": "^1.20.0",
+    "puppeteer": "^2.0.0",
     "qunitjs": "^2.3.3",
     "rollup-plugin-replace": "^2.2.0",
     "typescript": "~3.6.4"
