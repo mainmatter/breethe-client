@@ -29,7 +29,7 @@
     "@orbit/data": "^0.16.3",
     "@orbit/indexeddb": "^0.16.3",
     "@orbit/jsonapi": "^0.16.3",
-    "@orbit/store": "^0.16.3",
+    "@orbit/store": "^0.16.4",
     "@types/qunit": "^2.9.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-clean-css": "^2.0.1",
