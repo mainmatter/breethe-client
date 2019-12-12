@@ -1034,10 +1034,10 @@
     "@glimmer/runtime" "^0.31.0"
     "@glimmer/util" "^0.31.0"
 
-"@glimmer/blueprint@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@glimmer/blueprint/-/blueprint-0.13.0.tgz#235247666dd8a031c6c20e6d484643c2d3e9b32b"
-  integrity sha512-VIvPVf+16Plf9tugkXxsAplf2oUju5hkUTIsl/5i8GR7Rx4/BXCPK5vy6F1qvPh76ZlWIn8XG0lp+UYOrY1O1w==
+"@glimmer/blueprint@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/blueprint/-/blueprint-1.0.0.tgz#9d079be8cf38a5c4c526dce93882e3484bf93543"
+  integrity sha512-hnbH5VeoDy36mgP4C+utiThZYz+WJeICHAaouYUguNFaAPpEcJWTRQplqrTYoWkJxKF6+6FIIjNFc+aZbSBi7Q==
   dependencies:
     ember-cli-string-utils "^1.1.0"
 
