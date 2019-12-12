@@ -1,4 +1,4 @@
-import { ComponentManager, setPropertyDidChange } from '@glimmer/component';
+import { setPropertyDidChange } from '@glimmer/tracking';
 import App from './main';
 
 let wrapper = (callback) => callback();
@@ -14,12 +14,6 @@ wrapper(() => {
 
   setPropertyDidChange(() => {
     app.scheduleRerender();
-  });
-
-  app.registerInitializer({
-    initialize(registry) {
-      registry.register(`component-manager:/${app.rootName}/component-managers/main`, ComponentManager);
-    }
   });
 
   app.renderComponent('Breethe', containerElement, null);

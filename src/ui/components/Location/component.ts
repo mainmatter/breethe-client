@@ -38,7 +38,6 @@ export default class LocationComponent extends Component {
     return this.location && this.measurements.length > 0;
   }
 
-  @tracked
   get sortedMeasurements(): Measurement[] {
     let { measurements } = this;
     return [...measurements].sort((left, right) => {
@@ -50,7 +49,6 @@ export default class LocationComponent extends Component {
     });
   }
 
-  @tracked
   get measurementLists(): { first: Measurement[]; second: Measurement[] } {
     let { sortedMeasurements } = this;
 
@@ -80,7 +78,6 @@ export default class LocationComponent extends Component {
     };
   }
 
-  @tracked
   get updatedDate(): string {
     let { measurementLists, sortMeasurements } = this;
     let dates = [...measurementLists.first, ...measurementLists.second]
@@ -95,7 +92,6 @@ export default class LocationComponent extends Component {
     return dates.length > 0 ? dates[0].toLocaleString() : '–';
   }
 
-  @tracked
   get qualityIndex(): number {
     let { measurements, sortMeasurements } = this;
     let indexes = measurements
@@ -109,7 +105,6 @@ export default class LocationComponent extends Component {
     return indexes[0];
   }
 
-  @tracked
   get qualityLabel(): string {
     let { qualityIndex } = this;
     return QUALITY_LABEL[qualityIndex];
