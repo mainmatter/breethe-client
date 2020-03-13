@@ -1542,10 +1542,10 @@
   dependencies:
     "@orbit/utils" "^0.16.3"
 
-"@orbit/data@^0.16.3", "@orbit/data@^0.16.4":
-  version "0.16.4"
-  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.16.4.tgz#463ea07b4e01468c140d4b51a60a3a4cbcd64268"
-  integrity sha512-vZq4hJ9fg7UADuclgBJRPkUlKcAgEkLhNbWBlzvEwOfdU0BQRPVjUp57arXIPKQy4BDxZLxRIxUjLnc/+OS4gw==
+"@orbit/data@^0.16.4", "@orbit/data@^0.16.5":
+  version "0.16.5"
+  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.16.5.tgz#1ebbe06198fbea77ecee217b8d8a74e678002a8b"
+  integrity sha512-v1RV8Nb5VM8NOsS80MmwxZi/CwOlFrhOHhs0fD10pkO6vAT08LxbyZAKLN0QddURcAjImy/ghuXi8Rsx0iHznA==
   dependencies:
     "@orbit/core" "^0.16.3"
     "@orbit/utils" "^0.16.3"
