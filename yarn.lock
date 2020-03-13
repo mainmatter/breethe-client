@@ -1575,24 +1575,24 @@
     "@orbit/serializers" "^0.16.3"
     "@orbit/utils" "^0.16.3"
 
-"@orbit/memory@^0.16.4":
-  version "0.16.4"
-  resolved "https://registry.yarnpkg.com/@orbit/memory/-/memory-0.16.4.tgz#1c91dfbf83b0346c5fc3157be676d37fa4c95ae7"
-  integrity sha512-p2UR5T04vLZRzznPBDLGc7zJs02Q4gHJSH6n7y9NJ/hHijV6LC92k1s58LxUGsyjAkt6EFJlF45AKi8cdPRPlQ==
+"@orbit/memory@^0.16.5":
+  version "0.16.5"
+  resolved "https://registry.yarnpkg.com/@orbit/memory/-/memory-0.16.5.tgz#1ac46597308c8d4f65a251e3d633a26cb35587d5"
+  integrity sha512-P4eSlUIap4Z4X4/elDrt7Mv0++SC+cZTx5vCj6C5d6E0ke75gQNItOYuynRcyNODlVTfjThFch61oUOHz5a4kA==
   dependencies:
     "@orbit/core" "^0.16.3"
-    "@orbit/data" "^0.16.4"
+    "@orbit/data" "^0.16.5"
     "@orbit/immutable" "^0.16.3"
-    "@orbit/record-cache" "^0.16.4"
+    "@orbit/record-cache" "^0.16.5"
     "@orbit/utils" "^0.16.3"
 
-"@orbit/record-cache@^0.16.4":
-  version "0.16.4"
-  resolved "https://registry.yarnpkg.com/@orbit/record-cache/-/record-cache-0.16.4.tgz#6502bc956c84cbff0f4d5f5dfd87cfaf3495ed1d"
-  integrity sha512-VKJmrlZOZBobVp4McfDrQ7uwQG4ee6BeRa5mFFYxNPAgRK+z6sZZ3GHaMe2lvStU0chFTvXocHpzTH4uIjSxuQ==
+"@orbit/record-cache@^0.16.4", "@orbit/record-cache@^0.16.5":
+  version "0.16.5"
+  resolved "https://registry.yarnpkg.com/@orbit/record-cache/-/record-cache-0.16.5.tgz#7a2360864e7a812697f4b9bbfca713509af4e694"
+  integrity sha512-hM2hzeU3XqQikKb72EaLjYSFTuKUXguJeT48DlALkOsdfLMpDTKYyc0RjnNebSbVCzY+kDdOYb2l+4PchkGacg==
   dependencies:
     "@orbit/core" "^0.16.3"
-    "@orbit/data" "^0.16.4"
+    "@orbit/data" "^0.16.5"
     "@orbit/utils" "^0.16.3"
 
 "@orbit/serializers@^0.16.3":
@@ -1600,16 +1600,16 @@
   resolved "https://registry.yarnpkg.com/@orbit/serializers/-/serializers-0.16.3.tgz#fce96a2b0d65f86086c473f1c1d19bfccb9235bd"
   integrity sha512-PC5KKi76pqT7apCK3SuAkvO7MZX3McaITp2cY1IvFp88NpnqUyRvmkP/OqdeTmMD0v9LUT0m+ZAGHh6eCj9ZnQ==
 
-"@orbit/store@^0.16.4":
-  version "0.16.4"
-  resolved "https://registry.yarnpkg.com/@orbit/store/-/store-0.16.4.tgz#34abeb4ec859374a98a9ac5240179151b5fcffd1"
-  integrity sha512-3k8RFgf8Tjej0x58DfQrTSwlWb4fPWyQPX0ufDLcOaI50l7/+klrVUvO3ha5bJQivASNa3H6FJY/Ei5Sp5iTBg==
+"@orbit/store@^0.16.5":
+  version "0.16.5"
+  resolved "https://registry.yarnpkg.com/@orbit/store/-/store-0.16.5.tgz#6fdc696835ce9c2c2a64f26d652c92dddb26694a"
+  integrity sha512-yOQGnVeqCzmaZAwpSTv42dIvqIeVg/N4q+EVMcJ9SCnb63ZwHw5GShEBM3akYgt4lvvekuanwnrDV6b/T1MCUQ==
   dependencies:
     "@orbit/core" "^0.16.3"
-    "@orbit/data" "^0.16.4"
+    "@orbit/data" "^0.16.5"
     "@orbit/immutable" "^0.16.3"
-    "@orbit/memory" "^0.16.4"
-    "@orbit/record-cache" "^0.16.4"
+    "@orbit/memory" "^0.16.5"
+    "@orbit/record-cache" "^0.16.5"
     "@orbit/utils" "^0.16.3"
 
 "@orbit/utils@^0.16.3":
