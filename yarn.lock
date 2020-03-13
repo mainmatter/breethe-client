@@ -1526,13 +1526,13 @@
   dependencies:
     typescript-collections "^1.2.5"
 
-"@orbit/coordinator@^0.16.4":
-  version "0.16.4"
-  resolved "https://registry.yarnpkg.com/@orbit/coordinator/-/coordinator-0.16.4.tgz#dedb4e987a123e73e6db8542d641d35e6728c710"
-  integrity sha512-fl8LhW1BWFOoowumHo4+Gq59zzXgrQDFirRp6AYa+dDUrARy7ay+YY0Yg32jp25k3/kq6095OrAfy0E4bHUF1A==
+"@orbit/coordinator@^0.16.5":
+  version "0.16.5"
+  resolved "https://registry.yarnpkg.com/@orbit/coordinator/-/coordinator-0.16.5.tgz#b5cc2388f34e740409bc6c08d1831b6e769f7afd"
+  integrity sha512-GupOoLT5CstDxDeozpe88mywB+kFfBzg2fP4XyyaSGtH5sdDvSpE4UUbkoiL7zsKQkykrEsGrnkSFp+b/X8pTg==
   dependencies:
     "@orbit/core" "^0.16.3"
-    "@orbit/data" "^0.16.4"
+    "@orbit/data" "^0.16.5"
     "@orbit/utils" "^0.16.3"
 
 "@orbit/core@^0.16.3":
