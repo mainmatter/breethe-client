@@ -5815,10 +5815,10 @@ gensync@^1.0.0-beta.1:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
   integrity sha512-r8EC6NO1sngH/zdD9fiRDLdcgnbayXah+mLgManTaIZJqEC1MZstmnox8KpnI2/fxQwrp5OpCOYWLp4rBl4Jcg==
 
-geoip-lite@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/geoip-lite/-/geoip-lite-1.4.0.tgz#7fd823491484e2f2290b9f3c55900f328dc78249"
-  integrity sha512-pQmZqkOAs6yRAEruVvX9Vbj1rdGHSc8QpbOA/FSZIhIsTsySOrufc3DPxjHimWo4zxIZMbdHwOiWvA6FB3bZhQ==
+geoip-lite@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/geoip-lite/-/geoip-lite-1.4.1.tgz#7016c83a99d4579c10cb9af17ceb9fc8e1424969"
+  integrity sha512-uhPTk7ndEAnqpvNhcSQh51dIrMTGOmOPKIi4KgIHtuJbgaAGgON1Q1UFGhu4YSCnN1DVWTLqcpoL9/746x6Nqg==
   dependencies:
     async "^2.1.1"
     colors "^1.1.2"

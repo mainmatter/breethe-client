@@ -58,7 +58,7 @@
   "dependencies": {
     "chai-url": "^1.0.4",
     "express": "^4.17.1",
-    "geoip-lite": "^1.4.0",
+    "geoip-lite": "^1.4.1",
     "morgan": "^1.9.1",
     "navigo": "^7.1.2",
     "raven": "^2.6.4",
