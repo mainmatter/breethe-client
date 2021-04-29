@@ -44,7 +44,7 @@
     "ember-cli-uglify": "^3.0.0",
     "execa": "^5.0.0",
     "glob": "^7.1.6",
-    "mocha": "^7.1.1",
+    "mocha": "^8.3.2",
     "node-sass": "^5.0.0",
     "puppeteer": "^9.0.0",
     "qunitjs": "^2.3.3",
