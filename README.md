@@ -81,7 +81,7 @@ This is helpful for running benchmarks
 
 ## License
 
-Breethe is developed by and &copy; [simplabs GmbH](http://simplabs.com) and
+Breethe is developed by and &copy; [Mainmatter GmbH](http://mainmatter.com) and
 contributors. While we invite everyone to use this for inspiration and
 reference, we do not grant a license to reuse or redistribute this in any form.
 
