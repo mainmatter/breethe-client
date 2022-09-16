@@ -1,6 +1,6 @@
 # Breethe Client
 
-**Breethe is a Progressive Web App built by [simplabs](https://simplabs.com).
+**Breethe is a Progressive Web App built by [Mainmatter](https://mainmatter.com).
 We build custom web and mobile solutions for our clients to rely on.**
 
 ## Improving Understanding of Air Quality Across the World
@@ -13,13 +13,11 @@ check that project out!
 
 ## The Stack
 
-[![Build Status](https://travis-ci.org/simplabs/breethe-client.svg?branch=master)](https://travis-ci.org/simplabs/breethe-client)
-
 Breethe is built with [Glimmer.js](http://glimmerjs.com), the lightning fast UI
 components library backed by [Ember.js](http://emberjs.com)' rendering engine
 [Glimmer VM](https://github.com/glimmerjs/glimmer-vm). The data layer is based
 on [Orbit.js](http://orbitjs.com) and uses [json:api](http://jsonapi.org) to
-communicate with [the server](https://github.com/simplabs/breethe-server).
+communicate with [the server](https://github.com/mainmatter/breethe-server).
 Styles are compiled with [css-blocks](http://css-blocks.com).
 
 We built Breethe for maximum efficiency and performance. The main JS bundle
@@ -44,7 +42,7 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone git@github.com:simplabs/breethe-client.git`
+* `git clone git@github.com:mainmatter/breethe-client.git`
 * `cd breethe-client`
 * `yarn --pure-lockfile`
 
@@ -86,4 +84,4 @@ contributors. While we invite everyone to use this for inspiration and
 reference, we do not grant a license to reuse or redistribute this in any form.
 
 If you would like to use this for educational or charitable purposes, please
-reach out at breethe@simplabs.com
+reach out at breethe@mainmatter.com
