@@ -57,7 +57,7 @@
   "private": true,
   "dependencies": {
     "chai-url": "^1.0.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "geoip-lite": "^1.4.2",
     "morgan": "^1.10.0",
     "navigo": "^7.1.2",
